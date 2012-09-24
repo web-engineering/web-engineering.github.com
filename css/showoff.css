@@ -286,6 +286,11 @@ a.fg-button { float:left; }
   z-index: 2147483647; /* max, see http://www.puidokas.com/max-z-index/ */
 }
 
+pre.sh_sourceCode code {
+  position: relative;
+  left: -100px;
+}
+
 .code .c { color: #999988; font-style: italic } /* Comment */
 .code .err { color: #a61717; background-color: #e3d2d2 } /* Error */
 .code .k { font-weight: bold } /* Keyword */

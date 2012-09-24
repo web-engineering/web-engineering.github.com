@@ -34,6 +34,8 @@
     
       <script type="text/javascript" src="./js/sh_lang/sh_sh.min.js"></script>
     
+      <script type="text/javascript" src="./js/sh_lang/sh_text.min.js"></script>
+    
   
 
   
@@ -478,14 +480,151 @@ information.  (Wikipedia)</li>
 <h1>Do it!</h1>
 
 <p><a href="http://git-scm.com/book/en/Git-Branching-Basic-Branching-and-Merging">Chapter 3.2</a></p></div>
-</div><div class="slide" data-transition="none"><div class="content title-slide subsection" ref="git teamwork/1">
+</div><div class="slide" data-transition="none"><div class="content title-slide subsection" ref="git teamwork/1/1">
 <h1>git teamwork</h1></div>
-</div><div class="slide" data-transition="none"><div class="content title-slide subsection" ref="rails with scaffold/1">
+</div><div class="slide" data-transition="none"><div class="content incremental" ref="git teamwork/1/2">
+<h1>Pair Programming</h1>
+
+<ul>
+<li>two developers, one computer</li>
+<li>a lot of talking. talk first!</li>
+<li>"driver" is typing</li>
+<li>"navigator" watches, thinks ahead, spots errors, keeps the big picture in mind</li>
+<li>take turns, switch around roles, after 20 minutes</li>
+</ul></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="git teamwork/1/3">
+<h1>why pair?</h1>
+
+<ul>
+<li>pairs are more productive than single developers (see Williams(2000))</li>
+<li>better quality of life through contact with other humans</li>
+<li>learn from each other</li>
+<li>part of agile methodologies, used today in industry</li>
+</ul></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="git teamwork/1/4">
+<h1>Pair Programming und git</h1>
+
+<p>We want the log to show who worked as a pair</p>
+
+<pre class="sh_sh"><code>      $ git log
+      commit 38d4f10fe2fb3f4d13e12d75e70bc0a085f0753f
+      Author: Brigitte Jellinek + Mr. Hyde &lt;xhyde.lba@fh-salzburg.ac.at&gt;
+      Date:   Fri Sep 14 10:52:41 2012 +0200</code></pre>
+
+<p>This semester we will use:</p>
+
+<pre class="sh_sh"><code>      firstname lastname driver + firstname lastname navigator
+      e-mail address of the navigator</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="git teamwork/1/5">
+<h1>git config</h1>
+
+<p>see git config --help</p>
+
+<ul>
+<li>three Levels:
+
+<ul>
+<li>for a single repository ./.git/config</li>
+<li>for one user ~/.gitconfig </li>
+<li>with the flag --global</li>
+<li>for the whole system /etc/gitconfig </li>
+<li>with the flag --system</li>
+</ul>
+</li>
+</ul></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="git teamwork/1/6">
+<h1>git config file</h1>
+
+<pre class="sh_text"><code>  [user]
+          name = Brigitte Jellinek + Mr. Hyde
+          email = xhyde.lba@fh-salzburg.ac.at
+
+  [core]
+          repositoryformatversion = 0
+          filemode = true
+          bare = false
+          logallrefupdates = true
+          ignorecase = true
+
+  [remote "origin"]
+          url = ssh://repos.mediacube.at/opt/git/webpm/r1
+          fetch = +refs/heads/*:refs/remotes/origin/*</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="git teamwork/1/7">
+<h1>set the config</h1>
+
+<p>just in the current repository, just for now.</p>
+
+<pre class="sh_sh"><code>      git config --replace-all user.name "firstname lastname + firstname lastname"
+      git config --replace-all user.email "navigator@gmail.com"</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="git teamwork/1/8">
+<h1>the end</h1></div>
+</div><div class="slide" data-transition="none"><div class="content title-slide subsection" ref="rails with scaffold/1/1">
 <h1>rails with scaffold</h1>
 
 <p>we will build our first rails project</p>
 
 <p>but we will not really understand everything</p></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="rails with scaffold/1/2">
+<h1>What is ruby</h1>
+
+<p><img src="./file/rails with scaffold/Ruby_logo.png" width="198" height="198" alt="Ruby Logo"/></p>
+</div>
+</div><div class="slide" data-transition="none"><div class="content incremental" ref="rails with scaffold/1/3">
+<h1>What is ruby</h1>
+
+<ul>
+<li>open source</li>
+<li>scripting language
+
+<ul>
+<li>perl</li>
+<li>python</li>
+<li><strike>php</strike></li>
+</ul>
+</li>
+<li>created by Yukihiro 'Matz' Matsumoto</li>
+<li>started in 1996</li>
+</ul></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="rails with scaffold/1/4">
+<h1>What is ruby on rails</h1>
+
+<p><img src="./file/rails with scaffold/Ruby_on_Rails_logo.png" width="267" height="340" alt="Ruby on Rails Logo"/></p>
+</div>
+</div><div class="slide" data-transition="none"><div class="content incremental" ref="rails with scaffold/1/5">
+<h1>What is ruby on rails</h1>
+
+<ul>
+<li>web framework written in ruby</li>
+<li>created by David Heinemeier Hansson 'DHH'</li>
+<li>starting in 2005</li>
+</ul></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="rails with scaffold/1/6">
+<h1>Why Rails ?</h1>
+
+<p><img src="./file/rails with scaffold/ruby-and-rails-t-shirts.png" width="900" height="216" alt="Ruby and Rails T-Shirts"/></p>
+</div>
+</div><div class="slide" data-transition="none"><div class="content incremental" ref="rails with scaffold/1/7">
+<h1>Why Rails ?</h1>
+
+<ul>
+<li>modern 
+
+<ul>
+<li>model - view - controller</li>
+<li>test driven development</li>
+</ul>
+</li>
+<li>strong principles
+
+<ul>
+<li>DRY - don't repeat yourself</li>
+<li>convention over configuration</li>
+</ul>
+</li>
+<li>dynamic community</li>
+</ul></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="rails with scaffold/1/8">
+<h1>the end</h1></div>
 </div><div class="slide" data-transition="none"><div class="content title-slide subsection" ref="rails database and model/1">
 <h1>rails database and model</h1>
 
