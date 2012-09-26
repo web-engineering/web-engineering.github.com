@@ -9,7 +9,7 @@
   }
 
   #preso, .slide {
-      background: #fff;
+      background: rgba(255,255,255,1);
       width: 1024px;
       height: 768px;
       margin-left:auto;
@@ -546,4 +546,19 @@ body#stats {
   pre, code {
     font-family: Monaco, monospace;
   }
+}
+
+
+body.fullScreen {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#preso, .slide {
+  border: none !important;
 }

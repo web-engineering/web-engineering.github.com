@@ -49,7 +49,7 @@ function setupPreso(load_slides, prefix) {
 		bind('swiperight', swipeRight); // prev
 
   // start pinging the server
-  startPing()
+  // startPing()
 }
 
 function loadSlides(load_slides, prefix) {
@@ -537,8 +537,6 @@ function ListMenu(s)
 	this.itemLength = 0;
 	this.items = new Array();
 	this.addItem = function (key, text, slide) {
-                console.log("adding key " + key);
-
 		if (key.length > 1) {
 			thisKey = key.shift()
 			if (!this.items[thisKey]) {
@@ -862,3 +860,27 @@ function startPing()
 /********************
  End Analytics and Follower Code
  ********************/
+
+
+
+  $('div.content').live('showoff:show', function(evt) {
+
+    var bg_img = $('img[alt=background]', evt.target);
+    var old_bg = '';
+    console.log("looking for background image");
+    if (bg_img.size() > 0) {
+      var src = bg_img.attr('src');
+      bg_img.hide();
+      // Set new background on body
+      old_bg = $('body').css('background-image');
+      var img_url = 'url("' + src + '")';
+      console.log("set background image to " + img_url + ", copied from " + bg_img);
+      $('body')
+        .css('background-image', img_url)
+        .addClass('fullScreen');
+      $('#preso, .slide').css('background-color', 'rgba(255,255,255,0.05)');
+    } else {
+      $('body').css('background-image', old_bg).removeClass('fullScreen');
+      $('#preso, .slide').css('background-color', 'rgba(255,255,255,1)');
+    }
+  });
