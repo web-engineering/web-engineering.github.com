@@ -122,25 +122,37 @@
 </div><div class="slide" data-transition="none"><div class="content bullets" ref="intro to slides/1 intro/5">
 <h1>What will we learn?</h1>
 
+<p>"Project Management and Workflows for Web Projects"</p>
+
 <p>Is there anything special about web projects?</p>
 
 <p>Do we work differently than other software development projects?</p></div>
-</div><div class="slide" data-transition="none"><div class="content bullets" ref="intro to slides/1 intro/6">
-<h1>Different People</h1>
+</div><div class="slide" data-transition="none"><div class="content incremental" ref="intro to slides/1 intro/6">
+<h1>Web Projects</h1>
+
+<ul>
+<li>different People
 
 <ul>
 <li>more non-programmers needed: designers, usability, ..</li>
+</ul>
+</li>
+<li>different languages
+
+<ul>
+<li>scripting languages have different design patterns than strongly typed languages</li>
+</ul>
+</li>
 </ul></div>
 </div><div class="slide" data-transition="none"><div class="content subsection" ref="intro to slides/1 intro/7">
 <h1>software in boxes</h1>
 
 <p><img src="./file/intro to slides/software-in-boxes.jpg" width="1024" height="683" alt="background"/></p>
 </div>
-</div><div class="slide" data-transition="none"><div class="content bullets incremental" ref="intro to slides/1 intro/8">
-<h1>Faster Pace</h1>
+</div><div class="slide" data-transition="none"><div class="content incremental" ref="intro to slides/1 intro/8">
+<h1>no "Software in Boxes"</h1>
 
 <ul>
-<li>no "Software in Boxes"</li>
 <li>no versions</li>
 <li>continous delivery needed</li>
 <li>maintainance forever!</li>
@@ -200,7 +212,7 @@ information.  (Wikipedia)</li>
 <li>invented by linus torvalds</li>
 </ul><p>photo <a href="http://www.flickr.com/photos/48923114@N00/116787425">cc</a></p></div>
 </div><div class="slide" data-transition="none"><div class="content dark" ref="git branching/1 why git/9">
-<iframe width="1024" height="576" src="http://www.youtube.com/embed/ntTpM8hfl_E?feature=player_detailpage" frameborder="0"/></div>
+<p><a href="http://www.youtube.com/embed/ntTpM8hfl_E?feature=player_detailpage">video</a></p></div>
 </div><div class="slide" data-transition="none"><div class="content" ref="git branching/1 why git/10">
 <h1>Why git?</h1>
 
@@ -546,7 +558,7 @@ information.  (Wikipedia)</li>
 <li>"navigator" watches, thinks ahead, spots errors, keeps the big picture in mind</li>
 <li>take turns, switch around roles, after 20 minutes</li>
 </ul></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="git teamwork/1/3">
+</div><div class="slide" data-transition="none"><div class="content incremental" ref="git teamwork/1/3">
 <h1>why pair?</h1>
 
 <ul>
@@ -569,20 +581,24 @@ information.  (Wikipedia)</li>
 
 <pre class="sh_sh"><code>      firstname lastname driver + firstname lastname navigator
       e-mail address of the navigator</code></pre></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="git teamwork/1/5">
+</div><div class="slide" data-transition="none"><div class="content incremental" ref="git teamwork/1/5">
 <h1>git config</h1>
 
 <p>see git config --help</p>
 
 <ul>
-<li>three Levels:
+<li>three Levels:</li>
+<li>for a single repository ./.git/config</li>
+<li>for one user ~/.gitconfig 
 
 <ul>
-<li>for a single repository ./.git/config</li>
-<li>for one user ~/.gitconfig </li>
-<li>with the flag --global</li>
-<li>for the whole system /etc/gitconfig </li>
-<li>with the flag --system</li>
+<li>--global</li>
+</ul>
+</li>
+<li>for the whole system /etc/gitconfig 
+
+<ul>
+<li>--system</li>
 </ul>
 </li>
 </ul></div>
@@ -611,45 +627,70 @@ information.  (Wikipedia)</li>
 <pre class="sh_sh"><code>      git config --replace-all user.name "firstname lastname + firstname lastname"
       git config --replace-all user.email "navigator@gmail.com"</code></pre></div>
 </div><div class="slide" data-transition="none"><div class="content" ref="git teamwork/1/8">
-<h1>the end</h1></div>
-</div><div class="slide" data-transition="none"><div class="content subsection" ref="git teamwork/2 git internals/1">
-<h1>git internals</h1></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="git teamwork/2 git internals/2">
-<h1>where git stores data</h1>
+<p>(that was the easy part)</p></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="git teamwork/1/9">
+<h1>let's do it!</h1></div>
+</div><div class="slide" data-transition="none"><div class="content title-slide subsection" ref="rails with scaffold/1 intro to this course/1">
+<h1>Welcome</h1>
+
+<p>to the course</p>
+
+<p>Web Technologies 1</p></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="rails with scaffold/1 intro to this course/2">
+<h1>Who are we?</h1>
+
+<p>MMT-B2011 - 3rd semester Bachelor students</p>
+
+<p>MMT-M2012 - 1rd semester Master students</p>
+
+<p>Incoming Students</p>
+
+<p>Brigitte Jellinek</p></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="rails with scaffold/1 intro to this course/3">
+<h1>What will we learn?</h1>
+
+<p>Backend Development with Ruby on Rails</p></div>
+</div><div class="slide" data-transition="none"><div class="content incremental" ref="rails with scaffold/1 intro to this course/4">
+<h1>How will we learn?</h1>
 
 <ul>
-<li>./.git/objects/</li>
-<li>content is hashed,</li>
-<li>resulting hash-value used as directory + filename</li>
+<li>lecture (slides are online web-engineering.github.com)</li>
+<li>exercises in pairs</li>
+<li>homework in pairs</li>
+<li>project</li>
 </ul></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="git teamwork/2 git internals/3">
-<h1>hierarchy</h1>
+</div><div class="slide" data-transition="none"><div class="content incremental" ref="rails with scaffold/1 intro to this course/5">
+<h1>Which Tools will we use?</h1>
 
 <ul>
-<li>content</li>
-<li>files + folders</li>
-<li>commits</li>
+<li>ruby</li>
+<li>rubygems</li>
+<li>rails</li>
+<li>command line, command line, command line!</li>
+<li>programming editor of your choice</li>
+<li>web browser: firefox or chrome</li>
+<li>(no webserver software needed)</li>
 </ul></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="git teamwork/2 git internals/4">
-<h1>same content is never stored twice!</h1>
+</div><div class="slide" data-transition="none"><div class="content incremental" ref="rails with scaffold/1 intro to this course/6">
+<h1>After successfully finishing this course ...</h1>
 
-<p>@@@ sh
-  $git cat-file -p 6799a8db8f353007435e12f898ac9e97477d935f
-  100644 blob c16ab9ce6a5b5278c0621a31d6aa77dfb2534c3b    different.txt
-  100644 blob 6bc4ddef08b181feb7dfb76565d0d4c7465e2db1    other.txt
-  100644 blob 6bc4ddef08b181feb7dfb76565d0d4c7465e2db1    test.txt</p></div>
-</div><div class="slide" data-transition="none"><div class="content title-slide subsection" ref="rails with scaffold/1/1">
+<ul>
+<li>I am able to complete a project in ruby on rails and deploy it.</li>
+<li>I can write tests for my rails project with rspec.</li>
+<li>I understand the rails asset pipeline, and know how to integrate designs/images/media supplied by other people.</li>
+</ul></div>
+</div><div class="slide" data-transition="none"><div class="content title-slide subsection" ref="rails with scaffold/2 rails quickstart/1">
 <h1>rails with scaffold</h1>
 
 <p>we will build our first rails project</p>
 
 <p>but we will not really understand everything</p></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="rails with scaffold/1/2">
+</div><div class="slide" data-transition="none"><div class="content" ref="rails with scaffold/2 rails quickstart/2">
 <h1>What is ruby</h1>
 
 <p><img src="./file/rails with scaffold/Ruby_logo.png" width="198" height="198" alt="Ruby Logo"/></p>
 </div>
-</div><div class="slide" data-transition="none"><div class="content incremental" ref="rails with scaffold/1/3">
+</div><div class="slide" data-transition="none"><div class="content incremental" ref="rails with scaffold/2 rails quickstart/3">
 <h1>What is ruby</h1>
 
 <ul>
@@ -665,12 +706,12 @@ information.  (Wikipedia)</li>
 <li>created by Yukihiro 'Matz' Matsumoto</li>
 <li>started in 1996</li>
 </ul></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="rails with scaffold/1/4">
+</div><div class="slide" data-transition="none"><div class="content" ref="rails with scaffold/2 rails quickstart/4">
 <h1>What is ruby on rails</h1>
 
 <p><img src="./file/rails with scaffold/Ruby_on_Rails_logo.png" width="267" height="340" alt="Ruby on Rails Logo"/></p>
 </div>
-</div><div class="slide" data-transition="none"><div class="content incremental" ref="rails with scaffold/1/5">
+</div><div class="slide" data-transition="none"><div class="content incremental" ref="rails with scaffold/2 rails quickstart/5">
 <h1>What is ruby on rails</h1>
 
 <ul>
@@ -678,12 +719,12 @@ information.  (Wikipedia)</li>
 <li>created by David Heinemeier Hansson 'DHH'</li>
 <li>starting in 2005</li>
 </ul></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="rails with scaffold/1/6">
+</div><div class="slide" data-transition="none"><div class="content" ref="rails with scaffold/2 rails quickstart/6">
 <h1>Why Rails ?</h1>
 
 <p><img src="./file/rails with scaffold/ruby-and-rails-t-shirts.png" width="900" height="216" alt="Ruby and Rails T-Shirts"/></p>
 </div>
-</div><div class="slide" data-transition="none"><div class="content incremental" ref="rails with scaffold/1/7">
+</div><div class="slide" data-transition="none"><div class="content incremental" ref="rails with scaffold/2 rails quickstart/7">
 <h1>Why Rails ?</h1>
 
 <ul>
@@ -703,7 +744,52 @@ information.  (Wikipedia)</li>
 </li>
 <li>dynamic community</li>
 </ul></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="rails with scaffold/1/8">
+</div><div class="slide" data-transition="none"><div class="content" ref="rails with scaffold/2 rails quickstart/8">
+<h1>from the outside</h1></div>
+</div><div class="slide" data-transition="none"><div class="content incremental smaller" ref="rails with scaffold/2 rails quickstart/9">
+<h1>database - model - view - controller</h1>
+
+<ul>
+<li>example: course management system for a university</li>
+<li>sqlite as relational database, has a table 'courses'</li>
+<li>model has a class 'Course'</li>
+<li>view - several templates for courses</li>
+<li>controller - ties all the pieces together</li>
+<li>routing - maps URLs + parameters to controller</li>
+</ul></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="rails with scaffold/2 rails quickstart/10">
+<h1>start a rails project</h1>
+
+<p>rails new alljokes -T</p></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="rails with scaffold/2 rails quickstart/11">
+<h1>rails directory structure</h1>
+
+<ul>
+<li>Gemfile - which libraries (gems) does this project use?</li>
+<li>app
+
+<ul>
+<li>model</li>
+<li>view</li>
+<li>controller</li>
+</ul>
+</li>
+<li>config
+
+<ul>
+<li>database.yml - database configuration</li>
+<li>routes.rb </li>
+</ul>
+</li>
+<li>public - the webspace. files in here are accessible without routing</li>
+</ul></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="rails with scaffold/2 rails quickstart/12">
+<h1>start the rails server</h1>
+
+<pre class="sh_sh"><code>    $ rails server</code></pre>
+
+<p>point your browser at http://localhost:3000/</p></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="rails with scaffold/2 rails quickstart/13">
 <h1>the end</h1></div>
 </div><div class="slide" data-transition="none"><div class="content title-slide subsection" ref="rails database and model/1">
 <h1>rails database and model</h1>
