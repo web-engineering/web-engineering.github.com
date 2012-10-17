@@ -34,6 +34,10 @@
     
       <script type="text/javascript" src="./js/sh_lang/sh_sh.min.js"></script>
     
+      <script type="text/javascript" src="./js/sh_lang/sh_ruby.min.js"></script>
+    
+      <script type="text/javascript" src="./js/sh_lang/sh_shell.min.js"></script>
+    
   
 
   
@@ -663,13 +667,12 @@ information.  (Wikipedia)</li>
 <h1>Which Tools will we use?</h1>
 
 <ul>
-<li>ruby</li>
-<li>rubygems</li>
+<li>ruby, rubygems</li>
 <li>rails</li>
 <li>command line, command line, command line!</li>
 <li>programming editor of your choice</li>
 <li>web browser: firefox or chrome</li>
-<li>(no webserver software needed)</li>
+<li>(no webserver needed)</li>
 </ul></div>
 </div><div class="slide" data-transition="none"><div class="content incremental" ref="rails with scaffold/1 intro to this course/6">
 <h1>After successfully finishing this course ...</h1>
@@ -686,67 +689,8 @@ information.  (Wikipedia)</li>
 
 <p>but we will not really understand everything</p></div>
 </div><div class="slide" data-transition="none"><div class="content" ref="rails with scaffold/2 rails quickstart/2">
-<h1>What is ruby</h1>
-
-<p><img src="./file/rails with scaffold/Ruby_logo.png" width="198" height="198" alt="Ruby Logo"/></p>
-</div>
-</div><div class="slide" data-transition="none"><div class="content incremental" ref="rails with scaffold/2 rails quickstart/3">
-<h1>What is ruby</h1>
-
-<ul>
-<li>open source</li>
-<li>scripting language
-
-<ul>
-<li>perl</li>
-<li>python</li>
-<li><strike>php</strike></li>
-</ul>
-</li>
-<li>created by Yukihiro 'Matz' Matsumoto</li>
-<li>started in 1996</li>
-</ul></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="rails with scaffold/2 rails quickstart/4">
-<h1>What is ruby on rails</h1>
-
-<p><img src="./file/rails with scaffold/Ruby_on_Rails_logo.png" width="267" height="340" alt="Ruby on Rails Logo"/></p>
-</div>
-</div><div class="slide" data-transition="none"><div class="content incremental" ref="rails with scaffold/2 rails quickstart/5">
-<h1>What is ruby on rails</h1>
-
-<ul>
-<li>web framework written in ruby</li>
-<li>created by David Heinemeier Hansson 'DHH'</li>
-<li>starting in 2005</li>
-</ul></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="rails with scaffold/2 rails quickstart/6">
-<h1>Why Rails ?</h1>
-
-<p><img src="./file/rails with scaffold/ruby-and-rails-t-shirts.png" width="900" height="216" alt="Ruby and Rails T-Shirts"/></p>
-</div>
-</div><div class="slide" data-transition="none"><div class="content incremental" ref="rails with scaffold/2 rails quickstart/7">
-<h1>Why Rails ?</h1>
-
-<ul>
-<li>modern 
-
-<ul>
-<li>model - view - controller</li>
-<li>test driven development</li>
-</ul>
-</li>
-<li>strong principles
-
-<ul>
-<li>DRY - don't repeat yourself</li>
-<li>convention over configuration</li>
-</ul>
-</li>
-<li>dynamic community</li>
-</ul></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="rails with scaffold/2 rails quickstart/8">
-<h1>from the outside</h1></div>
-</div><div class="slide" data-transition="none"><div class="content incremental smaller" ref="rails with scaffold/2 rails quickstart/9">
+<h1>Rails from the outside in</h1></div>
+</div><div class="slide" data-transition="none"><div class="content incremental smaller" ref="rails with scaffold/2 rails quickstart/3">
 <h1>database - model - view - controller</h1>
 
 <ul>
@@ -757,11 +701,11 @@ information.  (Wikipedia)</li>
 <li>controller - ties all the pieces together</li>
 <li>routing - maps URLs + parameters to controller</li>
 </ul></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="rails with scaffold/2 rails quickstart/10">
+</div><div class="slide" data-transition="none"><div class="content" ref="rails with scaffold/2 rails quickstart/4">
 <h1>start a rails project</h1>
 
 <p>rails new alljokes -T</p></div>
-</div><div class="slide" data-transition="none"><div class="content smaller" ref="rails with scaffold/2 rails quickstart/11">
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="rails with scaffold/2 rails quickstart/5">
 <h1>rails directory structure</h1>
 
 <ul>
@@ -783,14 +727,222 @@ information.  (Wikipedia)</li>
 </li>
 <li>public - the webspace. files in here are accessible without routing</li>
 </ul></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="rails with scaffold/2 rails quickstart/12">
+</div><div class="slide" data-transition="none"><div class="content" ref="rails with scaffold/2 rails quickstart/6">
 <h1>start the rails server</h1>
 
 <pre class="sh_sh"><code>    $ rails server</code></pre>
 
 <p>point your browser at http://localhost:3000/</p></div>
-</div><div class="slide" data-transition="none"><div class="content" ref="rails with scaffold/2 rails quickstart/13">
+</div><div class="slide" data-transition="none"><div class="content" ref="rails with scaffold/2 rails quickstart/7">
 <h1>the end</h1></div>
+</div><div class="slide" data-transition="none"><div class="content title-slide subsection" ref="ruby commandline/0 intro">
+<h1>Ruby Day</h1>
+
+<ul>
+<li>Recap: What is Ruby</li>
+<li>Recap: Ruby Basics</li>
+<li>Three Important Features of Ruby</li>
+<li>Exercises in Class</li>
+<li>Recap of Exercises</li>
+<li>Homework</li>
+</ul></div>
+</div><div class="slide" data-transition="none"><div class="content title-slide subsection" ref="ruby commandline/1 ruby/1">
+<h1>What is ruby</h1>
+
+<p><img src="./file/ruby commandline/Ruby_logo.png" width="198" height="198" alt="Ruby Logo"/></p>
+</div>
+</div><div class="slide" data-transition="none"><div class="content incremental" ref="ruby commandline/1 ruby/2">
+<h1>What is ruby</h1>
+
+<ul>
+<li>open source</li>
+<li>scripting language
+
+<ul>
+<li>perl</li>
+<li>python</li>
+<li><strike>php</strike></li>
+</ul>
+</li>
+<li>created by Yukihiro 'Matz' Matsumoto</li>
+<li>started in 1996</li>
+</ul></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="ruby commandline/1 ruby/3">
+<h1>What is ruby on rails</h1>
+
+<p><img src="./file/ruby commandline/Ruby_on_Rails_logo.png" width="267" height="340" alt="Ruby on Rails Logo"/></p>
+</div>
+</div><div class="slide" data-transition="none"><div class="content incremental" ref="ruby commandline/1 ruby/4">
+<h1>What is ruby on rails</h1>
+
+<ul>
+<li>web framework written in ruby</li>
+<li>created by David Heinemeier Hansson 'DHH'</li>
+<li>starting in 2005</li>
+</ul></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="ruby commandline/1 ruby/5">
+<h1>Why Ruby? Why Rails ?</h1>
+
+<p><img src="./file/ruby commandline/ruby-and-rails-t-shirts.png" width="900" height="216" alt="Ruby and Rails T-Shirts"/></p>
+</div>
+</div><div class="slide" data-transition="none"><div class="content title-slide subsection" ref="ruby commandline/2 ruby&#xA0;basics/1">
+<h1>Ruby Basics (Recap)</h1></div>
+</div><div class="slide" data-transition="none"><div class="content incremental" ref="ruby commandline/2 ruby&#xA0;basics/2">
+<h1>Conventions for Identifiers</h1>
+
+<ul>
+<li>eine_variable</li>
+<li>EineKlasse</li>
+<li>a = b.sugar</li>
+<li>b.sugar!</li>
+<li>b.sweet?</li>
+</ul></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="ruby commandline/2 ruby&#xA0;basics/3">
+<h1>parantheses are optional!</h1>
+
+<pre class="sh_ruby"><code>    puts("less code")
+    puts "less code" </code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content incremental" ref="ruby commandline/2 ruby&#xA0;basics/4">
+<h1>Data Types</h1>
+
+<ul>
+<li>Fixnum, Bignum, Float</li>
+<li>String</li>
+<li>true, false</li>
+<li>Symbol</li>
+<li>Array</li>
+<li>Hash</li>
+<li>Object</li>
+</ul></div>
+</div><div class="slide" data-transition="none"><div class="content incremental" ref="ruby commandline/2 ruby&#xA0;basics/5">
+<h1>String</h1>
+
+<pre class="sh_ruby"><code>    s = 'nur ein String'
+    s = "string mit #{variable} oder #{a+b/c} Expression"
+    s = &lt;&lt;-EOM
+    Ein sogenanntes "Here-Document"
+    kann viele Zeilen Text enthalten
+    und endet beim (selbst gew&#xE4;hlten) Bezeichner EOM
+    EOM </code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="ruby commandline/2 ruby&#xA0;basics/6">
+<h1>only false and nil are treated as false</h1>
+
+<pre class="sh_ruby"><code>    if 0 
+      puts '0 is true!' 
+    end
+    if "false"
+      puts '"false" is not false'       
+    end</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="ruby commandline/2 ruby&#xA0;basics/7">
+<h1>shorter way of writing a condition</h1>
+
+<pre class="sh_ruby"><code>    puts '0 is true!' if 0 
+    puts '"false" is not false' if "false"</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="ruby commandline/2 ruby&#xA0;basics/8">
+<h1>shortcut evaluation of boolean operators</h1>
+
+<pre class="sh_ruby"><code>    default_value = "gray"
+    input_value = nil
+    a = input_value || default_value</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content incremental" ref="ruby commandline/2 ruby&#xA0;basics/9">
+<h1>Methode</h1>
+
+<pre class="sh_ruby"><code>    def f(a,b)
+      "x"
+    end
+
+    f(1,42)</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content title-slide subsection" ref="ruby commandline/3 ruby&#xA0;speacialities/1">
+<h1>Ruby Specialities</h1></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="ruby commandline/3 ruby&#xA0;speacialities/2">
+<ul>
+<li>(1) Enumerables, Arrays, Hashes</li>
+<li>(2) Blocks</li>
+</ul></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="ruby commandline/3 ruby&#xA0;speacialities/3">
+<h1>Enumerables, Arrays, Hashes</h1></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="ruby commandline/3 ruby&#xA0;speacialities/4">
+<h1>What is a Hash?</h1>
+
+<ul>
+<li>how does it work</li>
+<li>complexity of insert</li>
+<li>complexity of loopup</li>
+</ul></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="ruby commandline/3 ruby&#xA0;speacialities/5">
+<h1>"Piping Data"</h1>
+
+<pre class="sh_shell"><code>    # many httpd processes are running. as which user(s) ?
+    # 
+    $ ps aux | grep httpd | cut -c1-8 | sort | uniq</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="ruby commandline/3 ruby&#xA0;speacialities/6">
+<h1>Piping Data in Ruby</h1>
+
+<pre class="sh_ruby"><code>    languages = %w[Fortran Ada C C++ Java Scala Haskell]
+    languages.sort.first(3)</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content incremental smaller" ref="ruby commandline/3 ruby&#xA0;speacialities/7">
+<h1>some methods for Enumerables</h1>
+
+<ul>
+<li>sort</li>
+<li>first(n)</li>
+<li>drop(n)</li>
+<li>last(n)</li>
+<li>grep(/pattern/)</li>
+<li>count</li>
+<li>count("only this exact value")</li>
+<li>max, min</li>
+</ul></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="ruby commandline/3 ruby&#xA0;speacialities/8">
+<h1>methods for Enumerables that take a block</h1>
+
+<pre class="sh_ruby"><code>    (1..10).map{ |x| x*2 }.reverse</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="ruby commandline/3 ruby&#xA0;speacialities/9">
+<h1>methods for Enumerables that take a block</h1>
+
+<pre class="sh_ruby"><code>    (1..10).map do |x| 
+      x*2 
+    end.reverse</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content incremental" ref="ruby commandline/3 ruby&#xA0;speacialities/10">
+<h1>methods for Enumerables that take a block</h1>
+
+<ul>
+<li>map {|x| new value computed from x} </li>
+<li>select {|x| should x be selected? }</li>
+<li>reduce(:+)</li>
+<li>reduce{|memo, item| compute new value for memo}</li>
+</ul></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="ruby commandline/3 ruby&#xA0;speacialities/11">
+<h1>avoid loops!</h1></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="ruby commandline/3 ruby&#xA0;speacialities/12">
+<h1>Blocks etc.</h1></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="ruby commandline/3 ruby&#xA0;speacialities/13">
+<h1>My Function takes a Block of Code</h1>
+
+<p>as it's last argument</p>
+
+<pre class="sh_ruby"><code>    def my_function_with_block_arg
+      puts "code in the funtion"
+      yield
+      puts "more code in the function"
+    end
+
+    my_function_with_block_arg { puts "code in the block" }</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="ruby commandline/3 ruby&#xA0;speacialities/14">
+<h1>My Function takes a Block of Code</h1>
+
+<p>as it's last argument</p>
+
+<pre class="sh_ruby"><code>    def my_function_with_block_arg
+      puts "code in the funtion"
+      yield
+      puts "more code in the function"
+    end
+
+    my_function_with_block_arg do
+      puts "code in the block"
+      puts "more code in the block"
+    end</code></pre></div>
 </div><div class="slide" data-transition="none"><div class="content title-slide subsection" ref="rails database and model/1">
 <h1>rails database and model</h1>
 
