@@ -288,7 +288,7 @@ a.fg-button { float:left; }
 
 pre.sh_sourceCode code {
   position: relative;
-  left: -100px;
+  left: -30px;
 }
 
 .code .c { color: #999988; font-style: italic } /* Comment */
