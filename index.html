@@ -1321,6 +1321,194 @@ gem "nokogiri", :git =&gt; "git://github.com/tenderlove/nokogiri.git"</code></pr
 <li>gem may install rake tasks: <code>rake -T</code>
 </li>
 </ul></div>
+</div><div class="slide" data-transition="none"><div class="content title-slide subsection" ref="asset pipeline/1 compiling web assets/1">
+<h1>compiling to css</h1>
+
+<h1>compiling to javascript</h1></div>
+</div><div class="slide" data-transition="none"><div class="content incremental" ref="asset pipeline/1 compiling web assets/2">
+<h1>compiling to css</h1>
+
+<ul>
+<li>
+<a href="http://sass-lang.com/">sass</a> - default in ruby</li>
+<li><a href="http://lesscss.org/">less</a></li>
+<li><a href="http://learnboost.github.com/stylus/">stylus</a></li>
+</ul></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="asset pipeline/1 compiling web assets/3">
+<h1>no { } and no ;</h1>
+
+<pre><code>h1
+  color: black
+  background-color: yellow
+
+p
+  text-align: justify</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="asset pipeline/1 compiling web assets/4">
+<h1>nesting</h1>
+
+<pre><code>h1 strong
+  color: red
+
+nav
+  a:link, a:visited, a:active
+    text-decoration: none
+  a:link
+    color: blue
+  a:visited
+    color: white</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="asset pipeline/1 compiling web assets/5">
+<h1>variables and computation</h1>
+
+<pre><code>$blue: #3bbfce
+$x: 16px
+
+.content-navigation
+  border-color: $blue
+  color: darken($blue, 9%)
+
+.border
+  padding: $x / 2
+  margin: $x / 2
+  border-color: $blue</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="asset pipeline/1 compiling web assets/6">
+<h1>mixins for reusing css-code</h1>
+
+<pre><code>@mixin left($dist)
+  float: left
+  margin-left: $dist
+
+#data
+  @include left(10px)</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="asset pipeline/1 compiling web assets/7">
+<h1>automatically create sass from css after every change</h1>
+
+<pre><code># for one file in the current directory
+sass --watch style.scss:style.css
+
+# for a whole directory of files
+sass --watch stylesheets/sass:stylesheets/compiled</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="asset pipeline/1 compiling web assets/8">
+<h1>sass comes with a reverse compiler</h1>
+
+<pre><code>sass-convert --from css --to sass style.css &gt; style.sass</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content title-slide subsection" ref="asset pipeline/2 web performance/1">
+<h1>web performance</h1></div>
+</div><div class="slide" data-transition="none"><div class="content incremental" ref="asset pipeline/2 web performance/2">
+<h1>pre-modern area</h1>
+
+<ul>
+<li>performance of the backend</li>
+<li>myths about performance: image slicing</li>
+</ul></div>
+</div><div class="slide" data-transition="none"><div class="content incremental" ref="asset pipeline/2 web performance/3">
+<h1>modern area</h1>
+
+<ul>
+<li>work of the "exceptional performance" group at yahoo: yslow</li>
+<li>Souders(2007): High Performance Web Sites</li>
+<li>"front end view" of performance</li>
+</ul></div>
+</div><div class="slide" data-transition="none"><div class="content incremental smaller" ref="asset pipeline/2 web performance/4">
+<h1>Rules...</h1>
+
+<ul>
+<li>  Less HTTP Requests</li>
+<li>  Use a Content Delivery Network</li>
+<li>  Avoid empty src or href</li>
+<li>  Add an Expires or a Cache-Control Header</li>
+<li>  Gzip Components</li>
+<li>  Put StyleSheets at the Top</li>
+<li>  Put Scripts at the Bottom</li>
+<li>  Avoid CSS Expressions...</li>
+</ul></div>
+</div><div class="slide" data-transition="none"><div class="content incremental smaller" ref="asset pipeline/2 web performance/5">
+<h1>...Rules...</h1>
+
+<ul>
+<li>  Make JavaScript and CSS External</li>
+<li>  Reduce DNS Lookups</li>
+<li>  Minify JavaScript and CSS</li>
+<li>  Avoid Redirects</li>
+<li>  Remove Duplicate Scripts</li>
+<li>  ...</li>
+</ul></div>
+</div><div class="slide" data-transition="none"><div class="content incremental" ref="asset pipeline/2 web performance/6">
+<h1>rails can help</h1>
+
+<ul>
+<li>Minify JavaScript and CSS</li>
+<li>Create CSS Sprites</li>
+<li>Set Expires Header for static assets</li>
+</ul></div>
+</div><div class="slide" data-transition="none"><div class="content title-slide subsection" ref="asset pipeline/3 environments/1">
+<h1>Rails Environments</h1></div>
+</div><div class="slide" data-transition="none"><div class="content incremental" ref="asset pipeline/3 environments/2">
+<h1>Three pre-defined Environments</h1>
+
+<ul>
+<li>development - optimized for debugging</li>
+<li>testing</li>
+<li>production - optimized for speed, stability</li>
+</ul></div>
+</div><div class="slide" data-transition="none"><div class="content incremental" ref="asset pipeline/3 environments/3">
+<h1>How to Configure</h1>
+
+<ul>
+<li>config/environments/development.rb</li>
+<li>config/environments/production.rb</li>
+</ul></div>
+</div><div class="slide" data-transition="none"><div class="content incremental" ref="asset pipeline/3 environments/4">
+<h1>How to use different environment</h1>
+
+<ul>
+<li>webrick server: <code>rails server -e production</code>
+</li>
+<li>Rake tasks: add <code>RAILS_ENV="production"</code> at the end of the command.</li>
+<li>Rails console: <code>rails console production</code>
+</li>
+</ul></div>
+</div><div class="slide" data-transition="none"><div class="content incremental smaller" ref="asset pipeline/3 environments/5">
+<h1>Asset Pipeline (since Rails 3)</h1>
+
+<ul>
+<li>  source in <code>app/assets/*</code>
+</li>
+<li>  <code>rake assets:precompile</code>
+</li>
+<li>  assets in <code>public/assets/*</code>
+</li>
+<li>  can be served by web server, without going through the rails stack</li>
+<li>  <code>public/assets/manifest.yml</code>
+</li>
+<li>files look like this: <code>application-107e9bb2ab22174acce34bbbbe8f6d7f.css</code>
+</li>
+<li>expires header is set far into the future</li>
+<li>change in file --&gt; new file name</li>
+</ul></div>
+</div><div class="slide" data-transition="none"><div class="content title-slide subsection" ref="asset pipeline/4 local git/1">
+<h1>Local Git</h1></div>
+</div><div class="slide" data-transition="none"><div class="content incremental smaller" ref="asset pipeline/4 local git/2">
+<h1>all git repositories are created equal in dignity and rights</h1>
+
+<ul>
+<li>we've been using a centralized model, pushing to a remote on repos.mediacube.at</li>
+<li>today we need two working copies, but we can't push to the <code>origin</code>
+</li>
+<li>clone a local git repository:</li>
+<li><code>git clone /path/to/the/repository new_directory_name</code></li>
+<li>origin will point back to old repository</li>
+<li>push and pull as usual!</li>
+</ul></div>
+</div><div class="slide" data-transition="none"><div class="content smaller" ref="asset pipeline/4 local git/3">
+<h1>example app 'rezepte'</h1>
+
+<pre><code> cd /my/work
+ git clone ssh://repos.mediacube.at/opt/git/web_2012/example/rezepte.git/ rezepte_development
+ git clone /my/work/rezepte_development rezepte_production</code></pre></div>
+</div><div class="slide" data-transition="none"><div class="content" ref="asset pipeline/4 local git/4">
+<h1>remember!</h1>
+
+<p>every significant step in development should be a commit!</p></div>
 </div></div>
 <div id="pauseScreen">
   Paused !!!
