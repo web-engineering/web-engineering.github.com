@@ -1,0 +1,445 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Ruby on Rails Guides: Git Branching</title>
+
+<link rel="stylesheet" type="text/css" href="stylesheets/kindle.css" />
+
+</head>
+<body class="guide">
+
+    <h2>Git Branching</h2><p>This Guide will introduce you to using branches in git.</p><p>After reading this guide, you will know:</p>
+<ul>
+<li>Why you should a version control system like git</li>
+<li>How to create and merge branches</li>
+</ul>
+
+    <div class="pagebreak">
+
+              <div id="subCol">
+            <h3 class="chapter"><img src="images/chapters_icon.gif" alt="" />Chapters</h3>
+            <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><ol class="chapters">
+<li>
+<a href="#what-is-a-revision-control-system-questionmark">What is a Revision Control System?</a>
+
+<ul>
+<li><a href="#a-short-and-incomplete-history">A short - and incomplete - history</a></li>
+<li><a href="#why-use-revision-control-questionmark">Why use revision control?</a></li>
+<li><a href="#why-use-git-questionmark">Why use git?</a></li>
+<li><a href="#why-use-github-com-questionmark">Why use github.com?</a></li>
+<li><a href="#resources-for-learning-git">Resources for Learning Git</a></li>
+</ul>
+</li>
+<li>
+<a href="#git-basics">Git Basics </a>
+
+<ul>
+<li><a href="#configuring-git">Configuring Git</a></li>
+<li><a href="#create-a-repository-from-scratch">Create a Repository from scratch</a></li>
+<li><a href="#plain-git-workflow">Plain git Workflow</a></li>
+<li><a href="#index-staging-area">Index / Staging area</a></li>
+<li><a href="#content-not-file-bang">content, not file!</a></li>
+<li><a href="#delete-file">delete file</a></li>
+<li><a href="#rename-file">rename file</a></li>
+<li><a href="#remotes">remotes</a></li>
+<li><a href="#clone-an-existing-repository">clone an existing repository</a></li>
+<li><a href="#add-a-remote">add a remote</a></li>
+<li><a href="#workflow-with-remote">workflow with remote</a></li>
+<li><a href="#push">push</a></li>
+<li><a href="#pull">pull</a></li>
+</ul>
+</li>
+<li>
+<a href="#branching-and-merging">Branching and Merging</a>
+
+<ul>
+<li><a href="#branching">Branching</a></li>
+<li><a href="#basic-workflow">Basic workflow</a></li>
+<li><a href="#create-a-new-branch">create a new branch</a></li>
+<li><a href="#switch-to-a-branch">switch to a branch</a></li>
+<li><a href="#which-branch-am-i-on-questionmark">which branch am I on?</a></li>
+<li><a href="#work">work</a></li>
+<li><a href="#merge-bang">merge!</a></li>
+<li><a href="#done">done</a></li>
+<li><a href="#delete-branch">delete branch</a></li>
+<li><a href="#merging-in-detail">Merging in detail</a></li>
+<li><a href="#conflicts">Conflicts</a></li>
+<li><a href="#conflict-markers-in-a-file">conflict markers in a file</a></li>
+<li><a href="#conflict-markers-in-a-files">conflict markers in a files</a></li>
+<li><a href="#how-to-resolve">how to resolve</a></li>
+<li><a href="#do-it-bang">Do it!</a></li>
+</ul>
+</li>
+</ol></body></html>
+
+          </div>
+
+    <div class="pagebreak">
+
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h3 id="what-is-a-revision-control-system-questionmark">1 What is a Revision Control System?</h3>
+<p>Revision control (an aspect of software configuration management), is the management of changes to
+documents, computer programs, large web sites, and other collections of
+information.  <a href="http://en.wikipedia.org/wiki/Revision_control">Wikipedia</a></p>
+<p>In other words: it's a tool that helps you with your code files, and
+with several version of such files.</p>
+<p>These systems are known under many names
+* version control system (VCS)
+* source code manager (SCM)
+* revision control system (RCS)</p>
+<p>In german they are most commonly called
+* Versionskontrollsystem </p>
+<h4 id="a-short-and-incomplete-history">1.1 A short - and incomplete - history</h4>
+<p>Some ancient systems that are no longer in use are:</p>
+<ul>
+<li>RCS</li>
+<li>CVS</li>
+</ul>
+<p>These systems are open source systems that are still in use today:</p>
+<ul>
+<li>SVN, also called Subversion</li>
+<li>Hg, also called Mercurial</li>
+<li>Git</li>
+</ul>
+<h4 id="why-use-revision-control-questionmark">1.2 Why use revision control?</h4>
+<ol>
+<li>The whole history of the project always accessible</li>
+<li>You can try out stuff without danger of breaking anything</li>
+<li>For teamwork - several people can program on separate computers, the system helps with merging the differnet codes</li>
+</ol>
+<h4 id="why-use-git-questionmark">1.3 Why use git?</h4>
+<p><img src="images/linus-torvalds.jpg" alt="background">
+photo <a href="http://www.flickr.com/photos/48923114@N00/116787425">cc</a></p>
+<ol>
+<li>git was invented by linus torvalds, see <a href="http://www.youtube.com/watch?v=4XpnKHJAok8">this video of a talk by him</a>
+</li>
+<li>is is used to manage the linux kernel</li>
+<li>git is a distributed vcs</li>
+<li>you can work online and offline </li>
+<li>its architecture is not fixed: e.g. move to new central server</li>
+<li>branching and merging is easy</li>
+<li>all the data is saved in only one directory: .git</li>
+<li>integrity of the code: identified by SHA1</li>
+</ol>
+<h4 id="why-use-github-com-questionmark">1.4 Why use github.com?</h4>
+<ol>
+<li>it's free for open source projects</li>
+<li>it offers a convenient web interface</li>
+<li>with forking + pull requests it offers a good way how to contribute to open soruce projects</li>
+<li>it's mascopt is cute: octocat <img src="images/octocat.png" alt="octocat">
+</li>
+</ol>
+<h4 id="resources-for-learning-git">1.5 Resources for Learning Git</h4>
+<ul>
+<li><a href="http://git-scm.com/documentation">http://git-scm.com/documentation</a></li>
+<li><a href="http://progit.org/book/">http://progit.org/book/</a></li>
+<li><a href="http://help.github.com/">http://help.github.com/</a></li>
+<li>Loelinger(2009): Version Control with Git. O'Reilly Media.</li>
+<li>Swicegood(2009): Pragmatic Version Control Using Git. Pragmatic Bookshelf.</li>
+</ul>
+<h3 id="git-basics">2 Git Basics </h3>
+<p>Where is my code?  There are four answers to this question, for "places" that
+you need to learn about:</p>
+<p><img src="images/git-where.png" alt="git-transport"></p>
+<ul>
+<li>the workspace is what you see in your on file system</li>
+<li>the index is an invisible space where you can <em>add</em>  files you want to commit</li>
+<li>you can always commit to your local repository - it's really stored in the <em>.git</em> folder</li>
+<li>the remote repository may not be reachable all the time</li>
+</ul>
+<h4 id="configuring-git">2.1 Configuring Git</h4>
+<ul>
+<li>command "git config"</li>
+<li>for project: stored in .git/config</li>
+<li>for user: is stored in ~/.gitconfig</li>
+<li>use flag --global for user</li>
+</ul>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ git config --global user.name "Firstname Lastname"
+$ git config --global user.email "me@fh-salzburg.ac.at"
+$ git config --list --global
+# user.name=Firstname Lastname
+# user.email=me@fh-salzburg.ac.at
+
+</pre>
+</div>
+<h4 id="create-a-repository-from-scratch">2.2 Create a Repository from scratch</h4>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+cd project_directory
+git init
+# creates subdirectory .git
+# repository is stored in there
+# .git/config 
+
+</pre>
+</div>
+<p>Windows Only: line breaks?</p>
+<p>Some configs you might want to set</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+core.autocrlf false
+core.editor "C:/Programme/Notepad++/Notepad++.exe"
+
+</pre>
+</div>
+<p>Aliases</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+git config --global alias.co checkout
+
+# you now can use
+git co master
+# instead of
+git checkout master
+
+</pre>
+</div>
+<h4 id="plain-git-workflow">2.3 Plain git Workflow</h4>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+# what's up?
+git status
+
+# i've edited a file
+git add FILE
+
+# i've edited a lot of files
+git add .
+
+git commit -m "describe the commit"
+
+</pre>
+</div>
+<h4 id="index-staging-area">2.4 Index / Staging area</h4>
+<p><img src="images/git-index.png" alt="git-index"></p>
+<p>Workspace ("working copy") is managed by git!</p>
+<h4 id="content-not-file-bang">2.5 content, not file!</h4>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+# change file
+git add file
+# change file again
+git status
+git diff
+git diff --staged 
+
+</pre>
+</div>
+<p><em>the first change has beed staged, but not the second!</em></p>
+<h4 id="delete-file">2.6 delete file</h4>
+<ul>
+<li>deleting file from workspace alone is not enough</li>
+<li>opposite of "git add" is "git rm"</li>
+</ul>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+git rm FILE
+
+</pre>
+</div>
+<h4 id="rename-file">2.7 rename file</h4>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+git mv SOURCE DESTINATION
+
+</pre>
+</div>
+<h4 id="remotes">2.8 remotes</h4>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+git add remote origin https://github.com/myname/myrepository.git
+
+</pre>
+</div>
+<h4 id="clone-an-existing-repository">2.9 clone an existing repository</h4>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+git clone REPOSITORY_URL
+git clone REPOSITORY_URL DIR_NAME
+
+</pre>
+</div>
+
+<ul>
+<li>implicitly sets</li>
+</ul>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+git remote add origin REPOSITORY_URL
+
+</pre>
+</div>
+<h4 id="add-a-remote">2.10 add a remote</h4>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+git remote add REMOTE_NAME REMOTE_URL
+
+git remote add origin ssh://repos.mediacube.at/opt/git/username.git
+git remote add github git@github.com:bjelline/web-engineering-textbook.git
+
+</pre>
+</div>
+<h4 id="workflow-with-remote">2.11 workflow with remote</h4>
+<p><img src="images/git-remote.png" alt="git-remote"></p>
+<h4 id="push">2.12 push</h4>
+<ul>
+<li>specify local branch and remote repository</li>
+</ul>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+git push origin master
+
+</pre>
+</div>
+<h4 id="pull">2.13 pull</h4>
+<ul>
+<li>specify local branch and remote repository</li>
+</ul>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+git pull origin master
+
+</pre>
+</div>
+<h3 id="branching-and-merging">3 Branching and Merging</h3>
+<h4 id="branching">3.1 Branching</h4>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+git branch -v # shows branches
+* master 7a98805 Merge branch 'iss49'
+  iss50  782fd34 add scott to the author list in the readmes
+
+# create a branch 
+git branch BRANCH_NAME
+
+# delete a branch
+git branch -d BRANCH_NAME
+
+# get data from a different branch
+git checkout BRANCH_NAME
+
+# shortcut: create a new branch + checkout
+git checkout -b foo
+
+</pre>
+</div>
+<h4 id="basic-workflow">3.2 Basic workflow</h4>
+<p>before we branch</p>
+<p><img src="images/branching-1.png" alt="no branches yet"></p>
+<h4 id="create-a-new-branch">3.3 create a new branch</h4>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$git checkout -b iss53
+
+</pre>
+</div>
+<p><img src="images/branching-2.png" alt="no branches yet"></p>
+<h4 id="switch-to-a-branch">3.4 switch to a branch</h4>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$git checkout iss53
+
+</pre>
+</div>
+<h4 id="which-branch-am-i-on-questionmark">3.5 which branch am I on?</h4>
+<p><img src="images/git-branch.png" alt="git branch"></p>
+<h4 id="work">3.6 work</h4>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+# edit; commit(c3)
+$ git checkout master 
+# edit; commit(c4)
+$ git checkout iss53
+# edit; commit(c5)
+
+</pre>
+</div>
+<p><img src="images/branching-3.png" alt="worked on both branches"></p>
+<p><img src="images/branching-4.png" alt="what do I want to merge?"></p>
+<h4 id="merge-bang">3.7 merge!</h4>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ git checkout master
+$ git merge iss53
+Merge made by recursive.
+ README |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+
+</pre>
+</div>
+<h4 id="done">3.8 done</h4>
+<p><img src="images/branching-5.png" alt="after the merge"></p>
+<h4 id="delete-branch">3.9 delete branch</h4>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+git branch -d iss53
+
+</pre>
+</div>
+<h4 id="merging-in-detail">3.10 Merging in detail</h4>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+git merge OTHER_BRANCH
+
+</pre>
+</div>
+<p>merge the OTHER_BRANCH into the current (checked-out) branch</p>
+<h4 id="conflicts">3.11 Conflicts</h4>
+<ul>
+<li>when both branches contain changes for the same file</li>
+<li>or: trying two pushes containing changes for the same file</li>
+</ul>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ git status
+index.html: needs merge
+# On branch master
+# Changed but not updated:
+#   (use "git add &lt;file&gt;..." to update what will be committed)
+#   (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
+#
+#   unmerged:   index.html
+#
+
+</pre>
+</div>
+<h4 id="conflict-markers-in-a-file">3.12 conflict markers in a file</h4>
+<div class="code_container">
+<pre class="brush: xml; gutter: false; toolbar: false">
+&lt;/div&gt;
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD:index.html
+&lt;footer&gt;contact: support@github.com&lt;/footer&gt;
+=======
+&lt;div id="footer"&gt;
+  please contact us at support@github.com
+&lt;/div&gt;
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; iss53:index.html
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+</div>
+<h4 id="conflict-markers-in-a-files">3.13 conflict markers in a files</h4>
+<p><img src="images/conflict-markers.png" alt="conflict marker with syntax highlighting"></p>
+<h4 id="how-to-resolve">3.14 how to resolve</h4>
+<ul>
+<li>for all files:</li>
+<li>edit file</li>
+<li>try out your changes!</li>
+<li>git add FILE</li>
+<li>git commit</li>
+</ul>
+<h4 id="do-it-bang">3.15 Do it!</h4>
+<p><a href="http://git-scm.com/book/en/Git-Branching-Basic-Branching-and-Merging">Chapter 3.2</a></p>
+</body></html>
+
+</body>
+</html>

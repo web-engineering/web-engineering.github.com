@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Ruby on Rails Guides: Ruby Day</title>
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+  <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shThemeRailsGuides.css" />
+
+  <link rel="stylesheet" type="text/css" href="stylesheets/fixes.css" />
+
+  <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+</head>
+<body class="guide">
+  <div>
+    <a href="http://github.com/bjelline/web-engineering-textbook/"><img style="position: fixed; top: 0; right: 0; border: 0;" src="images/forkme.png" alt="Fork me on GitHub"></a>
+  </div>
+  <div id="topNav">
+    <div class="wrapper">
+      <strong class="more-info-label">Learn more at the sources: </strong>
+      <ul class="more-info-links s-hidden">
+        <li class="more-info"><a href="http://git-scm.com/documentation">Git Documentation</a></li>
+        <li class="more-info"><a href="http://try.github.com/">Try Git</a></li>
+        <li class="more-info"><a href="http://rubyonrails.org/">Ruby on Rails</a></li>
+        <li class="more-info"><a href="http://guides.rubyonrails.org/">Rails Guides</a></li>
+        <li class="more-info"><a href="http://railsforzombies.org/">Rails for Zombies</a></li>
+        <li class="more-info"><a href="http://railscasts.com/">Railscasts</a></li>
+      </ul>
+    </div>
+  </div>
+  <div id="header">
+    <div class="wrapper clearfix">
+      <h1><a href="index.html" title="Return to home page">WebEngineering</a></h1>
+      <ul class="nav">
+        <li><a class="nav-item" href="index.html">Home</a></li>
+        <li class="guides-index guides-index-large">
+          <a href="index.html" onclick="guideMenu(); return false;" id="guidesMenu" class="guides-index-item nav-item">Index</a>
+          <div id="guides" class="clearfix" style="display: none;">
+            <hr />
+              <dl class="L">
+                <dt>Git</dt>
+                <dd><a href="git_branching.html">Branching and Merging</a></dd>
+                <dd><a href="git_teamwork.html">Git Teamwork</a></dd>
+                <dt>Ruby on Rails</dt>
+                <dd><a href="rails_with_scaffold.html">Rails with Scaffold</a></dd>
+                <dd><a href="ruby_commandline.html">Ruby Commandline</a></dd>
+                <dd><a href="rails_database_and_model.html">Rails Database and Model</a></dd>
+                <dd><a href="rails_view_and_controller.html">Rails View and Controller</a></dd>
+                <dd><a href="authentication_from_scratch.html">Authentication from Scratch</a></dd>
+                <dd><a href="authentication_with_devise.html">Authentication with Devise</a></dd>
+                <dd><a href="asset_pipeline.html">Asset Pipeline</a></dd>
+                <dd><a href="testing_and_refactoring.html">Testing and Refactoring</a></dd>
+              </dl>
+              <dl class="R">
+                <dt>Software Process</dt>
+                <dd><a href="good_practices.html">Good Practices</a></dd>
+                <dd><a href="agile.html">Agile Methods</a></dd>
+              </dl>
+          </div>
+        </li>
+        <li><a class="nav-item" href="https://github.com/bjelline/web-engineering-textbook/">Contribute</a></li>
+      </ul>
+      </div>
+    </div>
+  </div>
+  <hr class="hide" />
+
+  <div id="feature">
+    <div class="wrapper">
+      <h2>Ruby Day</h2><p>This guide will focus on ruby, the language.</p><p>After finishing this guide you will</p>
+<ul>
+<li>understand this</li>
+<li>do that</li>
+</ul>
+
+
+                <div id="subCol">
+            <h3 class="chapter"><img src="images/chapters_icon.gif" alt="" />Chapters</h3>
+            <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><ol class="chapters">
+<li>
+<a href="#what-is-ruby">What is Ruby</a>
+
+<ul>
+<li><a href="#what-is-ruby-on-rails">What is ruby on rails</a></li>
+<li><a href="#why-ruby-questionmark-why-rails-questionmark">Why Ruby? Why Rails ?</a></li>
+</ul>
+</li>
+<li>
+<a href="#ruby-basics-recap">Ruby Basics (Recap)</a>
+
+<ul>
+<li><a href="#conventions-for-identifiers">Conventions for Identifiers</a></li>
+<li><a href="#parantheses-are-optional-bang">parantheses are optional!</a></li>
+<li><a href="#data-types">Data Types</a></li>
+<li><a href="#string">String</a></li>
+<li><a href="#only-false-and-nil-are-treated-as-false">only false and nil are treated as false</a></li>
+<li><a href="#shorter-way-of-writing-a-condition">shorter way of writing a condition</a></li>
+<li><a href="#shortcut-evaluation-of-boolean-operators">shortcut evaluation of boolean operators</a></li>
+<li><a href="#methode">Methode</a></li>
+</ul>
+</li>
+<li>
+<a href="#enumerables-and-piping-data">Enumerables and Piping Data</a>
+
+<ul>
+<li><a href="#what-is-a-hash-questionmark">What is a Hash?</a></li>
+<li><a href="#piping-data">"Piping Data"</a></li>
+<li><a href="#piping-data-in-ruby">Piping Data in Ruby</a></li>
+<li><a href="#some-methods-for-enumerables">some methods for Enumerables</a></li>
+<li><a href="#enumerables-and-piping-data-methods-for-enumerables-that-take-a-block">methods for Enumerables that take a block</a></li>
+<li><a href="#enumerables-and-piping-data-methods-for-enumerables-that-take-a-block">methods for Enumerables that take a block</a></li>
+<li><a href="#methods-for-enumerables-that-take-a-block">methods for Enumerables that take a block</a></li>
+<li><a href="#avoid-loops-bang">avoid loops!</a></li>
+</ul>
+</li>
+<li>
+<a href="#blocks-etc">Blocks etc.</a>
+
+<ul>
+<li><a href="#blocks-etc-my-function-takes-a-block-of-code">My Function takes a Block of Code</a></li>
+<li><a href="#blocks-etc-my-function-takes-a-block-of-code">My Function takes a Block of Code</a></li>
+</ul>
+</li>
+</ol></body></html>
+
+            <dl>
+               <dd class="work-in-progress">This whole book is currently a work in progress. While still useful, it may contain incomplete information and even errors. You can help by reviewing them and posting your comments and corrections.</dd>
+            </dl>
+          </div>
+
+    </div>
+  </div>
+
+  <div id="container">
+    <div class="wrapper">
+      <div id="mainCol">
+        <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h3 id="what-is-ruby">1 What is Ruby</h3>
+<p><img src="images/Ruby_logo.png" alt="Ruby Logo"></p>
+<ul>
+<li>an open source project</li>
+<li>one of the scripting language with p(?)
+
+<ul>
+<li>perl</li>
+<li>python</li>
+<li><strike>php</strike></li>
+</ul>
+</li>
+<li>created by Yukihiro 'Matz' Matsumoto</li>
+<li>started in 1996</li>
+</ul>
+<h4 id="what-is-ruby-on-rails">1.1 What is ruby on rails</h4>
+<p><img src="images/Ruby_on_Rails_logo.png" alt="Ruby on Rails Logo"></p>
+<ul>
+<li>web framework written in ruby</li>
+<li>created by David Heinemeier Hansson 'DHH'</li>
+<li>starting in 2005</li>
+</ul>
+<h4 id="why-ruby-questionmark-why-rails-questionmark">1.2 Why Ruby? Why Rails ?</h4>
+<p><img src="images/ruby-and-rails-t-shirts.png" alt="Ruby and Rails T-Shirts"></p>
+<h3 id="ruby-basics-recap">2 Ruby Basics (Recap)</h3>
+<h4 id="conventions-for-identifiers">2.1 Conventions for Identifiers</h4>
+<ul>
+<li>eine_variable</li>
+<li>EineKlasse</li>
+<li>a = b.sugar</li>
+<li>b.sugar!</li>
+<li>b.sweet?</li>
+</ul>
+<h4 id="parantheses-are-optional-bang">2.2 parantheses are optional!</h4>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+puts("less code")
+puts "less code" 
+
+</pre>
+</div>
+<h4 id="data-types">2.3 Data Types</h4>
+<ul>
+<li>Fixnum, Bignum, Float</li>
+<li>String</li>
+<li>true, false</li>
+<li>Symbol</li>
+<li>Array</li>
+<li>Hash</li>
+<li>Object</li>
+</ul>
+<h4 id="string">2.4 String</h4>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+s = 'nur ein String'
+s = "string mit #{variable} oder #{a+b/c} Expression"
+s = &lt;&lt;-EOM
+This is a so called "Here-Document"
+it can contain many lines of text
+and ends with the identifier EOM (that i chose!)
+EOM 
+
+</pre>
+</div>
+<h4 id="only-false-and-nil-are-treated-as-false">2.5 only false and nil are treated as false</h4>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+if 0 
+  puts '0 is true!' 
+end
+if "false"
+  puts '"false" is not false'       
+end
+
+</pre>
+</div>
+<h4 id="shorter-way-of-writing-a-condition">2.6 shorter way of writing a condition</h4>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+puts '0 is true!' if 0 
+puts '"false" is not false' if "false"
+
+</pre>
+</div>
+<h4 id="shortcut-evaluation-of-boolean-operators">2.7 shortcut evaluation of boolean operators</h4>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+default_value = "gray"
+input_value = nil
+a = input_value || default_value
+
+</pre>
+</div>
+<h4 id="methode">2.8 Methode</h4>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+def f(a,b)
+  "x"
+end
+
+f(1,42)
+
+</pre>
+</div>
+<h3 id="enumerables-and-piping-data">3 Enumerables and Piping Data</h3>
+<h4 id="what-is-a-hash-questionmark">3.1 What is a Hash?</h4>
+<ul>
+<li>how does it work</li>
+<li>complexity of insert</li>
+<li>complexity of loopup</li>
+</ul>
+<h4 id="piping-data">3.2 "Piping Data"</h4>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+# many httpd processes are running. as which user(s) ?
+# 
+$ ps aux | grep httpd | cut -c1-8 | sort | uniq
+
+</pre>
+</div>
+<h4 id="piping-data-in-ruby">3.3 Piping Data in Ruby</h4>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+languages = %w[Fortran Ada C C++ Java Scala Haskell]
+languages.sort.first(3)
+
+</pre>
+</div>
+<h4 id="some-methods-for-enumerables">3.4 some methods for Enumerables</h4>
+<ul>
+<li>sort</li>
+<li>first(n)</li>
+<li>drop(n)</li>
+<li>last(n)</li>
+<li>grep(/pattern/)</li>
+<li>count</li>
+<li>count("only this exact value")</li>
+<li>max, min</li>
+</ul>
+<h4 id="enumerables-and-piping-data-methods-for-enumerables-that-take-a-block">3.5 methods for Enumerables that take a block</h4>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+(1..10).map{ |x| x*2 }.reverse
+
+</pre>
+</div>
+<h4 id="enumerables-and-piping-data-methods-for-enumerables-that-take-a-block">3.6 methods for Enumerables that take a block</h4>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+(1..10).map do |x| 
+  x*2 
+end.reverse
+
+</pre>
+</div>
+<h4 id="methods-for-enumerables-that-take-a-block">3.7 methods for Enumerables that take a block</h4>
+<ul>
+<li>map {|x| new value computed from x} </li>
+<li>select {|x| should x be selected? }</li>
+<li>reduce(:+)</li>
+<li>reduce{|memo, item| compute new value for memo}</li>
+</ul>
+<h4 id="avoid-loops-bang">3.8 avoid loops!</h4>
+<h3 id="blocks-etc">4 Blocks etc.</h3>
+<h4 id="blocks-etc-my-function-takes-a-block-of-code">4.1 My Function takes a Block of Code</h4>
+<p>as it's last argument</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+def my_function_with_block_arg
+  puts "code in the funtion"
+  yield
+  puts "more code in the function"
+end
+
+my_function_with_block_arg { puts "code in the block" }
+
+</pre>
+</div>
+<h4 id="blocks-etc-my-function-takes-a-block-of-code">4.2 My Function takes a Block of Code</h4>
+<p>as it's last argument</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+def my_function_with_block_arg
+  puts "code in the funtion"
+  yield
+  puts "more code in the function"
+end
+
+my_function_with_block_arg do
+  puts "code in the block"
+  puts "more code in the block"
+end
+
+</pre>
+</div>
+</body></html>
+
+      </div>
+    </div>
+  </div>
+
+  <hr class="hide" />
+  <div id="footer">
+    <div class="wrapper">
+      <p class="copyright">published under <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/at/deed.de">creative commons by-nc-sa</a> in 2012 by <a href="http://brigitte-jellinek.at">Brigitte Jellinek</a>.
+      </p><p>If you want to contribute: <a href="https://github.com/bjelline/web-engineering-textbook/fork_select">fork the source on github</a> </p>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="javascripts/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/responsive-tables.js"></script>
+  <script type="text/javascript" src="javascripts/guides.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
+  <script type="text/javascript">
+    SyntaxHighlighter.all()
+  $(guidesIndex.bind);
+  </script>
+</body>
+</html>

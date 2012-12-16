@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="RailsGuides">
+<metadata>
+  <meta name="cover" content="cover" />
+  <dc-metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+
+  	<dc:title>Web Engineering Textbook (local)</dc:title>
+
+  	<dc:language>en-us</dc:language>
+  	<dc:creator>Brigitte Jellinek</dc:creator>
+  	<dc:publisher>Brigitte Jellinek</dc:publisher>
+  	<dc:subject>Reference</dc:subject>
+  	<dc:date>2012-12-16</dc:date>
+
+    <dc:description>This textbook is designed to make you a better web developer by learning version control and a MVC-framework - git and ruby on rails.</dc:description>
+  </dc-metadata>
+  <x-metadata>
+    <output content-type="application/x-mobipocket-subscription-magazine" encoding="utf-8"/>
+  </x-metadata>
+</metadata>
+
+<manifest>
+  <!-- HTML content files [mandatory] -->
+    <item id="git_branching.html" media-type="text/html" href="git_branching.html" />
+    <item id="git_teamwork.html" media-type="text/html" href="git_teamwork.html" />
+    <item id="rails_with_scaffold.html" media-type="text/html" href="rails_with_scaffold.html" />
+    <item id="ruby_commandline.html" media-type="text/html" href="ruby_commandline.html" />
+    <item id="rails_database_and_model.html" media-type="text/html" href="rails_database_and_model.html" />
+    <item id="rails_view_and_controller.html" media-type="text/html" href="rails_view_and_controller.html" />
+    <item id="authentication_from_scratch.html" media-type="text/html" href="authentication_from_scratch.html" />
+    <item id="authentication_with_devise.html" media-type="text/html" href="authentication_with_devise.html" />
+    <item id="asset_pipeline.html" media-type="text/html" href="asset_pipeline.html" />
+    <item id="testing_and_refactoring.html" media-type="text/html" href="testing_and_refactoring.html" />
+
+    <item id="toc.html" media-type="text/html" href="toc.html" />
+    <item id="credits.html" media-type="text/html" href="credits.html" />
+    <item id="welcome.html" media-type="text/html" href="welcome.html" />
+    <item id="copyright.html" media-type="text/html" href="copyright.html" />
+
+  <item id="toc" media-type="application/x-dtbncx+xml" href="toc.ncx" />
+
+  <item id="cover" media-type="image/jpg" href="images/rails_guides_kindle_cover.jpg"/>
+</manifest>
+
+<spine toc="toc">
+  <itemref idref="toc.html" />
+  <itemref idref="welcome.html" />
+  <itemref idref="credits.html" />
+  <itemref idref="copyright.html" />
+    <itemref idref="git_branching.html" />
+    <itemref idref="git_teamwork.html" />
+    <itemref idref="rails_with_scaffold.html" />
+    <itemref idref="ruby_commandline.html" />
+    <itemref idref="rails_database_and_model.html" />
+    <itemref idref="rails_view_and_controller.html" />
+    <itemref idref="authentication_from_scratch.html" />
+    <itemref idref="authentication_with_devise.html" />
+    <itemref idref="asset_pipeline.html" />
+    <itemref idref="testing_and_refactoring.html" />
+</spine>
+
+<guide>
+	<reference type="toc" title="Table of Contents" href="toc.html"></reference>
+</guide>
+
+</package>

@@ -4,8 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Web Engineering - a textbook
-</title>
+  <title>Ruby on Rails Guides: Git Teamwork</title>
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
   <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
@@ -72,26 +71,36 @@
 
   <div id="feature">
     <div class="wrapper">
-        <h2>About this Book</h2>
-  <p>This is a textbook for the second year of a computer
-  science or "media informatics" degree program.  It builds
-  on <a href="http://web-development.github.com">Web Development</a> 
-  (which is only available in german)</p>
-
-  <p>This book was written and published by Brigitte Jellinek
-  in the hope that it will be useful to lecturers and students
-  in educational institutions as well as to self-directed learners on the internet.
-  </p>
+      <h2>Git Teamwork</h2><p>In this guide you will learn about a special form of teamwork
+in programming: pair programming.</p><p>After reading this guide, you will:</p>
+<ul>
+<li>Know why you should try pair programming</li>
+<li>have a good starting point for your first try at pairing</li>
+<li>be able to use git while pairing</li>
+</ul>
 
 
-      <div id="subCol">
-  <dl>
-    <!--
-    <dd class="kindle">This textbook is also available for <a href="kindle/ruby_on_rails_guides_local.mobi">Kindle</a>.</dd>
-    -->
-    <dd class="work-in-progress">This whole book is currently a work in progress. While still useful, it may contain incomplete information and even errors. You can help by reviewing them and posting your comments and corrections.</dd>
-  </dl>
-</div>
+                <div id="subCol">
+            <h3 class="chapter"><img src="images/chapters_icon.gif" alt="" />Chapters</h3>
+            <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body><ol class="chapters">
+<li>
+<a href="#pair-programming">Pair Programming</a>
+
+<ul>
+<li><a href="#why-pair-questionmark">why pair?</a></li>
+<li><a href="#pair-programming-und-git">Pair Programming und git</a></li>
+<li><a href="#git-config">git config</a></li>
+<li><a href="#git-config-file">git config file</a></li>
+<li><a href="#set-the-config">set the config</a></li>
+</ul>
+</li>
+</ol></body></html>
+
+            <dl>
+               <dd class="work-in-progress">This whole book is currently a work in progress. While still useful, it may contain incomplete information and even errors. You can help by reviewing them and posting your comments and corrections.</dd>
+            </dl>
+          </div>
 
     </div>
   </div>
@@ -99,62 +108,83 @@
   <div id="container">
     <div class="wrapper">
       <div id="mainCol">
-        
-
-
-
-<h3>Why Web Engineering</h3>
-
-<p>Is there really a need for "Web Engineering" as a separate subject?
-Doesn't "Software Engineering" cover Web Development also?</p>
-
-<p>I would argue that web development has reached a level of
-complexity where it makes sense to study it in depth, in it's
-own right.  Web projects have some features in common, that separate
-them from other software projects:</p>
-
+        <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h3 id="pair-programming">1 Pair Programming</h3>
 <ul>
-  <li><strong>different people</strong>: more non-programmers needed: designers, usability,</li>
-  <li><strong>different languages</strong>: for web development dynamic languages are used. this implies different design patterns than strongly typed languages</li>
-  <li><strong>no software in boxes</strong>: web apps are not delivered once a year in a box. they have to be maintained and updated all the time, continous delivery is needed!</li>
+<li>two developers, one computer</li>
+<li>a lot of talking. talk first!</li>
+<li>"driver" is typing</li>
+<li>"navigator" watches, thinks ahead, spots errors, keeps the big picture in mind</li>
+<li>take turns, switch around roles, after 20 minutes</li>
 </ul>
+<h4 id="why-pair-questionmark">1.1 why pair?</h4>
+<ul>
+<li>pairs are more productive than single developers (see Williams(2000))</li>
+<li>better quality of life through contact with other humans</li>
+<li>learn from each other</li>
+<li>part of agile methodologies, used today in industry</li>
+</ul>
+<h4 id="pair-programming-und-git">1.2 Pair Programming und git</h4>
+<p>We want the log to show who worked as a pair</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ git log
+commit 38d4f10fe2fb3f4d13e12d75e70bc0a085f0753f
+Author: Brigitte Jellinek + Mr. Hyde &lt;xhyde.lba@fh-salzburg.ac.at&gt;
+Date:   Fri Sep 14 10:52:41 2012 +0200
 
-<p>This textbook will try to teach you about general good software engineering practices
-while always sticking to examples that are actually useful in web development today.</p>
+</pre>
+</div>
+<p>This semester we will use:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+firstname lastname driver + firstname lastname navigator
+e-mail address of the navigator
 
-  <h3>Git</h3>
-  <dl>
-      <dt><a href="git_branching.html">Branching and Merging</a></dt><dd>
-        <p></p>
-</dd>      <dt><a href="git_teamwork.html">Git Teamwork</a></dt><dd>
-        <p></p>
-</dd>  </dl>
-  <h3>Ruby on Rails</h3>
-  <dl>
-      <dt><a href="rails_with_scaffold.html">Rails with Scaffold</a></dt><dd>
-        <p>Let&#x27;s create a full Rails App in about an hour</p>
-</dd>      <dt><a href="ruby_commandline.html">Ruby Commandline</a></dt><dd>
-        <p>The essential ruby you need to know to understand rails</p>
-</dd>      <dt><a href="rails_database_and_model.html">Rails Database and Model</a></dt><dd>
-        <p>How does Rails use the database? How are models and database tables related?</p>
-</dd>      <dt><a href="rails_view_and_controller.html">Rails View and Controller</a></dt><dd>
-        <p></p>
-</dd>      <dt><a href="authentication_from_scratch.html">Authentication from Scratch</a></dt><dd>
-        <p></p>
-</dd>      <dt><a href="authentication_with_devise.html">Authentication with Devise</a></dt><dd>
-        <p></p>
-</dd>      <dt><a href="asset_pipeline.html">Asset Pipeline</a></dt><dd>
-        <p></p>
-</dd>      <dt><a href="testing_and_refactoring.html">Testing and Refactoring</a></dt><dd>
-        <p></p>
-</dd>  </dl>
-  <h3>Software Process</h3>
-  <dl>
-      <dt><a href="good_practices.html">Good Practices</a></dt><dd>
-        <p></p>
-</dd>      <dt><a href="agile.html">Agile Methods</a></dt><dd>
-        <p></p>
-</dd>  </dl>
+</pre>
+</div>
+<h4 id="git-config">1.3 git config</h4>
+<p>see git config --help</p>
+<ul>
+<li>three Levels:</li>
+<li>for a single repository ./.git/config</li>
+<li>for one user ~/.gitconfig </li>
+<li>--global</li>
+<li>for the whole system /etc/gitconfig </li>
+<li>--system</li>
+</ul>
+<h4 id="git-config-file">1.4 git config file</h4>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+[user]
+    name = Brigitte Jellinek + Mr. Hyde
+    email = xhyde.lba@fh-salzburg.ac.at
+
+[core]
+    repositoryformatversion = 0
+    filemode = true
+    bare = false
+    logallrefupdates = true
+    ignorecase = true
+
+[remote "origin"]
+    url = ssh://repos.mediacube.at/opt/git/webpm/r1
+    fetch = +refs/heads/*:refs/remotes/origin/*
+
+</pre>
+</div>
+<h4 id="set-the-config">1.5 set the config</h4>
+<p>just in the current repository, just for now.</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+git config --replace-all user.name "firstname lastname + firstname lastname"
+git config --replace-all user.email "navigator@gmail.com"
+
+</pre>
+</div>
+<p>go do it!</p>
+</body></html>
 
       </div>
     </div>
