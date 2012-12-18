@@ -34,7 +34,7 @@
   </div>
   <div id="header">
     <div class="wrapper clearfix">
-      <h1><a href="index.html" title="Return to home page">WebEngineering</a></h1>
+      <h1><a href="index.html" title="Return to home page">Web<span>Engineering</span></a></h1>
       <ul class="nav">
         <li><a class="nav-item" href="index.html">Home</a></li>
         <li class="guides-index guides-index-large">
@@ -71,9 +71,11 @@
 
   <div id="feature">
     <div class="wrapper">
-      <h2>Git Branching</h2><p>This Guide will introduce you to using branches in git.</p><p>After reading this guide, you will know:</p>
+      <h2>Git Branching</h2><p>This Guide will give you a very quick introduce to
+git, and then focus on using branches in git.</p><p>After reading this guide, you will know:</p>
 <ul>
 <li>Why you should a version control system like git</li>
+<li>How to use git as a single developer, in  a &quot;one person team&quot;</li>
 <li>How to create and merge branches</li>
 </ul>
 
@@ -86,7 +88,7 @@
 <a href="#what-is-a-revision-control-system-questionmark">What is a Revision Control System?</a>
 
 <ul>
-<li><a href="#a-short-and-incomplete-history">A short - and incomplete - history</a></li>
+<li><a href="#a-short-and-incomplete-history-of-revision-control">A short - and incomplete - history of revision control</a></li>
 <li><a href="#why-use-revision-control-questionmark">Why use revision control?</a></li>
 <li><a href="#why-use-git-questionmark">Why use git?</a></li>
 <li><a href="#why-use-github-com-questionmark">Why use github.com?</a></li>
@@ -154,29 +156,33 @@ documents, computer programs, large web sites, and other collections of
 information.  <a href="http://en.wikipedia.org/wiki/Revision_control">Wikipedia</a></p>
 <p>In other words: it's a tool that helps you with your code files, and
 with several version of such files.</p>
-<p>These systems are known under many names
-* version control system (VCS)
-* source code manager (SCM)
-* revision control system (RCS)</p>
-<p>In german they are most commonly called
-* Versionskontrollsystem </p>
-<h4 id="a-short-and-incomplete-history">1.1 A short - and incomplete - history</h4>
+<p>These systems are known under many names</p>
+<ul>
+<li>version control system (VCS)</li>
+<li>source code manager (SCM)</li>
+<li>revision control system (RCS)</li>
+</ul>
+<p>In german they are most commonly called "Versionskontrollsystem".</p>
+<h4 id="a-short-and-incomplete-history-of-revision-control">1.1 A short - and incomplete - history of revision control</h4>
 <p>Some ancient systems that are no longer in use are:</p>
 <ul>
 <li>RCS</li>
 <li>CVS</li>
 </ul>
-<p>These systems are open source systems that are still in use today:</p>
+<p>Systems are open source systems and that are still in use today:</p>
 <ul>
 <li>SVN, also called Subversion</li>
 <li>Hg, also called Mercurial</li>
 <li>Git</li>
 </ul>
 <h4 id="why-use-revision-control-questionmark">1.2 Why use revision control?</h4>
+<p>There are good reasons to use revision control even in
+small projects:</p>
 <ol>
-<li>The whole history of the project always accessible</li>
-<li>You can try out stuff without danger of breaking anything</li>
-<li>For teamwork - several people can program on separate computers, the system helps with merging the differnet codes</li>
+<li>The whole history of the project always accessible, you can "go back in time" to old versions of your code.</li>
+<li>You can try out experimental stuff without danger of breaking your existing code.<br>
+</li>
+<li>it's absolutely vital for teamwork - several people can program on separate computers, the system helps with merging the differnet codes</li>
 </ol>
 <h4 id="why-use-git-questionmark">1.3 Why use git?</h4>
 <p><img src="images/linus-torvalds.jpg" alt="background">
