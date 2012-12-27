@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Web Engineering Textbook: Ruby Day</title>
+  <title>Web Engineering Textbook: Ruby </title>
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
   <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
@@ -84,24 +84,22 @@
 </ul>
 </li>
 <li>
-<a href="#ruby-basics-recap">Ruby Basics (Recap)</a>
+<a href="#ruby-basics">Ruby Basics </a>
 
 <ul>
-<li><a href="#conventions-for-identifiers">Conventions for Identifiers</a></li>
-<li><a href="#parantheses-are-optional-bang">parantheses are optional!</a></li>
-<li><a href="#data-types">Data Types</a></li>
-<li><a href="#string">String</a></li>
-<li><a href="#only-false-and-nil-are-treated-as-false">only false and nil are treated as false</a></li>
-<li><a href="#shorter-way-of-writing-a-condition">shorter way of writing a condition</a></li>
-<li><a href="#shortcut-evaluation-of-boolean-operators">shortcut evaluation of boolean operators</a></li>
-<li><a href="#methode">Methode</a></li>
+<li><a href="#some-code-conventions">Some code conventions</a></li>
+<li><a href="#strings">Strings</a></li>
+<li><a href="#boolean-values">Boolean Values</a></li>
+<li><a href="#shorthand-for-conditions">shorthand for conditions</a></li>
+<li><a href="#boolean-operators">Boolean Operators</a></li>
+<li><a href="#methods">Methods</a></li>
+<li><a href="#hashes">Hashes</a></li>
 </ul>
 </li>
 <li>
 <a href="#enumerables-and-piping-data">Enumerables and Piping Data</a>
 
 <ul>
-<li><a href="#what-is-a-hash-questionmark">What is a Hash?</a></li>
 <li><a href="#piping-data">"Piping Data"</a></li>
 <li><a href="#piping-data-in-ruby">Piping Data in Ruby</a></li>
 <li><a href="#some-methods-for-enumerables">some methods for Enumerables</a></li>
@@ -119,6 +117,7 @@
 <li><a href="#blocks-etc-my-function-takes-a-block-of-code">My Function takes a Block of Code</a></li>
 </ul>
 </li>
+<li><a href="#ruby-style">Ruby Style</a></li>
 </ol></body></html>
 
             <dl>
@@ -126,10 +125,11 @@
             </dl>
           </div>
 
-      <h2>Ruby Day</h2><p>This guide will focus on ruby, the language.</p><p>After finishing this guide you will</p>
+      <h2>Ruby </h2><p>This guide will focus on ruby - the language - alone.</p><p>After finishing this guide you will</p>
 <ul>
-<li>understand this</li>
-<li>do that</li>
+<li>have an overview of rubys type system</li>
+<li>be able to use list processing funktions in ruby</li>
+<li>be able to use blocks and <code>yield</code> in ruby.</li>
 </ul>
 
     </div>
@@ -142,38 +142,63 @@
 <html><body>
 <h3 id="what-is-ruby">1 What is Ruby</h3>
 <p><img src="images/Ruby_logo.png" alt="Ruby Logo"></p>
-<ul>
-<li>an open source project</li>
-<li>one of the scripting language with p(?)
+<p>Ruby is an open source project.  It was started
+in 1996 by Yukihiro 'Matz' Matsumoto. He is still
+the "benevolent dictator" who decides on the future of the language.</p>
+<p>In a colossal break with tradition he did not
+choose a name starting with p for his scripting language
+(think perl, python, php) but opted for r instead.</p>
+<p>Like python ruby is a modern, thoroughly object oriented scripting language.
+Even basic data types are object:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+1.to_s
+=&gt; "1"
 
-<ul>
-<li>perl</li>
-<li>python</li>
-<li><strike>php</strike></li>
-</ul>
-</li>
-<li>created by Yukihiro 'Matz' Matsumoto</li>
-<li>started in 1996</li>
-</ul>
+</pre>
+</div>
+<p>In this example the number 1 is used as an object, the method <code>to_s</code> is
+called on it.  The result is an Object of class String.</p>
 <h4 id="what-is-ruby-on-rails">1.1 What is ruby on rails</h4>
 <p><img src="images/Ruby_on_Rails_logo.png" alt="Ruby on Rails Logo"></p>
-<ul>
-<li>web framework written in ruby</li>
-<li>created by David Heinemeier Hansson 'DHH'</li>
-<li>starting in 2005</li>
-</ul>
+<p>Ruby on Rails is a web framework written in ruby.
+It was created by David Heinemeier Hansson ('DHH') starting in 2005.</p>
+<p>Rails is famous for the high productivity it gives to developers. It
+is often used in startups, where speed of delivery is very important.
+Rails moves fast, new versions with major improvement appear about every 18
+months.  The rails community values speed of development, DRY code, testing,
+version control, ... when you learn rails you also pick up whole culture 
+surrounding it.</p>
 <h4 id="why-ruby-questionmark-why-rails-questionmark">1.2 Why Ruby? Why Rails ?</h4>
-<p><img src="images/ruby-and-rails-t-shirts.png" alt="Ruby and Rails T-Shirts"></p>
-<h3 id="ruby-basics-recap">2 Ruby Basics (Recap)</h3>
-<h4 id="conventions-for-identifiers">2.1 Conventions for Identifiers</h4>
+<p>Why should you use Ruby and Rails over other programming languages
+and frameworks?  </p>
 <ul>
-<li>eine_variable</li>
-<li>EineKlasse</li>
-<li>a = b.sugar</li>
-<li>b.sugar!</li>
-<li>b.sweet?</li>
+<li>Because you want to be a highly productive web developer?</li>
+<li>Because you want to learn from the best?</li>
+<li>Because you want try out many different languages and many frameworks?</li>
 </ul>
-<h4 id="parantheses-are-optional-bang">2.2 parantheses are optional!</h4>
+<p>All these answers are equally valid.</p>
+<p>Also, we have cool t-shirts:</p>
+<p><img src="images/ruby-and-rails-t-shirts.png" alt="Ruby and Rails T-Shirts"></p>
+<h3 id="ruby-basics">2 Ruby Basics </h3>
+<p>For a hands-on introdcution to ruby got to <a href="http://tryruby.org">try ruby</a>.
+Then come back and read on:</p>
+<h4 id="some-code-conventions">2.1 Some code conventions</h4>
+<p>Identifiers:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+the_variable = SomeClass.new
+             # variables are written in snake_case
+             # classes in capital CamelCase
+
+a = b.sugar  # a method the returns something
+b.sweet?     # a method that returns true or false
+b.sugar!     # a method that changes it's object
+
+</pre>
+</div>
+<p>In ruby the parantheses around arguments are optional.
+Leave them off unless your code get's confusing:</p>
 <div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
 puts("less code")
@@ -181,42 +206,52 @@ puts "less code"
 
 </pre>
 </div>
-<h4 id="data-types">2.3 Data Types</h4>
+<h2>Data Types</h2>
+<p>All of rubys basic data types are Classes.</p>
 <ul>
-<li>Fixnum, Bignum, Float</li>
+<li>Fixnum, Bignum, Float # are convert automatically to each other</li>
 <li>String</li>
-<li>true, false</li>
+<li>true  # TrueClass</li>
+<li>false # FalseClass</li>
 <li>Symbol</li>
 <li>Array</li>
 <li>Hash</li>
 <li>Object</li>
 </ul>
-<h4 id="string">2.4 String</h4>
+<h4 id="strings">2.2 Strings</h4>
 <div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
-s = 'nur ein String'
-s = "string mit #{variable} oder #{a+b/c} Expression"
+s = 'just a string of characters'
+s = "string with #{the_variable} or even #{a+b/c} a ruby expression embedded"
 s = &lt;&lt;-EOM
 This is a so called "Here-Document"
 it can contain many lines of text
 and ends with the identifier EOM (that i chose!)
+but only if it's alone on a line all by itselve:
 EOM 
 
 </pre>
 </div>
-<h4 id="only-false-and-nil-are-treated-as-false">2.5 only false and nil are treated as false</h4>
+<h4 id="boolean-values">2.3 Boolean Values</h4>
+<p>In ruby only false and nil are treated as false. This might
+be confusing for programmers used to other languages with
+more complex rules for truthyness:</p>
 <div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
 if 0 
   puts '0 is true!' 
 end
 if "false"
-  puts '"false" is not false'       
+  puts '"false" (the string) is not false'       
 end
 
 </pre>
 </div>
-<h4 id="shorter-way-of-writing-a-condition">2.6 shorter way of writing a condition</h4>
+<h4 id="shorthand-for-conditions">2.4 shorthand for conditions</h4>
+<p>the two conditions shown in the last
+code block only have one statement inside
+the if block.  This can also be written
+in another way:</p>
 <div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
 puts '0 is true!' if 0 
@@ -224,7 +259,20 @@ puts '"false" is not false' if "false"
 
 </pre>
 </div>
-<h4 id="shortcut-evaluation-of-boolean-operators">2.7 shortcut evaluation of boolean operators</h4>
+<h4 id="boolean-operators">2.5 Boolean Operators</h4>
+<p>When ruby evaluates a boolean operator it
+only does as little work as necessary.</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+# the second argument is not evaluated!
+a =  true || ...
+a = false &amp;&amp; ...
+
+</pre>
+</div>
+<p>The boolean operators don't just return true or
+false, they return the argument last evaluated.
+This is often used to set a variable:</p>
 <div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
 default_value = "gray"
@@ -233,7 +281,9 @@ a = input_value || default_value
 
 </pre>
 </div>
-<h4 id="methode">2.8 Methode</h4>
+<h4 id="methods">2.6 Methods</h4>
+<p>Methods in ruby return the last expression - even
+if no explicit <code>return</code> statement is given.</p>
 <div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
 def f(a,b)
@@ -244,14 +294,17 @@ f(1,42)
 
 </pre>
 </div>
-<h3 id="enumerables-and-piping-data">3 Enumerables and Piping Data</h3>
-<h4 id="what-is-a-hash-questionmark">3.1 What is a Hash?</h4>
+<h4 id="hashes">2.7 Hashes</h4>
+<p>A hash function is ...
+The Hash data type uses a hash function to find an index
+to store values in an array:</p>
 <ul>
 <li>how does it work</li>
 <li>complexity of insert</li>
 <li>complexity of loopup</li>
 </ul>
-<h4 id="piping-data">3.2 "Piping Data"</h4>
+<h3 id="enumerables-and-piping-data">3 Enumerables and Piping Data</h3>
+<h4 id="piping-data">3.1 "Piping Data"</h4>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 # many httpd processes are running. as which user(s) ?
@@ -260,7 +313,7 @@ $ ps aux | grep httpd | cut -c1-8 | sort | uniq
 
 </pre>
 </div>
-<h4 id="piping-data-in-ruby">3.3 Piping Data in Ruby</h4>
+<h4 id="piping-data-in-ruby">3.2 Piping Data in Ruby</h4>
 <div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
 languages = %w[Fortran Ada C C++ Java Scala Haskell]
@@ -268,7 +321,7 @@ languages.sort.first(3)
 
 </pre>
 </div>
-<h4 id="some-methods-for-enumerables">3.4 some methods for Enumerables</h4>
+<h4 id="some-methods-for-enumerables">3.3 some methods for Enumerables</h4>
 <ul>
 <li>sort</li>
 <li>first(n)</li>
@@ -279,14 +332,14 @@ languages.sort.first(3)
 <li>count("only this exact value")</li>
 <li>max, min</li>
 </ul>
-<h4 id="enumerables-and-piping-data-methods-for-enumerables-that-take-a-block">3.5 methods for Enumerables that take a block</h4>
+<h4 id="enumerables-and-piping-data-methods-for-enumerables-that-take-a-block">3.4 methods for Enumerables that take a block</h4>
 <div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
 (1..10).map{ |x| x*2 }.reverse
 
 </pre>
 </div>
-<h4 id="enumerables-and-piping-data-methods-for-enumerables-that-take-a-block">3.6 methods for Enumerables that take a block</h4>
+<h4 id="enumerables-and-piping-data-methods-for-enumerables-that-take-a-block">3.5 methods for Enumerables that take a block</h4>
 <div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
 (1..10).map do |x| 
@@ -295,14 +348,14 @@ end.reverse
 
 </pre>
 </div>
-<h4 id="methods-for-enumerables-that-take-a-block">3.7 methods for Enumerables that take a block</h4>
+<h4 id="methods-for-enumerables-that-take-a-block">3.6 methods for Enumerables that take a block</h4>
 <ul>
 <li>map {|x| new value computed from x} </li>
 <li>select {|x| should x be selected? }</li>
 <li>reduce(:+)</li>
 <li>reduce{|memo, item| compute new value for memo}</li>
 </ul>
-<h4 id="avoid-loops-bang">3.8 avoid loops!</h4>
+<h4 id="avoid-loops-bang">3.7 avoid loops!</h4>
 <h3 id="blocks-etc">4 Blocks etc.</h3>
 <h4 id="blocks-etc-my-function-takes-a-block-of-code">4.1 My Function takes a Block of Code</h4>
 <p>as it's last argument</p>
@@ -335,6 +388,9 @@ end
 
 </pre>
 </div>
+<h3 id="ruby-style">5 Ruby Style</h3>
+<p><a href="https://github.com/styleguide/ruby">Githubs Style Guide</a> is good enough
+for you!</p>
 </body></html>
 
       </div>
@@ -361,7 +417,31 @@ end
   <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
   <script type="text/javascript">
     SyntaxHighlighter.all()
-  $(guidesIndex.bind);
-  </script>
-</body>
+    $(guidesIndex.bind);
+
+    $('img[src*=svg]').each(function(i,s){
+      var $s = $(s);
+      var src = s.src.split("?viewbox=");
+      console.log(src);
+      var coord = src[1].split(";");
+      console.log(coord);
+
+      $.get(src[0], function(data) {
+        console.log("loaded " + data.documentElement );
+        // console.dir(data.documentElement);
+        svg = document.importNode(data.documentElement,true);
+        // console.log("svg = " + svg);
+        // document.body.appendChild(svg);  
+        // console.log(svg);
+        svg.viewBox.baseVal.x      = coord[0];
+        svg.viewBox.baseVal.y      = coord[1];
+        svg.viewBox.baseVal.width  = coord[2];
+        svg.viewBox.baseVal.height = coord[3];
+        console.log("aspect ratio = " + coord[3] +"/"+ coord[2] +" = " + coord[3] / coord[2]);
+        svg.height.baseVal.value = svg.width.baseVal.value * coord[3] / coord[2];
+        $s.replaceWith(svg);
+      });
+    });
+    </script>
+  </body>
 </html>

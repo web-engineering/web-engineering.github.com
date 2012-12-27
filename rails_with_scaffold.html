@@ -79,11 +79,20 @@
 <a href="#rails-from-the-outside-in">Rails from the Outside In</a>
 
 <ul>
-<li><a href="#database-model-view-controller">database - model - view - controller</a></li>
-<li><a href="#start-a-rails-project">start a rails project</a></li>
-<li><a href="#rails-directory-structure">rails directory structure</a></li>
-<li><a href="#start-the-rails-server">start the rails server</a></li>
-<li><a href="#the-end">the end</a></li>
+<li><a href="#start-a-rails-project">Start a Rails Project</a></li>
+<li><a href="#rails-directory-structure">Rails Directory Structure</a></li>
+<li><a href="#start-the-webserver">Start the Webserver</a></li>
+</ul>
+</li>
+<li><a href="#make-it-a-git-repository">Make it a Git Repository</a></li>
+<li>
+<a href="#scaffold">Scaffold</a>
+
+<ul>
+<li><a href="#migration">Migration</a></li>
+<li><a href="#use-your-app">Use your app</a></li>
+<li><a href="#view">View</a></li>
+<li><a href="#model">Model</a></li>
 </ul>
 </li>
 </ol></body></html>
@@ -93,12 +102,13 @@
             </dl>
           </div>
 
-      <h2>Rails with Scaffold </h2><p>we will build our first rails project but we will not really understand
+      <h2>Rails with Scaffold </h2><p>We will build our first rails project but we will not really understand
 everything - that comes later.</p><p>After finishing this guide you will</p>
 <ul>
 <li>have finished your first rails project</li>
 <li>know how to use the scaffold generator</li>
-<li>know about the main folders of a rails project: config, db, app</li>
+<li>know about the main folders of a rails project: <code>config</code>, <code>db</code>, <code>app</code></li>
+<li>have an overview of what model, view, controller (MVC) means in rails</li>
 </ul>
 
     </div>
@@ -110,51 +120,241 @@ everything - that comes later.</p><p>After finishing this guide you will</p>
         <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
 <h3 id="rails-from-the-outside-in">1 Rails from the Outside In</h3>
-<h4 id="database-model-view-controller">1.1 database - model - view - controller</h4>
+<p>Let's look at a fairly complex web application - the course
+management system for a university. How would the code for this
+app be organized, if it is written in ruby on rails?</p>
+<p>The course management system surely deals with courses in some
+way. </p>
+<p>Rails is organized along the distinction of model - view - controller (MVC).
+In our exmple we would find:</p>
 <ul>
-<li>example: course management system for a university</li>
-<li>sqlite as relational database, has a table 'courses'</li>
-<li>model has a class 'Course'</li>
-<li>view - several templates for courses</li>
-<li>controller - ties all the pieces together</li>
-<li>routing - maps URLs + parameters to controller</li>
+<li>an entry in <code>conf/route.rb</code> that configures the mapping of  URLs and parameters to the controller</li>
+<li>several templates for courses in the folder <code>app/views/courses/</code> </li>
+<li>a ruby class in the <code>apps/controllers</code> folder with the class name <code>CourseController</code>
+</li>
+<li>a ruby class in the <code>app/models</code> folder with the class name <code>Course</code>
+</li>
+<li>a relational database in the backend. this database contains a table <code>courses</code>
+</li>
 </ul>
-<h4 id="start-a-rails-project">1.2 start a rails project</h4>
+<p>As a rails programmer you know about all these folders and files.  If you are
+told that there is a problem in <a href="http://myapp.com/courses/5/edit">http://myapp.com/courses/5/edit</a> you immediately
+know which files you need to look at to fix the problem.</p>
+<p>If you have not used a framework before this might feel very restrictive in the
+beginning: you can't just make up filenames any way you want, there is a
+<strong>convention</strong> for everything.  And you have to stick to the convention if you
+want to profit from the framework.</p>
+<h4 id="start-a-rails-project">1.1 Start a Rails Project</h4>
+<p>Before you can start your first rails project you have
+to install ruby and the rails gem on your computer.  </p>
+<p>A word of warning: Ruby and Rails will work on any Unix, including Mac OS. 
+To use them on a windows system you need a lot more patience and troubleshooting
+ability.  So if you are a windows user you might consider running
+ruby and rails in a virtual (unix) machine instead. </p>
+<p>Make sure you are using a current ruby (&gt; 1.9) and rails (&gt; 3.2) before
+you proceed:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ ruby -v
+ruby 1.9.2p290 
+$ rails -v
+Rails 3.2.9
+
+</pre>
+</div>
+<p>Another word of warning: rails moves fast.  This was written in the fall/winter
+of 2012 and describes rails 3.2.  If you are reading this in the far future
+(which in rails terms means: more than 6 months from now) you are probably
+using ruby 2 or later, and rails 4 or later, and this text is <strong>not</strong> for you!</p>
+<p>Before you start your rails project you have to decide on the name (and folder
+name) of your application.  The name of application cannot easily be changed
+afterwards!  In the following example we create an app called 'alljokes':</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 rails new alljokes -T
 
 </pre>
 </div>
-<h4 id="rails-directory-structure">1.3 rails directory structure</h4>
+<p>The last step of creating the new rails project is <code>bundle install</code>.
+This will try to look up gems on the internet - if you are not connected
+to the internet you will be stuck here.</p>
+<h4 id="rails-directory-structure">1.2 Rails Directory Structure</h4>
+<p>Rails will create a directory structure and about 40 files for you.
+Let's start to look at a few of them:</p>
 <ul>
-<li>Gemfile - which libraries (gems) does this project use?</li>
-<li>app
+<li>
+<code>Gemfile</code> - in this file you specify which libraries (gems) your project uses</li>
+<li>
+<code>app</code>
 
 <ul>
-<li>model</li>
-<li>view</li>
-<li>controller</li>
+<li>
+<code>model</code> - contains all the classes of models</li>
+<li>
+<code>view</code> - contains a folder full of templates for every controller</li>
+<li>
+<code>controller</code> - contains all the classes of controllers</li>
 </ul>
 </li>
-<li>config
+<li>
+<code>config</code>
 
 <ul>
-<li>database.yml - database configuration</li>
-<li>routes.rb </li>
+<li>`<code>database.yml</code> - database configuration</li>
+<li>
+<code>routes.rb</code>  - configuration of routes</li>
 </ul>
 </li>
-<li>public - the webspace. files in here are accessible without routing</li>
+<li>
+<code>public</code> - the webspace. files in here are accessible without routing</li>
 </ul>
-<h4 id="start-the-rails-server">1.4 start the rails server</h4>
+<p>With your code split up into so many different files it is really useful
+to haven an editor that not only helps you edit a single file, but that
+will also display the directories and files. For example vim with NERDtree
+or RubyMine:</p>
+<p><img src="images/directory-structure-vim.png" alt="Screenshot of editor vim with NERDtree"><img src="images/directory-structure-rubymine.png" alt="Screenshot of editor rubymine"></p>
+<h4 id="start-the-webserver">1.3 Start the Webserver</h4>
+<p>Rails comes with a tiny webserver called <code>WEBrick</code>.  You start
+it in your terminal window (and then you need another window to go on working)</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 $ rails server
 
 </pre>
 </div>
-<p>point your browser at http://localhost:3000/</p>
-<h4 id="the-end">1.5 the end</h4>
+<p>Now you can point your browser at <code>http://localhost:3000/</code> to find the first
+webpage of your app.  It's just a static page, you can find it in
+<code>public/index.html</code>.</p>
+<h3 id="make-it-a-git-repository">2 Make it a Git Repository</h3>
+<p>A new rails project is already prepared to be turned
+into a git repository: there is a <code>.gitignore</code> file in the main 
+folder.   (If you are using rubymine you could add <code>/.idea</code> to
+your <code>.gitignore</code> - that's the directory where rubymine stores
+it's configuration.  you probably want to keep that private to
+each developer.</p>
+<p>Create a new repository and commit in the current status:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ git init .
+Initialized empty Git repository in /Developer/alljokes/.git/
+$ git add .
+
+$ git commit -m 'empty rails project'
+[master (root-commit) 2b2053c] empty rails project
+ 66 files changed, 1881 insertions(+)
+ create mode 100644 .gitignore
+ ..
+ create mode 100644 vendor/assets/stylesheets/.gitkeep
+ create mode 100644 vendor/plugins/.gitkeep
+
+</pre>
+</div>
+<p>From now on you should <code>commit</code> your changes after every
+finished step of programming.</p>
+<h3 id="scaffold">3 Scaffold</h3>
+<p>A scaffold helps you build something.  In Rails a scaffold
+helps you generate code according to the conventions.</p>
+<p>In our application we want to store jokes.  Let's generate
+the scaffold for that: We want a model called <code>joke</code> with
+two attributes:  a (short) title and a (longer) fulltext.</p>
+<p>When we call the scaffold generator on the commandline
+we need to specify the name of the model, and the names (and types)
+of the attributes.  short strings / varchars do not need a type at all.</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ rails generate scaffold joke title fulltext:text 
+invoke  active_record
+create    db/migrate/20121226144107_create_jokes.rb
+create    app/models/joke.rb
+
+</pre>
+</div>
+<p>This will generate about 20 lines of output, and create 13 new files.
+We will work through the files we need step by step:</p>
+<h4 id="migration">3.1 Migration</h4>
+<p>The first file we have to look at is stored in <code>db/migrate</code>.  The filename
+will be different from the one shown above, because it contains a timestamp.</p>
+<p>Inside the file you will find</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class CreateJokes &lt; ActiveRecord::Migration
+  def change
+    create_table :jokes do |t|
+      t.string :title
+      t.text :fulltext
+
+      t.timestamps
+    end
+  end
+end
+
+</pre>
+</div>
+<p>This is ruby code to generate a database table. You can see the
+two attrivbutes you specified when you called the generator.  There is
+also a line <code>t.timestamps</code> that will add two more attributes to the
+table: <code>created_at</code> and <code>updated_at</code>.  Rails will see to it that those
+two attributes always have the correct value.</p>
+<p>You can run the migration (tell ruby to actually create the table) by
+typing in <code>rake db:migrate</code> on the command line:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ rake db:migrate
+==  CreateJokes: migrating ====================================================
+-- create_table(:jokes)
+   -&gt; 0.0012s
+==  CreateJokes: migrated (0.0013s) ===========================================
+
+Process finished with exit code 0
+
+</pre>
+</div>
+<p>This actually created the table in a sqlite3 database called
+<code>db/development.sqlite3</code>.  As a side effect it also dumped the current
+database schema into <code>db/schema.rb</code> and created a second table
+<code>schema_migrations</code>. This table is used to keep track of which migrations
+have already been run.</p>
+<h4 id="use-your-app">3.2 Use your app</h4>
+<p>After running the migration your app is ready to be used:
+point your browser at <code>http://localhost:3030/jokes/</code> to start.</p>
+<p>The scaffold generated four webpages that you can visit, to
+list, show, create, edit and destroy jokes:</p>
+<p><img src="images/scaffold.svg" alt="webpages created by the scaffold"></p>
+<ul>
+<li>
+<code>/jokes/</code> is a list of all the jokes, with links to create, edit and destroy them</li>
+<li>
+<code>/jokes/1</code> shows a single joke, in this case the joke with id=1</li>
+<li>
+<code>/jokes/new</code> shows a form used to enter a new joke</li>
+<li>
+<code>/jokes/1/edit</code> shows a form to edit a joke, in this case the joke with id=1</li>
+</ul>
+<h4 id="view">3.3 View</h4>
+<p>You can find the views that correspond to the webpages in <code>app/views/jokes</code>. Try to add a bit
+of html to the following two views:</p>
+<ul>
+<li>
+<code>index.html.erb</code> is a list of all the jokes, with links to create, edit and destroy them</li>
+<li>
+<code>show.html.erb</code> shows a single joke</li>
+</ul>
+<h4 id="model">3.4 Model</h4>
+<p>The model is stored in <code>app/models</code>.  Add the following validation:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Joke &lt; ActiveRecord::Base
+  attr_accessible :fulltext, :title
+
+  validates_presence_of :title
+end
+
+</pre>
+</div>
+<p>This tell the model not to accept jokes that have no title.</p>
+<p>Now try to enter a new joke without a title, you should get a 
+error message:</p>
+<p><img src="images/error-validation.png" alt="Error message caused by unfullfilled validation"></p>
 </body></html>
 
       </div>
@@ -181,7 +381,31 @@ $ rails server
   <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
   <script type="text/javascript">
     SyntaxHighlighter.all()
-  $(guidesIndex.bind);
-  </script>
-</body>
+    $(guidesIndex.bind);
+
+    $('img[src*=svg]').each(function(i,s){
+      var $s = $(s);
+      var src = s.src.split("?viewbox=");
+      console.log(src);
+      var coord = src[1].split(";");
+      console.log(coord);
+
+      $.get(src[0], function(data) {
+        console.log("loaded " + data.documentElement );
+        // console.dir(data.documentElement);
+        svg = document.importNode(data.documentElement,true);
+        // console.log("svg = " + svg);
+        // document.body.appendChild(svg);  
+        // console.log(svg);
+        svg.viewBox.baseVal.x      = coord[0];
+        svg.viewBox.baseVal.y      = coord[1];
+        svg.viewBox.baseVal.width  = coord[2];
+        svg.viewBox.baseVal.height = coord[3];
+        console.log("aspect ratio = " + coord[3] +"/"+ coord[2] +" = " + coord[3] / coord[2]);
+        svg.height.baseVal.value = svg.width.baseVal.value * coord[3] / coord[2];
+        $s.replaceWith(svg);
+      });
+    });
+    </script>
+  </body>
 </html>

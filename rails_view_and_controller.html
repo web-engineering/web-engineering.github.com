@@ -91,16 +91,6 @@
 
 <ul>
 <li><a href="#restful-resources">restful resources</a></li>
-<li><a href="#now-do-rails-for-zombies-episode-4">Now do 'Rails for Zombies' Episode #4</a></li>
-<li><a href="#nested-resources">nested resources</a></li>
-<li><a href="#card-belongs-to-board">card belongs_to board</a></li>
-</ul>
-</li>
-<li>
-<a href="#routes">Routes</a>
-
-<ul>
-<li><a href="#routes-file">routes file:</a></li>
 <li><a href="#routes-constructed-by-nested-resources">Routes constructed by nested resources</a></li>
 </ul>
 </li>
@@ -170,42 +160,48 @@ you should use, and which controllers and methods you should use.</p>
 <pre class="brush: ruby; gutter: false; toolbar: false">
 resources :zombies
 
-
-### restful resource
-
-![scaffold](rest.png)
-
-
-
 </pre>
 </div>
-<p>GET    /zombies          zombies_controller def index
+<p><img src="images/rest.png" alt="scaffold"></p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+GET    /zombies          zombies_controller def index
 POST   /zombies          zombies_controller def create
 GET    /zombies/new      zombies_controller def new
 GET    /zombies/:id/edit zombies_controller def edit
 GET    /zombies/:id      zombies_controller def show
 PUT    /zombies/:id      zombies_controller def update
-DELETE /zombies/:id      zombies_controller def destroy</p>
-<h4 id="now-do-rails-for-zombies-episode-4">2.2 Now do 'Rails for Zombies' Episode #4</h4>
-<h4 id="nested-resources">2.3 nested resources</h4>
-<h4 id="card-belongs-to-board">2.4 card belongs_to board</h4>
-<ul>
-<li>one model belongs to another, and is dependent</li>
-<li><code>has_many :cards, :dependent =&gt; :destroy</code></li>
-<li>makes sense to nest urls:</li>
-<li>/boards/3/cards  - all the cards in board 3</li>
-</ul>
-<h3 id="routes">3 Routes</h3>
-<h4 id="routes-file">3.1 routes file:</h4>
-<div class="code_container">
-<pre class="brush: ruby; gutter: false; toolbar: false">
+DELETE /zombies/:id      zombies_controller def destroy
+
+
+
+### Now do 'Rails for Zombies' Episode #4
+
+### nested resources #
+
+
+### card belongs_to board
+
+* one model belongs to another, and is dependent
+* `has_many :cards, :dependent =&gt; :destroy`
+* makes sense to nest urls:
+* /boards/3/cards  - all the cards in board 3
+
+
+Routes
+-------
+
+
+### routes file:
+
+``` ruby
 resources :boards do
   resources :cards
 end
 
 </pre>
 </div>
-<h4 id="routes-constructed-by-nested-resources">3.2 Routes constructed by nested resources</h4>
+<h4 id="routes-constructed-by-nested-resources">2.2 Routes constructed by nested resources</h4>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 GET    /boards                          
@@ -225,7 +221,7 @@ DELETE /boards/:board_id/cards/:id
 
 </pre>
 </div>
-<h3 id="further-reading">4 Further reading</h3>
+<h3 id="further-reading">3 Further reading</h3>
 <ul>
 <li>Rails Guide: <a href="http://guides.rubyonrails.org/layouts_and_rendering.html">Layouts and Rendering in Rails</a>
 </li>
@@ -263,7 +259,31 @@ DELETE /boards/:board_id/cards/:id
   <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
   <script type="text/javascript">
     SyntaxHighlighter.all()
-  $(guidesIndex.bind);
-  </script>
-</body>
+    $(guidesIndex.bind);
+
+    $('img[src*=svg]').each(function(i,s){
+      var $s = $(s);
+      var src = s.src.split("?viewbox=");
+      console.log(src);
+      var coord = src[1].split(";");
+      console.log(coord);
+
+      $.get(src[0], function(data) {
+        console.log("loaded " + data.documentElement );
+        // console.dir(data.documentElement);
+        svg = document.importNode(data.documentElement,true);
+        // console.log("svg = " + svg);
+        // document.body.appendChild(svg);  
+        // console.log(svg);
+        svg.viewBox.baseVal.x      = coord[0];
+        svg.viewBox.baseVal.y      = coord[1];
+        svg.viewBox.baseVal.width  = coord[2];
+        svg.viewBox.baseVal.height = coord[3];
+        console.log("aspect ratio = " + coord[3] +"/"+ coord[2] +" = " + coord[3] / coord[2]);
+        svg.height.baseVal.value = svg.width.baseVal.value * coord[3] / coord[2];
+        $s.replaceWith(svg);
+      });
+    });
+    </script>
+  </body>
 </html>

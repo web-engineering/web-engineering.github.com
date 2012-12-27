@@ -207,6 +207,7 @@ photo <a href="http://www.flickr.com/photos/48923114@N00/116787425">cc</a></p>
 </ol>
 <h4 id="resources-for-learning-git">1.5 Resources for Learning Git</h4>
 <ul>
+<li><a href="http://try.github.com">try git</a></li>
 <li><a href="http://git-scm.com/documentation">http://git-scm.com/documentation</a></li>
 <li><a href="http://progit.org/book/">http://progit.org/book/</a></li>
 <li><a href="http://help.github.com/">http://help.github.com/</a></li>
@@ -216,7 +217,7 @@ photo <a href="http://www.flickr.com/photos/48923114@N00/116787425">cc</a></p>
 <h3 id="git-basics">2 Git Basics </h3>
 <p>Where is my code?  There are four answers to this question, for "places" that
 you need to learn about:</p>
-<p><img src="images/git-where.png" alt="git-transport"></p>
+<p><img src="images/git-workflow.svg?viewbox=0;0;600;100" alt="git-transport"></p>
 <ul>
 <li>the workspace is what you see in your on file system</li>
 <li>the index is an invisible space where you can <em>add</em>  files you want to commit</li>
@@ -289,7 +290,7 @@ git commit -m "describe the commit"
 </pre>
 </div>
 <h4 id="index-staging-area">2.4 Index / Staging area</h4>
-<p><img src="images/git-index.png" alt="git-index"></p>
+<p><img src="images/git-workflow.svg?viewbox=0;0;375;207" alt="git-transport"></p>
 <p>Workspace ("working copy") is managed by git!</p>
 <h4 id="content-not-file-bang">2.5 content, not file!</h4>
 <div class="code_container">
@@ -358,7 +359,7 @@ git remote add github git@github.com:bjelline/web-engineering-textbook.git
 </pre>
 </div>
 <h4 id="workflow-with-remote">2.11 workflow with remote</h4>
-<p><img src="images/git-remote.png" alt="git-remote"></p>
+<p><img src="images/git-workflow.svg" alt="git-transport"></p>
 <h4 id="push">2.12 push</h4>
 <ul>
 <li>specify local branch and remote repository</li>
@@ -535,7 +536,31 @@ index.html: needs merge
   <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
   <script type="text/javascript">
     SyntaxHighlighter.all()
-  $(guidesIndex.bind);
-  </script>
-</body>
+    $(guidesIndex.bind);
+
+    $('img[src*=svg]').each(function(i,s){
+      var $s = $(s);
+      var src = s.src.split("?viewbox=");
+      console.log(src);
+      var coord = src[1].split(";");
+      console.log(coord);
+
+      $.get(src[0], function(data) {
+        console.log("loaded " + data.documentElement );
+        // console.dir(data.documentElement);
+        svg = document.importNode(data.documentElement,true);
+        // console.log("svg = " + svg);
+        // document.body.appendChild(svg);  
+        // console.log(svg);
+        svg.viewBox.baseVal.x      = coord[0];
+        svg.viewBox.baseVal.y      = coord[1];
+        svg.viewBox.baseVal.width  = coord[2];
+        svg.viewBox.baseVal.height = coord[3];
+        console.log("aspect ratio = " + coord[3] +"/"+ coord[2] +" = " + coord[3] / coord[2]);
+        svg.height.baseVal.value = svg.width.baseVal.value * coord[3] / coord[2];
+        $s.replaceWith(svg);
+      });
+    });
+    </script>
+  </body>
 </html>

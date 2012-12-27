@@ -79,20 +79,23 @@
 <a href="#code-reuse-in-rails">Code Reuse in Rails</a>
 
 <ul>
-<li><a href="#views-in-views-in-views">views in views in views</a></li>
-<li><a href="#code-reuse-in-views">code reuse in views</a></li>
-<li><a href="#code-reuse-in-controllers-filter">code reuse in controllers: filter</a></li>
-<li><a href="#code-reuse-in-controllers-inheritance">code reuse in controllers: inheritance</a></li>
+<li><a href="#code-reuse-in-views">Code Reuse in Views</a></li>
+<li><a href="#code-reuse-in-views-and-controllers">Code Reuse in Views and Controllers</a></li>
+<li><a href="#code-reuse-in-controllers">Code Reuse in Controllers</a></li>
+</ul>
+</li>
+<li><a href="#sessions-in-rails">Sessions in Rails </a></li>
+<li>
+<a href="#models-are-more-than-a-simple-database-mapping">Models are more than a simple Database Mapping</a>
+
+<ul>
+<li><a href="#virtual-attribute-getter-and-setter">Virtual Attribute: Getter and Setter</a></li>
 </ul>
 </li>
 <li>
-<a href="#sessions-in-rails">Sessions in Rails </a>
+<a href="#login-from-scratch">Login from Scratch</a>
 
 <ul>
-<li><a href="#models-are-more-than-a-simple-object-database-mapping">models are more than a simple Object &lt;-&gt; Database Mapping</a></li>
-<li><a href="#virtual-attribute-getter">virtual attribute: getter</a></li>
-<li><a href="#virtual-attribute-setter">virtual attribute: setter</a></li>
-<li><a href="#virtual-attributes">virtual attributes</a></li>
 <li><a href="#user-model-for-authentication">user-model for authentication</a></li>
 </ul>
 </li>
@@ -105,7 +108,9 @@
 
       <h2>Authentication from Scratch</h2><p>This guide is about Logins and Logouts.</p><p>After reading this guide you will</p>
 <ul>
+<li>know several ways of reusing code in rails: layouts, partials, helpers, filters</li>
 <li>understand how cookies, sessions, logins are connected</li>
+<li>be able to write a model is more than just the mapping of a database table</li>
 <li>be able to build simple authentication into your rails app</li>
 </ul>
 
@@ -118,83 +123,170 @@
         <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
 <h3 id="code-reuse-in-rails">1 Code Reuse in Rails</h3>
-<h4 id="views-in-views-in-views">1.1 views in views in views</h4>
+<p>But first a short recap of code reuse in ruby on rails.</p>
+<h4 id="code-reuse-in-views">1.1 Code Reuse in Views</h4>
+<p>The Rails Templating System pieces together the html output
+from several files, as shown in the following illustration:</p>
+<p><img src="images/layout_view_partial.svg" alt="Views, Layouts and Partials"></p>
+<p>There are three types of files involved here:</p>
 <ul>
+<li>Layouts
+
+<ul>
+<li>The layout is the outermost part of the resulting output</li>
 <li>
-<code>app/views/layout/application.html.erb</code>  - the whole HTML document</li>
+<code>app/views/layout/application.html.erb</code> is the default layout</li>
+<li>in this file you can use <code>yield</code> to insert the view. You can also use partials, like <code>topmenu</code> in the illustration above</li>
+</ul>
+</li>
+<li>Views
+
+<ul>
+<li>The main part of the view is found in a file defined by the controllers name and the actions name</li>
 <li>
-<code>app/views/&lt;controllername&gt;/&lt;actionname&gt;.html.erb</code> - the specific view</li>
+<code>app/views/&lt;controllername&gt;/&lt;actionname&gt;.html.erb</code> </li>
+<li>in this file you can use partials</li>
+</ul>
+</li>
+<li>Partials
+
+<ul>
+<li>partials are the smallest parts. their filename always starts with an
+underscore, they can belong to a specific controller. if not, they are
+stored in the <code>shared</code> directory </li>
 <li>
 <code>app/views/&lt;controllername&gt;/_form.html.erb</code> partial used by edit and new action</li>
 <li>
-<code>app/views/&lt;controllername&gt;/_*.html.erb</code> other partials you can create</li>
+<code>app/views/shared/_topmenu.html.erb</code> shared partial</li>
 </ul>
-<h4 id="code-reuse-in-views">1.2 code reuse in views</h4>
-<ul>
-<li>
-<code>app/helpers/application_helper.rb</code> code you want to use in many views</li>
-</ul>
-<h4 id="code-reuse-in-controllers-filter">1.3 code reuse in controllers: filter</h4>
-<ul>
-<li><code>before_filter &lt;methodname&gt;</code></li>
-<li>method is called before every action</li>
-<li><code>before_filter &lt;methodname&gt;, :only =&gt; [:show, :edit, :update]</code></li>
-<li>method is only called before the specified actions</li>
-</ul>
-<h4 id="code-reuse-in-controllers-inheritance">1.4 code reuse in controllers: inheritance</h4>
-<ul>
-<li>all your controller inherti from <code>app/controllers/application_controller.rb</code> </li>
-<li>only the ApplicationController inherits from ActionController::Base</li>
-<li>= one class to configure things such as request forgery protection and filtering of sensitive request parameters.<br>
 </li>
 </ul>
+<p>This hierarchy of templates is well suited for outputting html with a bit of
+ruby embedded. If you find yourself repeating bigger pieces of ruby code, you
+might want to look into Helper Methods instead.</p>
+<h4 id="code-reuse-in-views-and-controllers">1.2 Code Reuse in Views and Controllers</h4>
+<p>A helper method is a method that can be called from
+both the view and the controller.  </p>
+<p><code>app/helpers/application_helper.rb</code> is the main file
+for helpers.  </p>
+<h4 id="code-reuse-in-controllers">1.3 Code Reuse in Controllers</h4>
+<p>If you find yourself writing the same code over and over
+again for serveral actions in a controller, you can use
+a filter to refactor that:</p>
+<p><code>before_filter &lt;methodname&gt;</code>  adds the method before any action</p>
+<p><code>before_filter &lt;methodname&gt;, :only =&gt; [:show, :edit, :update]</code>  specifies which
+action. There is also the reverse <code>:except =&gt; ....</code></p>
+<p>A very common pattern is to use a before_filter to find
+the ressource the controller is working on:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+before_filter find_foo, :only =&gt; [:show, :edit, :update, :destroy]
+
+...
+
+private
+
+def find_foo
+  @foo = Foo.find(params[:id])
+end
+
+</pre>
+</div>
+<p>If you want to share code between several controllers
+you can use inheritance to do that:
+all your controller inherit from <code>app/controllers/application_controller.rb</code>.
+(Only the ApplicationController inherits from ActionController::Base.)</p>
+<p>By default ApplicationController already contains a call to
+<code>protect_from_forgery</code> - a security measure we will look into in a later chapter.</p>
 <h3 id="sessions-in-rails">2 Sessions in Rails </h3>
-<ul>
-<li>HTTP is stateless</li>
-<li>cookies added to make it stateful </li>
-<li>result: sessions</li>
-<li>in Rails: hash <code>sessions</code> available in controllers + views</li>
-<li>See <a href="http://guides.rubyonrails.org/action_controller_overview.html#session">Rails Guide: Controller</a>
-</li>
-</ul>
-<h4 id="models-are-more-than-a-simple-object-database-mapping">2.1 models are more than a simple Object &lt;-&gt; Database Mapping</h4>
-<ul>
-<li>business logic</li>
-<li>offer a different interface than the database!</li>
-<li>"virtual attributes"</li>
-</ul>
-<h4 id="virtual-attribute-getter">2.2 virtual attribute: getter</h4>
-<p>is computed from two other attributes, does not really
-exist in the database.</p>
+<p>HTTP is a <strong>statless</strong> protocol. This means that the web server
+does not need to remember anything about the client from one
+request to the next.  </p>
+<p>Building a Login for your web app means getting around the
+statlessness, creating a way for the web app to remember: oh, this is user
+Susan, I already know her, she may look at this stuff.</p>
+<p>Cookies are a way to achive statefulness in HTTP. A cookie
+is an abitrary piece of information that the server sends to the
+client, and that the client will echo back with every request.</p>
+<p>Web frameworks use cookies to offer so called <strong>sessions</strong> to the
+developer: a session is a key-value store that is associated with
+the cookie, and thus with one specific user.</p>
+<p>Ruby on Rails by default sets a cookie named after the application.
+In the following screenshot you can see the cookie set by the <code>kanban</code>
+application (as displayed by firebug):</p>
+<p><img src="images/rails-cookie.png" alt="cookie set by rails,  as displayed by firebug"></p>
+<p>In Ruby on Rails you find a Hash <code>session</code> that is accessible from
+both controllers and views.</p>
+<p>See <a href="http://guides.rubyonrails.org/action_controller_overview.html#session">Rails Guide: Controller</a>
+for more details.</p>
+<h3 id="models-are-more-than-a-simple-database-mapping">3 Models are more than a simple Database Mapping</h3>
+<p>When building your first rails app with the scaffolds generator
+or the model generator you immediately see how tightly the
+rails model is connected to the database table.</p>
+<p>But there is more to the model than just that.  The model 
+is a ruby class. You can use it to add the so called "business logic"
+to your model:  for a model representing a book in the library
+this would be methods for checking out and handing in the book, .... for
+every model this will be different.</p>
+<p>In many cases you want the object from your model class 
+to have a different set of attributes than the underlying database has.
+For example in a user-model you want to be able to set the password,
+and to check if it is correct, but you do not want to read out the password.
+The methods might look like this:</p>
 <div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
+def password=
+end
+
+def check_password( p )
+end
+
+</pre>
+</div>
+<p>When you look into the database, the password should be salted and encrypted.</p>
+<p>To achieve this disconnect we will look into virtual attributes </p>
+<h4 id="virtual-attribute-getter-and-setter">3.1 Virtual Attribute: Getter and Setter</h4>
+<p>In the following example the attribute <code>fullname</code>
+is computed from two other attributes, and does not really
+exist in the database:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+attr_accessible :firstname, :lastname, :fullname
+
 def fullname
-  [first_name, last_name].join(' ')
+  "#{firstname} #{lastname}"
 end
 
 </pre>
 </div>
-<h4 id="virtual-attribute-setter">2.3 virtual attribute: setter</h4>
-<p>is computed from two other attributes, does not really
+<p>To set the attribute 
+is computed from two other attributes, does not really
 exist in the database.</p>
 <div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
-def full_name=(name)
+def fullname=(name)
   split = name.split(' ', 2)
-  self.first_name = split.first
-  self.last_name = split.last
+  self.firstname = split.first
+  self.lastname = split.last
 end
 
 </pre>
 </div>
-<h4 id="virtual-attributes">2.4 virtual attributes</h4>
-<p>see <a href="http://railscasts.com/episodes/16-virtual-attributes?view=asciicast">Railscast #16</a></p>
-<h4 id="user-model-for-authentication">2.5 user-model for authentication</h4>
+<p>See <a href="http://railscasts.com/episodes/16-virtual-attributes?view=asciicast">Railscast no.16</a> for
+more details.</p>
+<h3 id="login-from-scratch">4 Login from Scratch</h3>
+<p>We now have all the bits and pieces to build a
+Login.  </p>
+<p>There is a rails convention for authentication systems:
+the current user should be accessible via a helper method <code>current_user</code>.</p>
+<h4 id="user-model-for-authentication">4.1 user-model for authentication</h4>
 <ul>
 <li>Class User offers access login, email, firstname, lastname, password, password_confirmation</li>
 <li>Class User writes to Database:  firstname, lastname, email, login, crypted_password, salt</li>
 </ul>
-<p>See <a href="http://railscasts.com/episodes/250-authentication-from-scratch?view=asciicast">Railscast #250</a></p>
+<p>See <a href="http://railscasts.com/episodes/250-authentication-from-scratch?view=asciicast">Railscast
+no.250</a>
+for a step by step explanation.</p>
 </body></html>
 
       </div>
@@ -221,7 +313,31 @@ end
   <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
   <script type="text/javascript">
     SyntaxHighlighter.all()
-  $(guidesIndex.bind);
-  </script>
-</body>
+    $(guidesIndex.bind);
+
+    $('img[src*=svg]').each(function(i,s){
+      var $s = $(s);
+      var src = s.src.split("?viewbox=");
+      console.log(src);
+      var coord = src[1].split(";");
+      console.log(coord);
+
+      $.get(src[0], function(data) {
+        console.log("loaded " + data.documentElement );
+        // console.dir(data.documentElement);
+        svg = document.importNode(data.documentElement,true);
+        // console.log("svg = " + svg);
+        // document.body.appendChild(svg);  
+        // console.log(svg);
+        svg.viewBox.baseVal.x      = coord[0];
+        svg.viewBox.baseVal.y      = coord[1];
+        svg.viewBox.baseVal.width  = coord[2];
+        svg.viewBox.baseVal.height = coord[3];
+        console.log("aspect ratio = " + coord[3] +"/"+ coord[2] +" = " + coord[3] / coord[2]);
+        svg.height.baseVal.value = svg.width.baseVal.value * coord[3] / coord[2];
+        $s.replaceWith(svg);
+      });
+    });
+    </script>
+  </body>
 </html>
