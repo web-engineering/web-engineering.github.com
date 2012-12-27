@@ -83,7 +83,7 @@
 <li><a href="#rails-views">rails views</a></li>
 <li><a href="#static-content">static content</a></li>
 <li><a href="#links">links</a></li>
-<li><a href="#now-do-rails-for-zombies-episode-3">Now do 'Rails for Zombies' Episode #3</a></li>
+<li><a href="#now-do-rails-for-zombies-episode-no3">Now do 'Rails for Zombies' Episode no3</a></li>
 </ul>
 </li>
 <li>
@@ -91,6 +91,16 @@
 
 <ul>
 <li><a href="#restful-resources">restful resources</a></li>
+<li><a href="#now-do-rails-for-zombies-episode-no-4">Now do 'Rails for Zombies' Episode no 4</a></li>
+<li><a href="#nested-resources">nested resources</a></li>
+<li><a href="#card-belongs-to-board">card belongs_to board</a></li>
+</ul>
+</li>
+<li>
+<a href="#routes">Routes</a>
+
+<ul>
+<li><a href="#routes-file">routes file:</a></li>
 <li><a href="#routes-constructed-by-nested-resources">Routes constructed by nested resources</a></li>
 </ul>
 </li>
@@ -150,7 +160,8 @@
 <code>link_to 'link text here', object</code> links to show action of the object</li>
 <li>use <code>rake routes</code> to find out the names of urls/paths</li>
 </ul>
-<h4 id="now-do-rails-for-zombies-episode-3">1.5 Now do 'Rails for Zombies' Episode #3</h4>
+<h4 id="now-do-rails-for-zombies-episode-no3">1.5 Now do 'Rails for Zombies' Episode no3</h4>
+<p><img src="images/rails-for-zombies-4.jpg" alt="Rails for Zombies Episode 4"></p>
 <h3 id="the-controller">2 The Controller</h3>
 <h4 id="restful-resources">2.1 restful resources</h4>
 <p>a rails convention about which http methods and urls
@@ -173,35 +184,29 @@ GET    /zombies/:id      zombies_controller def show
 PUT    /zombies/:id      zombies_controller def update
 DELETE /zombies/:id      zombies_controller def destroy
 
-
-
-### Now do 'Rails for Zombies' Episode #4
-
-### nested resources #
-
-
-### card belongs_to board
-
-* one model belongs to another, and is dependent
-* `has_many :cards, :dependent =&gt; :destroy`
-* makes sense to nest urls:
-* /boards/3/cards  - all the cards in board 3
-
-
-Routes
--------
-
-
-### routes file:
-
-``` ruby
+</pre>
+</div>
+<h4 id="now-do-rails-for-zombies-episode-no-4">2.2 Now do 'Rails for Zombies' Episode no 4</h4>
+<p><img src="images/rails-for-zombies-4.jpg" alt="Rails for Zombies Episode 4"></p>
+<h4 id="nested-resources">2.3 nested resources</h4>
+<h4 id="card-belongs-to-board">2.4 card belongs_to board</h4>
+<ul>
+<li>one model belongs to another, and is dependent</li>
+<li><code>has_many :cards, :dependent =&gt; :destroy</code></li>
+<li>makes sense to nest urls:</li>
+<li>/boards/3/cards  - all the cards in board 3</li>
+</ul>
+<h3 id="routes">3 Routes</h3>
+<h4 id="routes-file">3.1 routes file:</h4>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
 resources :boards do
   resources :cards
 end
 
 </pre>
 </div>
-<h4 id="routes-constructed-by-nested-resources">2.2 Routes constructed by nested resources</h4>
+<h4 id="routes-constructed-by-nested-resources">3.2 Routes constructed by nested resources</h4>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 GET    /boards                          
@@ -221,7 +226,7 @@ DELETE /boards/:board_id/cards/:id
 
 </pre>
 </div>
-<h3 id="further-reading">3 Further reading</h3>
+<h3 id="further-reading">4 Further reading</h3>
 <ul>
 <li>Rails Guide: <a href="http://guides.rubyonrails.org/layouts_and_rendering.html">Layouts and Rendering in Rails</a>
 </li>
