@@ -60,6 +60,9 @@
                 <dt>Software Process</dt>
                 <dd><a href="good_practices.html">Good Practices</a></dd>
                 <dd><a href="agile.html">Agile Methods</a></dd>
+                <dd><a href="refactoring_rails.html">Refactoring Rails</a></dd>
+                <dt>More Ruby on Rails</dt>
+                <dd><a href="rails_advanced_models.html">Advanced Rails Models</a></dd>
               </dl>
           </div>
         </li>
@@ -203,9 +206,9 @@ photo <a href="http://www.flickr.com/photos/48923114@N00/116787425">cc</a></p>
 <li>it's free for open source projects</li>
 <li>it offers a convenient web interface</li>
 <li>with forking + pull requests it offers a good way how to contribute to open soruce projects</li>
-<li>it's mascopt is cute: octocat <img src="images/octocat.png" alt="octocat">
-</li>
+<li>it's mascopt is cute: octocat </li>
 </ol>
+<p><img src="images/octocat.png" alt="octocat"></p>
 <h4 id="resources-for-learning-git">1.5 Resources for Learning Git</h4>
 <ul>
 <li><a href="http://try.github.com">try git</a></li>
@@ -218,10 +221,11 @@ photo <a href="http://www.flickr.com/photos/48923114@N00/116787425">cc</a></p>
 <h3 id="git-basics">2 Git Basics </h3>
 <p>Where is my code?  There are four answers to this question, for "places" that
 you need to learn about:</p>
-<p><img src="images/git-workflow.svg?viewbox=0;0;600;100" alt="git-transport"></p>
+<p><img src="images/git-1-places.svg" alt="git-transport"></p>
 <ul>
 <li>the workspace is what you see in your on file system</li>
-<li>the index is an invisible space where you can <em>add</em>  files you want to commit</li>
+<li>the index is an invisible space where you can <em>add</em>  files you want to commit see <a href="http://www.gitguys.com/topics/whats-the-deal-with-the-git-index/">what's the deal with the git index</a>
+</li>
 <li>you can always commit to your local repository - it's really stored in the <em>.git</em> folder</li>
 <li>the remote repository may not be reachable all the time</li>
 </ul>
@@ -291,7 +295,7 @@ git commit -m "describe the commit"
 </pre>
 </div>
 <h4 id="index-staging-area">2.4 Index / Staging area</h4>
-<p><img src="images/git-workflow.svg?viewbox=0;0;375;207" alt="git-transport"></p>
+<p><img src="images/git-2-commit.svg" alt="git-transport"></p>
 <p>Workspace ("working copy") is managed by git!</p>
 <h4 id="content-not-file-bang">2.5 content, not file!</h4>
 <div class="code_container">
@@ -324,6 +328,7 @@ git mv SOURCE DESTINATION
 
 </pre>
 </div>
+<p><img src="images/git-3-commit-a.svg" alt="git-transport"></p>
 <h4 id="remotes">2.8 remotes</h4>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
@@ -360,7 +365,7 @@ git remote add github git@github.com:bjelline/web-engineering-textbook.git
 </pre>
 </div>
 <h4 id="workflow-with-remote">2.11 workflow with remote</h4>
-<p><img src="images/git-workflow.svg" alt="git-transport"></p>
+<p><img src="images/git-4-remote.svg" alt="git-transport"></p>
 <h4 id="push">2.12 push</h4>
 <ul>
 <li>specify local branch and remote repository</li>
@@ -405,7 +410,7 @@ git checkout -b foo
 </div>
 <h4 id="basic-workflow">3.2 Basic workflow</h4>
 <p>before we branch</p>
-<p><img src="images/branching-1.png" alt="no branches yet"></p>
+<p><img src="images/branch-and-merge-1.svg" alt="no branches yet"></p>
 <h4 id="create-a-new-branch">3.3 create a new branch</h4>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
@@ -413,7 +418,7 @@ $git checkout -b iss53
 
 </pre>
 </div>
-<p><img src="images/branching-2.png" alt="no branches yet"></p>
+<p><img src="images/branch-and-merge-2.svg" alt="no branches yet"></p>
 <h4 id="switch-to-a-branch">3.4 switch to a branch</h4>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
@@ -434,8 +439,8 @@ $ git checkout iss53
 
 </pre>
 </div>
-<p><img src="images/branching-3.png" alt="worked on both branches"></p>
-<p><img src="images/branching-4.png" alt="what do I want to merge?"></p>
+<p><img src="images/branch-and-merge-3.svg" alt="worked on both branches"></p>
+<p><img src="images/branch-and-merge-4.svg" alt="what do I want to merge?"></p>
 <h4 id="merge-bang">3.7 merge!</h4>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
@@ -448,7 +453,7 @@ Merge made by recursive.
 </pre>
 </div>
 <h4 id="done">3.8 done</h4>
-<p><img src="images/branching-5.png" alt="after the merge"></p>
+<p><img src="images/branch-and-merge-5.svg" alt="after the merge"></p>
 <h4 id="delete-branch">3.9 delete branch</h4>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
@@ -538,30 +543,6 @@ index.html: needs merge
   <script type="text/javascript">
     SyntaxHighlighter.all()
     $(guidesIndex.bind);
-
-    $('img[src*=svg]').each(function(i,s){
-      var $s = $(s);
-      var src = s.src.split("?viewbox=");
-      console.log(src);
-      var coord = src[1].split(";");
-      console.log(coord);
-
-      $.get(src[0], function(data) {
-        console.log("loaded " + data.documentElement );
-        // console.dir(data.documentElement);
-        svg = document.importNode(data.documentElement,true);
-        // console.log("svg = " + svg);
-        // document.body.appendChild(svg);  
-        // console.log(svg);
-        svg.viewBox.baseVal.x      = coord[0];
-        svg.viewBox.baseVal.y      = coord[1];
-        svg.viewBox.baseVal.width  = coord[2];
-        svg.viewBox.baseVal.height = coord[3];
-        console.log("aspect ratio = " + coord[3] +"/"+ coord[2] +" = " + coord[3] / coord[2]);
-        svg.height.baseVal.value = svg.width.baseVal.value * coord[3] / coord[2];
-        $s.replaceWith(svg);
-      });
-    });
-    </script>
+  </script>
   </body>
 </html>
