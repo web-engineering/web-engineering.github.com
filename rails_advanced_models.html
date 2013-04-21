@@ -17,7 +17,7 @@
 </head>
 <body class="guide">
   <div>
-    <a href="http://github.com/bjelline/web-engineering-textbook/"><img style="position: fixed; top: 0; right: 0; border: 0;" src="images/forkme.png" alt="Fork me on GitHub"></a>
+    <a href="http://github.com/bjelline/web-engineering-textbook/"><img style="position: fixed; top: 0; right: 0; border: 0; z-index: 10;" src="images/forkme.png" alt="Fork me on GitHub"></a>
   </div>
   <div id="topNav">
     <div class="wrapper">
@@ -63,6 +63,8 @@
                 <dd><a href="refactoring_rails.html">Refactoring Rails</a></dd>
                 <dt>More Ruby on Rails</dt>
                 <dd><a href="rails_advanced_models.html">Advanced Rails Models</a></dd>
+                <dd><a href="testing_with_rspec.html">Testing with RSpec</a></dd>
+                <dd><a href="advanced_testing.html">Advanced testing</a></dd>
               </dl>
           </div>
         </li>
@@ -80,7 +82,6 @@
             <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body><ol class="chapters">
 <li><a href="#the-code-smell">The Code Smell</a></li>
-<li><a href="#inheritance">Inheritance </a></li>
 <li><a href="#polymorphic-associations">Polymorphic Associations</a></li>
 <li>
 <a href="#using-polymorphic-associations-in-our-example">Using Polymorphic Associations in our example</a>
@@ -94,7 +95,6 @@
 <li><a href="#create-an-article-with-attachment">Create an Article with Attachment</a></li>
 </ul>
 </li>
-<li><a href="#single-table-inheritance">Single Table Inheritance</a></li>
 </ol></body></html>
 
             <dl>
@@ -105,9 +105,7 @@
       <h2>Rails: Advanced Models</h2><p>Models are the basic classes of a Rails Project.  The
 data is actually stored in a relational database.</p><p>After working through this guide you should</p>
 <ul>
-<li>understand who inheritance can be modeld in rails models</li>
 <li>be able to use polymorphic associations</li>
-<li>be able to use single table inheritance</li>
 </ul>
 <p>Sources and Examples</p>
 <ul>
@@ -130,7 +128,7 @@ a picture or a link as an attachment.</p>
 for the article:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
-```ruby
+@@@ruby
 Article
   has_one :image
   has_one :link
@@ -145,11 +143,9 @@ we will end up with lot's of conditional statements (if- or switch statements).<
 It's an indicator that you should not work with a type, but with a class
 <a href="http://c2.com/cgi/wiki?ReplaceTypeCodeWithClass">Replace Type Code With Class</a></p>
 <p>And that's what we'll do.</p>
-<h3 id="inheritance">2 Inheritance </h3>
-<p>TODO</p>
-<h3 id="polymorphic-associations">3 Polymorphic Associations</h3>
-<h3 id="using-polymorphic-associations-in-our-example">4 Using Polymorphic Associations in our example</h3>
-<h4 id="set-up-the-article">4.1 Set up the article</h4>
+<h3 id="polymorphic-associations">2 Polymorphic Associations</h3>
+<h3 id="using-polymorphic-associations-in-our-example">3 Using Polymorphic Associations in our example</h3>
+<h4 id="set-up-the-article">3.1 Set up the article</h4>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 rails new miniblog
@@ -159,7 +155,7 @@ rake db:migrate
 
 </pre>
 </div>
-<h4 id="set-up-the-first-attachment">4.2 Set up the first Attachment</h4>
+<h4 id="set-up-the-first-attachment">3.2 Set up the first Attachment</h4>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 rails g migration LinkAttachment url
@@ -222,7 +218,7 @@ irb(main):007:0&gt; a.save
 <p>As you can see, not only is the id of the LinkAttachment saved as a foreign key in the articles table,
 also the class of the LinkAttachment is saved as a string in the
 <code>attachment_type</code>  column.</p>
-<h4 id="show-attachments">4.3 Show Attachments</h4>
+<h4 id="show-attachments">3.3 Show Attachments</h4>
 <p>How do we show the attachments, without going back to
 switch statements?</p>
 <p>The scaffold already generated views for the LinkAttachment,
@@ -271,7 +267,7 @@ of the article views.</p>
 
 </pre>
 </div>
-<h4 id="set-up-the-second-attachment">4.4 Set Up the Second Attachment</h4>
+<h4 id="set-up-the-second-attachment">3.4 Set Up the Second Attachment</h4>
 <p>The second attachment type has a few more properties:
 it's a quote, with an author and an url for attribution.</p>
 <div class="code_container">
@@ -294,7 +290,7 @@ end
 this time the important view is called <code>_quote_attachment.html.erb</code>.</p>
 <p>The aricle views don't need to be changed at all to display both quotes and links
 as needed.</p>
-<h4 id="edit-an-article-with-attachment">4.5 Edit An Article with Attachment</h4>
+<h4 id="edit-an-article-with-attachment">3.5 Edit An Article with Attachment</h4>
 <p>Rails offer support for nested forms.
 With <code>accepts_nested_attributes_for</code> in the model
 we will be able to use the <code>fields_for</code> form builder.</p>
@@ -440,7 +436,7 @@ irb(main):061:0&gt; o.class.name.underscore
 </div>
 <p>We can now edit articles with no attachments as well as articles with
 an attachment.</p>
-<h4 id="create-an-article-with-attachment">4.6 Create an Article with Attachment</h4>
+<h4 id="create-an-article-with-attachment">3.6 Create an Article with Attachment</h4>
 <p>For creating an article we really need different
 forms: for an article without an attachment, and for
 each type of attachment:</p>
@@ -561,8 +557,6 @@ attachment first:</p>
 
 </pre>
 </div>
-<h3 id="single-table-inheritance">5 Single Table Inheritance</h3>
-<p>TODO</p>
 </body></html>
 
       </div>

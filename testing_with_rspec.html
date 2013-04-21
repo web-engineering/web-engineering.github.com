@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Web Engineering Textbook: Agile Methods</title>
+  <title>Web Engineering Textbook: Testing with RSpec</title>
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
   <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
@@ -81,9 +81,8 @@
             <h3 class="chapter"><img src="images/chapters_icon.gif" alt="" />Chapters</h3>
             <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body><ol class="chapters">
-<li><a href="#waterfall-and-agile">Waterfall and Agile</a></li>
-<li><a href="#iterations">Iterations</a></li>
-<li><a href="#scrum">SCRUM</a></li>
+<li><a href="#a-word-of-warning">A word of warning</a></li>
+<li><a href="#behaviour-driven-development-bdd">Behaviour Driven Development (BDD)</a></li>
 </ol></body></html>
 
             <dl>
@@ -91,11 +90,12 @@
             </dl>
           </div>
 
-      <h2>Agile Methods</h2><p>This is how current web projects are done.</p><p>After reading this guide, you will </p>
+      <h2>Testing with RSpec</h2><p>This guide will give you an introduction
+to rspec, an alternative testing syntax for ruby on rails.
+By referring to this guide, you will be able to:</p>
 <ul>
-<li>know the main points of the agile manifesto</li>
-<li>know the basics of SCRUM</li>
-<li>be able to begin work as a member of a SCRUM team</li>
+<li>Write rspec tests for your models</li>
+<li>Write rspec + capybara acceptance tests</li>
 </ul>
 
     </div>
@@ -106,9 +106,28 @@
       <div id="mainCol">
         <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h3 id="waterfall-and-agile">1 Waterfall and Agile</h3>
-<h3 id="iterations">2 Iterations</h3>
-<h3 id="scrum">3 SCRUM</h3>
+<h3 id="a-word-of-warning">1 A word of warning</h3>
+<p>There was a change in the organization of tests into
+folder from rspec 1 to rspec 2.  So you might find
+what is at first glance conflicting information on the web.</p>
+<p>We will be using rspec 2 and capybara.  Find the installation
+instructions on <a href="https://github.com/rspec/rspec-rails">rspecs homepage</a>.</p>
+<h3 id="behaviour-driven-development-bdd">2 Behaviour Driven Development (BDD)</h3>
+<p>BDD is a "top down" approach: you start out with a feature
+that has actual value to the end user. to start building
+this feature you</p>
+<ul>
+<li>first write an acceptance test for the whole feature</li>
+<li>this test will fail, because you haven't written any code to fulfill it yet</li>
+<li>then you think about how you would implement this feature, which smaller units of you code will have to do what</li>
+<li>for each unit:
+** you write the unit test
+** this test will fail,  because you haven't written any code to fulfill it yet
+** then you implement what is necessary to fulfill the test, until it passes
+** if the feature still fails, you go back to working on the next unit</li>
+<li>finally the feature passes</li>
+</ul>
+<p>and you're done.</p>
 </body></html>
 
       </div>
@@ -120,7 +139,7 @@
     <div class="wrapper">
       <p class="copyright">published under <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/at/deed.de">creative commons by-nc-sa</a> in 2012 by <a href="http://brigitte-jellinek.at">Brigitte Jellinek</a>.
       </p><p>If you want to contribute: <a href="https://github.com/bjelline/web-engineering-textbook/fork_select">fork the source on github</a>
-        and edit <a href="https://github.com/bjelline/web-engineering-textbook/blob/master/source/agile.md">agile.md</a>
+        and edit <a href="https://github.com/bjelline/web-engineering-textbook/blob/master/source/testing_with_rspec.md">testing_with_rspec.md</a>
       </p>
     </div>
   </div>
