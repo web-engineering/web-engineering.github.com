@@ -67,7 +67,6 @@
                 <dd><a href="advanced_testing.html">Advanced testing</a></dd>
                 <dd><a href="internationalization.html">Internationalization (I18n)</a></dd>
                 <dd><a href="security.html">Security</a></dd>
-                <dd><a href="webserver.html">Webserver</a></dd>
               </dl>
           </div>
         </li>
@@ -88,7 +87,7 @@
 <a href="#what-is-a-revision-control-system-questionmark">What is a Revision Control System?</a>
 
 <ul>
-<li><a href="#a-short-and-incomplete-history-of-revision-control">A short - and incomplete - history of revision control</a></li>
+<li><a href="#a-short-history-of-revision-control">A short history of revision control</a></li>
 <li><a href="#why-use-revision-control-questionmark">Why use revision control?</a></li>
 <li><a href="#why-use-git-questionmark">Why use git?</a></li>
 <li><a href="#why-use-github-com-questionmark">Why use github.com?</a></li>
@@ -102,16 +101,19 @@
 <li><a href="#configuring-git">Configuring Git</a></li>
 <li><a href="#create-a-repository-from-scratch">Create a Repository from scratch</a></li>
 <li><a href="#plain-git-workflow">Plain git Workflow</a></li>
-<li><a href="#index-staging-area">Index / Staging area</a></li>
-<li><a href="#content-not-file-bang">content, not file!</a></li>
-<li><a href="#delete-file">delete file</a></li>
-<li><a href="#rename-file">rename file</a></li>
-<li><a href="#remotes">remotes</a></li>
-<li><a href="#clone-an-existing-repository">clone an existing repository</a></li>
-<li><a href="#add-a-remote">add a remote</a></li>
+<li><a href="#git-adds-content-not-just-filenames">Git adds content, not just filenames</a></li>
+<li><a href="#deleting-a-file-from-git">Deleting a file from git</a></li>
+<li><a href="#rename-a-file">Rename a File</a></li>
+<li><a href="#what-is-a-good-commit-questionmark">What is a good commit?</a></li>
+</ul>
+</li>
+<li>
+<a href="#remote-repositories">Remote Repositories</a>
+
+<ul>
+<li><a href="#adding-a-remote-repository">Adding a Remote Repository</a></li>
+<li><a href="#clone-an-existing-repository">Clone an existing repository</a></li>
 <li><a href="#workflow-with-remote">workflow with remote</a></li>
-<li><a href="#push">push</a></li>
-<li><a href="#pull">pull</a></li>
 </ul>
 </li>
 <li>
@@ -119,7 +121,7 @@
 
 <ul>
 <li><a href="#branching">Branching</a></li>
-<li><a href="#basic-workflow">Basic workflow</a></li>
+<li><a href="#behind-the-scene-of-a-branch">Behind the scene of a branch</a></li>
 <li><a href="#create-a-new-branch">create a new branch</a></li>
 <li><a href="#switch-to-a-branch">switch to a branch</a></li>
 <li><a href="#which-branch-am-i-on-questionmark">which branch am I on?</a></li>
@@ -142,7 +144,7 @@
             </dl>
           </div>
 
-      <h2>Git Branching</h2><p>This Guide will give you a very quick introduce to
+      <h2>Git Branching</h2><p>This Guide will give you a very quick introduction to
 git, and then focus on using branches in git.</p><p>After reading this guide, you will know:</p>
 <ul>
 <li>Why you should a version control system like git</li>
@@ -171,18 +173,24 @@ with several version of such files.</p>
 <li>revision control system (RCS)</li>
 </ul>
 <p>In german they are most commonly called "Versionskontrollsystem".</p>
-<h4 id="a-short-and-incomplete-history-of-revision-control">1.1 A short - and incomplete - history of revision control</h4>
-<p>Some ancient systems that are no longer in use are:</p>
+<h4 id="a-short-history-of-revision-control">1.1 A short history of revision control</h4>
+<p>When we look at open source revision control systems
+wen find: Some ancient systems that are no longer in use:</p>
 <ul>
 <li>RCS</li>
 <li>CVS</li>
 </ul>
-<p>Systems are open source systems and that are still in use today:</p>
+<p>and several systems that are still in use today:</p>
 <ul>
 <li>SVN, also called Subversion</li>
 <li>Hg, also called Mercurial</li>
 <li>Git</li>
 </ul>
+<p>SVN uses a central server. If you cannot reach this server
+for a longer time (e.g. because you are travelling)  then
+you cannot work with the system effectively.</p>
+<p>Both Mercurial and Git are distributed systems, they
+do not need a central server.</p>
 <h4 id="why-use-revision-control-questionmark">1.2 Why use revision control?</h4>
 <p>There are good reasons to use revision control even in
 small projects:</p>
@@ -195,11 +203,12 @@ small projects:</p>
 <h4 id="why-use-git-questionmark">1.3 Why use git?</h4>
 <p><img src="images/linus-torvalds.jpg" alt="background">
 photo <a href="http://www.flickr.com/photos/48923114@N00/116787425">cc</a></p>
-<p>Git was invented by Linus Torvalds, see <a href="http://www.youtube.com/watch?v=4XpnKHJAok8">this video of a talk by him</a>
-to manage the source of the linux kernel and it's many contributors.</p>
+<p>Git was invented by Linus Torvalds, 
+to manage the source of the linux kernel and it's many contributors.
+See <a href="http://www.youtube.com/watch?v=4XpnKHJAok8">this video of a talk by him</a>.</p>
 <p>Git is a <strong>distributed vcs</strong> - it does not depend on one central repository, every
 repository is created equal. You  can transfer code in "both directions".
-You can work online and offline. Its architecture is not fixed: if on server
+You can work online and offline. Its architecture is not fixed: if one server
 breaks down, you can move to new server without any trouble.</p>
 <p>Branching and merging is easy in git.</p>
 <p>In your local working copy you also have a fully fledged repository:
@@ -207,10 +216,11 @@ it's stored in one directory: <code>.git</code>.</p>
 <p>All the code you check in is identified by SHA1. You cannot change the
 content of a commit after it has been made without the hash breaking!</p>
 <h4 id="why-use-github-com-questionmark">1.4 Why use github.com?</h4>
+<p>Github.com is a commercial hoster for git repositories.
+Their web interface adds a lot of convenient features to git.</p>
 <ol>
-<li>it's free for open source projects</li>
-<li>it offers a convenient web interface</li>
-<li>with forking + pull requests it offers a good way how to contribute to open soruce projects</li>
+<li>it's free for open source projects and used by many such projects</li>
+<li>with forking + pull requests it offers an easy way to contribute to open soruce projects</li>
 <li>it's mascopt is cute: octocat </li>
 </ol>
 <p><img src="images/octocat.png" alt="octocat"></p>
@@ -231,15 +241,20 @@ you need to learn about:</p>
 <li>the <em>workspace</em> is what you see in your computers file system</li>
 <li>the <em>index</em> is an invisible space where you can <em>add</em>  files you want to commit (see <a href="http://www.gitguys.com/topics/whats-the-deal-with-the-git-index/">what's the deal with the git index</a>)</li>
 <li>you can always commit to your <em>local repository</em> - it's really stored in the <code>.git</code> folder</li>
-<li>the <em>remote repository</em> can be on another computer. it may not be reachable all the time</li>
+<li>a <em>remote repository</em> can be on another computer. it may not be reachable all the time</li>
 </ul>
 <h4 id="configuring-git">2.1 Configuring Git</h4>
+<p>Before you start working with git you should configure
+your name and e-mail address.  This information will be 
+added to all commits you make.  (So if you want to work
+anonymously get a new e-mail address for this)</p>
 <ul>
-<li>command "git config"</li>
-<li>for project: stored in .git/config</li>
-<li>for user: is stored in ~/.gitconfig</li>
-<li>use flag --global for user</li>
+<li>use the command "git config"</li>
+<li>for a specific repository  the information is stored in .git/config</li>
+<li>for a user is stored in ~/.gitconfig</li>
+<li>use "git config --global" to change your user config</li>
 </ul>
+<p>This is how you save the information:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 $ git config --global user.name "Firstname Lastname"
@@ -251,8 +266,11 @@ $ git config --list --global
 </pre>
 </div>
 <h4 id="create-a-repository-from-scratch">2.2 Create a Repository from scratch</h4>
+<p>When you start a new project and have no data
+yet you can start like this:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
+mkdir project_directory
 cd project_directory
 git init
 # creates subdirectory .git
@@ -261,8 +279,9 @@ git init
 
 </pre>
 </div>
-<p>Windows Only: line breaks?</p>
-<p>Some configs you might want to set</p>
+<p>If you are working on windows but collaborating
+with developers on other systems you might want to
+change the following setting:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 core.autocrlf false
@@ -270,7 +289,8 @@ core.editor "C:/Programme/Notepad++/Notepad++.exe"
 
 </pre>
 </div>
-<p>Aliases</p>
+<p>If you ever find yourself annoyed by typing in long git
+commands you can define aliases:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 git config --global alias.co checkout
@@ -283,64 +303,134 @@ git checkout master
 </pre>
 </div>
 <h4 id="plain-git-workflow">2.3 Plain git Workflow</h4>
+<p>The "innermost loop" of working with git
+is the "commit":  a change in one or severl files
+that belong together.  This is how you create a commit:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 # what's up?
 git status
 
-# i've edited a file
+# i've created or edited a file
 git add FILE
 
-# i've edited a lot of files
+# i've created and/or edited a lot of files
 git add .
 
 git commit -m "describe the commit"
 
 </pre>
 </div>
-<h4 id="index-staging-area">2.4 Index / Staging area</h4>
+<p>The "add" command puts your changes into the
+staging area, the "commit" commands saves them
+to the local repository.  </p>
+<p>The staging area is the place where you collect
+the pieces that will make up a commit.</p>
 <p><img src="images/git-2-commit.svg" alt="git-transport"></p>
 <p>Workspace ("working copy") is managed by git!</p>
-<h4 id="content-not-file-bang">2.5 content, not file!</h4>
+<h4 id="git-adds-content-not-just-filenames">2.4 Git adds content, not just filenames</h4>
+<p>A word of warning: The "add" command puts
+the content of the added file into the staging area,
+not just the filename.</p>
+<p>Try out the following sequence with a file of your own:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
-# change file
-git add file
-# change file again
+# change FILE
+git add FILE
+# change FILE again
 git status
+# you will find the FILE mentioned both under
+#  "Changes to be committed" and under "Changes not staged for commit"
 git diff
+# between the staged version and the current version
 git diff --staged 
+# between the staged version and the last commit
 
 </pre>
 </div>
-<p><em>the first change has beed staged, but not the second!</em></p>
-<h4 id="delete-file">2.6 delete file</h4>
-<ul>
-<li>deleting file from workspace alone is not enough</li>
-<li>opposite of "git add" is "git rm"</li>
-</ul>
+<p>You will find that the first change has been staged,
+but the second one has not.  Therefore: only add your
+files when you are sure you are done.</p>
+<h4 id="deleting-a-file-from-git">2.5 Deleting a file from git</h4>
+<p>If you want to delete a file from the repository
+you should use the command</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 git rm FILE
 
 </pre>
 </div>
-<h4 id="rename-file">2.7 rename file</h4>
+<p>This removes the FILE from the file system and
+at the same time addes the information to the staging area.
+so on the next commit the deletion will be entered into
+the repository.</p>
+<p>If you just delete the file from the file system
+the process get's a bit more inconvenient.  <code>git status</code> will
+show you </p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+rm README
+git status
+# On branch master
+# Changes not staged for commit:
+#   (use "git add/rm &lt;file&gt;..." to update what will be committed)
+#
+#       deleted:    README
+git rm README
+
+</pre>
+</div>
+<p>On the last line there you have to type in the filename again. And you
+won't have any help from your shell (like autocompletion) because
+the file is not there any more.</p>
+<p>After the commit the file will no longer show up when we
+use the repository. But the information is still there! You
+can still go back to the previous commit and thus "resurrect" the file.</p>
+<h4 id="rename-a-file">2.6 Rename a File</h4>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 git mv SOURCE DESTINATION
 
 </pre>
 </div>
+<h4 id="what-is-a-good-commit-questionmark">2.7 What is a good commit?</h4>
+<p>When implementing a feature or fixing a bug you will usually need several commits to get the work done.
+Or maybe it's the other way round: when you work with git you will soon find that making several
+small commits is quite convenient, because it helps you structure (and maybe undo) your work.
+Even if you made several changes, you can split those up  into two commits by first adding
+and commiting one set of files, and then adding and commiting the rest.</p>
+<p>If - on the other hand - you do not want to add the files by hand
+there is a convenient way to commiting all the changes at once: add
+the <code>-a</code>  flag to the commit:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+git commit -a -m 'some stuff i did'
+
+</pre>
+</div>
 <p><img src="images/git-3-commit-a.svg" alt="git-transport"></p>
-<h4 id="remotes">2.8 remotes</h4>
+<h3 id="remote-repositories">3 Remote Repositories</h3>
+<p>You can work with several remote repositories. The most
+important remote repository is usually called <code>origin</code>.</p>
+<h4 id="adding-a-remote-repository">3.1 Adding a Remote Repository</h4>
+<p>If you created the repository locally you can connect it
+to a remote repository later on:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 git add remote origin https://github.com/myname/myrepository.git
 
 </pre>
 </div>
-<h4 id="clone-an-existing-repository">2.9 clone an existing repository</h4>
+<p>Look into <code>.git/config</code> to find the information again.</p>
+<h4 id="clone-an-existing-repository">3.2 Clone an existing repository</h4>
+<p>When you want to work with an existing remote repository
+you need to find out the repositories URL.  The URLs may
+start with http, https, ssh, or git.  Two examples are:</p>
+<ul>
+<li><code>https://github.com/web-engineering/web-engineering-textbook</code></li>
+<li><code>git@github.com:web-engineering/web-engineering-textbook</code></li>
+</ul>
+<p>To get the data for the first time use the <code>clone</code> command:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 git clone REPOSITORY_URL
@@ -348,53 +438,53 @@ git clone REPOSITORY_URL DIR_NAME
 
 </pre>
 </div>
-
-<ul>
-<li>implicitly sets</li>
-</ul>
+<p>If you do not specify a directory name, the last part of the
+URL will be used.  The clone command will implicitly set the
+origin to the repository url, you don't need to type:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 git remote add origin REPOSITORY_URL
 
 </pre>
 </div>
-<h4 id="add-a-remote">2.10 add a remote</h4>
-<div class="code_container">
-<pre class="brush: plain; gutter: false; toolbar: false">
-git remote add REMOTE_NAME REMOTE_URL
-
-git remote add origin ssh://repos.mediacube.at/opt/git/username.git
-git remote add github git@github.com:bjelline/web-engineering-textbook.git
-
-</pre>
-</div>
-<h4 id="workflow-with-remote">2.11 workflow with remote</h4>
+<h4 id="workflow-with-remote">3.3 workflow with remote</h4>
+<p>When working with a remote repositories you need two now
+commands: <code>push</code> and <code>pull</code>.</p>
 <p><img src="images/git-4-remote.svg" alt="git-transport"></p>
-<h4 id="push">2.12 push</h4>
-<ul>
-<li>specify local branch and remote repository</li>
-</ul>
+<p>When you push your local commits to the remote repository
+you have to specify a local branch and the name of the remote repository.
+When you haven't worked with branches yet there is only the <code>master</code> branch.</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 git push origin master
 
 </pre>
 </div>
-<h4 id="pull">2.13 pull</h4>
-<ul>
-<li>specify local branch and remote repository</li>
-</ul>
+<p>When you pull changes from the remote repository you havt
+to specify the local branch again (probably <code>master</code>) and 
+the name of the remote repository.</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 git pull origin master
 
 </pre>
 </div>
-<h3 id="branching-and-merging">3 Branching and Merging</h3>
-<h4 id="branching">3.1 Branching</h4>
+<p>Now you are ready to work with git on your own.  You can make
+a backup or publish to the world by pushing to a remote
+repository.</p>
+<p>But if you want to work in a team you will need to handle branches.</p>
+<h3 id="branching-and-merging">4 Branching and Merging</h3>
+<p>When you create a branch in the repository you enable two
+different development directions.  later on you might want to
+merge the branches again, or you might want to discard one.</p>
+<p>Different tools offer visual displays of these branches,
+here a screenshot from SourceTree:</p>
+<p><img src="images/source-tree-branches.png" alt="SourceTree branches"></p>
+<h4 id="branching">4.1 Branching</h4>
+<p>To create or delete a branch use the <code>branch</code> command:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
-git branch -v # shows branches
+git branch -v # shows branches + last commits
 * master 7a98805 Merge branch 'iss49'
   iss50  782fd34 add scott to the author list in the readmes
 
@@ -404,7 +494,13 @@ git branch BRANCH_NAME
 # delete a branch
 git branch -d BRANCH_NAME
 
-# get data from a different branch
+</pre>
+</div>
+<p>Creating and deleting branches in itself doenst not do anything.
+To actually use a branch you have to check it out:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+# switch to a different branch
 git checkout BRANCH_NAME
 
 # shortcut: create a new branch + checkout
@@ -412,10 +508,18 @@ git checkout -b foo
 
 </pre>
 </div>
-<h4 id="basic-workflow">3.2 Basic workflow</h4>
+<p>If this is a new, newly created branch, the files in your
+working copy do not change.  you can now work in this
+branch as usual: add, commit, add, commit.<br>
+Now the branch is really different from other branches.
+If you check out another branch now you will see the
+files in your filesystem change!</p>
+<p>Only checkout another branch when your working directory is clean,
+after you have commited all changes!</p>
+<h4 id="behind-the-scene-of-a-branch">4.2 Behind the scene of a branch</h4>
 <p>before we branch</p>
 <p><img src="images/branch-and-merge-1.svg" alt="no branches yet"></p>
-<h4 id="create-a-new-branch">3.3 create a new branch</h4>
+<h4 id="create-a-new-branch">4.3 create a new branch</h4>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 $git checkout -b iss53
@@ -423,16 +527,16 @@ $git checkout -b iss53
 </pre>
 </div>
 <p><img src="images/branch-and-merge-2.svg" alt="no branches yet"></p>
-<h4 id="switch-to-a-branch">3.4 switch to a branch</h4>
+<h4 id="switch-to-a-branch">4.4 switch to a branch</h4>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 $git checkout iss53
 
 </pre>
 </div>
-<h4 id="which-branch-am-i-on-questionmark">3.5 which branch am I on?</h4>
+<h4 id="which-branch-am-i-on-questionmark">4.5 which branch am I on?</h4>
 <p><img src="images/git-branch.png" alt="git branch"></p>
-<h4 id="work">3.6 work</h4>
+<h4 id="work">4.6 work</h4>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 # edit; commit(c3)
@@ -445,7 +549,7 @@ $ git checkout iss53
 </div>
 <p><img src="images/branch-and-merge-3.svg" alt="worked on both branches"></p>
 <p><img src="images/branch-and-merge-4.svg" alt="what do I want to merge?"></p>
-<h4 id="merge-bang">3.7 merge!</h4>
+<h4 id="merge-bang">4.7 merge!</h4>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 $ git checkout master
@@ -456,16 +560,16 @@ Merge made by recursive.
 
 </pre>
 </div>
-<h4 id="done">3.8 done</h4>
+<h4 id="done">4.8 done</h4>
 <p><img src="images/branch-and-merge-5.svg" alt="after the merge"></p>
-<h4 id="delete-branch">3.9 delete branch</h4>
+<h4 id="delete-branch">4.9 delete branch</h4>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 git branch -d iss53
 
 </pre>
 </div>
-<h4 id="merging-in-detail">3.10 Merging in detail</h4>
+<h4 id="merging-in-detail">4.10 Merging in detail</h4>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 git merge OTHER_BRANCH
@@ -473,7 +577,7 @@ git merge OTHER_BRANCH
 </pre>
 </div>
 <p>merge the OTHER_BRANCH into the current (checked-out) branch</p>
-<h4 id="conflicts">3.11 Conflicts</h4>
+<h4 id="conflicts">4.11 Conflicts</h4>
 <ul>
 <li>when both branches contain changes for the same file</li>
 <li>or: trying two pushes containing changes for the same file</li>
@@ -492,7 +596,7 @@ index.html: needs merge
 
 </pre>
 </div>
-<h4 id="conflict-markers-in-a-file">3.12 conflict markers in a file</h4>
+<h4 id="conflict-markers-in-a-file">4.12 conflict markers in a file</h4>
 <div class="code_container">
 <pre class="brush: xml; gutter: false; toolbar: false">
 &lt;/div&gt;
@@ -508,9 +612,9 @@ index.html: needs merge
 
 </pre>
 </div>
-<h4 id="conflict-markers-in-a-files">3.13 conflict markers in a files</h4>
+<h4 id="conflict-markers-in-a-files">4.13 conflict markers in a files</h4>
 <p><img src="images/conflict-markers.png" alt="conflict marker with syntax highlighting"></p>
-<h4 id="how-to-resolve">3.14 how to resolve</h4>
+<h4 id="how-to-resolve">4.14 how to resolve</h4>
 <ul>
 <li>for all files:</li>
 <li>edit file</li>
@@ -518,7 +622,7 @@ index.html: needs merge
 <li>git add FILE</li>
 <li>git commit</li>
 </ul>
-<h4 id="resources">3.15 Resources</h4>
+<h4 id="resources">4.15 Resources</h4>
 <p><a href="http://git-scm.com/book/en/Git-Branching-Basic-Branching-and-Merging">Git Book: Chapter 3.2</a>
 <a href="http://rypress.com/tutorials/git/branches-1.html">Ry's git tutorial: Branches 1</a>
 <a href="http://rypress.com/tutorials/git/branches-2.html">Ry's git tutorial: Branches 2</a></p>
