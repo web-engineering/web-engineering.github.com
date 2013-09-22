@@ -17,7 +17,7 @@
 </head>
 <body class="guide">
   <div>
-    <a href="http://github.com/bjelline/web-engineering-textbook/"><img style="position: fixed; top: 0; right: 0; border: 0; z-index: 10;" src="images/forkme.png" alt="Fork me on GitHub"></a>
+    <a href="http://github.com/web-engineering/web-engineering-textbook/"><img style="position: fixed; top: 0; right: 0; border: 0; z-index: 10;" src="images/forkme.png" alt="Fork me on GitHub"></a>
   </div>
   <div id="topNav">
     <div class="wrapper">
@@ -42,7 +42,11 @@
           <div id="guides" class="clearfix" style="display: none;">
             <hr />
               <dl class="L">
-                <dt>Ruby on Rails 1</dt>
+                <dt>Git</dt>
+                <dd><a href="git_branching.html">Branching and Merging</a></dd>
+                <dd><a href="git_teamwork.html">Teamwork</a></dd>
+                <dt>Ruby on Rails</dt>
+                <dd><a href="rails_with_scaffold.html">Rails with Scaffold</a></dd>
                 <dd><a href="ruby_commandline.html">Ruby Commandline</a></dd>
                 <dd><a href="rails_database_and_model.html">Rails Database and Model</a></dd>
                 <dd><a href="rails_view_and_controller.html">Rails View and Controller</a></dd>
@@ -51,22 +55,18 @@
                 <dd><a href="asset_pipeline.html">Asset Pipeline</a></dd>
                 <dd><a href="testing_and_refactoring.html">Testing and Refactoring</a></dd>
                 <dd><a href="deploying_rails.html">Deploying Rails with Capistrano</a></dd>
-                <dt>Ruby on Rails 2</dt>
+              </dl>
+              <dl class="R">
+                <dt>Software Process</dt>
+                <dd><a href="good_practices.html">Good Practices</a></dd>
+                <dd><a href="agile.html">Agile Methods</a></dd>
+                <dd><a href="refactoring_rails.html">Refactoring Rails</a></dd>
+                <dt>More Ruby on Rails</dt>
                 <dd><a href="rails_advanced_models.html">Advanced Rails Models</a></dd>
                 <dd><a href="testing_with_rspec.html">Testing with RSpec</a></dd>
                 <dd><a href="advanced_testing.html">Advanced testing</a></dd>
                 <dd><a href="internationalization.html">Internationalization (I18n)</a></dd>
                 <dd><a href="security.html">Security</a></dd>
-              </dl>
-              <dl class="R">
-                <dt>Git</dt>
-                <dd><a href="git_basics.html">Git Basics</a></dd>
-                <dd><a href="git_branching.html">Branching and Merging</a></dd>
-                <dd><a href="git_teamwork.html">Teamwork</a></dd>
-                <dt>Software Process</dt>
-                <dd><a href="good_practices.html">Good Practices</a></dd>
-                <dd><a href="agile.html">Agile Methods</a></dd>
-                <dd><a href="refactoring_rails.html">Refactoring Rails</a></dd>
               </dl>
           </div>
         </li>
@@ -100,16 +100,9 @@
 <li><a href="#boolean-values">Boolean Values</a></li>
 <li><a href="#shorthand-version-of-conditions">Shorthand version of Conditions</a></li>
 <li><a href="#boolean-operators">Boolean Operators</a></li>
-<li><a href="#symbols">Symbols</a></li>
 <li><a href="#methods">Methods</a></li>
 <li><a href="#arrays">Arrays</a></li>
-</ul>
-</li>
-<li>
-<a href="#hashes">Hashes</a>
-
-<ul>
-<li><a href="#implicit-form">Implicit Form</a></li>
+<li><a href="#hashes">Hashes</a></li>
 </ul>
 </li>
 <li>
@@ -127,14 +120,8 @@
 <li><a href="#my-function-takes-a-block-of-code">My Function takes a Block of Code</a></li>
 </ul>
 </li>
-<li>
-<a href="#summary">Summary</a>
-
-<ul>
-<li><a href="#online-resources">Online Resources</a></li>
-<li><a href="#books">Books</a></li>
-</ul>
-</li>
+<li><a href="#ruby-style">Ruby Style</a></li>
+<li><a href="#summary">Summary</a></li>
 </ol></body></html>
 
             <dl>
@@ -201,7 +188,6 @@ and frameworks?  </p>
 <p>For a hands-on introdcution to ruby got to <a href="http://tryruby.org">try ruby</a>.
 Then come back and read on:</p>
 <h4 id="some-code-conventions">2.1 Some code conventions</h4>
-<p>Try to stick to [<a href="https://github.com/styleguide/ruby">https://github.com/styleguide/ruby</a> githubs style for ruby]. </p>
 <p>When you chose names for your objects, classes and methods
 you should stick to the following conventions to avoid
 confusing other ruby developers:</p>
@@ -315,37 +301,7 @@ a = input_value || default_value
 
 </pre>
 </div>
-<h4 id="symbols">2.6 Symbols</h4>
-<p>A Symbol looks - at first glance - similar to a string: you can
-invent it at any time (no 'declaration') and give it any name:</p>
-<div class="code_container">
-<pre class="brush: ruby; gutter: false; toolbar: false">
-a = :foo
-a = :bar
-
-s = "foo"
-s = "bar"
-
-</pre>
-</div>
-<p>But: there is always just one instance of a symbol while
-There can be several strings that have the same content, but are different objects:</p>
-<div class="code_container">
-<pre class="brush: ruby; gutter: false; toolbar: false">
-&gt;&gt; :foo.object_id
-=&gt; 635528
-&gt;&gt; :foo.object_id
-=&gt; 635528
-&gt;&gt; "foo".object_id
-=&gt; 70099463087600
-&gt;&gt; "foo".object_id
-=&gt; 70099463106400
-
-</pre>
-</div>
-<p>Use symbols where you would enums in a database or another language,
-or if you need constants (whos 'real value' is not important).</p>
-<h4 id="methods">2.7 Methods</h4>
+<h4 id="methods">2.6 Methods</h4>
 <p>Methods in ruby return the last expression - even
 if no explicit <code>return</code> statement is given.</p>
 <div class="code_container">
@@ -358,7 +314,7 @@ f(1,42)  # returns "x"
 
 </pre>
 </div>
-<h4 id="arrays">2.8 Arrays</h4>
+<h4 id="arrays">2.7 Arrays</h4>
 <p>There are several ways of writing literal arrays in ruby.
 The first one looks like JSON:</p>
 <div class="code_container">
@@ -386,7 +342,7 @@ use a Range and convert it to an Array:</p>
 
 </pre>
 </div>
-<h3 id="hashes">3 Hashes</h3>
+<h4 id="hashes">2.8 Hashes</h4>
 <p>A Hash is a datastructure similar to an array. An array uses integers as
 the index while a Hash takes any object. Mostly strings and symbols
 are used as keys:</p>
@@ -417,7 +373,7 @@ same a linked list is built.</p>
 at first. But it offers the following intresting features:</p>
 <ul>
 <li>looking up a key can be accomplised in constant time</li>
-<li>inserting a new key / value pair can be accomplised in constant time</li>
+<li>inserting a new key / value pari can be accomplised in constant time</li>
 </ul>
 <p>Most scripting languages offer Hashes as a basic data type,
 most compiled languages as a library.  Read more about
@@ -425,33 +381,11 @@ hashes in Wikipedia:</p>
 <ul>
 <li><a href="http://en.wikipedia.org/wiki/Hash_table">Hashtables in Wikipedia</a></li>
 </ul>
-<h4 id="implicit-form">3.1 Implicit Form</h4>
-<p>A Hash can be created by using its "implicit form":</p>
-<div class="code_container">
-<pre class="brush: ruby; gutter: false; toolbar: false">
-roomnumber = { "Jane Doe" =&gt; 10, "Jim Doe" =&gt; 6 }
-
-</pre>
-</div>
-<p>Hashes allow an alternate syntax when all the keys are symbols. Instead of</p>
-<div class="code_container">
-<pre class="brush: ruby; gutter: false; toolbar: false">
-style = { :font_size =&gt; 10, :font_family =&gt; "Arial" }
-
-</pre>
-</div>
-<p>Since Ruby 1.9.3 you could write this  in  a JSON-like way:</p>
-<div class="code_container">
-<pre class="brush: ruby; gutter: false; toolbar: false">
-style = { font_size: 10, font_family: "Arial" }
-
-</pre>
-</div>
-<h3 id="enumerables-and-piping-data">4 Enumerables and Piping Data</h3>
+<h3 id="enumerables-and-piping-data">3 Enumerables and Piping Data</h3>
 <p>When working with a list of values ruby
 helps you think about data on a new, more abstract level
 with Enumerables:</p>
-<h4 id="piping-data">4.1 "Piping Data"</h4>
+<h4 id="piping-data">3.1 "Piping Data"</h4>
 <p>From the UNIX shell you may now the concepts of piping data
 from one command to the next:</p>
 <div class="code_container">
@@ -479,7 +413,7 @@ $ ps aux | grep httpd | cut -c1-8 | sort | uniq | less
 
 </pre>
 </div>
-<h4 id="piping-data-in-ruby">4.2 Piping Data in Ruby</h4>
+<h4 id="piping-data-in-ruby">3.2 Piping Data in Ruby</h4>
 <p>When piping data in ruby you can start with
 an Array</p>
 <div class="code_container">
@@ -542,11 +476,11 @@ the Block on several lines, ending with <code>end</code></p>
 </ul>
 <p>These methods should help you avoid loops and thus simplify
 code considerably.</p>
-<h3 id="blocks">5 Blocks </h3>
+<h3 id="blocks">4 Blocks </h3>
 <p>Blocks of code are not just used in Enumerables, they are
-a basic building block of ruby.  You can write functions
+ab basic building block of ruby.  You can write functions
 that take a Block as an argument:</p>
-<h4 id="my-function-takes-a-block-of-code">5.1 My Function takes a Block of Code</h4>
+<h4 id="my-function-takes-a-block-of-code">4.1 My Function takes a Block of Code</h4>
 <p>as its last argument</p>
 <div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
@@ -575,10 +509,13 @@ end
 
 </pre>
 </div>
+<h3 id="ruby-style">5 Ruby Style</h3>
+<p><a href="https://github.com/styleguide/ruby">Githubs Style Guide</a> is good enough
+for you!</p>
 <h3 id="summary">6 Summary</h3>
 <p>You now know about the basic data types, about enumerables and about block -<br>
 features that distinguish ruby from other scripting languages. This should
-be a good enough basis to digg deeper into rails next.  </p>
+be a good anough basis to digg deeper into rails next.  </p>
 <p>But do take every
 oppertunity you got to learn more about ruby itself: if you are unsure about
 a line of code, look it up in the ruby documentation and use the
@@ -587,21 +524,9 @@ I can highly recommend getting an offline version of the documentation
 installed on your development machine, so you can use it even if you
 are offline.</p>
 <p>But you should come back and learn more about ruby later on.</p>
-<h4 id="online-resources">6.1 Online Resources</h4>
 <ul>
-<li>
-<a href="http://tryruby.org">try ruby</a> - interactive online course</li>
-<li>
-<a href="http://www.codeschool.com/courses/ruby-bits">Ruby Bits</a> - interactive online course, with 8bit game graphics </li>
-<li><a href="http://ruby-doc.org/core/Enumerable.html">Ruby 2.0 Core Documentation: Enumerable</a></li>
-<li><a href="http://rubylearning.com/satishtalim/tutorial.html">learningruby.com tutorial</a></li>
-</ul>
-<h4 id="books">6.2 Books</h4>
-<ul>
-<li>Flanagan, Matsumoto(2008): <a href="http://www.amazon.com/Ruby-Programming-Language-David-Flanagan/dp/0596516177">The Ruby Programming Language</a>. O'Reilly. ISBN 0596516177.</li>
-<li>Thomas(2013): <a href="http://www.amazon.com/Programming-Ruby-1-9-2-0-Programmers/dp/1937785491/">Programming Ruby 1.9 + 2.0</a>. Pragmatic Porgrammers. ISBN 1937785491 </li>
-<li>Olsen (2011): <a href="http://www.amazon.com/Eloquent-Ruby-Addison-Wesley-Professional/dp/0321584104/">Eloquent Ruby</a>. Addison-Wesley. ISBN 0321584104 </li>
-<li>Tate(2010): <a href="http://www.amazon.com/Seven-Languages-Weeks-Programming-Programmers/dp/193435659X/">Seven Languages in Seven Weeks: A Pragmatic Guide to Learning Programming Languages</a>. Pragmatic Programmers.  ISBN 193435659X</li>
+<li>TODO: link to ruby documentation</li>
+<li>TODO: link ruby off rails</li>
 </ul>
 </body></html>
 
@@ -613,8 +538,8 @@ are offline.</p>
   <div id="footer">
     <div class="wrapper">
       <p class="copyright">published under <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/at/deed.de">creative commons by-nc-sa</a> in 2012 by <a href="http://brigitte-jellinek.at">Brigitte Jellinek</a>.
-      </p><p>If you want to contribute: <a href="https://github.com/bjelline/web-engineering-textbook/fork_select">fork the source on github</a>
-        and edit <a href="https://github.com/bjelline/web-engineering-textbook/blob/master/source/ruby_commandline.md">ruby_commandline.md</a>
+      </p><p>If you want to contribute: <a href="https://github.com/web-engineering/web-engineering-textbook/fork_select">fork the source on github</a>
+        and edit <a href="https://github.com/web-engineering/web-engineering-textbook/blob/master/source/ruby_commandline.md">ruby_commandline.md</a>
       </p>
     </div>
   </div>
