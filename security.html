@@ -42,11 +42,7 @@
           <div id="guides" class="clearfix" style="display: none;">
             <hr />
               <dl class="L">
-                <dt>Git</dt>
-                <dd><a href="git_branching.html">Branching and Merging</a></dd>
-                <dd><a href="git_teamwork.html">Teamwork</a></dd>
-                <dt>Ruby on Rails</dt>
-                <dd><a href="rails_with_scaffold.html">Rails with Scaffold</a></dd>
+                <dt>Ruby on Rails 1</dt>
                 <dd><a href="ruby_commandline.html">Ruby Commandline</a></dd>
                 <dd><a href="rails_database_and_model.html">Rails Database and Model</a></dd>
                 <dd><a href="rails_view_and_controller.html">Rails View and Controller</a></dd>
@@ -55,18 +51,21 @@
                 <dd><a href="asset_pipeline.html">Asset Pipeline</a></dd>
                 <dd><a href="testing_and_refactoring.html">Testing and Refactoring</a></dd>
                 <dd><a href="deploying_rails.html">Deploying Rails with Capistrano</a></dd>
-              </dl>
-              <dl class="R">
-                <dt>Software Process</dt>
-                <dd><a href="good_practices.html">Good Practices</a></dd>
-                <dd><a href="agile.html">Agile Methods</a></dd>
-                <dd><a href="refactoring_rails.html">Refactoring Rails</a></dd>
-                <dt>More Ruby on Rails</dt>
+                <dt>Ruby on Rails 2</dt>
                 <dd><a href="rails_advanced_models.html">Advanced Rails Models</a></dd>
                 <dd><a href="testing_with_rspec.html">Testing with RSpec</a></dd>
                 <dd><a href="advanced_testing.html">Advanced testing</a></dd>
                 <dd><a href="internationalization.html">Internationalization (I18n)</a></dd>
                 <dd><a href="security.html">Security</a></dd>
+              </dl>
+              <dl class="R">
+                <dt>Git</dt>
+                <dd><a href="git_branching.html">Branching and Merging</a></dd>
+                <dd><a href="git_teamwork.html">Teamwork</a></dd>
+                <dt>Software Process</dt>
+                <dd><a href="good_practices.html">Good Practices</a></dd>
+                <dd><a href="agile.html">Agile Methods</a></dd>
+                <dd><a href="refactoring_rails.html">Refactoring Rails</a></dd>
               </dl>
           </div>
         </li>
@@ -151,7 +150,7 @@ once you've found it:  First we write a test for the problem: <code>spec/feature
 
 </pre>
 </div>
-<p>When we run this test it rails, because right now passwords are displayed:</p>
+<p>When we run this test it fails, because right now passwords are displayed:</p>
 <p><img src="images/security-password-test-fails.png" alt=""></p>
 <p>Now we change the view to not display the passwords any more. Running the test again we get success:</p>
 <p><img src="images/security-password-test-ok.png" alt=""></p>
