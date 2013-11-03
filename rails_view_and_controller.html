@@ -87,7 +87,6 @@
 <a href="#the-view">The View</a>
 
 <ul>
-<li><a href="#view-in-mvc">view in MVC</a></li>
 <li><a href="#rails-views">rails views</a></li>
 <li><a href="#static-content">static content</a></li>
 <li><a href="#links">links</a></li>
@@ -138,12 +137,16 @@ and using the model and views to generate a result.</p><p>After reading this gui
         <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
 <h3 id="the-view">1 The View</h3>
-<h4 id="view-in-mvc">1.1 view in MVC</h4>
-<ul>
-<li>responsible for displaying stuff</li>
-<li>both web designers and developers might work on these files!</li>
-</ul>
-<h4 id="rails-views">1.2 rails views</h4>
+<p>The View in the Model-View-Controller pattern
+is responsible for displaying Data to the user in various ways.</p>
+<p>In Ruby on Rails <strong>Embedded Ruby</strong> (ERB) is normally used
+as the templating languages to define the views.  If you have
+used Templates in other languages or have used PHP embedded in HTML
+than you will recognize the similarities.</p>
+<p>Both Web Designers and Web Developers might want to edit
+the files concerning the view. (This is one of the points where
+using git to relove merge conflicts comes in handy!).</p>
+<h4 id="rails-views">1.1 rails views</h4>
 <ul>
 <li>are stored in <code>app/views/&lt;name of controller&gt;/*.html.erb</code>
 </li>
@@ -157,13 +160,13 @@ and using the model and views to generate a result.</p><p>After reading this gui
 <li>
 <code>yield</code>s to include single view</li>
 </ul>
-<h4 id="static-content">1.3 static content</h4>
+<h4 id="static-content">1.2 static content</h4>
 <ul>
 <li>anything placed in <code>public</code>
 </li>
 <li>is directly accessible in the web space, without going through rails!</li>
 </ul>
-<h4 id="links">1.4 links</h4>
+<h4 id="links">1.3 links</h4>
 <ul>
 <li>never write links to your own app "by hand"!</li>
 <li>use helper methods to get the right URLs</li>
@@ -171,8 +174,8 @@ and using the model and views to generate a result.</p><p>After reading this gui
 <code>link_to 'link text here', object</code> links to show action of the object</li>
 <li>use <code>rake routes</code> to find out the names of urls/paths</li>
 </ul>
-<h4 id="now-do-rails-for-zombies-episode-no3">1.5 Now do 'Rails for Zombies' Episode no3</h4>
-<p><img src="images/rails-for-zombies-4.jpg" alt="Rails for Zombies Episode 4"></p>
+<h4 id="now-do-rails-for-zombies-episode-no3">1.4 Now do 'Rails for Zombies' Episode no3</h4>
+<p><img src="images/rails-for-zombies-3.jpg" alt="Rails for Zombies Episode 3"></p>
 <h3 id="the-controller">2 The Controller</h3>
 <h4 id="restful-resources">2.1 restful resources</h4>
 <p>a rails convention about which http methods and urls
