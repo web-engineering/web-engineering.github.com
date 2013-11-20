@@ -44,7 +44,7 @@
               <dl class="L">
                 <dt>Ruby on Rails 1</dt>
                 <dd><a href="ruby_commandline.html">Ruby Commandline</a></dd>
-                <dd><a href="rails_database_and_model.html">Rails Database and Model</a></dd>
+                <dd><a href="rails_database_and_model.html">Rails Database and Models</a></dd>
                 <dd><a href="rails_view_and_controller.html">Rails View and Controller</a></dd>
                 <dd><a href="authentication_from_scratch.html">Authentication from Scratch</a></dd>
                 <dd><a href="authentication_with_devise.html">Authentication with Devise</a></dd>
@@ -83,15 +83,6 @@
             <h3 class="chapter"><img src="images/chapters_icon.gif" alt="" />Chapters</h3>
             <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body><ol class="chapters">
-<li>
-<a href="#code-reuse-in-rails">Code Reuse in Rails</a>
-
-<ul>
-<li><a href="#code-reuse-in-views">Code Reuse in Views</a></li>
-<li><a href="#code-reuse-in-views-and-controllers">Code Reuse in Views and Controllers</a></li>
-<li><a href="#code-reuse-in-controllers">Code Reuse in Controllers</a></li>
-</ul>
-</li>
 <li><a href="#sessions-in-rails">Sessions in Rails </a></li>
 <li>
 <a href="#models-are-more-than-a-simple-database-mapping">Models are more than a simple Database Mapping</a>
@@ -116,7 +107,6 @@
 
       <h2>Authentication from Scratch</h2><p>This guide is about Logins and Logouts.</p><p>After reading this guide you will</p>
 <ul>
-<li>know several ways of reusing code in rails: layouts, partials, helpers, filters</li>
 <li>understand how cookies, sessions, logins are connected</li>
 <li>be able to write a model is more than just the mapping of a database table</li>
 <li>be able to build simple authentication into your rails app</li>
@@ -130,83 +120,7 @@
       <div id="mainCol">
         <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h3 id="code-reuse-in-rails">1 Code Reuse in Rails</h3>
-<p>But first a short recap of code reuse in ruby on rails.</p>
-<h4 id="code-reuse-in-views">1.1 Code Reuse in Views</h4>
-<p>The Rails Templating System pieces together the html output
-from several files, as shown in the following illustration:</p>
-<p><img src="images/layout_view_partial.svg" alt="Views, Layouts and Partials"></p>
-<p>There are three types of files involved here:</p>
-<ul>
-<li>Layouts
-
-<ul>
-<li>The layout is the outermost part of the resulting output</li>
-<li>
-<code>app/views/layout/application.html.erb</code> is the default layout</li>
-<li>in this file you can use <code>yield</code> to insert the view. You can also use partials, like <code>topmenu</code> in the illustration above</li>
-</ul>
-</li>
-<li>Views
-
-<ul>
-<li>The main part of the view is found in a file defined by the controllers name and the actions name</li>
-<li>
-<code>app/views/&lt;controllername&gt;/&lt;actionname&gt;.html.erb</code> </li>
-<li>in this file you can use partials</li>
-</ul>
-</li>
-<li>Partials
-
-<ul>
-<li>partials are the smallest parts. their filename always starts with an
-underscore, they can belong to a specific controller. if not, they are
-stored in the <code>shared</code> directory </li>
-<li>
-<code>app/views/&lt;controllername&gt;/_form.html.erb</code> partial used by edit and new action</li>
-<li>
-<code>app/views/shared/_topmenu.html.erb</code> shared partial</li>
-</ul>
-</li>
-</ul>
-<p>This hierarchy of templates is well suited for outputting html with a bit of
-ruby embedded. If you find yourself repeating bigger pieces of ruby code, you
-might want to look into Helper Methods instead.</p>
-<h4 id="code-reuse-in-views-and-controllers">1.2 Code Reuse in Views and Controllers</h4>
-<p>A helper method is a method that can be called from
-both the view and the controller.  </p>
-<p><code>app/helpers/application_helper.rb</code> is the main file
-for helpers.  </p>
-<h4 id="code-reuse-in-controllers">1.3 Code Reuse in Controllers</h4>
-<p>If you find yourself writing the same code over and over
-again for serveral actions in a controller, you can use
-a filter to refactor that:</p>
-<p><code>before_filter &lt;methodname&gt;</code>  adds the method before any action</p>
-<p><code>before_filter &lt;methodname&gt;, :only =&gt; [:show, :edit, :update]</code>  specifies which
-action. There is also the reverse <code>:except =&gt; ....</code></p>
-<p>A very common pattern is to use a before_filter to find
-the ressource the controller is working on:</p>
-<div class="code_container">
-<pre class="brush: ruby; gutter: false; toolbar: false">
-before_filter find_foo, :only =&gt; [:show, :edit, :update, :destroy]
-
-...
-
-private
-
-def find_foo
-  @foo = Foo.find(params[:id])
-end
-
-</pre>
-</div>
-<p>If you want to share code between several controllers
-you can use inheritance to do that:
-all your controller inherit from <code>app/controllers/application_controller.rb</code>.
-(Only the ApplicationController inherits from ActionController::Base.)</p>
-<p>By default ApplicationController already contains a call to
-<code>protect_from_forgery</code> - a security measure we will look into in a later chapter.</p>
-<h3 id="sessions-in-rails">2 Sessions in Rails </h3>
+<h3 id="sessions-in-rails">1 Sessions in Rails </h3>
 <p>HTTP is a <strong>statless</strong> protocol. This means that the web server
 does not need to remember anything about the client from one
 request to the next.  </p>
@@ -227,7 +141,7 @@ application (as displayed by firebug):</p>
 both controllers and views.</p>
 <p>See <a href="http://guides.rubyonrails.org/action_controller_overview.html#session">Rails Guide: Controller</a>
 for more details.</p>
-<h3 id="models-are-more-than-a-simple-database-mapping">3 Models are more than a simple Database Mapping</h3>
+<h3 id="models-are-more-than-a-simple-database-mapping">2 Models are more than a simple Database Mapping</h3>
 <p>When building your first rails app with the scaffolds generator
 or the model generator you immediately see how tightly the
 rails model is connected to the database table.</p>
@@ -253,7 +167,7 @@ end
 </div>
 <p>When you look into the database, the password should be salted and encrypted.</p>
 <p>To achieve this disconnect we will look into virtual attributes </p>
-<h4 id="virtual-attribute-getter-and-setter">3.1 Virtual Attribute: Getter and Setter</h4>
+<h4 id="virtual-attribute-getter-and-setter">2.1 Virtual Attribute: Getter and Setter</h4>
 <p>In the following example the attribute <code>fullname</code>
 is computed from two other attributes, and does not really
 exist in the database:</p>
@@ -282,12 +196,12 @@ end
 </div>
 <p>See <a href="http://railscasts.com/episodes/16-virtual-attributes?view=asciicast">Railscast no.16</a> for
 more details.</p>
-<h3 id="login-from-scratch">4 Login from Scratch</h3>
+<h3 id="login-from-scratch">3 Login from Scratch</h3>
 <p>We now have all the bits and pieces to build a
 Login.  </p>
 <p>There is a rails convention for authentication systems:
 the current user should be accessible via a helper method <code>current_user</code>.</p>
-<h4 id="user-model-for-authentication">4.1 user-model for authentication</h4>
+<h4 id="user-model-for-authentication">3.1 user-model for authentication</h4>
 <ul>
 <li>Class User offers access login, email, firstname, lastname, password, password_confirmation</li>
 <li>Class User writes to Database:  firstname, lastname, email, login, crypted_password, salt</li>

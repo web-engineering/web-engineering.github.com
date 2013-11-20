@@ -89,10 +89,10 @@
 
 <ul>
 <li><a href="#the-mapping">The Mapping</a></li>
-<li><a href="#how-to-build">How to build</a></li>
+<li><a href="#how-to-build-a-model">How to build a model</a></li>
 <li><a href="#database-migrations">Database Migrations</a></li>
-<li><a href="#work-with-the-model-interactively">Work with the Model Interactively</a></li>
-<li><a href="#now-do-rails-for-zombies-episode-1">Now do 'Rails for Zombies' Episode #1</a></li>
+<li><a href="#the-model-on-the-console">the Model on the console</a></li>
+<li><a href="#learn-from-zombies">Learn from Zombies</a></li>
 <li><a href="#activerecord-validations">Validations</a></li>
 <li><a href="#activerecord-validations">Validations</a></li>
 <li><a href="#activerecord-1-n-associations">1:n Associations</a></li>
@@ -205,7 +205,7 @@ can deviate from these conventions, but this takes some extra configuration and 
 you build a rails app to replace an old php app. You can start with the models
 in rails configured to fit with your old database, and then refactor and migrate towards
 the rails conventions step by step.</p>
-<h4 id="how-to-build">2.2 How to build</h4>
+<h4 id="how-to-build-a-model">2.2 How to build a model</h4>
 <p>To build the first model and its corresponding database table,
 you can use the scaffold generator.
 You need to work on the command line using the commands
@@ -279,16 +279,17 @@ end
 </ul>
 <p>A word of warning:  you never, ever need to change a migration after
 using and commiting it.  You only ever add new migrations!</p>
-<h4 id="work-with-the-model-interactively">2.4 Work with the Model Interactively</h4>
+<h4 id="the-model-on-the-console">2.4 the Model on the console</h4>
 <p>You can use the rails console to work with
-the model.  This is similar to the ruby console <code>irb</code>
+the model interactively.  This is similar to the ruby console <code>irb</code>
 but with your rails app already loaded. 
 Any changes you make are really written
 to the development database!</p>
 <ul>
 <li><code>rails console</code></li>
 </ul>
-<h4 id="now-do-rails-for-zombies-episode-1">2.5 Now do 'Rails for Zombies' Episode #1</h4>
+<h4 id="learn-from-zombies">2.5 Learn from Zombies</h4>
+<p>Now do 'Rails for Zombies' Episode #1</p>
 <p><img src="images/rails-for-zombies-1.jpg" alt="Rails for Zombies 1"></p>
 <h4 id="activerecord-validations">2.6 Validations</h4>
 <ul>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Web Egineeering Textbook</title>
+  <title>Web Engineering Textbook: Deploying Rails</title>
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
   <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
@@ -44,7 +44,7 @@
               <dl class="L">
                 <dt>Ruby on Rails 1</dt>
                 <dd><a href="ruby_commandline.html">Ruby Commandline</a></dd>
-                <dd><a href="rails_database_and_model.html">Rails Database and Model</a></dd>
+                <dd><a href="rails_database_and_model.html">Rails Database and Models</a></dd>
                 <dd><a href="rails_view_and_controller.html">Rails View and Controller</a></dd>
                 <dd><a href="authentication_from_scratch.html">Authentication from Scratch</a></dd>
                 <dd><a href="authentication_with_devise.html">Authentication with Devise</a></dd>
@@ -83,6 +83,7 @@
             <h3 class="chapter"><img src="images/chapters_icon.gif" alt="" />Chapters</h3>
             <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body><ol class="chapters">
+<li><a href="#deploying-with-git">Deploying with git</a></li>
 <li>
 <a href="#public-key-authentication-in-ssh">Public Key Authentication in SSH</a>
 
@@ -121,7 +122,13 @@
             </dl>
           </div>
 
-      
+      <h2>Deploying Rails</h2><p>Your &quot;Minimal Viable Product&quot; is finished, now you
+want to publish it on the web.</p><p>After working through this guide you should be able to</p>
+<ul>
+<li>deploy a rails app to heroku using git</li>
+<li>deploy a rails app to any unix server using capistrano</li>
+</ul>
+
     </div>
   </div>
 
@@ -130,7 +137,37 @@
       <div id="mainCol">
         <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h3 id="public-key-authentication-in-ssh">1 Public Key Authentication in SSH</h3>
+<h3 id="deploying-with-git">1 Deploying with git</h3>
+<p>heroku is one "Platform as a Service" provider that offers
+to host your rails app.  Heroku uses git to push the code to
+the production server.</p>
+<p>(See also 
+<a href="http://installfest.railsbridge.org/installfest/create_a_heroku_account">Railsbridge Installfest: Create A Heroku Account</a>
+and
+<a href="http://installfest.railsbridge.org/installfest/create_a_heroku_account#step7">Railsbridge Installfest: Create And Deploy A Rails App</a>
+)</p>
+<ul>
+<li>create an account on <a href="https://heroku.com">https://heroku.com</a>
+</li>
+<li>add your public key to your heroku account</li>
+<li>install the heroku toolbelt on your local development machine</li>
+</ul>
+<p>in your rails app, which is already using git:</p>
+<ul>
+<li>heroku create</li>
+<li>make some changes in the Gemfile (rubyracer, pg instead of sqlite)</li>
+<li>don't forget to commit all changes!<br>
+</li>
+<li>git push heroku master</li>
+<li>heroku run rake db:migrate</li>
+<li>heroku open<br>
+</li>
+<li>heroku logs</li>
+</ul>
+<p>That's it.   You should now have an app with a very strange URL, like
+<a href="http://mighty-shore-1497.herokuapp.com/">http://mighty-shore-1497.herokuapp.com/</a></p>
+<h3 id="public-key-authentication-in-ssh">2 Public Key Authentication in SSH</h3>
+<p>(See also <a href="http://installfest.railsbridge.org/installfest/create_an_ssh_key">Railsbridge Installfest</a>)</p>
 <p><img src="images/public_key_crypto.svg" alt="public key login"></p>
 <ul>
 <li><a href="http://dougvitale.wordpress.com/2012/02/20/ssh-the-secure-shell/">learn about ssh</a></li>
@@ -158,7 +195,7 @@
 <li>then ssh will let you log in without giving a password</li>
 </ul>
 <p><img src="images/ssh_login_with_public_key.svg" alt="public key login"></p>
-<h4 id="deploying-with-a-deploy-user">1.1 deploying with a deploy-user</h4>
+<h4 id="deploying-with-a-deploy-user">2.1 deploying with a deploy-user</h4>
 <ul>
 <li>alice and bob both want to deploy project x</li>
 <li>
@@ -169,7 +206,7 @@
 </li>
 <li>both can deploy (from different machines) using the same capistrano setup</li>
 </ul>
-<h4 id="authorized-keys2">1.2 authorized_keys2</h4>
+<h4 id="authorized-keys2">2.2 authorized_keys2</h4>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 ssh-rsa AAAAB3NzaC...2EAAAABI== alice@fh-salzburg.ac.at
@@ -177,17 +214,17 @@ ssh-rsa AAAAB8NzaC...DVj3R4Ww== bob@fh-salzburg.ac.at
 
 </pre>
 </div>
-<h3 id="how-to-run-rails">2 How to run Rails</h3>
+<h3 id="how-to-run-rails">3 How to run Rails</h3>
 <ul>
 <li>WEBrick (built in web server)</li>
 <li>apache/nginx + mod_passenger</li>
 <li>apache/nginx + mod_passenger + capistrano</li>
 </ul>
-<h4 id="webrick">2.1 WEBrick</h4>
+<h4 id="webrick">3.1 WEBrick</h4>
 <ul>
 <li>rails s</li>
 </ul>
-<h4 id="mod-passenger">2.2 mod_passenger</h4>
+<h4 id="mod-passenger">3.2 mod_passenger</h4>
 <ul>
 <li>install <a href="https://www.phusionpassenger.com/">mod_passenger</a>
 </li>
@@ -210,16 +247,16 @@ ssh-rsa AAAAB8NzaC...DVj3R4Ww== bob@fh-salzburg.ac.at
 </ul>
 </li>
 </ul>
-<h3 id="deploying-with-capistrano">3 Deploying with Capistrano</h3>
+<h3 id="deploying-with-capistrano">4 Deploying with Capistrano</h3>
 <p><img src="images/capistrano-deploy.svg" alt="Deploying with Javascript"></p>
-<h4 id="warning">3.1 WARNING</h4>
+<h4 id="warning">4.1 WARNING</h4>
 <ul>
 <li>capistrano is a command line tool</li>
 <li>you need to read the output!</li>
 <li>you need to read every line of the output!</li>
 <li>you seriously need to read every line of the output!</li>
 </ul>
-<h4 id="capistrano-assumptions">3.2 capistrano assumptions</h4>
+<h4 id="capistrano-assumptions">4.2 capistrano assumptions</h4>
 <ul>
 <li>You are using SSH to access your remote machines</li>
 <li>your remote servers have a shell called sh</li>
@@ -227,7 +264,7 @@ ssh-rsa AAAAB8NzaC...DVj3R4Ww== bob@fh-salzburg.ac.at
 <li>Capistrano reads its instructions from a <code>capfile</code>
 </li>
 </ul>
-<h4 id="how-to-install">3.3 how to install</h4>
+<h4 id="how-to-install">4.3 how to install</h4>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 $ sudo gem install capistrano
@@ -241,10 +278,10 @@ $ capify .
 
 </pre>
 </div>
-<h4 id="configuration-in-config-deploy-rb">3.4 configuration in <code>config/deploy.rb</code>
+<h4 id="configuration-in-config-deploy-rb">4.4 configuration in <code>config/deploy.rb</code>
 </h4>
 <p>local information, see our wiki</p>
-<h4 id="example-task-in-capfile">3.5 example task in Capfile</h4>
+<h4 id="example-task-in-capfile">4.5 example task in Capfile</h4>
 <div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
 task :display_free_disk_space do
@@ -253,7 +290,7 @@ end
 
 </pre>
 </div>
-<h4 id="run-a-capistrano-task">3.6 run a capistrano task</h4>
+<h4 id="run-a-capistrano-task">4.6 run a capistrano task</h4>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 $ cap display_free_disk_space
@@ -268,10 +305,10 @@ $ cap display_free_disk_space
 
 </pre>
 </div>
-<h4 id="deploying-with-capistrano-capistrano-folders">3.7 capistrano folders</h4>
+<h4 id="deploying-with-capistrano-capistrano-folders">4.7 capistrano folders</h4>
 <p>read the logfile, try to find out how capistrano lays out
 the folders</p>
-<h4 id="deploying-with-capistrano-capistrano-folders">3.8 capistrano folders</h4>
+<h4 id="deploying-with-capistrano-capistrano-folders">4.8 capistrano folders</h4>
 <ul>
 <li>current --&gt; links to a release</li>
 <li>release
@@ -296,7 +333,7 @@ the folders</p>
 </ul>
 </li>
 </ul>
-<h4 id="my-first-deploy">3.9 my first deploy</h4>
+<h4 id="my-first-deploy">4.9 my first deploy</h4>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 $ cap deploy:setup
