@@ -94,8 +94,11 @@
 <li><a href="#testing">Testing</a></li>
 <li><a href="#file-upload">File Upload</a></li>
 <li><a href="#authentication">Authentication</a></li>
+<li><a href="#permalinks">Permalinks</a></li>
+<li><a href="#activity-stream">Activity Stream</a></li>
 <li><a href="#sending-mail">Sending Mail</a></li>
-<li><a href="#errors">Errors</a></li>
+<li><a href="#understanding-your-code-better">Understanding your Code better</a></li>
+<li><a href="#using-apis">Using APIs</a></li>
 </ul>
 </li>
 <li><a href="#finding-more-gems">Finding more Gems</a></li>
@@ -149,7 +152,8 @@ Examples include nokogiri which wraps libxml2 and libxslt, pg which is an interf
 to the PostgreSQL database and the mysql and mysql2 gems which provide an interface to the MySQL database.</p>
 </blockquote>
 <h3 id="some-gems">2 Some Gems</h3>
-<p>This list is based on <a href="http://www.dwellable.com/blog/Rails-Rumble-Gem-Teardown">Dwellables statistics on the Rails Rumble 2013</a>.</p>
+<p>This list is based on <a href="http://www.dwellable.com/blog/Rails-Rumble-Gem-Teardown">Dwellables statistics on the Rails Rumble 2013</a> and
+<a href="http://www.codebeerstartups.com/2013/04/must-have-gems-for-development-machine-in-ruby-on-rails">coodbeerstartups "Must Have Gems for Development Machine in Ruby on Rails "</a>.</p>
 <h4 id="mixins">2.1 Mixins</h4>
 <p>You don't want to waste your time writing vendor-prefixes for css3 features.
 Use a mixin library instead:</p>
@@ -170,11 +174,27 @@ with choosing the right bootstrap gem.</p>
 <p><a href="https://github.com/plataformatec/devise">devise</a> for login,
 <a href="https://github.com/intridea/omniauth">omniauth</a> to integrate authentication methods.</p>
 <p><a href="https://github.com/ryanb/cancan">cancan</a> if you need roles and permissions <a href="http://railscasts.com/episodes/192-authorization-with-cancan?view=asciicast">sceencast</a>.</p>
-<h4 id="sending-mail">2.6 Sending Mail</h4>
+<h4 id="permalinks">2.6 Permalinks</h4>
+<p><a href="https://github.com/norman/friendly_id">friendlyid</a></p>
+<h4 id="activity-stream">2.7 Activity Stream</h4>
+<p><a href="https://github.com/pokonski/public_activity">public_activity</a></p>
+<h4 id="sending-mail">2.8 Sending Mail</h4>
 <p>To send mail from Rails use <a href="http://guides.rubyonrails.org/action_mailer_basics.html">ActionMailer</a>.</p>
 <p>To see the generated mails in your web browser <em>instead</em> for sending them use the gem <a href="https://github.com/ryanb/letter_opener">letter_opener</a></p>
-<h4 id="errors">2.7 Errors</h4>
+<h4 id="understanding-your-code-better">2.9 Understanding your Code better</h4>
 <p><img src="images/gem-better_errors.png" alt="better_errors screenshot"><a href="https://github.com/charliesome/better_errors">carliesome/better_errors</a></p>
+<ul>
+<li><a href="https://github.com/ctran/annotate_models">annotate inserts the db schema as comments in your model.rb file</a></li>
+<li><a href="https://github.com/flyerhzm/bullet">bullet helps you improve your usage of activerecord queries</a></li>
+<li><a href="https://github.com/seattlerb/flay">flay finds structural similarities in your code, so you can refactor</a></li>
+</ul>
+<h4 id="using-apis">2.10 Using APIs</h4>
+<ul>
+<li><a href="https://github.com/octokit/octokit.rb">octokit for github</a></li>
+<li><a href="https://github.com/sferik/twitter">twitter</a></li>
+<li><a href="https://github.com/sinisterchipmunk/gravatar">gravatar</a></li>
+<li><a href="https://github.com/arsduo/koala">koala for facebook</a></li>
+</ul>
 <h3 id="finding-more-gems">3 Finding more Gems</h3>
 <ul>
 <li>
