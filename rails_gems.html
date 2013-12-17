@@ -95,9 +95,12 @@
 <li><a href="#file-upload">File Upload</a></li>
 <li><a href="#authentication">Authentication</a></li>
 <li><a href="#permalinks">Permalinks</a></li>
+<li><a href="#parsing-xml-and-html">Parsing xml and html</a></li>
+<li><a href="#admin-backend">Admin Backend</a></li>
 <li><a href="#activity-stream">Activity Stream</a></li>
 <li><a href="#sending-mail">Sending Mail</a></li>
 <li><a href="#understanding-your-code-better">Understanding your Code better</a></li>
+<li><a href="#http-requests-zeug-runterladen">HTTP Requests, Zeug runterladen</a></li>
 <li><a href="#using-apis">Using APIs</a></li>
 </ul>
 </li>
@@ -164,37 +167,69 @@ with choosing the right bootstrap gem.</p>
 <p>But there is a more sophisticated alternative to bootstrap: <strong>Neat</strong> uses a <em>semantic</em> grid system:</p>
 <p><img src="images/gem-neat.png" alt="neat screenshot"><a href="http://neat.bourbon.io/">http://neat.bourbon.io/</a></p>
 <h4 id="testing">2.3 Testing</h4>
-<p><a href="https://github.com/thoughtbot/factory_girl">factory_girl</a> for creating test data.</p>
-<p><a href="https://github.com/jnicklas/capybara">capybara</a> as the "browser" for acceptance tests, with
-<a href="https://github.com/jonleighton/poltergeist">poltergeist</a> for testing client side javascript.</p>
+<ul>
+<li>
+<a href="https://github.com/thoughtbot/factory_girl">factory_girl</a> for creating test data.</li>
+<li>
+<a href="https://github.com/jnicklas/capybara">capybara</a> as the "browser" for acceptance tests, with</li>
+<li>
+<a href="https://github.com/jonleighton/poltergeist">poltergeist</a> for testing client side javascript.</li>
+</ul>
 <h4 id="file-upload">2.4 File Upload</h4>
-<p><a href="https://github.com/carrierwaveuploader/carrierwave">carrierwave</a> or
-<a href="https://github.com/thoughtbot/paperclip">paperclip</a></p>
+<ul>
+<li>
+<a href="https://github.com/carrierwaveuploader/carrierwave">carrierwave</a> or</li>
+<li><a href="https://github.com/thoughtbot/paperclip">paperclip</a></li>
+<li><a href="https://github.com/rmagick/rmagick">image processing with image magick</a></li>
+</ul>
 <h4 id="authentication">2.5 Authentication</h4>
-<p><a href="https://github.com/plataformatec/devise">devise</a> for login,
-<a href="https://github.com/intridea/omniauth">omniauth</a> to integrate authentication methods.</p>
-<p><a href="https://github.com/ryanb/cancan">cancan</a> if you need roles and permissions <a href="http://railscasts.com/episodes/192-authorization-with-cancan?view=asciicast">sceencast</a>.</p>
+<ul>
+<li>
+<a href="https://github.com/plataformatec/devise">devise</a> for login,</li>
+<li>
+<a href="https://github.com/intridea/omniauth">omniauth</a> to integrate authentication methods.</li>
+<li>
+<a href="https://github.com/ryanb/cancan">cancan</a> if you need roles and permissions <a href="http://railscasts.com/episodes/192-authorization-with-cancan?view=asciicast">sceencast</a>.</li>
+</ul>
 <h4 id="permalinks">2.6 Permalinks</h4>
-<p><a href="https://github.com/norman/friendly_id">friendlyid</a></p>
-<h4 id="activity-stream">2.7 Activity Stream</h4>
+<ul>
+<li><a href="https://github.com/norman/friendly_id">friendlyid</a></li>
+</ul>
+<h4 id="parsing-xml-and-html">2.7 Parsing xml and html</h4>
+<ul>
+<li><a href="http://nokogiri.org/">nokogiri</a></li>
+</ul>
+<p>(this is also used by capybara)</p>
+<h4 id="admin-backend">2.8 Admin Backend</h4>
+<p>![ActiveAdmin Screenshot|]
+<a href="http://activeadmin.info/">ActiveAdmin</a></p>
+<h4 id="activity-stream">2.9 Activity Stream</h4>
 <p><a href="https://github.com/pokonski/public_activity">public_activity</a></p>
-<h4 id="sending-mail">2.8 Sending Mail</h4>
+<h4 id="sending-mail">2.10 Sending Mail</h4>
 <p>To send mail from Rails use <a href="http://guides.rubyonrails.org/action_mailer_basics.html">ActionMailer</a>.</p>
 <p>To see the generated mails in your web browser <em>instead</em> for sending them use the gem <a href="https://github.com/ryanb/letter_opener">letter_opener</a></p>
-<h4 id="understanding-your-code-better">2.9 Understanding your Code better</h4>
+<h4 id="understanding-your-code-better">2.11 Understanding your Code better</h4>
 <p><img src="images/gem-better_errors.png" alt="better_errors screenshot"><a href="https://github.com/charliesome/better_errors">carliesome/better_errors</a></p>
 <ul>
+<li>anbindung an chrome developer tools: <a href="https://github.com/dejan/rails_panel/tree/master/meta_request">https://github.com/dejan/rails_panel/tree/master/meta_request</a>
+</li>
 <li><a href="https://github.com/ctran/annotate_models">annotate inserts the db schema as comments in your model.rb file</a></li>
 <li><a href="https://github.com/flyerhzm/bullet">bullet helps you improve your usage of activerecord queries</a></li>
 <li><a href="https://github.com/seattlerb/flay">flay finds structural similarities in your code, so you can refactor</a></li>
 <li><a href="https://github.com/railsbp/rails_best_practices">rails_best_practices</a></li>
 </ul>
-<h4 id="using-apis">2.10 Using APIs</h4>
+<h4 id="http-requests-zeug-runterladen">2.12 HTTP Requests, Zeug runterladen</h4>
+<ul>
+<li><a href="https://github.com/taf2/curb">curb</a></li>
+</ul>
+<h4 id="using-apis">2.13 Using APIs</h4>
 <ul>
 <li><a href="https://github.com/octokit/octokit.rb">octokit for github</a></li>
 <li><a href="https://github.com/sferik/twitter">twitter</a></li>
 <li><a href="https://github.com/sinisterchipmunk/gravatar">gravatar</a></li>
 <li><a href="https://github.com/arsduo/koala">koala for facebook</a></li>
+<li><a href="https://github.com/attack/barometer">barometer - A multi API consuming weather forecasting superstar</a></li>
+<li><a href="https://github.com/apneadiving/Google-Maps-for-Rails">gmaps4rails</a></li>
 </ul>
 <h3 id="finding-more-gems">3 Finding more Gems</h3>
 <ul>
