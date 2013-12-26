@@ -196,13 +196,13 @@ and frameworks?  </p>
 <li>Because you want try out many different languages and many frameworks?</li>
 </ul>
 <p>All these answers are equally valid.</p>
-<p>Also, we have cool t-shirts:</p>
+<p>Also, there are cool t-shirts:</p>
 <p><img src="images/ruby-and-rails-t-shirts.png" alt="Ruby and Rails T-Shirts"></p>
 <h3 id="ruby-basics">2 Ruby Basics </h3>
 <p>For a hands-on introdcution to ruby got to <a href="http://tryruby.org">try ruby</a>.
 Then come back and read on:</p>
 <h4 id="some-code-conventions">2.1 Some code conventions</h4>
-<p>Try to stick to [<a href="https://github.com/styleguide/ruby">https://github.com/styleguide/ruby</a> githubs style for ruby]. </p>
+<p>Try to stick to <a href="https://github.com/styleguide/ruby">githubs style for ruby</a>. </p>
 <p>When you chose names for your objects, classes and methods
 you should stick to the following conventions to avoid
 confusing other ruby developers:</p>
@@ -223,7 +223,7 @@ b.sugar!     # a method that changes its object
 </div>
 <p>In the last to examples the punctuation marks are really
 part of the method name!</p>
-<p>The parantheses around a methods arguments are optional.
+<p>The parantheses around the arguments of a method are optional.
 Leave them off unless your code get's confusing:</p>
 <div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
@@ -235,11 +235,14 @@ puts "less code"
 <h2>Data Types</h2>
 <p>All of rubys basic data types are Classes.</p>
 <ul>
-<li>Numeric, Integer, Fixnum, Bignum, Float # are converted automatically to each other</li>
+<li>Numeric, Integer, Fixnum, Bignum, Float <code># are converted automatically to each other</code>
+</li>
 <li>Ranges</li>
 <li>String</li>
-<li>true  # TrueClass</li>
-<li>false # FalseClass</li>
+<li>true  <code># TrueClass</code>
+</li>
+<li>false <code># FalseClass</code>
+</li>
 <li>Symbol</li>
 <li>Array</li>
 <li>Hash</li>
@@ -250,7 +253,8 @@ puts "less code"
 <div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
 s = 'just a string of characters'
-s = "string with #{the_variable} or even #{a+b/c} a ruby expression embedded"
+s = "string with #{the_variable} embedded"
+s = "string with #{a+b/c} a ruby expression embedded"
 s = &lt;&lt;EOM
 This is a so called "Here-Document"
 it can contain many lines of text
@@ -330,7 +334,7 @@ s = "bar"
 </pre>
 </div>
 <p>But: there is always just one instance of a symbol while
-There can be several strings that have the same content, but are different objects:</p>
+there can be several strings that have the same content, but are different objects:</p>
 <div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
 &gt;&gt; :foo.object_id
@@ -345,7 +349,7 @@ There can be several strings that have the same content, but are different objec
 </pre>
 </div>
 <p>Use symbols where you would enums in a database or another language,
-or if you need constants (whos 'real value' is not important).</p>
+or if you need distnict constants, when there value is not important.</p>
 <h4 id="methods">2.7 Methods</h4>
 <p>Methods in ruby return the last expression - even
 if no explicit <code>return</code> statement is given.</p>
@@ -388,9 +392,8 @@ use a Range and convert it to an Array:</p>
 </pre>
 </div>
 <h3 id="hashes">3 Hashes</h3>
-<p>A Hash is a datastructure similar to an array. An array uses integers as
-the index while a Hash takes any object. Mostly strings and symbols
-are used as keys:</p>
+<p>A Hash is a datastructure similar to an array. An array uses integers as keys
+while a Hash uses any. Mostly strings and symbols are used:</p>
 <div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
 h = Hash.new
@@ -409,9 +412,9 @@ h[t] = "recently"
 </pre>
 </div>
 <p>The data structure behind a ruby Hash is more complex
-than an array: The key is sent though a function  (called hashfunction)
+than an array: The key is sent though a function  (called hash function)
 that returns a number. This number is used as the index
-for an array.  If the hashfunction for two keys is the
+for an array.  If the hash function for two keys is the
 same a linked list is built.</p>
 <p><img src="images/hash_table.svg" alt="How Hash(tabl)es work"></p>
 <p>This datastructure seems like an serious waste of memory
@@ -426,6 +429,11 @@ hashes in Wikipedia:</p>
 <ul>
 <li><a href="http://en.wikipedia.org/wiki/Hash_table">Hashtables in Wikipedia</a></li>
 </ul>
+<p>(If you don't know what "in constant time" means above, you
+should learn more about the analysis of algorithms. e.g. by
+taking a algorithms and data strcture course as offered in the second
+semester of most computer science programs.  Or by working through the 
+<a href="http://www.brpreiss.com/books/opus8/">the book by Bruno R. Preiss</a>).</p>
 <h4 id="implicit-form">3.1 Implicit Form</h4>
 <p>A Hash can be created by using its "implicit form":</p>
 <div class="code_container">
@@ -434,17 +442,30 @@ roomnumber = { "Jane Doe" =&gt; 10, "Jim Doe" =&gt; 6 }
 
 </pre>
 </div>
-<p>Hashes allow an alternate syntax when all the keys are symbols. Instead of</p>
+<p>Since Ruby 1.9.3 hashes allow an alternate syntax when the keys are symbols. Instead of</p>
 <div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
 style = { :font_size =&gt; 10, :font_family =&gt; "Arial" }
 
 </pre>
 </div>
-<p>Since Ruby 1.9.3 you could write this  in  a JSON-like way:</p>
+<p>you could write this  in  a JSON-like way:</p>
 <div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
 style = { font_size: 10, font_family: "Arial" }
+
+</pre>
+</div>
+<p>This style of hash is often used as an argument for a method,
+that way we get named arguments:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+def apply_the_style( h )
+  ...
+end
+
+apply_the_style(font_size: 10, font_family: "Arial")
+apply_the_style font_size: 10, font_family: "Arial" 
 
 </pre>
 </div>
@@ -464,7 +485,7 @@ $ ps aux | grep httpd | cut -c1-8 | sort | uniq
 </pre>
 </div>
 <p>Each of those programs reads data from "Standard Input" and
-writes data to "Standard Output".  The vertical bar symbol takes
+writes data to "Standard Output".  The vertical bar symbol (called "pipe") takes
 the output of the preceding program and sends it input the next
 program.  The data in question is plain text, consisting
 of several lines.</p>
@@ -490,8 +511,11 @@ languages.sort.first(3)
 
 </pre>
 </div>
+<p>The elements of the array are piped into the sort-method, which again outputs a list
+of elements. Theses are piped into first, which only returns the first three and discards
+the rest. The result is a list of 3 elements.</p>
 <p>Here are some simple methods you can use on Arrays (and other Enumerables)
-that return a new Array.  You can connect theses methods to each other:</p>
+that return a new Enumerable.  You can connect theses methods to each other:</p>
 <ul>
 <li>sort</li>
 <li>first(n)</li>
@@ -509,11 +533,12 @@ that return a new Array.  You can connect theses methods to each other:</p>
 </ul>
 <p>More advanced methods take a Block (of code) as their argument.
 The method <code>map</code> applys the Block to each piece of data, and
-returns an Array of the now data:</p>
+returns an Enumerable of the new data:</p>
 <div class="code_container">
 <pre class="brush: ruby; gutter: false; toolbar: false">
 &gt;&gt; (1..10).map{ |x| x*2 }
 =&gt; [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+
 &gt;&gt; (1..10).map{ |x| x*2 }.reverse
 =&gt; [20, 18, 16, 14, 12, 10, 8, 6, 4, 2]
 
@@ -527,6 +552,7 @@ the Block on several lines, ending with <code>end</code></p>
 ?&gt;   x*2
 &gt;&gt; end
 =&gt; [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+
 &gt;&gt; (1..10).map do |x|
 ?&gt;   x*2
 &gt;&gt; end.reverse
@@ -543,6 +569,11 @@ the Block on several lines, ending with <code>end</code></p>
 </ul>
 <p>These methods should help you avoid loops and thus simplify
 code considerably.</p>
+<p>Read the Reference on</p>
+<ul>
+<li><a href="http://ruby-doc.org/core-2.1.0/Enumerable.html">Enumerable</a></li>
+<li><a href="http://ruby-doc.org/core-2.1.0/Array.html">Array</a></li>
+</ul>
 <h3 id="blocks">5 Blocks </h3>
 <p>Blocks of code are not just used in Enumerables, they are
 a basic building block of ruby.  You can write functions
@@ -583,18 +614,18 @@ be a good enough basis to digg deeper into rails next.  </p>
 <p>But do take every
 oppertunity you got to learn more about ruby itself: if you are unsure about
 a line of code, look it up in the ruby documentation and use the
-opportunity to read a bit more than strictly necessary.
-I can highly recommend getting an offline version of the documentation
-installed on your development machine, so you can use it even if you
-are offline.</p>
-<p>But you should come back and learn more about ruby later on.</p>
+opportunity to read a bit more than strictly necessary.</p>
+<p>Get an offline version of the documentation
+installed on your development machine so you can look up stuff instantly.</p>
+<ul>
+<li>Mac Tool <a href="http://kapeli.com/dash">Dash</a> for keeping offline copies of documentation</li>
+</ul>
 <h4 id="online-resources">6.1 Online Resources</h4>
 <ul>
 <li>
 <a href="http://tryruby.org">try ruby</a> - interactive online course</li>
 <li>
 <a href="http://www.codeschool.com/courses/ruby-bits">Ruby Bits</a> - interactive online course, with 8bit game graphics </li>
-<li><a href="http://ruby-doc.org/core/Enumerable.html">Ruby 2.0 Core Documentation: Enumerable</a></li>
 <li><a href="http://rubylearning.com/satishtalim/tutorial.html">learningruby.com tutorial</a></li>
 </ul>
 <h4 id="books">6.2 Books</h4>
