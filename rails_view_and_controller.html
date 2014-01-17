@@ -43,7 +43,7 @@
             <hr />
               <dl class="L">
                 <dt>Ruby on Rails 1</dt>
-                <dd><a href="ruby_commandline.html">Ruby Commandline</a></dd>
+                <dd><a href="ruby_commandline.html">Ruby</a></dd>
                 <dd><a href="rails_database_and_model.html">Rails Database and Models</a></dd>
                 <dd><a href="rails_view_and_controller.html">Rails View and Controller</a></dd>
                 <dd><a href="authentication_from_scratch.html">Authentication from Scratch</a></dd>
@@ -89,10 +89,10 @@
 
 <ul>
 <li><a href="#layouts-and-views">layouts and views</a></li>
-<li><a href="#rails-views">rails views</a></li>
+<li><a href="#erb-is-embedded-ruby">erb is embedded ruby</a></li>
 <li><a href="#static-content">static content</a></li>
 <li><a href="#links">links</a></li>
-<li><a href="#now-do-rails-for-zombies-episode-no3">Now do 'Rails for Zombies' Episode no3</a></li>
+<li><a href="#learn-from-zombies">Learn from Zombies</a></li>
 </ul>
 </li>
 <li>
@@ -156,38 +156,77 @@ than you will recognize the similarities.</p>
 the files concerning the view. (This is one of the points where
 using git to relove merge conflicts comes in handy!).</p>
 <h4 id="layouts-and-views">1.1 layouts and views</h4>
+<p>If you look at the resulting HTML document you can see code that originates
+in two main files: the layout and the view. There normally is one layout for
+the whole app, stored in <code>app/views/layout/application.html.erb</code>.  It contains
+one <code>yield</code> statement, which then includes the current view.</p>
+<p>Every action of a controller has it's own view, stored in <code>app/views/CONTROLLER/ACTION.html.erb</code>.</p>
 <p><img src="images/layout_view.svg" alt="Layouts and Views"></p>
+<p>Rails offers many ways to enhance this basic setup, the first you should know about
+are <strong>partials</strong>: sub-templates that can be included using the <code>render</code> method:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+&lt;%= render :partial =&gt; "shared/topmenu" %&gt;
+&lt;%= render :partial =&gt; "form" %&gt;
+
+</pre>
+</div>
+<p>You should be aware that the filenames for partials contain a leading underscore, so
+rendering <code>form</code> actually includes a file <code>_form.html.erb</code>.</p>
 <p><img src="images/layout_view_partial.svg" alt="Layouts, Views and Partials"></p>
-<h4 id="rails-views">1.2 rails views</h4>
+<h4 id="erb-is-embedded-ruby">1.2 erb is embedded ruby</h4>
+<p>the template format normally used in rails is <code>erb</code>, html with embedded ruby.
+There is one major other template language: HAML.  But you should start your
+first rails project with erb.</p>
 <ul>
-<li>are stored in <code>app/views/&lt;name of controller&gt;/*.html.erb</code>
-</li>
-<li>template format <code>.erb</code> is html with embedded ruby:</li>
 <li>
 <code>&lt;% ruby code here %&gt;</code> just evaluates the code</li>
 <li>
-<code>&lt;%= ruby code here %&gt;</code> evaluates the code and includes result</li>
-<li>main template (for header, footer) in <code>app/views/layouts/application.html.erb</code>
-</li>
-<li>
-<code>yield</code>s to include single view</li>
+<code>&lt;%= ruby code here %&gt;</code> evaluates the code and includes the result</li>
 </ul>
+<p>You can use all of rubys conditions, loops, etc in erb.  Very often you
+will use instance variables (recognizable by the <code>@</code> sign) that were
+filled in by the controller, and output them or iterate over them:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+&lt;% @ideas.each do |idea| %&gt;
+  &lt;p&gt;
+    &lt;strong&gt;&lt;%= idea.name %&gt;&lt;/strong&gt;
+    &lt;%= idea.description %&gt;
+  &lt;/p&gt;
+&lt;% end %&gt;
+
+</pre>
+</div>
 <h4 id="static-content">1.3 static content</h4>
+<p>anything placed in the folder <code>public</code> is directly accessible in the web space, 
+without going through the rails stack. In an empty rails project you will find at
+least the following files there:</p>
 <ul>
-<li>anything placed in <code>public</code>
-</li>
-<li>is directly accessible in the web space, without going through rails!</li>
+<li>
+<code>404.html</code>, <code>422.html</code>, <code>500.html</code> for HTML error messages. these should work even if everything else breaks down</li>
+<li>
+<code>favicon.ico</code> replace this with your icon</li>
+<li>
+<code>robots.txt</code>  add your <a href="http://www.robotstxt.org/wc/norobots.html">robot rules</a> here</li>
 </ul>
 <h4 id="links">1.4 links</h4>
+<p>When programming a rails app you will never write links "by hand" using the HTML <code>&lt;a&gt;</code> tag.
+Rail knows about your URLs, your controllers and actions, and offers you helper methods
+to use this knowledge:</p>
 <ul>
-<li>never write links to your own app "by hand"!</li>
-<li>use helper methods to get the right URLs</li>
 <li>
 <code>link_to 'link text here', object</code> links to show action of the object</li>
-<li>use <code>rake routes</code> to find out the names of urls/paths</li>
+<li>
+<code>link_to 'link text here', some_path</code> links to the path created by the helper method <code>some_path</code>
+</li>
 </ul>
-<h4 id="now-do-rails-for-zombies-episode-no3">1.5 Now do 'Rails for Zombies' Episode no3</h4>
-<p><img src="images/rails-for-zombies-3.jpg" alt="Rails for Zombies Episode 3"></p>
+<p>Use <code>rake routes</code> to find out the names of urls/paths</p>
+<h4 id="learn-from-zombies">1.5 Learn from Zombies</h4>
+<p>Now do <a href="http://railsforzombies.org/levels/3">Rails for Zombies Level #3</a> to learn
+the basics of views.</p>
+<p><img src="images/rails-for-zombies-3.jpg" alt="Rails for Zombies 3"></p>
+<p>To delve deeper into Layout and Rendinerg read the <a href="http://guides.rubyonrails.org/layouts_and_rendering.html">Rails Guide</a></p>
 <h3 id="the-controller">2 The Controller</h3>
 <p>The controller is the central part of MVC. One Controller gets
 called for every HTTP request. The controller than uses the model(s)
