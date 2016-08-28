@@ -163,8 +163,8 @@ small projects:</p>
 <li>The whole history of the project always accessible, you can "go back in time" to old versions of your code.</li>
 <li>You can try out experimental stuff without danger of breaking your existing code.<br>
 </li>
-<li>it's absolutely vital for teamwork - several people can program on separate computers, the system helps with merging the differnet codes</li>
 </ol>
+<p>And it's absolutely vital for teamwork - several people can develop on separate machines. The system helps with merging the differnet programs into one.</p>
 <h4 id="why-use-git-questionmark">1.3 Why use git?</h4>
 <p><img src="images/linus-torvalds.jpg" alt="background">
 photo <a href="http://www.flickr.com/photos/48923114@N00/116787425">cc</a></p>
@@ -174,7 +174,7 @@ See <a href="http://www.youtube.com/watch?v=4XpnKHJAok8">this video of a talk by
 <p>Git is a <strong>distributed vcs</strong> - it does not depend on one central repository, every
 repository is created equal. You  can transfer code in "both directions".
 You can work online and offline. Its architecture is not fixed: if one server
-breaks down, you can move to new server without any trouble.</p>
+breaks down, you can move to a new server without any trouble.</p>
 <p>Branching and merging is easy in git.</p>
 <p>In your local working copy you also have a fully fledged repository:
 it's stored in one directory: <code>.git</code>.</p>
@@ -185,16 +185,16 @@ content of a commit after it has been made without the hash breaking!</p>
 Their web interface adds a lot of convenient features to git.</p>
 <ol>
 <li>it's free for open source projects and used by many such projects</li>
-<li>with forking + pull requests it offers an easy way to contribute to open soruce projects</li>
-<li>it's mascopt is cute: octocat </li>
+<li>with forking + pull requests it offers an easy way to contribute to open source projects</li>
+<li>it's mascot is cute: octocat </li>
 </ol>
 <p><img src="images/octocat.png" alt="octocat"></p>
 <h4 id="resources-for-learning-git">1.5 Resources for Learning Git</h4>
 <ul>
-<li><a href="http://try.github.com">try git</a></li>
-<li><a href="http://git-scm.com/documentation">http://git-scm.com/documentation</a></li>
-<li><a href="http://progit.org/book/">http://progit.org/book/</a></li>
-<li><a href="http://help.github.com/">http://help.github.com/</a></li>
+<li><a href="https://try.github.io">try git</a></li>
+<li><a href="documentation">https://git-scm.com/documentation</a></li>
+<li><a href="git%20book">https://git-scm.com/book/en/v2</a></li>
+<li><a href="help.github.com/">https://help.github.com/</a></li>
 <li>Loelinger(2009): Version Control with Git. O'Reilly Media.</li>
 <li>Swicegood(2009): Pragmatic Version Control Using Git. Pragmatic Bookshelf.</li>
 </ul>
@@ -246,24 +246,12 @@ git init
 </div>
 <p>If you are working on windows but collaborating
 with developers on other systems you might want to
+configure which line endings and which external editor is used.
 change the following setting:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 core.autocrlf false
 core.editor "C:/Programme/Notepad++/Notepad++.exe"
-
-</pre>
-</div>
-<p>If you ever find yourself annoyed by typing in long git
-commands you can define aliases:</p>
-<div class="code_container">
-<pre class="brush: plain; gutter: false; toolbar: false">
-git config --global alias.co checkout
-
-# you now can use
-git co master
-# instead of
-git checkout master
 
 </pre>
 </div>
@@ -439,7 +427,7 @@ a backup or publish to the world by pushing to a remote
 repository.</p>
 <p>But if you want to work in a team you will need to handle branches.</p>
 <h4 id="resources">3.4 Resources</h4>
-<p><a href="http://git-scm.com/book/en/Git-Basics">Git Book: Chapter 2</a></p>
+<p><a href="https://git-scm.com/book/en/v1/Git-Basics">Git Book: Chapter 2</a></p>
 </body></html>
 
       </div>

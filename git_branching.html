@@ -72,15 +72,21 @@
 <html><body>
 <ol class="chapters">
 <li>
-<a href="#branching-and-merging">Branching and Merging</a>
+<a href="#branching">Branching </a>
 
 <ul>
-<li><a href="#branching">Branching</a></li>
+<li><a href="#create-a-branch">Create a branch</a></li>
 <li><a href="#behind-the-scene-of-a-branch">Behind the scene of a branch</a></li>
 <li><a href="#create-a-new-branch">create a new branch</a></li>
 <li><a href="#switch-to-a-branch">switch to a branch</a></li>
 <li><a href="#which-branch-am-i-on-questionmark">which branch am I on?</a></li>
 <li><a href="#work">work</a></li>
+</ul>
+</li>
+<li>
+<a href="#merging">Merging</a>
+
+<ul>
 <li><a href="#merge-bang">merge!</a></li>
 <li><a href="#done">done</a></li>
 <li><a href="#delete-branch">delete branch</a></li>
@@ -113,14 +119,14 @@ and using branches.</p><p>After reading this guide, you will know:</p>
       <div id="mainCol">
         <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h3 id="branching-and-merging">1 Branching and Merging</h3>
+<h3 id="branching">1 Branching </h3>
 <p>When you create a branch in the repository you enable two
 different development directions.  later on you might want to
 merge the branches again, or you might want to discard one.</p>
 <p>Different tools offer visual displays of these branches,
 here a screenshot from SourceTree:</p>
 <p><img src="images/source-tree-branches.png" alt="SourceTree branches"></p>
-<h4 id="branching">1.1 Branching</h4>
+<h4 id="create-a-branch">1.1 Create a branch</h4>
 <p>To create or delete a branch use the <code>branch</code> command:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
@@ -189,7 +195,10 @@ $ git checkout iss53
 </div>
 <p><img src="images/branch-and-merge-3.svg" alt="worked on both branches"></p>
 <p><img src="images/branch-and-merge-4.svg" alt="what do I want to merge?"></p>
-<h4 id="merge-bang">1.7 merge!</h4>
+<h3 id="merging">2 Merging</h3>
+<p>So development has gone in two different directions in two branches.
+How do we get it together again? </p>
+<h4 id="merge-bang">2.1 merge!</h4>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 $ git checkout master
@@ -200,16 +209,16 @@ Merge made by recursive.
 
 </pre>
 </div>
-<h4 id="done">1.8 done</h4>
+<h4 id="done">2.2 done</h4>
 <p><img src="images/branch-and-merge-5.svg" alt="after the merge"></p>
-<h4 id="delete-branch">1.9 delete branch</h4>
+<h4 id="delete-branch">2.3 delete branch</h4>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 git branch -d iss53
 
 </pre>
 </div>
-<h4 id="merging-in-detail">1.10 Merging in detail</h4>
+<h4 id="merging-in-detail">2.4 Merging in detail</h4>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 git merge OTHER_BRANCH
@@ -217,7 +226,7 @@ git merge OTHER_BRANCH
 </pre>
 </div>
 <p>merge the OTHER_BRANCH into the current (checked-out) branch</p>
-<h4 id="conflicts">1.11 Conflicts</h4>
+<h4 id="conflicts">2.5 Conflicts</h4>
 <ul>
 <li>when both branches contain changes for the same file</li>
 <li>or: trying two pushes containing changes for the same file</li>
@@ -236,7 +245,7 @@ index.html: needs merge
 
 </pre>
 </div>
-<h4 id="conflict-markers-in-a-file">1.12 conflict markers in a file</h4>
+<h4 id="conflict-markers-in-a-file">2.6 conflict markers in a file</h4>
 <div class="code_container">
 <pre class="brush: xml; gutter: false; toolbar: false">
 &lt;/div&gt;
@@ -252,9 +261,9 @@ index.html: needs merge
 
 </pre>
 </div>
-<h4 id="conflict-markers-in-a-files">1.13 conflict markers in a files</h4>
+<h4 id="conflict-markers-in-a-files">2.7 conflict markers in a files</h4>
 <p><img src="images/conflict-markers.png" alt="conflict marker with syntax highlighting"></p>
-<h4 id="how-to-resolve">1.14 how to resolve</h4>
+<h4 id="how-to-resolve">2.8 how to resolve</h4>
 <ul>
 <li>for all files:</li>
 <li>edit file</li>
@@ -262,7 +271,7 @@ index.html: needs merge
 <li>git add FILE</li>
 <li>git commit</li>
 </ul>
-<h4 id="resources">1.15 Resources</h4>
+<h4 id="resources">2.9 Resources</h4>
 <ul>
 <li><a href="http://git-scm.com/book/en/Git-Branching-Basic-Branching-and-Merging">Git Book: Chapter 3.2</a></li>
 <li><a href="http://rypress.com/tutorials/git/branches-1.html">Ry's git tutorial: Branches 1</a></li>
