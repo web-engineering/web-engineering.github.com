@@ -1,43 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Web Engineering - under construction</title>
-  <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+  <title>Web Engineering - a textbook
+</title>
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+  <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shThemeRailsGuides.css" />
+
+  <link rel="stylesheet" type="text/css" href="stylesheets/fixes.css" />
+  <link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" />
+
+  <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 </head>
 <body class="guide">
+  <div>
+    <a href="http://github.com/web-engineering/web-engineering-textbook/"><img style="position: fixed; top: 0; right: 0; border: 0; z-index: 10;" src="images/forkme.png" alt="Fork me on GitHub"></a>
+  </div>
   <div id="topNav">
     <div class="wrapper">
-      <strong class="more-info-label">Learn more in other places: </strong>
+      <strong class="more-info-label">Learn more at the sources: </strong>
       <ul class="more-info-links s-hidden">
-        <li class="more-info"><a href="http://git-scm.com/documentation">Git Documentation</a></li>
-        <li class="more-info"><a href="http://try.github.com/">Try Git</a></li>
-        <li class="more-info"><a href="http://rubyonrails.org/">Ruby on Rails</a></li>
-        <li class="more-info"><a href="http://guides.rubyonrails.org/">Rails Guides</a></li>
-        <li class="more-info"><a href="http://railsforzombies.org/">Rails for Zombies</a></li>
-        <li class="more-info"><a href="http://railscasts.com/">Railscasts</a></li>
+        <li class="more-info"><a href="https://git-scm.com/documentation">Git Documentation</a></li>
+        <li class="more-info"><a href="https://try.github.io/">Try Git</a></li>
+        <li class="more-info"><a href="http://refactoring.com/catalog/">Refactoring Catalog</a></li>
       </ul>
     </div>
   </div>
   <div id="header">
     <div class="wrapper clearfix">
       <h1><a href="index.html" title="Return to home page">Web<span>Engineering</span></a></h1>
+      <ul class="nav">
+        <li><a class="nav-item" href="index.html">Home</a></li>
+        <li class="guides-index guides-index-large">
+          <a href="index.html" onclick="guideMenu(); return false;" id="guidesMenu" class="guides-index-item nav-item">Index  &#x25BC;</a>
+          <div id="guides" class="clearfix" style="display: none;">
+            <hr />
+              <dl class="L">
+                <dt>Workflows</dt>
+                <dd><a href="git_basics.html">Git Basics</a></dd>
+                <dd><a href="git_branching.html">Branching and Merging</a></dd>
+                <dd><a href="git_teamwork.html">Teamwork</a></dd>
+                <dd><a href="good_practices.html">Good Practices</a></dd>
+                <dd><a href="agile.html">Agile Methods</a></dd>
+                <dd><a href="testing_and_refactoring.html">Testing and Refactoring</a></dd>
+                <dd><a href="advanced_testing.html">Advanced testing</a></dd>
+                <dd><a href="deploying_rails.html">Deploying Rails with Capistrano</a></dd>
+              </dl>
+              <dl class="R">
+                <dt>Web Operations</dt>
+                <dd><a href="webserver.html">Webserver</a></dd>
+                <dd><a href="security.html">Security</a></dd>
+              </dl>
+          </div>
+        </li>
+        <li><a class="nav-item" href="https://github.com/bjelline/web-engineering-textbook/">Contribute</a></li>
+      </ul>
+      </div>
     </div>
   </div>
   <hr class="hide" />
 
   <div id="feature">
     <div class="wrapper">
+      
+        <h2>About this Book</h2>
+  <p>This is a textbook for the second year of a computer
+  science or "media informatics" degree program.  It builds
+  on <a href="https://web-development.github.io">Web Development</a> 
+  (in german) and runs parallell to
+  <a href="https://backend-development.github.io">Backend Development</a>  and
+  <a href="https://web-development.github.io">Frontend Development</a>.</p>
 
-        <h2>About this Site</h2>
-        <p>There used to be a Textbook here. It has moved to <a href="https://backend-development.github.io">backend-development.github.io</a></p>
+  <p>This book is not a self-contained work: There are great
+  resources for learning about the tools and technologies of web engineering
+  - this book tries to use
+  these resources, and bind them together into a coherent study plan.</p>
 
-        <p>We plan to build a more comprehensive site here</p>
+  <p>It was written and published by Brigitte Jellinek and Hannes Moser
+  in the hope that it will be useful to lecturers and students
+  in educational institutions as well as to self-directed learners on the internet.
+  </p>
 
     </div>
   </div>
 
+  <div id="container">
+    <div class="wrapper">
+      <div id="mainCol">
+        
+
+<h3>What is Web Engineering</h3>
+
+<p>Under this title we collect all the stuff that
+does not fit neatly into "backend" or "frontend" development:
+workflows, tools, operations.
+</p>
+
+  <h3>Workflows</h3>
+  <dl>
+      <dt><a href="git_basics.html">Git Basics</a></dt><dd>
+        <p>With branches you can work on two separate versions of your code in parallel. For example you can work on a new feature, but go back and fix an error in production in the middle of it. Git will help you keep your code sorted.</p>
+</dd>      <dt><a href="git_branching.html">Branching and Merging</a></dt><dd>
+        <p>With branches you can work on two separate versions of your code in parallel. For example you can work on a new feature, but go back and fix an error in production in the middle of it. Git will help you keep your code sorted.</p>
+</dd>      <dt><a href="git_teamwork.html">Teamwork</a></dt><dd>
+        <p>When two programmers work at one computer this is called &quot;pair programming&quot;.</p>
+</dd>      <dt><a href="good_practices.html">Good Practices</a></dt><dd>
+        <p></p>
+</dd>      <dt><a href="agile.html">Agile Methods</a></dt><dd>
+        <p></p>
+</dd>      <dt><a href="testing_and_refactoring.html">Testing and Refactoring</a></dt><dd>
+        <p></p>
+</dd>      <dt><a href="advanced_testing.html">Advanced testing</a></dt><dd>
+        <p>More testing with test doubles and a headless browser</p>
+</dd>      <dt><a href="deploying_rails.html">Deploying Rails with Capistrano</a></dt><dd>
+        <p></p>
+</dd>  </dl>
+  <h3>Web Operations</h3>
+  <dl>
+      <dt><a href="webserver.html">Webserver</a></dt><dd>
+        <p>Webserver</p>
+</dd>      <dt><a href="security.html">Security</a></dt><dd>
+        <p>How your web framework helps with security, and how to mess it up</p>
+</dd>  </dl>
+
+      </div>
+    </div>
+  </div>
+
+  <hr class="hide" />
+  <div id="footer">
+    <div class="wrapper">
+      <p class="copyright">published under <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/at/deed.de">creative commons by-nc-sa</a> in 2012-2016 by <a href="http://brigitte-jellinek.at">Brigitte Jellinek</a>.
+      </p><p>If you want to contribute: <a href="https://github.com/web-engineering/web-engineering-textbook/fork">fork the source on github</a>
+      </p>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="javascripts/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/responsive-tables.js"></script>
+  <script type="text/javascript" src="javascripts/guides.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
+  <script type="text/javascript">
+    SyntaxHighlighter.all()
+    $(guidesIndex.bind);
+  </script>
   </body>
 </html>
