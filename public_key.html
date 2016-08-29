@@ -71,13 +71,10 @@
             <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
 <ol class="chapters">
-<li>
-<a href="#public-key-authentication-in-ssh">Public Key Authentication in SSH</a>
-
-<ul>
-<li><a href="#authorized-keys2">authorized_keys2</a></li>
-</ul>
-</li>
+<li><a href="#public-key-cryptography">Public Key Cryptography</a></li>
+<li><a href="#generating-and-using-keys-for-git-and-github">Generating and using keys for git and github</a></li>
+<li><a href="#use-your-public-key-on-github">Use your public key on github</a></li>
+<li><a href="#see-also">See Also</a></li>
 </ol>
 </body></html>
 
@@ -98,36 +95,52 @@ to understand how public key cryptography works.</p><p>After working through thi
       <div id="mainCol">
         <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h3 id="public-key-authentication-in-ssh">1 Public Key Authentication in SSH</h3>
-<p>(See also <a href="http://installfest.railsbridge.org/installfest/create_an_ssh_key">Railsbridge Installfest</a>)</p>
+<h3 id="public-key-cryptography">1 Public Key Cryptography</h3>
+<p>In the 1970ies several cryptographers invented public-key cryptography independently
+of each other.  With the low computing power available then it could not be used in practice.
+Since the 1990 it is used widely in ssh, e-mail encryption and SSL/TLS.</p>
+<p>The basic idea is to have an assymetric encryption system: two different keys
+are used:  a public key for encryption and a private key for decryption</p>
 <p><img src="images/public_key_crypto.svg" alt="public key login"></p>
+<p>We will be using public key cryptography for ssh and git.  For these
+systems the keys are stored in a folder <strong>.ssh</strong>:</p>
 <ul>
-<li><a href="http://dougvitale.wordpress.com/2012/02/20/ssh-the-secure-shell/">learn about ssh</a></li>
-<li>if you have a public + private key pair
+<li>you have a public + private key pair
 
 <ul>
 <li><code>id_rsa</code></li>
 <li><code>id_rsa.pub</code></li>
 </ul>
 </li>
-<li>and your private key is on your local computer
+<li>your private key is stored on your local computer
 
 <ul>
-<li>stored in <code>~/.ssh/id_rsa</code>
+<li>in <code>~/.ssh/id_rsa</code>
 </li>
 </ul>
 </li>
-<li>and your public key is on the server
+<li>your public key is also stored on your local coputer
 
 <ul>
-<li>stored in <code>~/.ssh/authorized_keys2</code>
+<li>in <code>~/.ssh/id_rsa</code>
 </li>
 </ul>
 </li>
-<li>then ssh will let you log in without giving a password</li>
 </ul>
+<p>If you want to use these keys for logging in to a server without
+using a password, you have to copy over your public key to the server:</p>
+<ul>
+<li>on the server your public key is stored
+
+<ul>
+<li>in <code>~/.ssh/authorized_keys2</code>
+</li>
+</ul>
+</li>
+</ul>
+<p>Then ssh will let you log in without giving a password</p>
 <p><img src="images/ssh_login_with_public_key.svg" alt="public key login"></p>
-<h4 id="authorized-keys2">1.1 authorized_keys2</h4>
+<p>The authorized_keys file can contain several public keys:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 ssh-rsa AAAAB3NzaC...2EAAAABI== alice@fh-salzburg.ac.at
@@ -135,6 +148,46 @@ ssh-rsa AAAAB8NzaC...DVj3R4Ww== bob@fh-salzburg.ac.at
 
 </pre>
 </div>
+<h3 id="generating-and-using-keys-for-git-and-github">2 Generating and using keys for git and github</h3>
+<p>Decide which e-mail address you want to use - this address
+will be your identity as a developer from now on.  (so maybe don't use
+a really private one)</p>
+<p>Type this in the terminal (with your own e-mail address:)</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+ssh-keygen -C exampleme@example.com -t rsa
+
+</pre>
+</div>
+<p>Press enter to accept the default key save location.
+Do not use a passphrase.</p>
+<p>After key generation is complete, you'll have output that looks like this:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+Generating public/private rsa key pair.
+Enter file in which to save the key (/Users/student/.ssh/id_rsa):
+Created directory '/Users/student/.ssh'.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /Users/student/.ssh/id_rsa.
+Your public key has been saved in /Users/student/.ssh/id_rsa.pub.
+The key fingerprint is:
+88:54:ab:11:fe:5a:c3:7s:14:37:28:8c:1d:ef:2a:8d exampleme@example.com
+
+</pre>
+</div>
+<p>Now check if your two keys are really stored in <code>~/.ssh/id_rsa</code> and <code>~/.ssh/id_rsa.pub</code>!</p>
+<h3 id="use-your-public-key-on-github">3 Use your public key on github</h3>
+<p><a href="https://github.com/join">Generate an account on github</a>. Chose a username that is not embarassing (not now, and not
+in 3 years when you are a professional developer).  You can chose a Synonyme instead
+of using your real name if you are not sure yet if you want to be identified on the interent.</p>
+<p>No you can <a href="https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/">add your public key to your github account</a>.</p>
+<h3 id="see-also">4 See Also</h3>
+<ul>
+<li>
+<a href="http://installfest.railsbridge.org/installfest/create_an_ssh_key">creating an ssh key</a> as explained by railsbridge</li>
+<li><a href="http://dougvitale.wordpress.com/2012/02/20/ssh-the-secure-shell/">learn about ssh</a></li>
+</ul>
 </body></html>
 
       </div>
