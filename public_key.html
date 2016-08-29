@@ -48,8 +48,8 @@
                 <dd><a href="testing_and_refactoring.html">Testing and Refactoring</a></dd>
                 <dd><a href="advanced_testing.html">Advanced testing</a></dd>
                 <dt>Basics</dt>
-                <dd><a href="git_basics.html">Git Basics</a></dd>
                 <dd><a href="public_key.html">Using Public Key Cryptography</a></dd>
+                <dd><a href="git_basics.html">Git Basics</a></dd>
               </dl>
               <dl class="R">
                 <dt>Web Operations</dt>
@@ -73,8 +73,23 @@
 <html><body>
 <ol class="chapters">
 <li><a href="#public-key-cryptography">Public Key Cryptography</a></li>
-<li><a href="#generating-and-using-keys-for-git-and-github">Generating and using keys for git and github</a></li>
-<li><a href="#use-your-public-key-on-github">Use your public key on github</a></li>
+<li>
+<a href="#ssh">ssh</a>
+
+<ul>
+<li><a href="#generating-keys">Generating keys</a></li>
+<li><a href="#using-keys-with-ssh">Using keys with ssh</a></li>
+</ul>
+</li>
+<li>
+<a href="#git">git </a>
+
+<ul>
+<li><a href="#useing-keys-with-github">Useing keys with github</a></li>
+<li><a href="#useing-keys-on-gitlab">Useing keys on gitlab</a></li>
+<li><a href="#remember-to-use-ssh-bang">remember to use ssh!</a></li>
+</ul>
+</li>
 <li><a href="#see-also">See Also</a></li>
 </ol>
 </body></html>
@@ -103,53 +118,20 @@ Since the 1990 it is used widely in ssh, e-mail encryption and SSL/TLS.</p>
 <p>The basic idea is to have an assymetric encryption system: two different keys
 are used:  a public key for encryption and a private key for decryption</p>
 <p><img src="images/public_key_crypto.svg" alt="public key login"></p>
+<h3 id="ssh">2 ssh</h3>
 <p>We will be using public key cryptography for ssh and git.  For these
-systems the keys are stored in a folder <strong>.ssh</strong>:</p>
+systems the keys are stored in a folder <strong>.ssh</strong>.</p>
+<p>you have a public + private key pair</p>
 <ul>
-<li>you have a public + private key pair
-
-<ul>
-<li><code>id_rsa</code></li>
-<li><code>id_rsa.pub</code></li>
-</ul>
+<li>
+<code>id_rsa</code> - your private key is stored on your local computer in <code>~/.ssh/id_rsa</code>
 </li>
-<li>your private key is stored on your local computer
-
-<ul>
-<li>in <code>~/.ssh/id_rsa</code>
+<li>
+<code>id_rsa.pub</code> - your public key is also stored on your local computer in <code>~/.ssh/id_rsa</code>
 </li>
 </ul>
-</li>
-<li>your public key is also stored on your local coputer
-
-<ul>
-<li>in <code>~/.ssh/id_rsa</code>
-</li>
-</ul>
-</li>
-</ul>
-<p>If you want to use these keys for logging in to a server without
-using a password, you have to copy over your public key to the server:</p>
-<ul>
-<li>on the server your public key is stored
-
-<ul>
-<li>in <code>~/.ssh/authorized_keys2</code>
-</li>
-</ul>
-</li>
-</ul>
-<p>Then ssh will let you log in without giving a password</p>
-<p><img src="images/ssh_login_with_public_key.svg" alt="public key login"></p>
-<p>The authorized_keys file can contain several public keys:</p>
-<div class="code_container">
-<pre class="brush: plain; gutter: false; toolbar: false">
-ssh-rsa AAAAB3NzaC...2EAAAABI== alice@fh-salzburg.ac.at
-ssh-rsa AAAAB8NzaC...DVj3R4Ww== bob@fh-salzburg.ac.at
-
-</pre>
-</div>
-<h3 id="generating-and-using-keys-for-git-and-github">2 Generating and using keys for git and github</h3>
+<p>But how do you get those keys?</p>
+<h4 id="generating-keys">2.1 Generating keys</h4>
 <p>Decide which e-mail address you want to use - this address
 will be your identity as a developer from now on.  (so maybe don't use
 a really private one)</p>
@@ -178,11 +160,35 @@ The key fingerprint is:
 </pre>
 </div>
 <p>Now check if your two keys are really stored in <code>~/.ssh/id_rsa</code> and <code>~/.ssh/id_rsa.pub</code>!</p>
-<h3 id="use-your-public-key-on-github">3 Use your public key on github</h3>
-<p><a href="https://github.com/join">Generate an account on github</a>. Chose a username that is not embarassing (not now, and not
-in 3 years when you are a professional developer).  You can chose a Synonyme instead
+<h4 id="using-keys-with-ssh">2.2 Using keys with ssh</h4>
+<p>If you want to use these keys for logging in to a server without
+using a password, you have to copy over your public key to the server.</p>
+<p>On the server your public key must be stored in <code>~/.ssh/authorized_keys2</code>,
+then ssh will let you log in without giving a password</p>
+<p><img src="images/ssh_login_with_public_key.svg" alt="public key login"></p>
+<p>The authorized_keys file can contain several public keys:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+ssh-rsa AAAAB3NzaC...2EAAAABI== alice@fh-salzburg.ac.at
+ssh-rsa AAAAB8NzaC...DVj3R4Ww== bob@fh-salzburg.ac.at
+
+</pre>
+</div>
+<h3 id="git">3 git </h3>
+<p>Git uses two different transport modes: http and ssh.</p>
+<p>To upload (push) data to remote repository you should use ssh,
+and this is where you need your key pair.</p>
+<p>You need to tell your remote git repository about your
+public key.  This works slightly differently for different servers:</p>
+<h4 id="useing-keys-with-github">3.1 Useing keys with github</h4>
+<p><a href="https://github.com/join">Generate an account on github</a>. Chose a username that is not embarassing (not now, and not in 3 years when you are a professional developer).  You can chose a synonym instead
 of using your real name if you are not sure yet if you want to be identified on the interent.</p>
-<p>No you can <a href="https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/">add your public key to your github account</a>.</p>
+<p>Now you can <a href="https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/">add your public key to your github account</a>.</p>
+<h4 id="useing-keys-on-gitlab">3.2 Useing keys on gitlab</h4>
+<p>Under <strong>Profile settings</strong> &amp;rarrow; <strong>SSH Keys</strong> you can add your public key.</p>
+<h4 id="remember-to-use-ssh-bang">3.3 remember to use ssh!</h4>
+<p>When you clone a remote repository remember to use the address that starts with <code>git@</code>, not
+an address that starts with <code>http</code> !</p>
 <h3 id="see-also">4 See Also</h3>
 <ul>
 <li>
