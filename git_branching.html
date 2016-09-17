@@ -73,29 +73,26 @@
 <html><body>
 <ol class="chapters">
 <li>
-<a href="#branching">Branching </a>
+<a href="#how-to-branch">How to Branch</a>
 
 <ul>
 <li><a href="#create-a-branch">Create a branch</a></li>
-<li><a href="#behind-the-scene-of-a-branch">Behind the scene of a branch</a></li>
+</ul>
+</li>
+<li>
+<a href="#behind-the-scenes">Behind the scenes</a>
+
+<ul>
 <li><a href="#create-a-new-branch">create a new branch</a></li>
-<li><a href="#switch-to-a-branch">switch to a branch</a></li>
-<li><a href="#which-branch-am-i-on-questionmark">which branch am I on?</a></li>
-<li><a href="#work">work</a></li>
+<li><a href="#work-on-two-different-branches">work on two different branches</a></li>
 </ul>
 </li>
 <li>
 <a href="#merging">Merging</a>
 
 <ul>
-<li><a href="#merge-bang">merge!</a></li>
-<li><a href="#done">done</a></li>
-<li><a href="#delete-branch">delete branch</a></li>
-<li><a href="#merging-in-detail">Merging in detail</a></li>
 <li><a href="#conflicts">Conflicts</a></li>
-<li><a href="#conflict-markers-in-a-file">conflict markers in a file</a></li>
-<li><a href="#conflict-markers-in-a-files">conflict markers in a files</a></li>
-<li><a href="#how-to-resolve">how to resolve</a></li>
+<li><a href="#how-to-resolve-a-conflict">how to resolve a conflict</a></li>
 </ul>
 </li>
 <li>
@@ -126,12 +123,12 @@ and using branches.</p><p>After reading this guide, you will know:</p>
       <div id="mainCol">
         <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h3 id="branching">1 Branching </h3>
+<h3 id="how-to-branch">1 How to Branch</h3>
 <p>When you create a branch in the repository you enable two
-different development directions.  later on you might want to
+different development directions.  Later on you might want to
 merge the branches again, or you might want to discard one.</p>
-<p>Different tools offer visual displays of these branches,
-here a screenshot from SourceTree:</p>
+<p>Some tools offer visual displays of these branches.
+Here is a screenshot from SourceTree:</p>
 <p><img src="images/source-tree-branches.png" alt="SourceTree branches"></p>
 <h4 id="create-a-branch">1.1 Create a branch</h4>
 <p>To create or delete a branch use the <code>branch</code> command:</p>
@@ -149,8 +146,9 @@ git branch -d BRANCH_NAME
 
 </pre>
 </div>
-<p>Creating and deleting branches in itself doesn't not do anything.
-To actually use a branch you have to check it out:</p>
+<p>Creating and deleting branches in itself doesn not do anything to 
+your file, and does not change which branch you are on.</p>
+<p>To actually use a branch you have to check it out:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 # switch to a different branch
@@ -169,10 +167,16 @@ If you check out another branch now you will see the
 files in your filesystem change!</p>
 <p>Only checkout another branch when your working directory is clean,
 after you have commited all changes!</p>
-<h4 id="behind-the-scene-of-a-branch">1.2 Behind the scene of a branch</h4>
-<p>before we branch</p>
+<h3 id="behind-the-scenes">2 Behind the scenes</h3>
+<p>Git keeps track of all the commits. A branch is
+a pointer to a certain commit.  To begin with you
+only have  a master branch, and it points to the most recent commit,
+in this figure that is c2:</p>
 <p><img src="images/branch-and-merge-0.svg" alt="no branches yet"></p>
-<h4 id="create-a-new-branch">1.3 create a new branch</h4>
+<h4 id="create-a-new-branch">2.1 create a new branch</h4>
+<p>A new branch just points to the same commit as the current branch.
+In this figure the new branch iss53 (probably created to fix issue 53)
+also points to commit c2:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 $git checkout -b iss53
@@ -180,32 +184,27 @@ $git checkout -b iss53
 </pre>
 </div>
 <p><img src="images/branch-and-merge-1.svg" alt="no branches yet"> </p>
-<h4 id="switch-to-a-branch">1.4 switch to a branch</h4>
-<div class="code_container">
-<pre class="brush: plain; gutter: false; toolbar: false">
-$git checkout iss53
-
-</pre>
-</div>
-<h4 id="which-branch-am-i-on-questionmark">1.5 which branch am I on?</h4>
+<p>With <code>git checkout</code> you can switch to a different branch - 
+this will not change the branches in any way:</p>
 <p><img src="images/git-branch.png" alt="git branch"></p>
-<h4 id="work">1.6 work</h4>
-<div class="code_container">
-<pre class="brush: plain; gutter: false; toolbar: false">
-# edit; commit(c3)
-$ git checkout master 
-# edit; commit(c4)
-$ git checkout iss53
-# edit; commit(c5)
-
-</pre>
-</div>
-<p><img src="images/branch-and-merge-3.svg" alt="worked on both branches"></p>
+<h4 id="work-on-two-different-branches">2.2 work on two different branches</h4>
+<p>When you continue to work in your project,
+and you make new commits to the master branch and the
+iss53 branch you may end up in a situation like
+in this figure:</p>
 <p><img src="images/branch-and-merge-4.svg" alt="what do I want to merge?"></p>
-<h3 id="merging">2 Merging</h3>
-<p>So development has gone in two different directions in two branches.
-How do we get it together again? </p>
-<h4 id="merge-bang">2.1 merge!</h4>
+<p>Now the content of the two branches is different,
+when switching to another branch with <code>git checkout</code> you will
+see the files in your working copy change.</p>
+<h3 id="merging">3 Merging</h3>
+<p>The process of combining branches again is called merging.
+Git will try to do this automatically, and in many cases this
+is not a problem.  For example if the two branches changed
+different files.</p>
+<p>This is the process: you should be on the branch that you
+want to continue using, in the example below this is <code>master</code>.
+Then you issue the command to merge in the other branch.
+If all goes well the output will look like this:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 $ git checkout master
@@ -216,43 +215,38 @@ Merge made by recursive.
 
 </pre>
 </div>
-<h4 id="done">2.2 done</h4>
+<p>After the successfull merge the current branch (<code>master</code>)
+contains all the changes from both branches. The other branch
+is still unchanged:</p>
 <p><img src="images/branch-and-merge-5.svg" alt="after the merge"></p>
-<h4 id="delete-branch">2.3 delete branch</h4>
+<p>You probably do not need the other branch any more and can delete it:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 git branch -d iss53
 
 </pre>
 </div>
-<h4 id="merging-in-detail">2.4 Merging in detail</h4>
-<div class="code_container">
-<pre class="brush: plain; gutter: false; toolbar: false">
-git merge OTHER_BRANCH
-
-</pre>
-</div>
-<p>merge the OTHER_BRANCH into the current (checked-out) branch</p>
-<h4 id="conflicts">2.5 Conflicts</h4>
-<ul>
-<li>when both branches contain changes for the same file</li>
-<li>or: trying two pushes containing changes for the same file</li>
-</ul>
+<h4 id="conflicts">3.1 Conflicts</h4>
+<p>Merging is not always so easy.  When both branches contain changes for the same file
+git might not be able to merge them automatically. Then the repository
+will be left in an "unmerged" state:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 $ git status
 index.html: needs merge
 # On branch master
 # Changed but not updated:
-#   (use "git add &lt;file&gt;..." to update what will be committed)
-#   (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
 #
 #   unmerged:   index.html
 #
 
 </pre>
 </div>
-<h4 id="conflict-markers-in-a-file">2.6 conflict markers in a file</h4>
+<p>The "unmerged" files will contain "conflict markers" to 
+indicate where git tried to merge but failed.  Here a developer
+is needed to look at the code and decide which version to keep,
+or how to combine the two versions.</p>
+<p>Here an example of an "unmerged" html file:</p>
 <div class="code_container">
 <pre class="brush: xml; gutter: false; toolbar: false">
 &lt;/div&gt;
@@ -268,20 +262,30 @@ index.html: needs merge
 
 </pre>
 </div>
-<h4 id="conflict-markers-in-a-files">2.7 conflict markers in a files</h4>
+<p>If you use an editor with appropriate syntax highlighting
+this might be easier to read:</p>
 <p><img src="images/conflict-markers.png" alt="conflict marker with syntax highlighting"></p>
-<h4 id="how-to-resolve">2.8 how to resolve</h4>
-<ul>
-<li>for all files:</li>
-<li>edit file</li>
-<li>try out your changes!</li>
-<li>git add FILE</li>
-<li>git commit</li>
-</ul>
-<h3 id="git-flow">3 Git Flow</h3>
+<p>Before deciding how to edit this
+you probably also need to look at other files too
+- in this example at the CSS files
+to find out if the tag footer or the id footer is used.</p>
+<h4 id="how-to-resolve-a-conflict">3.2 how to resolve a conflict</h4>
+<p>For every file that is marked as "umerged", you need
+to edit the file, check if the program still works (run tests?)
+and finally: <strong>add</strong> the file again.</p>
+<p>After treating all the file write a commit message that
+starts with "MERGE:".</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+git add index.html
+git commit -m 'MERGE: consolidated changes in the footer, using footer-tag from now on'
+
+</pre>
+</div>
+<h3 id="git-flow">4 Git Flow</h3>
 <p>git flow is a specific way of using branches:</p>
 <p><a href="https://guides.github.com/introduction/flow/">github flow</a></p>
-<h4 id="resources">3.1 Resources</h4>
+<h4 id="resources">4.1 Resources</h4>
 <ul>
 <li><a href="http://git-scm.com/book/en/Git-Branching-Basic-Branching-and-Merging">Git Book: Chapter 3.2</a></li>
 <li><a href="http://rypress.com/tutorials/git/branches-1.html">Ry's git tutorial: Branches 1</a></li>
