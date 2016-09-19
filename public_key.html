@@ -40,16 +40,15 @@
           <div id="guides" class="clearfix" style="display: none;">
             <hr />
               <dl class="L">
-                <dt>Workflows</dt>
-                <dd><a href="git_branching.html">Branching and Merging</a></dd>
-                <dd><a href="git_teamwork.html">Teamwork</a></dd>
-                <dd><a href="good_practices.html">Good Practices</a></dd>
-                <dd><a href="agile.html">Agile Methods</a></dd>
-                <dd><a href="testing_and_refactoring.html">Testing and Refactoring</a></dd>
-                <dd><a href="advanced_testing.html">Advanced testing</a></dd>
                 <dt>Basics</dt>
                 <dd><a href="public_key.html">Using Public Key Cryptography</a></dd>
                 <dd><a href="git_basics.html">Git Basics</a></dd>
+                <dt>Workflows</dt>
+                <dd><a href="git_branching.html">Git Branching and Merging</a></dd>
+                <dd><a href="git_teamwork.html">Git Teamwork</a></dd>
+                <dd><a href="testing_and_refactoring.html">Testing and Refactoring</a></dd>
+                <dd><a href="dependencies.html">Managing Dependencies</a></dd>
+                <dd><a href="advanced_testing.html">Advanced testing</a></dd>
               </dl>
               <dl class="R">
                 <dt>Web Operations</dt>
@@ -114,23 +113,29 @@ to understand how public key cryptography works.</p><p>After working through thi
 <h3 id="public-key-cryptography">1 Public Key Cryptography</h3>
 <p>In the 1970ies several cryptographers invented public-key cryptography independently
 of each other.  With the low computing power available then it could not be used in practice.
-Since the 1990 it is used widely in ssh, e-mail encryption and SSL/TLS.</p>
+Since the 1990ies it is used widely in ssh, e-mail encryption and SSL/TLS.</p>
 <p>The basic idea is to have an assymetric encryption system: two different keys
 are used:  a public key for encryption and a private key for decryption</p>
 <p><img src="images/public_key_crypto.svg" alt="public key login"></p>
+<p>This system has some important consequences: Only Alice can ever read the encrypted message.
+If you want to send encrypted messages to three people, you need three different
+public key for encryption.</p>
+<p>Alice needs to keep here private key private, but can publish her public key
+anywhere: on the web, in an e-mail signature, on her business card.</p>
 <h3 id="ssh">2 ssh</h3>
 <p>We will be using public key cryptography for ssh and git.  For these
-systems the keys are stored in a folder <strong>.ssh</strong>.</p>
-<p>you have a public + private key pair</p>
+systems the keys are stored in a folder <strong>.ssh</strong> in your home directory.</p>
 <ul>
 <li>
-<code>id_rsa</code> - your private key is stored on your local computer in <code>~/.ssh/id_rsa</code>
+<code>id_rsa</code> - your private key is stored in <code>~/.ssh/id_rsa</code>
 </li>
 <li>
-<code>id_rsa.pub</code> - your public key is also stored on your local computer in <code>~/.ssh/id_rsa</code>
+<code>id_rsa.pub</code> - your public key is also in <code>~/.ssh/id_rsa</code>
 </li>
 </ul>
-<p>But how do you get those keys?</p>
+<p>The directory <code>.ssh</code> can also contain two other important
+files: <code>config</code> and <code>authorized_keys</code>.</p>
+<p>But first: how do you get a key pair?</p>
 <h4 id="generating-keys">2.1 Generating keys</h4>
 <p>Decide which e-mail address you want to use - this address
 will be your identity as a developer from now on.  (so maybe don't use

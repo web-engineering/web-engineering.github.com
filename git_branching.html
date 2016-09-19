@@ -40,16 +40,15 @@
           <div id="guides" class="clearfix" style="display: none;">
             <hr />
               <dl class="L">
-                <dt>Workflows</dt>
-                <dd><a href="git_branching.html">Branching and Merging</a></dd>
-                <dd><a href="git_teamwork.html">Teamwork</a></dd>
-                <dd><a href="good_practices.html">Good Practices</a></dd>
-                <dd><a href="agile.html">Agile Methods</a></dd>
-                <dd><a href="testing_and_refactoring.html">Testing and Refactoring</a></dd>
-                <dd><a href="advanced_testing.html">Advanced testing</a></dd>
                 <dt>Basics</dt>
                 <dd><a href="public_key.html">Using Public Key Cryptography</a></dd>
                 <dd><a href="git_basics.html">Git Basics</a></dd>
+                <dt>Workflows</dt>
+                <dd><a href="git_branching.html">Git Branching and Merging</a></dd>
+                <dd><a href="git_teamwork.html">Git Teamwork</a></dd>
+                <dd><a href="testing_and_refactoring.html">Testing and Refactoring</a></dd>
+                <dd><a href="dependencies.html">Managing Dependencies</a></dd>
+                <dd><a href="advanced_testing.html">Advanced testing</a></dd>
               </dl>
               <dl class="R">
                 <dt>Web Operations</dt>
@@ -131,12 +130,19 @@ merge the branches again, or you might want to discard one.</p>
 Here is a screenshot from SourceTree:</p>
 <p><img src="images/source-tree-branches.png" alt="SourceTree branches"></p>
 <h4 id="create-a-branch">1.1 Create a branch</h4>
-<p>To create or delete a branch use the <code>branch</code> command:</p>
+<p>To view, create or delete a branch use the <code>branch</code> command.
+The current branch will be marked with an asterisk (star):</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
-git branch -v # shows branches + last commits
+# show branches 
+git branch 
+* master
+  iss50
+
+# show branches and last commits
+git branch -v 
 * master 7a98805 Merge branch 'iss49'
-  iss50  782fd34 add scott to the readme
+  iss50  782fd34 Fix bug in displaying formerrors
 
 # create a branch 
 git branch BRANCH_NAME
@@ -146,9 +152,11 @@ git branch -d BRANCH_NAME
 
 </pre>
 </div>
-<p>Creating and deleting branches in itself doesn not do anything to 
-your file, and does not change which branch you are on.</p>
-<p>To actually use a branch you have to check it out:</p>
+<p>Creating and deleting branches in itself does not do anything to 
+your files and does not change which branch you are on.</p>
+<p>One branch is always the current branch. You start out
+on the <code>master</code> branch and can switch to another branch
+by using <code>checkout</code>:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 # switch to a different branch

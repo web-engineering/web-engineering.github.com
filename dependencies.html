@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Web Engineering Textbook: Managing Dependencies</title>
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+  <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shThemeRailsGuides.css" />
+
+  <link rel="stylesheet" type="text/css" href="stylesheets/fixes.css" />
+  <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" />
+
+  <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+</head>
+<body class="guide">
+  <div>
+    <a href="http://github.com/web-engineering/web-engineering-textbook/"><img style="position: fixed; top: 0; right: 0; border: 0; z-index: 10;" src="images/forkme.png" alt="Fork me on GitHub"></a>
+  </div>
+  <div id="topNav">
+    <div class="wrapper">
+      <strong class="more-info-label">Learn more at the sources: </strong>
+      <ul class="more-info-links s-hidden">
+        <li class="more-info"><a href="https://git-scm.com/documentation">Git Documentation</a></li>
+        <li class="more-info"><a href="https://try.github.io/">Try Git</a></li>
+        <li class="more-info"><a href="http://refactoring.com/catalog/">Refactoring Catalog</a></li>
+      </ul>
+    </div>
+  </div>
+  <div id="header">
+    <div class="wrapper clearfix">
+      <h1><a href="index.html" title="Return to home page">Web<span>Engineering</span></a></h1>
+      <ul class="nav">
+        <li><a class="nav-item" href="index.html">Home</a></li>
+        <li class="guides-index guides-index-large">
+          <a href="index.html" onclick="guideMenu(); return false;" id="guidesMenu" class="guides-index-item nav-item">Index  &#x25BC;</a>
+          <div id="guides" class="clearfix" style="display: none;">
+            <hr />
+              <dl class="L">
+                <dt>Basics</dt>
+                <dd><a href="public_key.html">Using Public Key Cryptography</a></dd>
+                <dd><a href="git_basics.html">Git Basics</a></dd>
+                <dt>Workflows</dt>
+                <dd><a href="git_branching.html">Git Branching and Merging</a></dd>
+                <dd><a href="git_teamwork.html">Git Teamwork</a></dd>
+                <dd><a href="testing_and_refactoring.html">Testing and Refactoring</a></dd>
+                <dd><a href="dependencies.html">Managing Dependencies</a></dd>
+                <dd><a href="advanced_testing.html">Advanced testing</a></dd>
+              </dl>
+              <dl class="R">
+                <dt>Web Operations</dt>
+                <dd><a href="webserver.html">Webserver</a></dd>
+                <dd><a href="security.html">Security</a></dd>
+              </dl>
+          </div>
+        </li>
+        <li><a class="nav-item" href="https://github.com/bjelline/web-engineering-textbook/">Contribute</a></li>
+      </ul>
+      </div>
+    </div>
+  </div>
+  <hr class="hide" />
+
+  <div id="feature">
+    <div class="wrapper">
+                <div id="subCol">
+            <h3 class="chapter"><img src="images/chapters_icon.gif" alt="" />Chapters</h3>
+            <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<ol class="chapters">
+<li>
+<a href="#dependencies">Dependencies</a>
+
+<ul>
+<li><a href="#how-to-install">How to install</a></li>
+<li><a href="#where-is-the-code-installed-questionmark">Where is the code installed?</a></li>
+<li><a href="#ruby-and-gems">ruby and gems</a></li>
+<li><a href="#dependency-hell">dependency hell</a></li>
+<li><a href="#bundler-saves-us">bundler saves us</a></li>
+<li><a href="#defining-versions">defining versions</a></li>
+</ul>
+</li>
+</ol>
+</body></html>
+
+          </div>
+
+      <h2>Managing Dependencies</h2><p>The program you write will depend on other code
+that other people have written.  This guide will teach you 
+how to install, use and upgrade dependencies for your web application. 
+It covers ruby, javascript and php.</p><p>After working through this guide you will be able to:</p>
+<ul>
+<li>install packages for javascript and node with <code>npm</code></li>
+<li>install gems für ruby with <code>gem</code> and <code>bundler</code></li>
+<li>install libraries for php with <code>composer</code></li>
+<li>know how to keep your dependencies current</li>
+<li>understand how these systems help you avoid &quot;dependency hell&quot;</li>
+</ul>
+
+    </div>
+  </div>
+
+  <div id="container">
+    <div class="wrapper">
+      <div id="mainCol">
+        <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<h3 id="dependencies">1 Dependencies</h3>
+<p>The program you write will depend on other code
+that other people have written. Some of this code
+has been packaged into operating systems or applications:
+Linux, Postgres, Apache, nginx, ... </p>
+<p>But you also use smaller pieces of code that you include
+in your source code or link to your code after compiling.
+These dependencies are called libraries, packages or gems in different
+programming languges.</p>
+<p>We will discuss four different systems in parallell:</p>
+<ul>
+<li>
+<code>apt</code> a package manager for Linux (used in debian, ubuntu, and several other distributions)</li>
+<li>
+<code>brew</code> a package manager for mac os</li>
+<li>
+<code>gem</code> and <code>bundler</code> for ruby</li>
+<li>
+<code>npm</code> for javascript and node.js</li>
+<li>
+<code>composer</code> for php</li>
+</ul>
+<p>We will be using <code>imagemagick</code> as an example. It is an image
+manipulation software originally written in c.</p>
+<h4 id="how-to-install">1.1 How to install</h4>
+<ul>
+<li><code>apt-get install imagemagick</code></li>
+<li><code>brew install imagemagick</code></li>
+<li><code>gem install rmagick</code></li>
+<li><code>npm install imagemagick</code></li>
+<li><code>composer install imagemagick</code></li>
+</ul>
+<h4 id="where-is-the-code-installed-questionmark">1.2 Where is the code installed?</h4>
+<ul>
+<li>
+<code>apt</code> and the packages it uses conform to the linux file standard conventions. You can find out where it put the files by issuing dpkg -L imagemagick</li>
+<li>
+<code>brew</code> installs in just one location:  <code>/usr/local/Cellar/</code>.  You can find out where it put the files by issuing <code>brew list imagemagic</code>. brew created a folder structure with the package name and the version number: /usr/local/Cellar/imagemagick/6.9.4-1_1/  and added several subfolders (lib/, etc/, ....)</li>
+<li>
+<code>gem</code> creates a folder that combines package name and version number rmagick-2.15.4/ to install the package</li>
+<li>
+<code>composer</code>...</li>
+<li>
+<code>npm</code> install the package inside your project, in a folder called <code>node_packages</code>
+</li>
+</ul>
+<p>We will look at ruby and its gems as a first example of how to
+use dependencies.  </p>
+<h4 id="ruby-and-gems">1.3 ruby and gems</h4>
+<p><code>rubygems</code> is the package manager for ruby,
+it let's you install gems on your system.</p>
+<p>A gem has a name  (e.g. <code>rake</code>) and a version number (e.g. <code>10.4.2</code>).
+It can be written in plain ruby or sometimes in ruby and c.  Many gems
+depend on system libraries that need to be installed before the gem can
+be installed.  For example the <a href="https://rubygems.org/gems/rmagick/versions/2.15.4">rmagick</a>
+gem for image manipulation needs the library <code>ImageMagick</code>.</p>
+<p>So most of the time installing a gem is as simple as</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+&gt; gem install rails_best_practices
+Successfully installed rails_best_practices-1.15.7
+Parsing documentation for rails_best_practices-1.15.7
+Installing ri documentation for rails_best_practices-1.15.7
+Done installing documentation for rails_best_practices after 2 seconds
+1 gem installed
+
+</pre>
+</div>
+<p>But sometimes you have to do other installations first. 
+On your development machine this might look like this:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+# install node on a mac
+&gt; brew install nodejs
+&gt; gem install uglifier
+
+</pre>
+</div>
+<p>Sometimes you need to set include paths when compiling the c-part of the gem, e.g.:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+&gt; gem install eventmachine 
+... error messages ...
+In file included from binder.cpp:20:
+./project.h:116:10: fatal error: 'openssl/ssl.h' file not found
+#include &lt;openssl/ssl.h&gt;
+         ^
+&gt; brew install openssl
+&gt; gem install eventmachine -- --with-cppflags=-I/usr/local/opt/openssl/include
+
+</pre>
+</div>
+<p>In production you probably have to deal with Linux, and you
+may not have the right permissions to install system libraries.
+A typical example would be:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$dev&gt; ssh my.production.machine
+$production&gt; sudo apt-get install libmagick++-dev
+$production&gt; gem install rmagick
+$production&gt; gem install paperclip
+
+</pre>
+</div>
+<p>Now that you have installed the gem once by hand
+you can be sure that it can also be reinstalled by bundler.</p>
+<p>See also:</p>
+<ul>
+<li><a href="http://docs.rubygems.org/read/chapter/24">what is a gem</a></li>
+<li>find 100.000 gems at <a href="http://rubygems.org/">rubygems.org</a>
+</li>
+</ul>
+<h4 id="dependency-hell">1.4 dependency hell</h4>
+<p>For a big web project you will be using a lot of gems. This will lead
+to two problems:</p>
+<ol>
+<li>dependency resolution: gem A depends on version 1.1 of gem C, while gem B wants at least version 1.5.  You need to find the right version of every gem in your project that actually fits together</li>
+<li>different installation: when deploying to a production server, or even just when sharing code with other developers you need to make sure that the same constellation of gems and versions is used on every machine</li>
+</ol>
+<p>If this all goes horribly wrong you are in "dependency hell": you can't find the right versions
+of gems to make your code work again on a new machine or after an update.</p>
+<h4 id="bundler-saves-us">1.5 bundler saves us</h4>
+<p><img src="images/bundler-small.png" alt="bundler"></p>
+<p>Bundler is the name of the tool that saves us from dependency hell.
+Bundler is itself a gem, so you install it with <code>gem install bundler</code>.
+Beware: the command you will be using called <code>bundle</code>, not bundler.</p>
+<p>There is how it works: In every ruby project you write
+a <code>Gemfile</code> in which you define which gems and (to a certain degree) which versions you want.
+When you run <code>bundle install</code> bundler will:</p>
+<ul>
+<li>read the Gemfile, </li>
+<li>pick out compatible versions of all the gems (if possible), </li>
+<li>install all these gems</li>
+<li>write <code>Gemfile.lock</code>
+</li>
+</ul>
+<p>The lock-file contains a complete list of all the gems necessary for
+your project, and their version numbers.  These are now locked down,
+and will not change!</p>
+<p>When deploying to a new development machine or the production server, 
+you run <code>bundle install</code> and the exact same versions are now installed.</p>
+<h4 id="defining-versions">1.6 defining versions</h4>
+<p>In the Gemfile you can specify which versions should be used.
+But don't overdo it!  Bundler does a good job picking versions,
+if you specify every version number by hand you are doing too much work.</p>
+<p>Some examples of the different ways of specifying version number and source:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+# Gemfile
+source 'https://rubygems.org'
+
+ruby '2.1.5'
+
+gem 'devise'
+gem 'rails', '4.2.5'
+gem 'uglifier', '&gt;= 1.3.0'
+gem 'coffee-rails', '~&gt; 4.1.0'
+
+</pre>
+</div>
+<p>Giving an exact version number fixes that version, so only
+version 4.2.5 of rails will be allowed here.  Using the "greater-or-equal-than" sign
+you can require any version greater or equal to 1.3.0.  So 1.2.7 is forbidden,
+but 1.3.2 or 1.4.0 or 2.2.0 is allowed.</p>
+<p>The arrow <code>~&gt;</code> will only allow an increase in the 
+last (right most) number, so <code>~&gt; 4.1.0</code> does allow <code>4.1.17</code> but not <code>4.2</code>.
+This is called a pessimistic version constraint, read more about 
+it in <a href="http://guides.rubygems.org/patterns/#pessimistic-version-constraint">the rubygem documentation</a>.</p>
+</body></html>
+
+      </div>
+    </div>
+  </div>
+
+  <hr class="hide" />
+  <div id="footer">
+    <div class="wrapper">
+      <p class="copyright">published under <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/at/deed.de">creative commons by-nc-sa</a> in 2012-2016 by <a href="http://brigitte-jellinek.at">Brigitte Jellinek</a>.
+      </p><p>If you want to contribute: <a href="https://github.com/web-engineering/web-engineering-textbook/fork">fork the source on github</a>
+        and edit <a href="https://github.com/web-engineering/web-engineering-textbook/blob/master/source/dependencies.md">dependencies.md</a>
+      </p>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="javascripts/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/responsive-tables.js"></script>
+  <script type="text/javascript" src="javascripts/guides.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
+  <script type="text/javascript">
+    SyntaxHighlighter.all()
+    $(guidesIndex.bind);
+  </script>
+  </body>
+</html>
