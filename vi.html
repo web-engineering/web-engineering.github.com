@@ -73,7 +73,7 @@
 <html><body>
 <ol class="chapters">
 <li>
-<a href="#what-is-vi-questionmark">What is vi?</a>
+<a href="#history">History</a>
 
 <ul>
 <li><a href="#ed">ed</a></li>
@@ -81,7 +81,7 @@
 <li><a href="#vi">vi</a></li>
 </ul>
 </li>
-<li><a href="#basic-editing">Basic Editing</a></li>
+<li><a href="#vi-modes">Vi Modes</a></li>
 <li><a href="#resources">Resources </a></li>
 </ol>
 </body></html>
@@ -105,7 +105,7 @@ the editor <strong>vi</strong>.</p><p>After reading this guide, you will be able
       <div id="mainCol">
         <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h3 id="what-is-vi-questionmark">1 What is vi?</h3>
+<h3 id="history">1 History</h3>
 <p><code>vi</code> is a very, very old editor that is still used today.
 To understand how it works, and why it works this way, we
 have to go back in time:</p>
@@ -167,8 +167,9 @@ in interface: the input prompt is marked with a colon.</p>
 <p>With monitors came the next version of the editor: the visual editor <em>vi</em>.</p>
 <p>It now displays the content of the file (one screen at a time),
 and offers a cursor - it almost looks and works like a modern text editor.
-But <em>ed</em> and <em>ex</em> are still there, in the <em>normal mode</em> and <em>commandline</em> of vi:</p>
-<p><img src="images/vi-modes.png" alt="vi modes"></p>
+But <em>ed</em> and <em>ex</em> are still there, in the <em>normal mode</em> and <em>commandline</em> of vi.</p>
+<h3 id="vi-modes">2 Vi Modes</h3>
+<p><img src="images/vi-modes.svg" alt="vi modes"></p>
 <p>Using <em>vi</em> you have to be aware which mode the editor is in. There
 are only subtle visual clues to help you.</p>
 <p><img src="images/vi-recognize-modes.png" alt="vi modes"></p>
@@ -176,8 +177,6 @@ are only subtle visual clues to help you.</p>
 from normal mode by the showing <code>-- INSERT --</code> in the last line.
 Command-line mode puts the cursor in the last line, and shows the colon
 (that you typed in to get into command-line mode).</p>
-<h3 id="basic-editing">2 Basic Editing</h3>
-<p>TBD</p>
 <h3 id="resources">3 Resources </h3>
 <ul>
 <li><a href="https://vim-adventures.com">vim adventures</a></li>
