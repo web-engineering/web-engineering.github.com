@@ -2,6 +2,7 @@
 .DS_STORE
 layout.html
 *.ai
+*.psd
 fonts/LinBiolinum_R.svg
 fonts/LinLibertine_R.svg
 images/github-org-icon.png
