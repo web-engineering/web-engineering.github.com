@@ -74,10 +74,12 @@
 <html><body>
 <ol class="chapters">
 <li>
-<a href="#why-test-questionmark">Why Test?</a>
+<a href="#testing-software">Testing Software</a>
 
 <ul>
-<li><a href="#for-beginners-two-testing-levels">for beginners: two testing levels</a></li>
+<li><a href="#why-write-automatic-tests-questionmark">Why write automatic tests?</a></li>
+<li><a href="#example-test">Example test</a></li>
+<li><a href="#types-of-tests">Types of Tests</a></li>
 </ul>
 </li>
 <li>
@@ -101,8 +103,8 @@
 
           </div>
 
-      <h2>Testing and Refactoring</h2><p>This guide will explain why you should write tests
-for your web application. It covers built-in mechanisms offered by Rails.
+      <h2>Testing and Refactoring</h2><p>This guide will explain why you should write automatic tests
+for your web application. 
 By referring to this guide, you will be able to:</p>
 <ul>
 <li>Understand testing terminology</li>
@@ -119,18 +121,55 @@ By referring to this guide, you will be able to:</p>
       <div id="mainCol">
         <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h3 id="why-test-questionmark">1 Why Test?</h3>
+<h3 id="testing-software">1 Testing Software</h3>
+<p>There are two ways to test software:  have an actual person
+use the software or have a program automatically test the software.</p>
+<p>People who test software "by hand" often do this under the heading
+"Quality Assurance" or "QA".  See <a href="http://www.karriere.at/jobs/software-quality-assurance-tester/salzburg">jobs in Salzburg</a>  or <a href="http://de.indeed.com/Software-Quality-Assurance-Jobs-in-Berlin">jobs in Berlin</a>.</p>
+<p>But even if you have a QA department for your project, as a developer
+you still will write automated tests too.</p>
+<h4 id="why-write-automatic-tests-questionmark">1.1 Why write automatic tests?</h4>
+<p>There are many reasons why you would want to write test for your program:</p>
 <ul>
-<li>to know if the program works (as specified)</li>
-<li>to know if it still works after refactoring</li>
+<li>when you first write the program: to know if the program works (as specified)</li>
 <li>to know if it still works after adding a new feature</li>
-<li>to know if it still works ...</li>
+<li>to know if it still works after refactoring the code</li>
+<li>to know if it still works after updating the dependencies</li>
 </ul>
-<h4 id="for-beginners-two-testing-levels">1.1 for beginners: two testing levels</h4>
+<h4 id="example-test">1.2 Example test</h4>
+<p>This simple example in Javascript tests a function foo:</p>
+<p>``javascript
+  describe('foo function', function() {</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+it('converts number 1 correctly', function() {
+  let input = { value: 1, language: english };
+  assert.equal(foo(input), 'one');
+});
+
+</pre>
+</div>
+<p>  });
+``</p>
+<p>The test framework gives you the possibility to group your
+tests. In this example this is done with <code>describe</code> and <code>it</code>.</p>
+<p>This test of the function <code>foo</code> consists of:</p>
 <ul>
-<li>unit testing - models</li>
-<li>integration testing - like a browser</li>
+<li>a setup phase, where we prepare a data strucure we need later</li>
+<li>the calling of the function foo with the prepared input</li>
+<li>comparing the output of foo to the expected output</li>
 </ul>
+<p>For the last step often the word <code>assert</code>  or Assertion is used.</p>
+<h4 id="types-of-tests">1.3 Types of Tests</h4>
+<p>As a beginner you should distinguish at least two types of tests:</p>
+<ul>
+<li>unit test - tests the function of one unit (be it a class, a package, one model, one view....)</li>
+<li>integration test - tests the whole program from the perspective of a user</li>
+</ul>
+<p>Integration tests give you more valuable insights from a users
+perspective, e.g.: "the shopping cart checkout does not work".
+Unit tests help developers find the part of the program that is
+responsible for a problem: "the cookie store class is broken".</p>
 <h3 id="test-driven-development-tdd">2 Test Driven Development (TDD)</h3>
 <h4 id="what-is-test-first-questionmark">2.1 what is "test first" ?</h4>
 <ol>
