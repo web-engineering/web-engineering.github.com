@@ -46,7 +46,7 @@
                 <dd><a href="git_basics.html">Git Basics</a></dd>
                 <dt>Workflows</dt>
                 <dd><a href="git_branching.html">Git Branching and Merging</a></dd>
-                <dd><a href="git_teamwork.html">Git Teamwork</a></dd>
+                <dd><a href="pair_programming.html">Pair Programming</a></dd>
                 <dd><a href="testing_and_refactoring.html">Testing and Refactoring</a></dd>
                 <dd><a href="dependencies.html">Managing Dependencies</a></dd>
                 <dd><a href="dep-ruby.html">Managing Dependencies in Ruby</a></dd>
@@ -78,10 +78,6 @@
 
 <ul>
 <li><a href="#for-beginners-two-testing-levels">for beginners: two testing levels</a></li>
-<li><a href="#rails-and-testing">rails and testing</a></li>
-<li><a href="#my-first-test">my first test</a></li>
-<li><a href="#my-first-integration-test">my first integration test</a></li>
-<li><a href="#see-documentation">see documentation</a></li>
 </ul>
 </li>
 <li>
@@ -109,8 +105,10 @@
 for your web application. It covers built-in mechanisms offered by Rails.
 By referring to this guide, you will be able to:</p>
 <ul>
-<li>Understand Rails testing terminology</li>
+<li>Understand testing terminology</li>
 <li>Write unit and integration tests for your application</li>
+<li>Know what test driven development is</li>
+<li>Know what refactoring is</li>
 </ul>
 
     </div>
@@ -132,45 +130,6 @@ By referring to this guide, you will be able to:</p>
 <ul>
 <li>unit testing - models</li>
 <li>integration testing - like a browser</li>
-</ul>
-<h4 id="rails-and-testing">1.2 rails and testing</h4>
-<ul>
-<li>testing built in</li>
-<li>scaffold creates (empty) tests</li>
-<li>testing environment</li>
-<li>run all tests with <code>rake:test</code>
-</li>
-<li>run all tests with <code>rake test TESTOPTS="-v"</code>
-</li>
-</ul>
-<h4 id="my-first-test">1.3 my first test</h4>
-<div class="code_container">
-<pre class="brush: ruby; gutter: false; toolbar: false">
-# in file test/unit/user_test.rb
-test "no_stars is zero in new user" do
-  u = User.create!(:first_name=&gt;"John", :last_name=&gt;"Doe")
-  assert u.no_stars == 0
-end
-
-</pre>
-</div>
-<h4 id="my-first-integration-test">1.4 my first integration test</h4>
-<div class="code_container">
-<pre class="brush: ruby; gutter: false; toolbar: false">
-test "users are displayed" do
-  u = User.create!(:first_name=&gt;"Jane", :last_name=&gt;"Doe")
-  visit "/users"
-  assert page.has_content?('Gib ein Sternchen!')
-  assert page.has_content?('Jane Doe')
-end
-
-</pre>
-</div>
-<h4 id="see-documentation">1.5 see documentation</h4>
-<ul>
-<li><a href="http://guides.rubyonrails.org/testing.html">Guide to Testing Rails Applications</a></li>
-<li><a href="http://topfunky.com/clients/rails/ruby_and_rails_assertions.pdf">Test::Unit Cheatsheet</a></li>
-<li><a href="https://gist.github.com/3942267">Capybara Cheat Sheet</a></li>
 </ul>
 <h3 id="test-driven-development-tdd">2 Test Driven Development (TDD)</h3>
 <h4 id="what-is-test-first-questionmark">2.1 what is "test first" ?</h4>

@@ -46,7 +46,7 @@
                 <dd><a href="git_basics.html">Git Basics</a></dd>
                 <dt>Workflows</dt>
                 <dd><a href="git_branching.html">Git Branching and Merging</a></dd>
-                <dd><a href="git_teamwork.html">Git Teamwork</a></dd>
+                <dd><a href="pair_programming.html">Pair Programming</a></dd>
                 <dd><a href="testing_and_refactoring.html">Testing and Refactoring</a></dd>
                 <dd><a href="dependencies.html">Managing Dependencies</a></dd>
                 <dd><a href="dep-ruby.html">Managing Dependencies in Ruby</a></dd>
@@ -81,6 +81,7 @@
 <li><a href="#package-names-and-a-central-database">package names and a central database</a></li>
 <li><a href="#how-to-install">How to install</a></li>
 <li><a href="#where-is-the-code-installed-questionmark">Where is the code installed?</a></li>
+<li><a href="#security-considerations">Security considerations</a></li>
 </ul>
 </li>
 <li>
@@ -92,7 +93,13 @@
 <li><a href="#keeping-up-to-date">Keeping Up To Date</a></li>
 </ul>
 </li>
-<li><a href="#dependency-managment-in-detail">Dependency Managment in Detail</a></li>
+<li><a href="#apt-for-linux">apt for Linux</a></li>
+<li><a href="#brew-for-mac-os">brew for mac os</a></li>
+<li><a href="#choco-for-windows">choco for windows</a></li>
+<li><a href="#gem-and-bundler-for-ruby">gem and bundler for ruby</a></li>
+<li><a href="#npm-for-javascript-and-node-js">npm for javascript and node.js</a></li>
+<li><a href="#composer-and-packagist-for-php">composer and packagist for php</a></li>
+<li><a href="#references">References</a></li>
 </ol>
 </body></html>
 
@@ -107,8 +114,7 @@ It covers ruby, javascript and php.</p><p>After working through this guide you w
 <li>install packages for javascript and node with <code>npm</code></li>
 <li>install gems für ruby with <code>gem</code> and <code>bundler</code></li>
 <li>install libraries for php with <code>composer</code></li>
-<li>install programs and libraries for your mac with <code>brew</code></li>
-<li>install programs and libraries for your linux machine with <code>apt</code></li>
+<li>install programs and libraries for your operating system with <code>brew</code>, <code>apt</code> or <code>choco</code></li>
 <li>know how to keep your dependencies current</li>
 </ul>
 
@@ -129,12 +135,22 @@ Linux, Postgres, Apache, nginx, and so on.</p>
 in your source code or link to your code after compiling.
 These dependencies are called libraries, packages or gems in different
 programming languages.</p>
-<p>We will discuss five different systems:</p>
+<p>We will discuss six different systems:</p>
+<ul>
+<li>Package management for the operating system:
+
 <ul>
 <li>
 <code>apt</code> a package manager for Linux (used in debian, ubuntu, and several other distributions)</li>
 <li>
 <code>brew</code> a package manager for mac os</li>
+<li>
+<code>choco</code> a package manager for windows</li>
+</ul>
+</li>
+<li>Package management for a programming language:
+
+<ul>
 <li>
 <code>gem</code> and <code>bundler</code> for ruby</li>
 <li>
@@ -142,8 +158,10 @@ programming languages.</p>
 <li>
 <code>composer</code> for php</li>
 </ul>
+</li>
+</ul>
 <h4 id="dynamiclly-linked-libraries">1.1 dynamiclly linked libraries</h4>
-<p>Why do we need to look at <code>apt</code> and <code>brew</code>?  Isn't the
+<p>Why do we need to look at <code>apt</code>, <code>brew</code> or <code>choco</code>?  Isn't the
 package manager for my main programing language enough?</p>
 <p>In many cases using php-only or ruby-only libraries will be enough.
 But sometimes the libraries we use in our dynamic languages use
@@ -180,22 +198,24 @@ a central database that contains the information on all available packages.
 These databases typically also offer a web page with search functionality:</p>
 <ul>
 <li>
+<a href="http://de.archive.ubuntu.com/ubuntu">apt</a> packages are kept on ftp servers and are not searchable there. other sources can be added to <code>/etc/apt/sources.list</code>
+</li>
+<li>
+<a href="https://github.com/Homebrew/homebrew-core">homebrew/core</a> is a repository on github, but other "taps" (sources of packges) can be added</li>
+<li>choco</li>
+<li>
 <a href="https://rubygems.org/">rubygems.org</a> for ruby</li>
 <li>
 <a href="https://www.npmjs.com/">npmjs.com</a> for javascript</li>
 <li>
-<a href="https://packagist.org/">packagist.org</a> for php and composer</li>
-<li>
-<a href="https://github.com/Homebrew/homebrew-core">homebrew/core</a> is a repository on github, but other "taps" (sources of packges) can be added</li>
-<li>
-<a href="http://de.archive.ubuntu.com/ubuntu">apt</a> packages are kept on ftp servers and are not searchable there. other sources can be added to <code>/etc/apt/sources.list</code>
-</li>
+<a href="https://packagist.org/">packagist.org</a> for php and composer
+Package names need to be unique.  Version numbers are often given out according to <a href="http://semver.org/">semantic versioning</a>.</li>
 </ul>
-<p>Package names need to be unique.  Version numbers are often given out according to <a href="http://semver.org/">semantic versioning</a>.</p>
 <h4 id="how-to-install">1.3 How to install</h4>
 <ul>
 <li><code>apt-get install imagemagick</code></li>
 <li><code>brew install imagemagick</code></li>
+<li><code>choco install imagemagick</code></li>
 <li><code>gem install rmagick</code></li>
 <li><code>npm install imagemagick</code></li>
 <li>
@@ -205,6 +225,14 @@ These databases typically also offer a web page with search functionality:</p>
 <p>All the package managers distinguish between installing <strong>globally</strong> - for all users and projects on a computer and installing <strong>locally</strong>.  This might mean installing in a way that only one user can use, or it might mean installing into a projects directory.</p>
 <p>When you deploy your project to a production server you again face this question: should
 the dependencies be installed globally or locally?</p>
+<h4 id="security-considerations">1.5 Security considerations</h4>
+<p>Downloading and using software is always dangerous. With a package
+management system a lot of downloads happen automatically.  So we want
+to make sure the software we download is really what it is supposed to be.</p>
+<p>A package management system can offer different methods of making it more secure:
+* comparing <strong>checksums</strong> of the code to  make sure the downloaded package contains the same code as the original package 
+* cryptographically <strong>signing</strong> the code in the package and checking this signature before installing. This ensures
+that only the original author of the package can release new versions.  </p>
 <h3 id="dependency-hell">2 Dependency Hell</h3>
 <p>For a big web project you will be using a lot of dependencies. This will lead
 to two problems (here shown in a ruby projects with gems):</p>
@@ -275,19 +303,42 @@ have to be prepared for updating several dependencies each month!</p>
 <p>To update the versions you need to override the lock-file and allow a change in version numbers.</p>
 <p>For each dependency system we discussed there are services out there that will tell
 you about new version or -- even more important -- new security updates for your dependencies.</p>
-<h3 id="dependency-managment-in-detail">3 Dependency Managment in Detail</h3>
-<p>More detailled information on the five systems is available on separate pages:</p>
+<h3 id="apt-for-linux">3 apt for Linux</h3>
+<h3 id="brew-for-mac-os">4 brew for mac os</h3>
+<h3 id="choco-for-windows">5 choco for windows</h3>
+<h3 id="gem-and-bundler-for-ruby">6 gem and bundler for ruby</h3>
+<h3 id="npm-for-javascript-and-node-js">7 npm for javascript and node.js</h3>
+<h3 id="composer-and-packagist-for-php">8 composer and packagist for php</h3>
+<h3 id="references">9 References</h3>
+<ul>
+<li>Package management for the operating system:
+
 <ul>
 <li>
-<code>apt</code> a package manager for Linux (used in debian, ubuntu, and several other distributions)</li>
+<code>apt</code> for Linux, e.g. for <a href="https://help.ubuntu.com/lts/serverguide/apt.html">Ubuntu</a> and <a href="https://www.debian.org/doc/manuals/debian-reference/ch02.en.html">Debian</a>
+</li>
 <li>
-<code>brew</code> a package manager for mac os</li>
+<code>brew</code> for mac os <a href="http://brew.sh/">brew.sh</a>
+</li>
 <li>
-<code>gem</code> and <code>bundler</code> for ruby</li>
+<code>choco</code> for windows <a href="https://chocolatey.org/">chocolatey.org</a>
+</li>
+</ul>
+</li>
+<li>Package management for a programming language:
+
+<ul>
 <li>
-<code>npm</code> for javascript and node.js</li>
+<code>gem</code> and <code>bundler</code> for ruby <a href="http://guides.rubygems.org/rubygems-basics/">rubygems.org</a> and <a href="http://bundler.io/">bundler.io</a>
+</li>
 <li>
-<code>composer</code> for php</li>
+<code>npm</code> for javascript and node.js <a href="https://www.npmjs.com/">npmjs.org</a>
+</li>
+<li>
+<code>composer</code> for php <a href="https://getcomposer.org/">getcomposer.org</a> and <a href="https://packagist.org/">packagist.org</a>
+</li>
+</ul>
+</li>
 </ul>
 </body></html>
 

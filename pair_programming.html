@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Web Engineering Textbook: Git Teamwork</title>
+  <title>Web Engineering Textbook: Pair Programming</title>
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
   <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
@@ -46,7 +46,7 @@
                 <dd><a href="git_basics.html">Git Basics</a></dd>
                 <dt>Workflows</dt>
                 <dd><a href="git_branching.html">Git Branching and Merging</a></dd>
-                <dd><a href="git_teamwork.html">Git Teamwork</a></dd>
+                <dd><a href="pair_programming.html">Pair Programming</a></dd>
                 <dd><a href="testing_and_refactoring.html">Testing and Refactoring</a></dd>
                 <dd><a href="dependencies.html">Managing Dependencies</a></dd>
                 <dd><a href="dep-ruby.html">Managing Dependencies in Ruby</a></dd>
@@ -85,8 +85,6 @@
 
 <ul>
 <li><a href="#git-config">git config</a></li>
-<li><a href="#git-config-file">git config file</a></li>
-<li><a href="#set-the-config">set the config</a></li>
 </ul>
 </li>
 </ol>
@@ -94,12 +92,11 @@
 
           </div>
 
-      <h2>Git Teamwork</h2><p>In this guide you will learn about a special form of teamwork
+      <h2>Pair Programming</h2><p>In this guide you will learn about a special form of teamwork
 in programming: pair programming.</p><p>After reading this guide, you will:</p>
 <ul>
 <li>Know why you should try pair programming</li>
 <li>have a good starting point for your first try at pairing</li>
-<li>be able to use git while pairing</li>
 </ul>
 
     </div>
@@ -131,12 +128,12 @@ in programming: pair programming.</p><p>After reading this guide, you will:</p>
 <pre class="brush: plain; gutter: false; toolbar: false">
 $ git log
 commit 38d4f10fe2fb3f4d13e12d75e70bc0a085f0753f
-Author: Brigitte Jellinek + Mr. Hyde &lt;xhyde.lba@fh-salzburg.ac.at&gt;
+Author: Brigitte Jellinek + Xaviar Hyde &lt;xhyde.lba@fh-salzburg.ac.at&gt;
 Date:   Fri Sep 14 10:52:41 2012 +0200
 
 </pre>
 </div>
-<p>This semester we will use:</p>
+<p>This follows the pattern:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 firstname lastname driver + firstname lastname navigator
@@ -145,20 +142,17 @@ e-mail address of the navigator
 </pre>
 </div>
 <h4 id="git-config">2.1 git config</h4>
-<p>see git config --help</p>
-<ul>
-<li>three Levels:</li>
-<li>for a single repository ./.git/config</li>
-<li>for one user ~/.gitconfig </li>
-<li>--global</li>
-<li>for the whole system /etc/gitconfig </li>
-<li>--system</li>
-</ul>
-<h4 id="git-config-file">2.2 git config file</h4>
+<p>The configuration of git is saved on three levels:
+For the repository you can find the configuration in the file <code>.git/config</code>.</p>
+<p>You can set your own user-specific settings with the command line switch <code>--global</code>.
+They will be saved to <code>~/.gitconfig</code>.  </p>
+<p>And with the command line switch <code>--system</code> you can set global settings that
+will be saved to <code>/etc/gitconfig</code></p>
+<p>This is what a <code>.git/config</code> file might look like:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 [user]
-    name = Brigitte Jellinek + Mr. Hyde
+    name = Brigitte Jellinek + Xaviar Hyde
     email = xhyde.lba@fh-salzburg.ac.at
 
 [core]
@@ -174,16 +168,6 @@ e-mail address of the navigator
 
 </pre>
 </div>
-<h4 id="set-the-config">2.3 set the config</h4>
-<p>just in the current repository, just for now.</p>
-<div class="code_container">
-<pre class="brush: plain; gutter: false; toolbar: false">
-git config --replace-all user.name "firstname lastname + firstname lastname"
-git config --replace-all user.email "navigator@gmail.com"
-
-</pre>
-</div>
-<p>go do it!</p>
 </body></html>
 
       </div>
@@ -195,7 +179,7 @@ git config --replace-all user.email "navigator@gmail.com"
     <div class="wrapper">
       <p class="copyright">published under <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/at/deed.de">creative commons by-nc-sa</a> in 2012-2016 by <a href="http://brigitte-jellinek.at">Brigitte Jellinek</a>.
       </p><p>If you want to contribute: <a href="https://github.com/web-engineering/web-engineering-textbook/fork">fork the source on github</a>
-        and edit <a href="https://github.com/web-engineering/web-engineering-textbook/blob/master/source/git_teamwork.md">git_teamwork.md</a>
+        and edit <a href="https://github.com/web-engineering/web-engineering-textbook/blob/master/source/pair_programming.md">pair_programming.md</a>
       </p>
     </div>
   </div>
