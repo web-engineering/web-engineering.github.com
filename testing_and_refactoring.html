@@ -138,19 +138,19 @@ you still will write automated tests too.</p>
 </ul>
 <h4 id="example-test">1.2 Example test</h4>
 <p>This simple example in Javascript tests a function foo:</p>
-<p>``javascript
-  describe('foo function', function() {</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
-it('converts number 1 correctly', function() {
-  let input = { value: 1, language: english };
-  assert.equal(foo(input), 'one');
+describe('foo function', function() {
+
+  it('converts number 1 correctly', function() {
+    let input = { value: 1, language: english };
+    assert.equal(foo(input), 'one');
+  });
+
 });
 
 </pre>
 </div>
-<p>  });
-``</p>
 <p>The test framework gives you the possibility to group your
 tests. In this example this is done with <code>describe</code> and <code>it</code>.</p>
 <p>This test of the function <code>foo</code> consists of:</p>
