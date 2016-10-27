@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Web Engineering Textbook: vi</title>
+  <title>Web Engineering Textbook: Testing </title>
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
   <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
@@ -74,28 +74,25 @@
 <html><body>
 <ol class="chapters">
 <li>
-<a href="#history">History</a>
+<a href="#testing-software">Testing Software</a>
 
 <ul>
-<li><a href="#ed">ed</a></li>
-<li><a href="#ex">ex</a></li>
-<li><a href="#vi">vi</a></li>
+<li><a href="#why-write-automatic-tests-questionmark">Why write automatic tests?</a></li>
+<li><a href="#example-test">Example test</a></li>
+<li><a href="#types-of-tests">Types of Tests</a></li>
 </ul>
 </li>
-<li><a href="#vi-modes">Vi Modes</a></li>
-<li><a href="#resources">Resources </a></li>
 </ol>
 </body></html>
 
           </div>
 
-      <h2>vi</h2><p>This Guide will give you a very quick introduction to
-the editor <strong>vi</strong>.</p><p>After reading this guide, you will be able to:</p>
+      <h2>Testing </h2><p>This guide will explain why you should write automatic tests
+for your web application. 
+By referring to this guide, you will be able to:</p>
 <ul>
-<li>recognize <code>vi</code> if you stumble into it</li>
-<li>get out of <code>vi</code> </li>
-<li>understand the different modes </li>
-<li>do basic editing in <code>vi</code></li>
+<li>Understand testing terminology</li>
+<li>Write unit and integration tests for your application</li>
 </ul>
 
     </div>
@@ -106,86 +103,90 @@ the editor <strong>vi</strong>.</p><p>After reading this guide, you will be able
       <div id="mainCol">
         <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h3 id="history">1 History</h3>
-<p><code>vi</code> is a very, very old editor that is still used today.
-To understand how it works, and why it works this way, we
-have to go back in time:</p>
-<h4 id="ed">1.1 ed</h4>
-<p>In 1969, when the operating system UNIX was first developed,
-Teleprinters (also called teletypewriters, or short TTY) were
-used as input and output devices for computers: a keyboard
-for input, and a printer for output.</p>
-<p><img src="images/teletype-33.jpg" alt="Example of a Teleprinter"></p>
-<p>For UNIX a <strong>line editor</strong> called <strong>ed</strong> was developed, that
-could be used on TTYs. <strong>ed</strong> distinguishes command mode from text mode,
-and always starts out in command mode.  </p>
-<p>In the following example session the user first types in the command <strong>a</strong> 
-(for 'append') to enter text mode, and then enters two lines of text
-and a period on an empty line to leave text mode.</p>
-<p>The editor gives no feedback at this point.  The user enters 
-the command <strong>p</strong> to print out the current line.
-Notice that only the current line is printed, not the whole file!</p>
-<p>Next the user enters <strong>i</strong> (for 'insert'), modified by the number two
-to indicate that the text should be inserted twice (before the current line).
-The user enters a line of equal-signs and again a period on an empty line
-to end the text-input.</p>
-<p>The user finally uses the command <strong>l</strong> to output the text with extra information: 
-a $ sign for the line endings is printed.  The comma before the l command
-selets the range of lines to be printed (here: all the lines). To print
-just lines 2 to 4 one would write <strong>2,4l</strong>.</p>
-<p>Then the user types in a substitution command <strong>s</strong> to replace
-the word "two" by the word "four". And finally the <strong>w</strong> (write) command
-to save the text to a file and <strong>q</strong> (quit) to exit the editor.</p>
+<h3 id="testing-software">1 Testing Software</h3>
+<p>There are two ways to test software:  have an actual person
+use the software or have a program automatically test the software.</p>
+<p>People who test software "by hand" often do this under the heading
+"Quality Assurance" or "QA".  See <a href="http://www.karriere.at/jobs/software-quality-assurance-tester/salzburg">jobs in Salzburg</a>  or <a href="http://de.indeed.com/Software-Quality-Assurance-Jobs-in-Berlin">jobs in Berlin</a>.</p>
+<p>But even if you have a QA department for your project, as a developer
+you still will write automated tests too.</p>
+<h4 id="why-write-automatic-tests-questionmark">1.1 Why write automatic tests?</h4>
+<p>There are many reasons why you would want to write test for your program:</p>
+<ul>
+<li>when you first write the program: to know if the program works (as specified)</li>
+<li>to know if it still works after adding a new feature</li>
+<li>to know if it still works after refactoring the code</li>
+<li>to know if it still works after updating the dependencies</li>
+</ul>
+<h4 id="example-test">1.2 Example test</h4>
+<p>This simple example in Javascript tests a function foo:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
-a
-ed is the standard Unix text editor.
-This is line number two.
-.
-p
-This is line number two.
-2i
-========================
-.
-,l
-ed is the standard Unix text editor.$
-========================$
-========================$
-This is line number two.$
-s/two/four/
-p
-This is line number four.$
-w about-ed.txt
-88
-q
+describe('foo function', function() {
+
+  it('converts number 1 correctly', function() {
+    let input = { value: 1, language: english };
+    assert.equal(foo(input), 'one');
+  });
+
+});
 
 </pre>
 </div>
-<h4 id="ex">1.2 ex</h4>
-<p>The next step was the editor <strong>ex</strong> which brought a slight change
-in interface: the input prompt is marked with a colon.</p>
-<h4 id="vi">1.3 vi</h4>
-<p>With monitors came the next version of the editor: the visual editor <em>vi</em>.</p>
-<p>It now displays the content of the file (one screen at a time),
-and offers a cursor - it almost looks and works like a modern text editor.
-But <em>ed</em> and <em>ex</em> are still there, in the <em>normal mode</em> and <em>commandline</em> of vi.</p>
-<h3 id="vi-modes">2 Vi Modes</h3>
-<p><img src="images/vi-modes.svg" alt="vi modes"></p>
-<p>Using <em>vi</em> you have to be aware which mode the editor is in. There
-are only subtle visual clues to help you.</p>
-<p><img src="images/vi-recognize-modes.png" alt="vi modes"></p>
-<p>As you can see in the images above, insert mode is distinguished
-from normal mode by the showing <code>-- INSERT --</code> in the last line.
-Command-line mode puts the cursor in the last line, and shows the colon
-(that you typed in to get into command-line mode).</p>
-<h3 id="resources">3 Resources </h3>
+<p>The test framework gives you the possibility to group your
+tests. In this example this is done with <code>describe</code> and <code>it</code>.</p>
+<p>This test of the function <code>foo</code> consists of:</p>
 <ul>
-<li><a href="https://vim-adventures.com">vim adventures</a></li>
-<li>
-<a href="https://en.wikipedia.org/wiki/Ed_(text_editor)">Text Editor ed</a> in Wikipedia</li>
-<li>
-<a href="https://en.wikipedia.org/wiki/Ex_(text_editor)">Text Editor ex</a> in Wikipedia</li>
+<li>a setup phase, where we prepare a data strucure we need later</li>
+<li>the calling of the function foo with the prepared input</li>
+<li>comparing the output of foo to the expected output</li>
 </ul>
+<p>For the last step often the word <code>assert</code> or assertion is used.</p>
+<p>Here is a longer example in ruby:</p>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+    describe Customer do
+
+      before do
+        @movie_1 = Movie.new("Iron Man 3", Movie::NEW_RELEASE)
+        @movie_2 = Movie.new("Avatar",     Movie::REGULAR)
+        @movie_3 = Movie.new("Brave",      Movie::CHILDRENS)
+        @customer = Customer.new("Vroni")
+      end
+
+      describe "customer statement" do
+        it "is printed correctly for a new release movie" do
+          # [...]
+        end
+        it "is summed up correctly for 3 movies" do
+          @customer.add_rental(Rental.new(@movie_1, 2))
+          @customer.add_rental(Rental.new(@movie_2, 3))
+          @customer.add_rental(Rental.new(@movie_3, 4))
+          @customer.statement.must_match /Amount owed is 12.5/
+          @customer.statement.must_match /You earned 4 frequent renter points/
+        end 
+      end
+    end
+
+</pre>
+</div>
+<p>Here the setup phase has been extracted to a <code>before</code> block.
+This is run before every test inside the same <code>describe</code> block. 
+The means that the variable will be reset before each test,
+if you change <code>@movie_1</code> in the first test this will not affect
+the second test.</p>
+<p>In this example a more complex assertion is used: <code>must_match</code> will
+do a pattern match on the resulting string.</p>
+<h4 id="types-of-tests">1.3 Types of Tests</h4>
+<p>As a beginner you should distinguish at least two types of tests:</p>
+<ul>
+<li>unit test - tests the function of one unit (be it a class, a package, one model, one view....)</li>
+<li>integration test - tests the whole program from the perspective of a user</li>
+</ul>
+<p>Integration tests give you more valuable insights from a users
+perspective, e.g.: "the shopping cart checkout does not work".
+Unit tests help developers find the part of the program that is
+responsible for a problem: "the cookie store class breaks if you store an undefined value".</p>
 </body></html>
 
       </div>
@@ -197,7 +198,7 @@ Command-line mode puts the cursor in the last line, and shows the colon
     <div class="wrapper">
       <p class="copyright">published under <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/at/deed.de">creative commons by-nc-sa</a> in 2012-2016 by <a href="http://brigitte-jellinek.at">Brigitte Jellinek</a>.
       </p><p>If you want to contribute: <a href="https://github.com/web-engineering/web-engineering-textbook/fork">fork the source on github</a>
-        and edit <a href="https://github.com/web-engineering/web-engineering-textbook/blob/master/source/vi.md">vi.md</a>
+        and edit <a href="https://github.com/web-engineering/web-engineering-textbook/blob/master/source/testing.md">testing.md</a>
       </p>
     </div>
   </div>
