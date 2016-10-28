@@ -55,11 +55,10 @@
               <dl class="R">
                 <dt>Web Operations</dt>
                 <dd><a href="webserver.html">Webserver</a></dd>
-                <dd><a href="security.html">Security</a></dd>
               </dl>
           </div>
-        </li>
-        <li><a class="nav-item" href="https://github.com/bjelline/web-engineering-textbook/">Contribute</a></li>
+          </li>
+        <li><a class="nav-item" href="https://github.com/web-engineering/web-engineering-textbook/">Contribute</a></li>
       </ul>
       </div>
     </div>
@@ -93,6 +92,7 @@
 <li><a href="#keeping-up-to-date">Keeping Up To Date</a></li>
 </ul>
 </li>
+<li><a href="#dependencies-risk">Dependencies = Risk</a></li>
 <li><a href="#apt-for-linux">apt for Linux</a></li>
 <li><a href="#brew-for-mac-os">brew for mac os</a></li>
 <li><a href="#choco-for-windows">choco for windows</a></li>
@@ -303,13 +303,25 @@ have to be prepared for updating several dependencies each month!</p>
 <p>To update the versions you need to override the lock-file and allow a change in version numbers.</p>
 <p>For each dependency system we discussed there are services out there that will tell
 you about new version or -- even more important -- new security updates for your dependencies.</p>
-<h3 id="apt-for-linux">3 apt for Linux</h3>
-<h3 id="brew-for-mac-os">4 brew for mac os</h3>
-<h3 id="choco-for-windows">5 choco for windows</h3>
-<h3 id="gem-and-bundler-for-ruby">6 gem and bundler for ruby</h3>
-<h3 id="npm-for-javascript-and-node-js">7 npm for javascript and node.js</h3>
-<h3 id="composer-and-packagist-for-php">8 composer and packagist for php</h3>
-<h3 id="references">9 References</h3>
+<h3 id="dependencies-risk">3 Dependencies = Risk</h3>
+<p>While using a third party library today will make you more
+productive, it could well harm you in the long wrong:</p>
+<ul>
+<li>It might change drastically in the future, like Angular 2 did. See <a href="https://daveceddia.com/angular-2-should-you-upgrade/">Ceddias article on upgrading von Angular 1 to Angular 2</a>
+</li>
+<li>It might be discontinued and disappear completely, like Parse did. See <a href="http://blog.parse.com/announcements/moving-on/">their final announcement</a>
+</li>
+<li>It might disappear and be replaced, causing havoc in the meantime, like left_pad did. See <a href="http://www.theregister.co.uk/2016/03/23/npm_left_pad_chaos/">article in theregister on left_pad</a>
+</li>
+</ul>
+<p>These examples were taken from <a href="https://medium.freecodecamp.com/code-dependencies-are-the-devil-35ed28b556d#.4a7d59i6u">a longer article</a> that discusses ways to minimize the risk.</p>
+<h3 id="apt-for-linux">4 apt for Linux</h3>
+<h3 id="brew-for-mac-os">5 brew for mac os</h3>
+<h3 id="choco-for-windows">6 choco for windows</h3>
+<h3 id="gem-and-bundler-for-ruby">7 gem and bundler for ruby</h3>
+<h3 id="npm-for-javascript-and-node-js">8 npm for javascript and node.js</h3>
+<h3 id="composer-and-packagist-for-php">9 composer and packagist for php</h3>
+<h3 id="references">10 References</h3>
 <ul>
 <li>Package management for the operating system:
 
