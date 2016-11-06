@@ -93,12 +93,18 @@
 </ul>
 </li>
 <li><a href="#dependencies-risk">Dependencies = Risk</a></li>
+<li>
+<a href="#quick-start-guides">Quick Start Guides</a>
+
+<ul>
 <li><a href="#apt-for-linux">apt for Linux</a></li>
 <li><a href="#brew-for-mac-os">brew for mac os</a></li>
 <li><a href="#choco-for-windows">choco for windows</a></li>
 <li><a href="#gem-and-bundler-for-ruby">gem and bundler for ruby</a></li>
 <li><a href="#npm-for-javascript-and-node-js">npm for javascript and node.js</a></li>
 <li><a href="#composer-and-packagist-for-php">composer and packagist for php</a></li>
+</ul>
+</li>
 <li><a href="#references">References</a></li>
 </ol>
 </body></html>
@@ -315,13 +321,331 @@ productive today. But it could well harm you in the long run:</p>
 </li>
 </ul>
 <p>These examples were taken from <a href="https://medium.freecodecamp.com/code-dependencies-are-the-devil-35ed28b556d#.4a7d59i6u">a longer article</a> that discusses ways to minimize the risk.</p>
-<h3 id="apt-for-linux">4 apt for Linux</h3>
-<h3 id="brew-for-mac-os">5 brew for mac os</h3>
-<h3 id="choco-for-windows">6 choco for windows</h3>
-<h3 id="gem-and-bundler-for-ruby">7 gem and bundler for ruby</h3>
-<h3 id="npm-for-javascript-and-node-js">8 npm for javascript and node.js</h3>
-<h3 id="composer-and-packagist-for-php">9 composer and packagist for php</h3>
-<h3 id="references">10 References</h3>
+<h3 id="quick-start-guides">4 Quick Start Guides</h3>
+<h4 id="apt-for-linux">4.1 apt for Linux</h4>
+<p>The Advanced Package Tool, or APT, handles the installation and removal 
+of software on the Debian, Ubuntu and other Linux distributions. 
+It installs both complete programs (like apache in the example below)
+and libraries (like libssl in the example below) that can be used to build programs.</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+apt install apache2  
+apt install libssl-dev
+
+</pre>
+</div>
+<p>The software is downloaded from a file system (e.g. a DVD) or an FTP server.
+Each Linux distribution keeps their own server.
+You can search for software with <code>apt search</code></p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ apt search xml
+[...]
+xmlto/xenial 0.0.28-0.1 amd64
+  XML-to-any converter
+
+xmltoman/xenial,xenial 0.4-3 all
+  simple XML to man converter
+
+xmltooling-schemas/xenial,xenial 1.5.6-2 all
+  XML schemas for XMLTooling
+[...]
+
+</pre>
+</div>
+<p>The software is installed into the usual folder used in UNIX
+(see also the <a href="https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard">Filesystem Hierarchy Standard (FHS)</a>:</p>
+<ul>
+<li>
+<code>/etc</code> for configuration files</li>
+<li>
+<code>/bin</code> and <code>/lib</code> for essential binaries and libraries</li>
+<li>
+<code>/usr/bin</code> and <code>/usr/lib</code> for non-essential (=most) binaries and libraries</li>
+</ul>
+<p>You can find out what exactly got installed by running the <code>dpkg</code> command:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ dpkg -L libmagickcore
+/.
+/usr
+/usr/lib
+/usr/lib/x86_64-linux-gnu
+/usr/lib/x86_64-linux-gnu/libMagickCore-6.Q16.so.2.0.0
+/usr/lib/x86_64-linux-gnu/ImageMagick-6.8.9
+/usr/lib/x86_64-linux-gnu/ImageMagick-6.8.9/modules-Q16
+/usr/lib/x86_64-linux-gnu/ImageMagick-6.8.9/modules-Q16/filters
+/usr/lib/x86_64-linux-gnu/ImageMagick-6.8.9/modules-Q16/filters/analyze.so
+/usr/lib/x86_64-linux-gnu/ImageMagick-6.8.9/modules-Q16/filters/analyze.la
+[...]
+
+</pre>
+</div>
+<p>As apt installs many types of software, there are many ways to use this software:</p>
+<ul>
+<li>command line tools: you just run them on the command line, like <code>wget http://io9.com</code>
+</li>
+<li>daemons: you start and stop them with the service command, like <code>service apache2 start</code>
+</li>
+<li>c libraries: include the header-file in your own c program, like <code>#include &lt;PCSC/winscard.h&gt;</code> and then link the library </li>
+<li>other libraries: depends on the programming language</li>
+</ul>
+<h4 id="brew-for-mac-os">4.2 brew for mac os</h4>
+<p>Homebrew is a package manager for Mac OS.  It builds
+software from source, applying patches to make the software
+mac compatible.</p>
+<p>It installs both complete programs (like postgresql in the example below)
+and libraries (like libyaml in the example below) that can be used to build programs.</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+brew install postgresql  
+brew install libyaml
+
+</pre>
+</div>
+<p>You can search for software with <code>brew search</code>:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ brew search xml
+[...]
+homebrew/php/php54-wbxml               libxml++3 
+homebrew/php/php54-xmldiff             libxml2 ✔ 
+homebrew/php/php55-wbxml               libxmlsec1
+[...]
+
+</pre>
+</div>
+<p>Homebrew is a git repository in <code>/usr/local/Homebew</code>.  It installs
+software into <code>/usr/local/Cellar</code> and then creates links from 
+<code>/usr/local/bin</code> or <code>/usr/local/lib</code> as appropriate.</p>
+<p>You can find out what exactly got installed by running the <code>brew list</code> command:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ brew list libyaml
+/usr/local/Cellar/libyaml/0.1.7/include/yaml.h
+/usr/local/Cellar/libyaml/0.1.7/lib/libyaml-0.2.dylib
+/usr/local/Cellar/libyaml/0.1.7/lib/pkgconfig/yaml-0.1.pc
+/usr/local/Cellar/libyaml/0.1.7/lib/ (2 other files)
+
+$ brew list postgresql
+/usr/local/Cellar/postgresql/9.5.4_1/bin/clusterdb
+/usr/local/Cellar/postgresql/9.5.4_1/bin/createdb
+[...]
+
+</pre>
+</div>
+<p>The executable programs in the last example can
+be found as links in <code>/usr/local/bin/</code>  </p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+lrwxr-xr-x  user  clusterdb -&gt; ../Cellar/postgresql/9.5.4_1/bin/clusterdb
+lrwxr-xr-x  user  createdb -&gt; ../Cellar/postgresql/9.5.4_1/bin/createdb
+
+</pre>
+</div>
+<p>As brew installs many types of software, there are many ways to use this software:</p>
+<ul>
+<li>command line tools: you just run them on the command line, like <code>wget http://io9.com</code>
+</li>
+<li>daemons: you start and stop them with the service command, like <code>brew services start postgresql</code>
+</li>
+<li>c libraries: include the header-file in your own c program, like <code>#include &lt;yaml.h&gt;</code> and then link the library </li>
+<li>other libraries: depends on the programming language</li>
+</ul>
+<h4 id="choco-for-windows">4.3 choco for windows</h4>
+<h4 id="gem-and-bundler-for-ruby">4.4 gem and bundler for ruby</h4>
+<p>Libraries for ruby are called <strong>gems</strong>  and can be installed using the command lin tool <code>gem</code>:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+gem install pg
+
+</pre>
+</div>
+<p>The gems are stored on a central server <code>https://rubygems.org</code>.
+You can use <code>gem search</code> or the web interface to find gems.</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ gem search xml
+[...]
+klarna-xmlrpc (0.2.1)
+koara-xml (0.13.0)
+latexml-ruby (0.0.2)
+libxml-ext (0.4.2)
+[...]
+
+</pre>
+</div>
+<p>Gems will normally be installed "globally" = in a way that they
+can be used by several users for several projects.</p>
+<ul>
+<li>e.g. <code>C:/RailsInstaller/Ruby2.2.0/lib/ruby/gems/2.2.0</code> on Windows</li>
+<li>e.g. <code>/usr/lib/ruby/2.3.0/</code> on Linux</li>
+</ul>
+<p>You can find out where a gem is installed by using <code>gem which</code>.</p>
+<p>On many machines <code>rvm</code> - the ruby version manager - is used to switch
+between different versions of the programming language.  Then each version
+of the language has it's own set of gems, and the paths include the
+word <code>rvm</code>:</p>
+<ul>
+<li>
+<code>/usr/local/rvm/gems/ruby-2.2.3/gems/pg-0.18.4/lib/pg.rb</code> Unix, global rvm, ruby version 2.2.3, gem <code>pg</code> for postgresql</li>
+<li>
+<code>/Users/USERNAME/.rvm/rubies/ruby-2.3.0/gems/pg-0.18.4/lib/pg.rb</code> Windows, rvm installed for one user only, ruby version 2.3.0, gem <code>pg</code> for postgresql</li>
+</ul>
+<p>To use gems in your ruby project you will write a <code>Gemfile</code> where you
+list the gems (and maybe the versions) that you need, e.g.:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+source 'https://rubygems.org'
+
+gem 'activerecord'
+gem 'pg'
+gem 'mechanize'
+
+</pre>
+</div>
+<p>To install all the gems and their dependencies run the command <code>bundle</code>.
+The bundler will find a constellation of dependencies and versions
+that work well together, and write this information to <code>Gemfile.lock</code>.</p>
+<p>In a non-rails project you load the gems in the ruby files that need
+them with <code>require</code>:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+require 'active_record'
+
+</pre>
+</div>
+<p>In a rails project this is not necessary, the gems are loaded by rails.</p>
+<p>When using git with ruby you add <code>Gemfile</code> and <code>Gemfile.lock</code> to the
+repository.   </p>
+<h4 id="npm-for-javascript-and-node-js">4.5 npm for javascript and node.js</h4>
+<p>Libraries for javascript are called <strong>packages</strong>  and can be installed using the command line tool <code>npm</code>:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+npm install should 
+
+</pre>
+</div>
+<p>You can search for packages using <code>npm search</code> or the web search interface
+at <a href="https://www.npmjs.com/">https://www.npmjs.com/</a>.</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ npm search xml
+[...]
+muxml-cli         Streaming XML parser and formatter      =t1st3
+mxmlc             Node.js module to build ActionScript    =meekgeek
+naive-request     Very simple xmlhttp library for the…    =kev_nz
+named-items-rss   RSS feed generator.                     =jamierevans
+[...]
+
+</pre>
+</div>
+<p>Packages will normally be installed "locally" in the sub-folder <code>node_modules</code>.
+If you want to install them globally add <code>-g</code> to the command:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+npm install -g grunt
+
+</pre>
+</div>
+<p>To use packages in your javascript project you will write a <code>package.json</code> file where you list the packages (and maybe the versions) that you need.  To create
+the first version of this file use <code>npm init</code>.  Then you can use the <code>--save</code> 
+option to install packages and at the same time add them to the file:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ npm install --save should
+my_first_javascript_project@1.0.0 /Users/USERNAME/mfjsp
+└─┬ should@11.1.1
+  ├── should-equal@1.0.1
+  ├── should-format@3.0.2
+  ├── should-type@1.4.0
+  ├── should-type-adaptors@1.0.1
+  └── should-util@1.0.0
+
+$ cat package.json
+{
+  "name": "my_first_javascript_project",
+  "version": "1.0.0",
+  "description": "reimplementation of leftpad",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" &amp;&amp; exit 1"
+  },
+  "author": "Maria Musterfrau",
+  "license": "ISC",
+  "dependencies": {
+    "should": "^11.1.1"
+  }
+}
+
+</pre>
+</div>
+<p>In a serverside node.js project load the packages with <code>require</code>. Before ECMAScript2015:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+const http = require('http');
+
+</pre>
+</div>
+<p>In ECMAScript2015:
+<code>
+import { http } from 'http';
+</code></p>
+<p>To fix the exact versions of all dependencies, use
+<code>npm shrinkwrap</code>. This command creates a file <code>npm-shrinkwrap.json</code>.</p>
+<p>When using git with a node.js project you add <code>packages.json</code> and  <code>npm-shrinkwrap.json</code> to the repository, and <code>node_modules</code> to <code>.gitignore</code>.   </p>
+<h4 id="composer-and-packagist-for-php">4.6 composer and packagist for php</h4>
+<p>One package manager for php is <code>composer</code>.  It can be used to
+install packages with <code>composer require</code>:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ composer require friendsofphp/php-cs-fixer
+Using version ^1.12 for friendsofphp/php-cs-fixer
+./composer.json has been created
+Loading composer repositories with package information
+Updating dependencies (including require-dev)
+  - Installing sebastian/diff (1.4.1)
+    Downloading: 100%
+
+  - Installing symfony/stopwatch (v3.1.6)
+    Loading from cache
+[...]
+  - Installing friendsofphp/php-cs-fixer (v1.12.3)
+    Downloading: 100%
+
+Writing lock file
+Generating autoload files
+
+</pre>
+</div>
+<p>It installs the software and it's dependencies into the subfolder <code>vendor</code>. It also
+generates a <code>composer.json</code> and a <code>composer.lock</code> file.</p>
+<p>To install packages globally use global:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ composer global require friendsofphp/php-cs-fixer
+
+</pre>
+</div>
+<p>To use the packages in you php script you only need to
+require one file: <code>autoload.php</code>. Then you can start using
+the classes loaded from the packages:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+require __DIR__ . '/vendor/autoload.php';
+
+$log = new Monolog\Logger('name');
+
+</pre>
+</div>
+<p>When using git with a  php project you add <code>composer.json</code> and  <code>composer.lock</code> to the repository, and <code>vendor</code> to <code>.gitignore</code>.   </p>
+<p>A word of warning: there are two older levels of dependencies:</p>
+<ul>
+<li>PECL <a href="https://pecl.php.net/">https://pecl.php.net/</a> is a library of PHP extentions, that need to be compiled and linked to the php interpreter. </li>
+<li>PEAR <a href="https://pear.php.net/">https://pear.php.net/</a> was the former package manager for php packages, see also <a href="http://fabien.potencier.org/the-rise-of-composer-and-the-fall-of-pear.html">Fabien Potencier article: The rise of Composer and the fall of PEAR</a>
+</li>
+</ul>
+<h3 id="references">5 References</h3>
 <ul>
 <li>Package management for the operating system:
 
