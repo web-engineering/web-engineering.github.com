@@ -240,10 +240,13 @@ the dependencies be installed globally or locally?</p>
 <p>Downloading and using software is always dangerous. With a package
 management system a lot of downloads happen automatically.  So we want
 to make sure the software we download is really what it is supposed to be.</p>
-<p>A package management system can offer different methods of making it more secure:
-* comparing <strong>checksums</strong> of the code to  make sure the downloaded package contains the same code as the original package 
-* cryptographically <strong>signing</strong> the code in the package and checking this signature before installing. This ensures
-that only the original author of the package can release new versions.  </p>
+<p>A package management system can offer different methods of making it more secure:</p>
+<ul>
+<li>comparing <strong>checksums</strong> of the code to  make sure the downloaded package contains the same code as the original package </li>
+<li>cryptographically <strong>signing</strong> the code in the package and checking this signature before installing. This ensures
+that only the original author of the package can release new versions.<br>
+</li>
+</ul>
 <h3 id="dependency-hell">2 Dependency Hell</h3>
 <p>For a big web project you will be using a lot of dependencies. This will lead
 to two problems (here shown in a ruby projects with gems):</p>
@@ -532,6 +535,15 @@ require 'active_record'
 <p>In a rails project this is not necessary, the gems are loaded by rails.</p>
 <p>When using git with ruby you add <code>Gemfile</code> and <code>Gemfile.lock</code> to the
 repository.   </p>
+<p>Keeping up to date:</p>
+<ul>
+<li>
+<code>bundle outdated</code> shows which gems can be updated</li>
+<li>
+<a href="https://github.com/lpender/bummr">bummr</a> update each gem separately, removes failing updates</li>
+<li>
+<a href="https://github.com/presidentbeef/brakeman">brakeman</a> check for security risks, incl</li>
+</ul>
 <h4 id="npm-for-javascript-and-node-js">4.5 npm for javascript and node.js</h4>
 <p>Libraries for javascript are called <strong>packages</strong>  and can be installed using the command line tool <code>npm</code>:</p>
 <div class="code_container">
