@@ -75,6 +75,7 @@
 <li><a href="#static-code-analysis">Static Code Analysis</a></li>
 <li><a href="#style-guide">Style Guide</a></li>
 <li><a href="#linting">Linting</a></li>
+<li><a href="#configuring-rubocop">Configuring Rubocop</a></li>
 <li><a href="#best-practices">Best Practices</a></li>
 <li><a href="#security">Security</a></li>
 </ol>
@@ -99,8 +100,8 @@ the quality up.</p>
         <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
 <h3 id="static-code-analysis">1 Static Code Analysis</h3>
-<p>Any automatic analysis done on the source code of a program
-is called static analysis.  The simplest form is a check
+<p>Any automatic analysis done on the <strong>source code</strong> of a program
+is called <strong>static</strong> analysis.  The simplest form is a check
 of coding conventions. This is called "linting". </p>
 <h3 id="style-guide">2 Style Guide</h3>
 <p>A Style Guide or Coding Convention tells places
@@ -118,16 +119,38 @@ with the discussions.</p>
 <li><a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md">PHP Standards Recommendations: PSR-2</a></li>
 </ul>
 <h3 id="linting">3 Linting</h3>
+<p>To lint is to check if code follows a style guide.
+Linting tools are available for all languages:</p>
 <ul>
 <li><a href="https://github.com/bbatsov/rubocop">rubocop</a></li>
 <li><a href="http://eslint.org/">ES Lint</a></li>
 <li><a href="https://github.com/squizlabs/PHP_CodeSniffer">PHP Code Sniffer</a></li>
 </ul>
-<h3 id="best-practices">4 Best Practices</h3>
+<p>You can incorporate linting into your editor, this
+way you will be </p>
+<h3 id="configuring-rubocop">4 Configuring Rubocop</h3>
+<p>When you run <code>rubocop</code> it will examine all the files
+in the current directory, and in subdirectories.</p>
+<p>The rules that rubocop follows are called "cops". The default
+rules are <a href="https://github.com/bbatsov/rubocop/blob/master/config/enabled.yml">documented here</a>.</p>
+<p>You can configure rubocop by writing a file <code>.rubocop.yml</code> in your
+projects root folder.</p>
+<p>Run  <code>rubocop -d</code> to find out which rules the code is breaking.
+You can disable rules for all files, you can exempt some files from
+completely, or you can deactivate a rule just for a few lines of code:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+# rubocop:disable Metrics/LineLength, Style/StringLiterals
+# [... ugly code ...]
+# rubocop:enable Metrics/LineLength, Style/StringLiterals
+
+</pre>
+</div>
+<h3 id="best-practices">5 Best Practices</h3>
 <ul>
 <li><a href="https://github.com/railsbp/rails_best_practices">rails_best_pracices</a></li>
 </ul>
-<h3 id="security">5 Security</h3>
+<h3 id="security">6 Security</h3>
 <ul>
 <li><a href="https://github.com/presidentbeef/brakeman">brakeman</a></li>
 </ul>

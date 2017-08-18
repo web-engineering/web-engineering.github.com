@@ -107,13 +107,17 @@ the editor <strong>vi</strong>.</p><p>After reading this guide, you will be able
         <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
 <h3 id="emergency-vi-help">1 Emergency Vi Help</h3>
-<p>If you ever need to leave vi, try these commands:</p>
+<p>When working on the command line, you might stumble into vi
+without meaning to.  For example if you have not set the EDITOR
+environment variable to another editor than vi.</p>
+<p>You can recognize vi by the line of squiggly "tilde" symbols running down the left side of the screen:</p>
+<p><img src="images/vi-recognize-modes.png" alt="vi modes"></p>
+<p>If you need to leave vi, try these commands:</p>
 <p>First, always press <code>escape</code></p>
 <ul>
 <li>then type in <code>:q!</code> and hit <code>enter</code> to quit without saving</li>
 <li>then type in <code>:wq!</code> and hit <code>enter</code> to save any changes made and then quit</li>
 </ul>
-<p><code>vi</code> is a very, very old editor that is still used today.</p>
 <h3 id="history">2 History</h3>
 <p><code>vi</code> is a very, very old editor that is still used today.
 To understand how it works, and why it works this way, we
@@ -188,11 +192,11 @@ Command-line mode puts the cursor in the last line, and shows the colon
 (that you typed in to get into command-line mode).</p>
 <h3 id="resources">4 Resources </h3>
 <ul>
-<li><a href="https://vim-adventures.com">vim adventures</a></li>
 <li>
 <a href="https://en.wikipedia.org/wiki/Ed_(text_editor)">Text Editor ed</a> in Wikipedia</li>
 <li>
 <a href="https://en.wikipedia.org/wiki/Ex_(text_editor)">Text Editor ex</a> in Wikipedia</li>
+<li><a href="https://medium.freecodecamp.org/vim-isnt-that-scary-here-are-5-free-resources-you-can-use-to-learn-it-ab78f5726f8d">Vim isn’t that scary. Here are 5 free resources you can use to learn it.</a></li>
 </ul>
 </body></html>
 
