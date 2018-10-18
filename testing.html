@@ -47,8 +47,8 @@
                 <dt>Workflows</dt>
                 <dd><a href="git_branching.html">Git Branching and Merging</a></dd>
                 <dd><a href="pair_programming.html">Pair Programming</a></dd>
+                <dd><a href="code.html">Clean Code</a></dd>
                 <dd><a href="testing.html">Testing</a></dd>
-                <dd><a href="tdd.html">Test Driven Development</a></dd>
                 <dd><a href="refactoring.html">Refactoring</a></dd>
                 <dd><a href="dependencies.html">Managing Dependencies</a></dd>
               </dl>
@@ -81,6 +81,14 @@
 <li><a href="#types-of-tests">Types of Tests</a></li>
 </ul>
 </li>
+<li>
+<a href="#test-driven-development-tdd">Test Driven Development (TDD)</a>
+
+<ul>
+<li><a href="#tipps-for-tdd">Tipps for TDD</a></li>
+</ul>
+</li>
+<li><a href="#getting-startet-with-testing-in-js">Getting Startet with testing in JS</a></li>
 </ol>
 </body></html>
 
@@ -186,6 +194,37 @@ do a pattern match on the resulting string.</p>
 perspective, e.g.: "the shopping cart checkout does not work".
 Unit tests help developers find the part of the program that is
 responsible for a problem: "the cookie store class breaks if you store an undefined value".</p>
+<h3 id="test-driven-development-tdd">2 Test Driven Development (TDD)</h3>
+<p>If you write tests after writing the code of the program itself 
+you will face several problems:</p>
+<ul>
+<li>why write tests now, when we are done programming? isn't it a wast of time?</li>
+<li>we already know the problems our program has, and will write friendly tests that avoid these problems</li>
+<li>the system is finished and the architecture does not lend itself to testing</li>
+</ul>
+<p>To avoid these problems  "Test Driven Development" turns this around:</p>
+<ul>
+<li>you write the test first</li>
+<li>then you write just enough of your program to satisfy the test</li>
+<li>then you refactor your code </li>
+</ul>
+<p>This cycle is also known by three keywords:</p>
+<ul>
+<li>red</li>
+<li>green</li>
+<li>refactor</li>
+</ul>
+<h4 id="tipps-for-tdd">2.1 Tipps for TDD</h4>
+<ul>
+<li>Start with the simple test cases </li>
+<li>Always run the test once before you start implementing (red!)</li>
+<li>do not add code that is not needed (yet) (see <a href="https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it">YAGNI</a>)</li>
+<li>build your program from small units (functions, classes, components), that can be tested separately</li>
+<li>always test the outside of the unit, not the inside </li>
+</ul>
+<h3 id="getting-startet-with-testing-in-js">3 Getting Startet with testing in JS</h3>
+<p>You already have a setup for Javascript and Babel that
+let's you run a <code>build</code> and a <code>start</code> step.</p>
 </body></html>
 
       </div>

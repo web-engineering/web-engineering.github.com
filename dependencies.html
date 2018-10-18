@@ -47,8 +47,8 @@
                 <dt>Workflows</dt>
                 <dd><a href="git_branching.html">Git Branching and Merging</a></dd>
                 <dd><a href="pair_programming.html">Pair Programming</a></dd>
+                <dd><a href="code.html">Clean Code</a></dd>
                 <dd><a href="testing.html">Testing</a></dd>
-                <dd><a href="tdd.html">Test Driven Development</a></dd>
                 <dd><a href="refactoring.html">Refactoring</a></dd>
                 <dd><a href="dependencies.html">Managing Dependencies</a></dd>
               </dl>
@@ -112,7 +112,7 @@
 
           </div>
 
-      <h2>Managing Dependencies</h2><p>The program you write will depend on other code
+      <h2>Managing Dependencies</h2><p>The program you write will depend on  code
 that other people have written.  This guide will teach you 
 how to install, use and upgrade dependencies for your web application. 
 It covers ruby, javascript and php.</p><p>After working through this guide you will be able to:</p>
@@ -134,7 +134,7 @@ It covers ruby, javascript and php.</p><p>After working through this guide you w
         <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
 <h3 id="dependencies">1 Dependencies</h3>
-<p>The program you write will depend on other code
+<p>The program you write will depend on  code
 that other people have written. Some of this code
 has been packaged into operating systems or applications:
 Linux, Postgres, Apache, nginx, and so on.</p>
@@ -177,9 +177,9 @@ package manager for my main programing language enough?</p>
 <p>In many cases using php-only or ruby-only libraries will be enough.
 But sometimes the libraries we use in our dynamic languages use
 other code originally written in c or c++.</p>
-<p>The image processing library <code>imagemagick</code> is a good example.  If you want to use the ruby gem <a href="https://rubygems.org/gems/rmagick/versions/2.15.4">rmagick</a> to edit images you will find that to install
-the gem, you first need to install the program and the library "ImageMagick".
-You do this using apt or brew or
+<p>The image processing library <code>imagemagick</code> is a good example.  If you want to use the ruby gem <a href="https://rubygems.org/gems/rmagick/versions/2.15.4">rmagick</a> or the npm package <a href="https://www.npmjs.com/package/easyimage">easyimage</a> to edit images  you will that they deplend on the library "ImageMagick"
+which is writen in <a href="https://github.com/ImageMagick/ImageMagick/tree/master/MagickCore">C</a>.</p>
+<p>You do this using apt or brew or
 <a href="http://www.imagemagick.org/script/binary-releases.php#windows">the windows installer with dynamic link libraries</a>.</p>
 <p>The result of installing imagemagick with brew is the file <code>libMagickCore-6.Q16.2.dylib</code> and two other libraries.  These are libraries that can be used by multiple programs on your computer when they are dynamically linked to those programs.</p>
 <p>When installing the ruby gem with <code>gem install rmagick</code> you get the following output:</p>
@@ -338,6 +338,9 @@ productive today. But it could well harm you in the long run:</p>
 </li>
 </ul>
 <p>These examples were taken from <a href="https://medium.freecodecamp.com/code-dependencies-are-the-devil-35ed28b556d#.4a7d59i6u">a longer article</a> that discusses ways to minimize the risk.</p>
+<ul>
+<li>Use <a href="https://bundlephobia.com/">bundlephobia</a> to measure the size of javascript dependencies</li>
+</ul>
 <h3 id="quick-start-guides">4 Quick Start Guides</h3>
 <h4 id="apt-for-linux">4.1 apt for Linux</h4>
 <p>The Advanced Package Tool, or APT, handles the installation and removal 
