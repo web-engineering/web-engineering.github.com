@@ -88,7 +88,16 @@
 <li><a href="#tipps-for-tdd">Tipps for TDD</a></li>
 </ul>
 </li>
-<li><a href="#getting-startet-with-testing-in-js">Getting Startet with testing in JS</a></li>
+<li>
+<a href="#getting-startet-with-unit-testing-in-javascript">Getting Startet with unit testing in Javascript</a>
+
+<ul>
+<li><a href="#tddbin">TDDbin</a></li>
+<li><a href="#mocha">Mocha</a></li>
+<li><a href="#mocha-and-babel">Mocha and Babel</a></li>
+</ul>
+</li>
+<li><a href="#literature">Literature</a></li>
 </ol>
 </body></html>
 
@@ -101,7 +110,7 @@ By referring to this guide, you will be able to:</p>
 <li>Understand testing terminology</li>
 <li>Write unit and integration tests for your application</li>
 </ul>
-
+<div class="repo"><p>You can find the setups discussed here in the <a href="https://github.com/web-engineering/example-setups">example setups</a> repository.</p></div>
     </div>
   </div>
 
@@ -188,11 +197,11 @@ do a pattern match on the resulting string.</p>
 <p>As a beginner you should distinguish at least two types of tests:</p>
 <ul>
 <li>unit test - tests one specific unit of code (be it a class, a package, one model, one view....)</li>
-<li>integration test - tests the whole program from the perspective of a user</li>
+<li>end-to-end test - tests the whole program from the perspective of a user</li>
 </ul>
-<p>Integration tests give you more valuable insights from a users
-perspective, e.g.: "the shopping cart checkout does not work".
-Unit tests help developers find the part of the program that is
+<p>End-to-end  tests give you more valuable insights from a users
+perspective, e.g.: "the shopping cart checkout does not work".</p>
+<p>Unit tests help developers find the part of the program that is
 responsible for a problem: "the cookie store class breaks if you store an undefined value".</p>
 <h3 id="test-driven-development-tdd">2 Test Driven Development (TDD)</h3>
 <p>If you write tests after writing the code of the program itself 
@@ -222,9 +231,43 @@ you will face several problems:</p>
 <li>build your program from small units (functions, classes, components), that can be tested separately</li>
 <li>always test the outside of the unit, not the inside </li>
 </ul>
-<h3 id="getting-startet-with-testing-in-js">3 Getting Startet with testing in JS</h3>
-<p>You already have a setup for Javascript and Babel that
-let's you run a <code>build</code> and a <code>start</code> step.</p>
+<h3 id="getting-startet-with-unit-testing-in-javascript">3 Getting Startet with unit testing in Javascript</h3>
+<h4 id="tddbin">3.1 TDDbin</h4>
+<p>On the site <code>https://tddbin.com</code> you can try out TDD without having to install or configure anything.  It gives you modern Javascript  (compiled to ES5 in the background) and the testing framework mocha.</p>
+<p><img src="images/tddbin.png" alt="tddbin in action"></p>
+<p><a href="http://tddbin.com/#?kata=es6/language/class/creation">tddbin</a></p>
+<h4 id="mocha">3.2 Mocha</h4>
+<p>To use mocha to test your command line javascript code
+you can set up a project, add mocha as a development dependency:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+npm install --save-dev mocha
+
+</pre>
+</div>
+<p>Put your first tests into a file <code>test.js</code> which you can run
+either from the commandline as <code>mocha test.js</code> or through npm
+as <code>npm test</code>.</p>
+<p>Inside your test you need to require <code>assert</code>:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+var assert = require('assert');
+
+</pre>
+</div>
+<p>You can find an example setup as <a href="https://github.com/web-engineering/example-setups/tree/master/04-testing">folder 04 in the repo</a></p>
+<h4 id="mocha-and-babel">3.3 Mocha and Babel</h4>
+<p>Using modern Javascript and transpiling it to ES5 complicates the test setup.
+The tests are also written in modern Javascript and also transpiled.
+Then the resulting tests in ES5 are run against the resulting ES5 of the program code.</p>
+<p>You can find an example setup as <a href="https://github.com/web-engineering/example-setups/tree/master/05-testing-babel">folder 05 in the repo</a></p>
+<h3 id="literature">4 Literature</h3>
+<ul>
+<li>Beck, Kent. Test-driven development: by example. Addison-Wesley Professional, 2003.</li>
+<li>Gupta, Ravi Kumar, Hetal Prajapati, and Harmeet Singh. Test-Driven JavaScript Development. Packt Publishing Ltd, 2015.</li>
+<li>Fields, Jay, Shane Harvie, Martin Fowler, and Kent Beck. Refactoring: Ruby Edition. Pearson Education, 2009.</li>
+<li>Metz, Sandi. Practical Object-Oriented Design in Ruby: An Agile Primer. Pearson Education, 2013.</li>
+</ul>
 </body></html>
 
       </div>
