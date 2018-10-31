@@ -77,7 +77,9 @@
 
 <ul>
 <li><a href="#what-is-code-refactoring-questionmark">what is "code refactoring" ?</a></li>
-<li><a href="#refactoring-and-testing">refactoring and testing</a></li>
+<li><a href="#refactoring-and-testing">Refactoring and Testing</a></li>
+<li><a href="#code-smells">Code Smells</a></li>
+<li><a href="#catalog-of-refactorings">Catalog of Refactorings</a></li>
 </ul>
 </li>
 </ol>
@@ -120,18 +122,61 @@ mentioned above.</p>
 <li>"restructuring an existing body of code</li>
 <li>altering its internal structure</li>
 <li>without changing its external behavior"</li>
-<li>or for short:</li>
-<li>change your code:</li>
-<li>but only how you do it,</li>
-<li>not what you do.</li>
 </ul>
-<h4 id="refactoring-and-testing">1.2 refactoring and testing</h4>
+<p>or for short:</p>
 <ul>
-<li>run the unit test (it should be green)</li>
+<li>change your code:</li>
+<li>but only <strong>how</strong> you do it,</li>
+<li>not <strong>what</strong> you do.</li>
+</ul>
+<h4 id="refactoring-and-testing">1.2 Refactoring and Testing</h4>
+<p>Refactoring and Testing go hand in hand: having tests
+gives you the assurance that you are not breaking things when
+you are refactoring the code:</p>
+<ul>
+<li>run the test (it should be green)</li>
 <li>refactor</li>
-<li>run the unit test (it should still be green)</li>
+<li>run the test (it should still be green)</li>
 <li>done</li>
 </ul>
+<h4 id="code-smells">1.3 Code Smells</h4>
+<p>So what should you refactor?  You can look for "code smells" - common patterns
+of "bad" code. In their Refactoring book, Fowler, Beck, Brant, Opdyke and Roberts give a list of such code smells. </p>
+<h5 id="simple-examples">1.3.1 Simple Examples</h5>
+<p>The first code smell is <strong>duplicated code</strong>. "If you see the same code
+structure in more than one place, you can be sure that your program will be better
+if you find a way to unify them."</p>
+<p>Some other code smells that are kind of selfexplanatory:</p>
+<ul>
+<li>Long Method</li>
+<li>Large Class</li>
+<li>Long Parameter List</li>
+</ul>
+<h5 id="comments">1.3.2 Comments</h5>
+<p>Another intresting code smell is "comments".  This is not meant to imply that
+comments are bad, but rather that a code area that needs a lot of comments
+is probably in need of refactoring.</p>
+<p>An easy way to get rid of comments is to extract a method with
+a good name:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+# output the header
+puts "&lt;head&gt;"
+puts "  &lt;meta charset='utf-8'&gt;"
+puts "&lt;/head&gt;"
+
+</pre>
+</div>
+<p>turns into:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+output_the_header()
+
+</pre>
+</div>
+<h4 id="catalog-of-refactorings">1.4 Catalog of Refactorings</h4>
+<p>Chapters 7 to 12 of the Refactoring book give a long catalog of Refactorings.
+The first Refactoring is <strong>Extract Method</strong></p>
 </body></html>
 
       </div>
