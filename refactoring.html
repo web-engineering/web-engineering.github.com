@@ -80,6 +80,7 @@
 <li><a href="#refactoring-and-testing">Refactoring and Testing</a></li>
 <li><a href="#code-smells">Code Smells</a></li>
 <li><a href="#catalog-of-refactorings">Catalog of Refactorings</a></li>
+<li><a href="#refactoring-and-your-editor">Refactoring and your Editor</a></li>
 </ul>
 </li>
 </ol>
@@ -152,11 +153,41 @@ if you find a way to unify them."</p>
 <li>Large Class</li>
 <li>Long Parameter List</li>
 </ul>
-<h5 id="comments">1.3.2 Comments</h5>
-<p>Another intresting code smell is "comments".  This is not meant to imply that
+<p>Study the book to learn about code smells!  You don't have to read it all
+in one go.</p>
+<h4 id="catalog-of-refactorings">1.4 Catalog of Refactorings</h4>
+<p>Chapters 7 to 12 of the Refactoring book give a long catalog of Refactorings.
+A short version of the catalog is also <a href="https://refactoring.com/catalog/">available online</a>, showing all the code example. The book gives you a proper explanation for every refactoring.</p>
+<p>Again: study the book to get to know the refactorings.  You can take your time, and read only a few each day. </p>
+<p>§</p>
+<p>The first Refactoring is <a href="https://refactoring.com/catalog/extractMethod.html">Extract Method</a>. Here's the code example from the Ruby version of the book. The code we start out with:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+def print_owing(amount)
+  print_banner
+  puts "name: #{@name}"
+  puts "amount: #{amount}"
+end
+
+</pre>
+</div>
+<p>And after the refactoring:</p>
+<p>``
+def print_owing(amount)
+  print_banner
+  print_details amount
+end</p>
+<p>def print_details(amount)
+  puts "name: #{@name}"
+  puts "amount: #{amount}"
+end
+```</p>
+<h5 id="code-smells-and-refactorings">1.4.1 Code Smells and Refactorings</h5>
+<p>Let's See how code smells and refactoring work together.</p>
+<p>An intresting code smell is "comments".  This is not meant to imply that
 comments are bad, but rather that a code area that needs a lot of comments
 is probably in need of refactoring.</p>
-<p>An easy way to get rid of comments is to extract a method with
+<p>An easy way to get rid of comments is to <strong>extract</strong> a <strong>method</strong> with
 a good name:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
@@ -167,16 +198,31 @@ puts "&lt;/head&gt;"
 
 </pre>
 </div>
-<p>turns into:</p>
+<p>turns into a call to the method</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
-output_the_header()
+output_the_header
 
 </pre>
 </div>
-<h4 id="catalog-of-refactorings">1.4 Catalog of Refactorings</h4>
-<p>Chapters 7 to 12 of the Refactoring book give a long catalog of Refactorings.
-The first Refactoring is <strong>Extract Method</strong></p>
+<p>with the definition of the method:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+def output the header
+  puts "&lt;head&gt;"
+  puts "  &lt;meta charset='utf-8'&gt;"
+  puts "&lt;/head&gt;"
+end
+
+</pre>
+</div>
+<h4 id="refactoring-and-your-editor">1.5 Refactoring and your Editor</h4>
+<p>Modern programming editors can help you do some refactorings:</p>
+<ul>
+<li><a href="https://code.visualstudio.com/docs/editor/refactoring">vscode</a></li>
+<li><a href="https://www.jetbrains.com/help/webstorm/specific-javascript-refactorings.html">webstorm</a></li>
+<li><a href="https://www.jetbrains.com/help/ruby/refactoring-source-code.html">rubymine</a></li>
+</ul>
 </body></html>
 
       </div>
