@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Web Engineering Textbook: Webserver</title>
+  <title>Web Engineering Textbook: Deploy a Single Page App</title>
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
   <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
@@ -73,20 +73,20 @@
             <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
 <ol class="chapters">
-<li><a href="#the-stack">The Stack</a></li>
+<li><a href="#urls-and-routing-in-a-spa">URLS and Routing in a SPA</a></li>
+<li><a href="#deploying-to-heroku">Deploying to Heroku</a></li>
 <li><a href="#see-also">See Also</a></li>
 </ol>
 </body></html>
 
           </div>
 
-      <h2>Webserver</h2><p>This guide will give you an overview
-of the web server infrastucture behind
-your ruby on rails app.
-After reading it you should be familiar with:</p>
+      <h2>Deploy a Single Page App</h2><p>A Single Page App makes one html file appear
+to contain many pages.  To host such an app
+you need a very specific configuration of a webserver </p><p>After reading it you should be familiar with:</p>
 <ul>
-<li>rack</li>
-<li>apache and mod_passenger</li>
+<li>How to host a SPA on Heroku</li>
+<li>How to configure Apache for a SPA</li>
 </ul>
 
     </div>
@@ -97,14 +97,106 @@ After reading it you should be familiar with:</p>
       <div id="mainCol">
         <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html><body>
-<h3 id="the-stack">1 The Stack</h3>
-<p>Rack is an  interface between webservers and the Ruby and Ruby framework - or
-other ruby-based web apps.</p>
-<p><img src="images/rack-logo.png" alt="rack"></p>
-<h3 id="see-also">2 See Also</h3>
+<h3 id="urls-and-routing-in-a-spa">1 URLS and Routing in a SPA</h3>
+<p>A Single Page App makes one html file appear
+to contain many pages.  When a users clicks on a link
+the URL changes and new content appears, just like
+in a classical static web site.  But the new
+content and the URL change is initiated by JavaScript.
+There need not be a HTTP Request to load the new
+content, the content might be created locally.</p>
+<p>For hosting this </p>
+<h3 id="deploying-to-heroku">2 Deploying to Heroku</h3>
+<p>You need a heroku account and the heroku toolbelt (= command line program) installed.</p>
+<p>Heroku offers a plugin to the heroku toolbelt, install it with</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ heroku plugins:install heroku-cli-static
+
+</pre>
+</div>
+<p>Got to your SPAs root folder and run</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ heroku create
+
+</pre>
+</div>
+<p>to create a new heroku app.  you will be told the URL of your app.</p>
+<p>Now you can start the setup process: First define the buildpacks</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ heroku buildpacks:add heroku/nodejs
+$ heroku buildpacks:add https://github.com/hone/heroku-buildpack-static
+
+</pre>
+</div>
+<p>We need two buildpacks: nodejs to run the build, and static to do
+the actuall serving of the pages.  </p>
+<p>The node buildpack will run <code>npm install</code> automatically.
+this is considered to be the build step. But we need another
+build step to build our app. So we add <code>heroku-postbuild</code> 
+to <code>package.json</code> and run our build there:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+    "heroku-postbuild": "webpack --mode production",
+
+</pre>
+</div>
+<p>To configure the static buildpack we create a file <code>static.json</code>:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ heroku static:init
+? Enter the directory of your app: dist/
+? Drop `.html` extensions from urls? Yes
+? Path to custom error page from root directory: 404.html
+{
+  "root": "dist/",
+  "clean_urls": true,
+  "error_page": "404.html"
+}
+
+</pre>
+</div>
+<p>This creates the file <code>static.json</code>. You could have created this file
+by hand. Now we need to add information about the routing in our page.
+For example: the build process creates a structure.</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+--+ dist
+  |-+ fonts
+    + Roboto-Regular.woff
+    + Roboto-Regular.woff2
+  |-+ images
+    + logo.svg
+  + index.html
+  + style.b15a70a9c7e59c773405.css
+  + main.ff30a167f508273f99d6.js
+
+</pre>
+</div>
+<p>the fonts, images, css and js files should be served by the webserver directly.  All other URLs should be handled by index.html. This can be configured in <code>static.json</code> like this:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+{
+  "root": "dist/",
+  "clean_urls": true,
+  "error_page": "404.html",
+  "routes": {
+    "/fonts/*":  "/fonts/",
+    "/images/*": "/images/",
+    "/*.js":     "/",
+    "/*.css":    "/",
+    "/**":       "index.html"
+  }  
+}
+
+</pre>
+</div>
+<h3 id="see-also">3 See Also</h3>
 <ul>
-<li><a href="http://rack.github.io/">Rack: a Ruby Webserver Interface</a></li>
-<li><a href="http://guides.rubyonrails.org/rails_on_rack.html">Rails Guide: Rails on Rack</a></li>
+<li><a href="https://www.npmjs.com/package/heroku-cli-static">heroku-cli-static</a></li>
+<li><a href="https://github.com/heroku/heroku-buildpack-static">static buildpack for heroku</a></li>
 </ul>
 </body></html>
 
@@ -117,7 +209,7 @@ other ruby-based web apps.</p>
     <div class="wrapper">
       <p class="copyright">published under <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/at/deed.de">creative commons by-nc-sa</a> in 2012-2016 by <a href="http://brigitte-jellinek.at">Brigitte Jellinek</a>.
       </p><p>If you want to contribute: <a href="https://github.com/web-engineering/web-engineering-textbook/fork">fork the source on github</a>
-        and edit <a href="https://github.com/web-engineering/web-engineering-textbook/blob/master/source/webserver.md">webserver.md</a>
+        and edit <a href="https://github.com/web-engineering/web-engineering-textbook/blob/master/source/deploy-spa.md">deploy-spa.md</a>
       </p>
     </div>
   </div>
