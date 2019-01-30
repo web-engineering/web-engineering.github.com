@@ -102,12 +102,20 @@ you need a very specific configuration of a webserver </p><p>After reading it yo
 to contain many pages.  When a users clicks on a link
 the URL changes and new content appears, just like
 in a classical static web site.  But the new
-content and the URL change is initiated by JavaScript.
-There need not be a HTTP Request to load the new
-content, the content might be created locally.</p>
-<p>For hosting this </p>
+content and the URL change are both done by JavaScript.</p>
+<p>See <a href="https://blog.pshrmn.com/entry/how-single-page-applications-work/">How Single-Page Applications Work</a> for a good introduction.</p>
+<p>For example let's consider the single page app on <code>https://mini-spa-demo.herokuapps.com/</code>. There might be only one <code>index.html</code>, but inside this page the URL might be changed to</p>
+<ul>
+<li><code>https://mini-spa-demo.herokuapps.com/about</code></li>
+<li><code>https://mini-spa-demo.herokuapps.com/product/1</code></li>
+<li><code>https://mini-spa-demo.herokuapps.com/product/2</code></li>
+</ul>
+<p>and so on.</p>
+<p>Each of these URLs also need to work when you call them
+directly, without entering through index.html.  This is
+what we need to configure our webserver for.</p>
 <h3 id="deploying-to-heroku">2 Deploying to Heroku</h3>
-<p>You need a heroku account and the heroku toolbelt (= command line program) installed.</p>
+<p>You need a heroku account and the heroku toolbelt (= command line program) installed. Remember: heroku expects your app to be in the <strong>root folder of the repository</strong>!!</p>
 <p>Heroku offers a plugin to the heroku toolbelt, install it with</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
@@ -149,11 +157,11 @@ to <code>package.json</code> and run our build there:</p>
 $ heroku static:init
 ? Enter the directory of your app: dist/
 ? Drop `.html` extensions from urls? Yes
-? Path to custom error page from root directory: 404.html
+? Path to custom error page from root directory: 404
 {
   "root": "dist/",
   "clean_urls": true,
-  "error_page": "404.html"
+  "error_page": "404"
 }
 
 </pre>
