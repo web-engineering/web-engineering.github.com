@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=1024, user-scalable=no">
+    <title>Slides for
+        Refactoring in the Backend Development Textbook
+    </title>
+    <!-- Required stylesheet -->
+    <link rel="stylesheet" media="screen" href="stylesheets/deck.core.css">
+    <!-- Extension CSS files go here. Remove or add as needed. -->
+    <link rel="stylesheet" media="screen" href="stylesheets/deck.goto.css">
+    <link rel="stylesheet" media="screen" href="stylesheets/deck.menu.css">
+    <link rel="stylesheet" media="screen" href="stylesheets/deck.navigation.css">
+    <link rel="stylesheet" media="screen" href="stylesheets/deck.status.css">
+    <!-- Style theme. More available in /themes/style/ or create your own. -->
+    <link rel="stylesheet" media="screen" href="stylesheets/web-2.0.css">
+    <!-- Transition theme. More available in /themes/transition/ or create your own. -->
+    <link rel="stylesheet" media="screen" href="stylesheets/horizontal-slide.css">
+    <!-- syntax highlighter -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shThemeRailsGuides.css" />    
+
+
+    <!-- Basic black and white print styles -->
+    <link rel="stylesheet" media="print" href="stylesheets/print.css">
+    <!-- Required Modernizr file -->
+    <script src="javascripts/modernizr.custom.js"></script>
+</head>
+
+<body>
+    <div class="deck-container">
+        <div class='slide'><h2>Refactoring</h2><p>This guide will explain how you can use refactoring 
+to improve your code.
+By referring to this guide, you will be able to:</p>
+<ul>
+<li>Understand how refactoring is different from changing code</li>
+<li>Know important code smells</li>
+<li>Know important refactorings</li>
+<li>Be able to refactor your code in ruby and javascript</li>
+</ul>
+
+</div>
+<div class='slide'>
+<a class='slide_break' href='refactoring.html#slide-1'>▻</a>
+<h3 id="code-refactoring">1 Code Refactoring</h3>
+<p>As beginners, programmer often do a lot of things at once:
+when they edit a file to implement a new feature, they will also
+fix some problems at the same time and change the formatting of the
+code.</p>
+<p>Becoming a better programmer entails slowing down and untangeling this:
+you stick to doing one thing at a time.  First fix this problem, test
+if it acutally worked.  Then add the new feature, test if that actually
+worked.  Then improve the code to be more easily readable, test if everything
+still works.</p>
+<p>When you are using git, you will do a commit for every single step
+mentioned above.</p>
+</div>
+<div class='slide'>
+<a class='slide_break' href='refactoring.html#slide-2'>▻</a>
+<h4 id="what-is-code-refactoring-questionmark">1.1 what is "code refactoring" ?</h4>
+<ul>
+<li>"restructuring an existing body of code</li>
+<li>altering its internal structure</li>
+<li>without changing its external behavior"</li>
+</ul>
+<p>or for short:</p>
+<ul>
+<li>change your code:</li>
+<li>but only <strong>how</strong> you do it,</li>
+<li>not <strong>what</strong> you do.</li>
+</ul>
+</div>
+<div class='slide'>
+<a class='slide_break' href='refactoring.html#slide-3'>▻</a>
+<h4 id="refactoring-and-testing">1.2 Refactoring and Testing</h4>
+<p>Refactoring and Testing go hand in hand: having tests
+gives you the assurance that you are not breaking things when
+you are refactoring the code:</p>
+<ul>
+<li>run the test (it should be green)</li>
+<li>refactor</li>
+<li>run the test (it should still be green)</li>
+<li>done</li>
+</ul>
+</div>
+<div class='slide'>
+<a class='slide_break' href='refactoring.html#slide-4'>▻</a>
+<h4 id="code-smells">1.3 Code Smells</h4>
+<p>So what should you refactor?  You can look for "code smells" - common patterns
+of "bad" code. In their Refactoring book, Fowler, Beck, Brant, Opdyke and Roberts give a list of such code smells. </p>
+<p>The first code smell is <strong>duplicated code</strong>. "If you see the same code
+structure in more than one place, you can be sure that your program will be better
+if you find a way to unify them."</p>
+<p>Some other code smells that are kind of selfexplanatory:</p>
+<ul>
+<li>Long Method</li>
+<li>Large Class</li>
+<li>Long Parameter List</li>
+</ul>
+<p>Study the book to learn about code smells!  You don't have to read it all
+in one go.</p>
+</div>
+<div class='slide'>
+<a class='slide_break' href='refactoring.html#slide-5'>▻</a>
+<h4 id="catalog-of-refactorings">1.4 Catalog of Refactorings</h4>
+<p>Chapters 7 to 12 of the Refactoring book give a long catalog of Refactorings.
+A short version of the catalog is also <a href="https://refactoring.com/catalog/">available online</a>, showing all the code example. The book gives you a proper explanation for every refactoring.</p>
+<p>Again: study the book to get to know the refactorings.  You can take your time, and read only a few each day. </p>
+</div>
+<div class='slide'>
+<a class='slide_break' href='refactoring.html#slide-6'>▻</a>
+<h4 id="simple-example">1.5 Simple Example</h4>
+<p>The first Refactoring is <a href="https://refactoring.com/catalog/extractMethod.html">Extract Method</a>. Here's the code example from the Ruby version of the book. The code we start out with:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+def print_owing(amount)
+  print_banner
+  puts "name: #{@name}"
+  puts "amount: #{amount}"
+end
+
+</pre>
+</div>
+<p>And after the refactoring:</p>
+<p>``
+def print_owing(amount)
+  print_banner
+  print_details amount
+end</p>
+<p>def print_details(amount)
+  puts "name: #{@name}"
+  puts "amount: #{amount}"
+end
+```</p>
+</div>
+<div class='slide'>
+<a class='slide_break' href='refactoring.html#slide-7'>▻</a>
+<h4 id="code-smells-and-refactorings">1.6 Code Smells and Refactorings</h4>
+<p>Let's See how code smells and refactoring work together.</p>
+<p>An intresting code smell is "comments".  This is not meant to imply that
+comments are bad, but rather that a code area that needs a lot of comments
+is probably in need of refactoring.</p>
+<p>An easy way to get rid of comments is to <strong>extract</strong> a <strong>method</strong> with
+a good name:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+# output the header
+puts "&lt;head&gt;"
+puts "  &lt;meta charset='utf-8'&gt;"
+puts "&lt;/head&gt;"
+
+</pre>
+</div>
+<p>turns into a call to the method</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+output_the_header
+
+</pre>
+</div>
+<p>with the definition of the method:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+def output the header
+  puts "&lt;head&gt;"
+  puts "  &lt;meta charset='utf-8'&gt;"
+  puts "&lt;/head&gt;"
+end
+
+</pre>
+</div>
+</div>
+<div class='slide'>
+<a class='slide_break' href='refactoring.html#slide-8'>▻</a>
+<h4 id="refactoring-and-your-editor">1.7 Refactoring and your Editor</h4>
+<p>Modern programming editors can help you do some refactorings:</p>
+<ul>
+<li><a href="https://code.visualstudio.com/docs/editor/refactoring">vscode</a></li>
+<li><a href="https://www.jetbrains.com/help/webstorm/specific-javascript-refactorings.html">webstorm</a></li>
+<li><a href="https://www.jetbrains.com/help/ruby/refactoring-source-code.html">rubymine</a></li>
+</ul>
+</div>
+    </div>
+    <!-- End slides. -->
+    <!-- Begin extension snippets. Add or remove as needed. -->
+    <!-- deck.navigation snippet -->
+    <div aria-role="navigation">
+        <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+        <a href="#" class="deck-next-link" title="Next">&#8594;</a>
+    </div>
+    <!-- deck.status snippet -->
+    <p class="deck-status" aria-role="status">
+        <span class="deck-status-current"></span>
+        /
+        <span class="deck-status-total"></span>
+    </p>
+    <!-- deck.goto snippet -->
+    <form action="." method="get" class="goto-form">
+        <label for="goto-slide">Go to slide:</label>
+        <input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+        <datalist id="goto-datalist"></datalist>
+        <input type="submit" value="Go">
+    </form>
+    <!-- End extension snippets. -->
+    </div>
+    <!-- Required JS files. -->
+    <script src="javascripts/jquery.min.js"></script>
+    <script src="javascripts/deck.core.js"></script>
+    <!-- Extension JS files. Add or remove as needed. -->
+    <script src="javascripts/deck.menu.js"></script>
+    <script src="javascripts/deck.goto.js"></script>
+    <script src="javascripts/deck.status.js"></script>
+    <script src="javascripts/deck.navigation.js"></script>
+    <script src="javascripts/deck.escape.js"></script>
+    <!--  Syntax highlighter -->
+    <script src="javascripts/syntaxhighlighter/shCore.js"></script>
+    <script src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
+    <script src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
+    <script src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
+    <script src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>    
+    <!-- Initialize the deck. You can put this in an external file if desired. -->
+    <script>
+    SyntaxHighlighter.all()      
+    $(function() {
+      $.deck('.slide');
+    });
+
+    var $d = $(document);    
+
+    $d.bind('deck.change', function(event, from, to) {
+      // console.log('Moving from slide ' + from + ' to ' + to);
+    });   
+    $d.bind('deck.beforeInit', function() {
+      // console.log('Deck.beforeInit. hash is ' + document.location.hash);
+    });     
+    $d.bind('deck.init', function() {
+      // console.log('Deck.init is done. hash was ' + document.location.hash);
+    }); 
+    </script>
+</body>
+
+</html>

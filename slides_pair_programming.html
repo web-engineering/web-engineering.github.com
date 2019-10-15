@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=1024, user-scalable=no">
+    <title>Slides for
+        Pair Programming in the Backend Development Textbook
+    </title>
+    <!-- Required stylesheet -->
+    <link rel="stylesheet" media="screen" href="stylesheets/deck.core.css">
+    <!-- Extension CSS files go here. Remove or add as needed. -->
+    <link rel="stylesheet" media="screen" href="stylesheets/deck.goto.css">
+    <link rel="stylesheet" media="screen" href="stylesheets/deck.menu.css">
+    <link rel="stylesheet" media="screen" href="stylesheets/deck.navigation.css">
+    <link rel="stylesheet" media="screen" href="stylesheets/deck.status.css">
+    <!-- Style theme. More available in /themes/style/ or create your own. -->
+    <link rel="stylesheet" media="screen" href="stylesheets/web-2.0.css">
+    <!-- Transition theme. More available in /themes/transition/ or create your own. -->
+    <link rel="stylesheet" media="screen" href="stylesheets/horizontal-slide.css">
+    <!-- syntax highlighter -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shThemeRailsGuides.css" />    
+
+
+    <!-- Basic black and white print styles -->
+    <link rel="stylesheet" media="print" href="stylesheets/print.css">
+    <!-- Required Modernizr file -->
+    <script src="javascripts/modernizr.custom.js"></script>
+</head>
+
+<body>
+    <div class="deck-container">
+        <div class='slide'><h2>Pair Programming</h2><p>In this guide you will learn about a special form of teamwork
+in programming: pair programming.</p><p>After reading this guide, you will:</p>
+<ul>
+<li>Know why you should try pair programming</li>
+<li>have a good starting point for your first try at pairing</li>
+</ul>
+
+</div>
+<div class='slide'>
+<a class='slide_break' href='pair_programming.html#slide-1'>▻</a>
+<h3 id="pair-programming">1 Pair Programming</h3>
+<p>In pair programming two programmers work together at one workstation. 
+One, the driver, writes code while the other, the observer or navigator,
+considers the "strategic" direction of the work, coming up with 
+ideas for improvements and likely future problems to address.
+The two programmers switch roles frequently.</p>
+</div>
+<div class='slide'>
+<a class='slide_break' href='pair_programming.html#slide-2'>▻</a>
+<h4 id="why-pair-questionmark">1.1 why pair?</h4>
+<p>At first glance two people programming together seems
+like a waste of resources: they could be typing in twice
+the amount of code if they each had a keyboard!</p>
+<p>But a closer look reveals some positive features of pair programming:</p>
+<ul>
+<li>pairs are more productive than single developers (see Williams(2000))</li>
+<li>better quality of life through contact with other humans</li>
+<li>learn from each other</li>
+<li>part of agile methodologies, used today in industry</li>
+</ul>
+</div>
+<div class='slide'>
+<a class='slide_break' href='pair_programming.html#slide-3'>▻</a>
+<h3 id="pair-programming-und-git">2 Pair Programming und git</h3>
+<p>We want the log to show who worked as a pair</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ git log
+commit 38d4f10fe2fb3f4d13e12d75e70bc0a085f0753f
+Author: Brigitte Jellinek + Xaviar Hyde &lt;xhyde.lba@fh-salzburg.ac.at&gt;
+Date:   Fri Sep 14 10:52:41 2012 +0200
+
+</pre>
+</div>
+<p>This follows the pattern:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+firstname lastname driver + firstname lastname navigator
+e-mail address of the navigator
+
+</pre>
+</div>
+</div>
+<div class='slide'>
+<a class='slide_break' href='pair_programming.html#slide-4'>▻</a>
+<h4 id="git-config">2.1 git config</h4>
+<p>The configuration of git is saved on three levels:
+For the repository you can find the configuration in the file <code>.git/config</code>.</p>
+<p>You can set your own user-specific settings with the command line switch <code>--global</code>.
+They will be saved to <code>~/.gitconfig</code>.  </p>
+<p>And with the command line switch <code>--system</code> you can set global settings that
+will be saved to <code>/etc/gitconfig</code></p>
+<p>This is what a <code>.git/config</code> file might look like:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+[user]
+    name = Brigitte Jellinek + Xaviar Hyde
+    email = xhyde.lba@fh-salzburg.ac.at
+
+[core]
+    repositoryformatversion = 0
+    filemode = true
+    bare = false
+    logallrefupdates = true
+    ignorecase = true
+
+[remote "origin"]
+    url = ssh://repos.mediacube.at/opt/git/webpm/r1
+    fetch = +refs/heads/*:refs/remotes/origin/*
+
+</pre>
+</div>
+</div>
+    </div>
+    <!-- End slides. -->
+    <!-- Begin extension snippets. Add or remove as needed. -->
+    <!-- deck.navigation snippet -->
+    <div aria-role="navigation">
+        <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+        <a href="#" class="deck-next-link" title="Next">&#8594;</a>
+    </div>
+    <!-- deck.status snippet -->
+    <p class="deck-status" aria-role="status">
+        <span class="deck-status-current"></span>
+        /
+        <span class="deck-status-total"></span>
+    </p>
+    <!-- deck.goto snippet -->
+    <form action="." method="get" class="goto-form">
+        <label for="goto-slide">Go to slide:</label>
+        <input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+        <datalist id="goto-datalist"></datalist>
+        <input type="submit" value="Go">
+    </form>
+    <!-- End extension snippets. -->
+    </div>
+    <!-- Required JS files. -->
+    <script src="javascripts/jquery.min.js"></script>
+    <script src="javascripts/deck.core.js"></script>
+    <!-- Extension JS files. Add or remove as needed. -->
+    <script src="javascripts/deck.menu.js"></script>
+    <script src="javascripts/deck.goto.js"></script>
+    <script src="javascripts/deck.status.js"></script>
+    <script src="javascripts/deck.navigation.js"></script>
+    <script src="javascripts/deck.escape.js"></script>
+    <!--  Syntax highlighter -->
+    <script src="javascripts/syntaxhighlighter/shCore.js"></script>
+    <script src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
+    <script src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
+    <script src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
+    <script src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>    
+    <!-- Initialize the deck. You can put this in an external file if desired. -->
+    <script>
+    SyntaxHighlighter.all()      
+    $(function() {
+      $.deck('.slide');
+    });
+
+    var $d = $(document);    
+
+    $d.bind('deck.change', function(event, from, to) {
+      // console.log('Moving from slide ' + from + ' to ' + to);
+    });   
+    $d.bind('deck.beforeInit', function() {
+      // console.log('Deck.beforeInit. hash is ' + document.location.hash);
+    });     
+    $d.bind('deck.init', function() {
+      // console.log('Deck.init is done. hash was ' + document.location.hash);
+    }); 
+    </script>
+</body>
+
+</html>

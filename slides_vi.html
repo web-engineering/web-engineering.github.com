@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=1024, user-scalable=no">
+    <title>Slides for
+        vi in the Backend Development Textbook
+    </title>
+    <!-- Required stylesheet -->
+    <link rel="stylesheet" media="screen" href="stylesheets/deck.core.css">
+    <!-- Extension CSS files go here. Remove or add as needed. -->
+    <link rel="stylesheet" media="screen" href="stylesheets/deck.goto.css">
+    <link rel="stylesheet" media="screen" href="stylesheets/deck.menu.css">
+    <link rel="stylesheet" media="screen" href="stylesheets/deck.navigation.css">
+    <link rel="stylesheet" media="screen" href="stylesheets/deck.status.css">
+    <!-- Style theme. More available in /themes/style/ or create your own. -->
+    <link rel="stylesheet" media="screen" href="stylesheets/web-2.0.css">
+    <!-- Transition theme. More available in /themes/transition/ or create your own. -->
+    <link rel="stylesheet" media="screen" href="stylesheets/horizontal-slide.css">
+    <!-- syntax highlighter -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shThemeRailsGuides.css" />    
+
+
+    <!-- Basic black and white print styles -->
+    <link rel="stylesheet" media="print" href="stylesheets/print.css">
+    <!-- Required Modernizr file -->
+    <script src="javascripts/modernizr.custom.js"></script>
+</head>
+
+<body>
+    <div class="deck-container">
+        <div class='slide'><h2>vi</h2><p>This Guide will give you a very quick introduction to
+the editor <strong>vi</strong>.</p><p>After reading this guide, you will be able to:</p>
+<ul>
+<li>recognize <code>vi</code> if you stumble into it</li>
+<li>get out of <code>vi</code> </li>
+<li>understand the different modes </li>
+<li>do basic editing in <code>vi</code></li>
+</ul>
+
+</div>
+<div class='slide'>
+<a class='slide_break' href='vi.html#slide-1'>▻</a>
+<h3 id="emergency-vi-help">1 Emergency Vi Help</h3>
+<p>When working on the command line, you might stumble into vi
+without meaning to.  For example if you have not set the EDITOR
+environment variable to another editor than vi.</p>
+<p>You can recognize vi by the line of squiggly "tilde" symbols running down the left side of the screen:</p>
+<p><img src="images/vi-recognize-modes.png" alt="vi modes"></p>
+<p>If you need to leave vi, try these commands:</p>
+<p>First, always press <code>escape</code></p>
+<ul>
+<li>then type in <code>:q!</code> and hit <code>enter</code> to quit without saving</li>
+<li>then type in <code>:wq!</code> and hit <code>enter</code> to save any changes made and then quit</li>
+</ul>
+</div>
+<div class='slide'>
+<a class='slide_break' href='vi.html#slide-2'>▻</a>
+<h3 id="history">2 History</h3>
+<p><code>vi</code> is a very, very old editor that is still used today.
+To understand how it works, and why it works this way, we
+have to go back in time:</p>
+</div>
+<div class='slide'>
+<a class='slide_break' href='vi.html#slide-3'>▻</a>
+<h4 id="ed">2.1 ed</h4>
+<p>In 1969, when the operating system UNIX was first developed,
+Teleprinters (also called teletypewriters, or short TTY) were
+used as input and output devices for computers: a keyboard
+for input, and a printer for output.</p>
+<p><img src="images/teletype-33.jpg" alt="Example of a Teleprinter"></p>
+<p>For UNIX a <strong>line editor</strong> called <strong>ed</strong> was developed, that
+could be used on TTYs. <strong>ed</strong> distinguishes command mode from text mode,
+and always starts out in command mode.  </p>
+<p>In the following example session the user first types in the command <strong>a</strong> 
+(for 'append') to enter text mode, and then enters two lines of text
+and a period on an empty line to leave text mode.</p>
+<p>The editor gives no feedback at this point.  The user enters 
+the command <strong>p</strong> to print out the current line.
+Notice that only the current line is printed, not the whole file!</p>
+<p>Next the user enters <strong>i</strong> (for 'insert'), modified by the number two
+to indicate that the text should be inserted twice (before the current line).
+The user enters a line of equal-signs and again a period on an empty line
+to end the text-input.</p>
+<p>The user finally uses the command <strong>l</strong> to output the text with extra information: 
+a $ sign for the line endings is printed.  The comma before the l command
+selets the range of lines to be printed (here: all the lines). To print
+just lines 2 to 4 one would write <strong>2,4l</strong>.</p>
+<p>Then the user types in a substitution command <strong>s</strong> to replace
+the word "two" by the word "four". And finally the <strong>w</strong> (write) command
+to save the text to a file and <strong>q</strong> (quit) to exit the editor.</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+a
+ed is the standard Unix text editor.
+This is line number two.
+.
+p
+This is line number two.
+2i
+========================
+.
+,l
+ed is the standard Unix text editor.$
+========================$
+========================$
+This is line number two.$
+s/two/four/
+p
+This is line number four.$
+w about-ed.txt
+88
+q
+
+</pre>
+</div>
+</div>
+<div class='slide'>
+<a class='slide_break' href='vi.html#slide-4'>▻</a>
+<h4 id="ex">2.2 ex</h4>
+<p>The next step was the editor <strong>ex</strong> which brought a slight change
+in interface: the input prompt is marked with a colon.</p>
+</div>
+<div class='slide'>
+<a class='slide_break' href='vi.html#slide-5'>▻</a>
+<h4 id="vi">2.3 vi</h4>
+<p>With monitors came the next version of the editor: the visual editor <em>vi</em>.</p>
+<p>It now displays the content of the file (one screen at a time),
+and offers a cursor - it almost looks and works like a modern text editor.
+But <em>ed</em> and <em>ex</em> are still there, in the <em>normal mode</em> and <em>commandline</em> of vi.</p>
+</div>
+<div class='slide'>
+<a class='slide_break' href='vi.html#slide-6'>▻</a>
+<h3 id="vi-modes">3 Vi Modes</h3>
+<p><img src="images/vi-modes.svg" alt="vi modes"></p>
+<p>Using <em>vi</em> you have to be aware which mode the editor is in. There
+are only subtle visual clues to help you.</p>
+<p><img src="images/vi-recognize-modes.png" alt="vi modes"></p>
+<p>As you can see in the images above, insert mode is distinguished
+from normal mode by the showing <code>-- INSERT --</code> in the last line.
+Command-line mode puts the cursor in the last line, and shows the colon
+(that you typed in to get into command-line mode).</p>
+</div>
+<div class='slide'>
+<a class='slide_break' href='vi.html#slide-7'>▻</a>
+<h3 id="resources">4 Resources </h3>
+<ul>
+<li>
+<a href="https://en.wikipedia.org/wiki/Ed_(text_editor)">Text Editor ed</a> in Wikipedia</li>
+<li>
+<a href="https://en.wikipedia.org/wiki/Ex_(text_editor)">Text Editor ex</a> in Wikipedia</li>
+<li><a href="https://medium.freecodecamp.org/vim-isnt-that-scary-here-are-5-free-resources-you-can-use-to-learn-it-ab78f5726f8d">Vim isn’t that scary. Here are 5 free resources you can use to learn it.</a></li>
+</ul>
+</div>
+    </div>
+    <!-- End slides. -->
+    <!-- Begin extension snippets. Add or remove as needed. -->
+    <!-- deck.navigation snippet -->
+    <div aria-role="navigation">
+        <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+        <a href="#" class="deck-next-link" title="Next">&#8594;</a>
+    </div>
+    <!-- deck.status snippet -->
+    <p class="deck-status" aria-role="status">
+        <span class="deck-status-current"></span>
+        /
+        <span class="deck-status-total"></span>
+    </p>
+    <!-- deck.goto snippet -->
+    <form action="." method="get" class="goto-form">
+        <label for="goto-slide">Go to slide:</label>
+        <input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+        <datalist id="goto-datalist"></datalist>
+        <input type="submit" value="Go">
+    </form>
+    <!-- End extension snippets. -->
+    </div>
+    <!-- Required JS files. -->
+    <script src="javascripts/jquery.min.js"></script>
+    <script src="javascripts/deck.core.js"></script>
+    <!-- Extension JS files. Add or remove as needed. -->
+    <script src="javascripts/deck.menu.js"></script>
+    <script src="javascripts/deck.goto.js"></script>
+    <script src="javascripts/deck.status.js"></script>
+    <script src="javascripts/deck.navigation.js"></script>
+    <script src="javascripts/deck.escape.js"></script>
+    <!--  Syntax highlighter -->
+    <script src="javascripts/syntaxhighlighter/shCore.js"></script>
+    <script src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
+    <script src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
+    <script src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
+    <script src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>    
+    <!-- Initialize the deck. You can put this in an external file if desired. -->
+    <script>
+    SyntaxHighlighter.all()      
+    $(function() {
+      $.deck('.slide');
+    });
+
+    var $d = $(document);    
+
+    $d.bind('deck.change', function(event, from, to) {
+      // console.log('Moving from slide ' + from + ' to ' + to);
+    });   
+    $d.bind('deck.beforeInit', function() {
+      // console.log('Deck.beforeInit. hash is ' + document.location.hash);
+    });     
+    $d.bind('deck.init', function() {
+      // console.log('Deck.init is done. hash was ' + document.location.hash);
+    }); 
+    </script>
+</body>
+
+</html>

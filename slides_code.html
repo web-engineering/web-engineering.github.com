@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=1024, user-scalable=no">
+    <title>Slides for
+        Tools to keep your Code Clean in the Backend Development Textbook
+    </title>
+    <!-- Required stylesheet -->
+    <link rel="stylesheet" media="screen" href="stylesheets/deck.core.css">
+    <!-- Extension CSS files go here. Remove or add as needed. -->
+    <link rel="stylesheet" media="screen" href="stylesheets/deck.goto.css">
+    <link rel="stylesheet" media="screen" href="stylesheets/deck.menu.css">
+    <link rel="stylesheet" media="screen" href="stylesheets/deck.navigation.css">
+    <link rel="stylesheet" media="screen" href="stylesheets/deck.status.css">
+    <!-- Style theme. More available in /themes/style/ or create your own. -->
+    <link rel="stylesheet" media="screen" href="stylesheets/web-2.0.css">
+    <!-- Transition theme. More available in /themes/transition/ or create your own. -->
+    <link rel="stylesheet" media="screen" href="stylesheets/horizontal-slide.css">
+    <!-- syntax highlighter -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shThemeRailsGuides.css" />    
+
+
+    <!-- Basic black and white print styles -->
+    <link rel="stylesheet" media="print" href="stylesheets/print.css">
+    <!-- Required Modernizr file -->
+    <script src="javascripts/modernizr.custom.js"></script>
+</head>
+
+<body>
+    <div class="deck-container">
+        <div class='slide'><h2>Tools to keep your Code Clean</h2><p>With this guide will get to know some tools
+that will help you produce good code, and keep
+the quality up.</p>
+<ul>
+<li>this</li>
+<li>that</li>
+</ul>
+
+</div>
+<div class='slide'>
+<a class='slide_break' href='code.html#slide-1'>▻</a>
+<h3 id="static-code-analysis">1 Static Code Analysis</h3>
+<p>Any automatic analysis done on the <strong>source code</strong> of a program
+is called <strong>static</strong> analysis.  The simplest form is a check
+of coding conventions. This is called "linting". </p>
+</div>
+<div class='slide'>
+<a class='slide_break' href='code.html#slide-2'>▻</a>
+<h3 id="style-guide">2 Style Guide</h3>
+<p>A Style Guide or Coding Convention tells places
+restrictions on the way you write your code: it tells
+you how deep indentation should be, whether to put
+spaces inside brackts, and so on.</p>
+<p>You can invest a lot of emotional energy in this, and fight
+with your co-workers over the details of formatting.  Or
+you can just decide on a style guide to follow, and be done
+with the discussions.</p>
+<ul>
+<li><a href="https://github.com/bbatsov/ruby-style-guide">ruby style guide</a></li>
+<li><a href="https://github.com/airbnb/javascript">airbnb style guide</a></li>
+<li><a href="https://standardjs.com/">javascript standard stlye</a></li>
+<li><a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md">PHP Standards Recommendations: PSR-2</a></li>
+</ul>
+</div>
+<div class='slide'>
+<a class='slide_break' href='code.html#slide-3'>▻</a>
+<h3 id="linting">3 Linting</h3>
+<p>To lint is to check if code follows a style guide.
+Linting tools are available for all languages:</p>
+<ul>
+<li><a href="https://github.com/bbatsov/rubocop">rubocop</a></li>
+<li><a href="http://eslint.org/">ES Lint</a></li>
+<li><a href="https://github.com/squizlabs/PHP_CodeSniffer">PHP Code Sniffer</a></li>
+</ul>
+<p>You can incorporate linting into your editor, this
+way you will never stray far from the style guide.</p>
+</div>
+<div class='slide'>
+<a class='slide_break' href='code.html#slide-4'>▻</a>
+<h3 id="example-linter-for-ruby-rubocop">4 Example Linter for Ruby: Rubocop</h3>
+<p>When you run <code>rubocop</code> it will examine all the files
+in the current directory, and in subdirectories.</p>
+<p>The rules that rubocop follows are called "cops". The default
+rules are <a href="https://github.com/bbatsov/rubocop/blob/master/config/enabled.yml">documented here</a>.</p>
+<p>You can configure rubocop by writing a file <code>.rubocop.yml</code> in your
+projects root folder.</p>
+<p>Run  <code>rubocop -d</code> to find out which rules the code is breaking.
+You can disable rules for all files, you can exempt some files from
+completely, or you can deactivate a rule just for a few lines of code:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+# rubocop:disable Metrics/LineLength, Style/StringLiterals
+# [... ugly code ...]
+# rubocop:enable Metrics/LineLength, Style/StringLiterals
+
+</pre>
+</div>
+</div>
+<div class='slide'>
+<a class='slide_break' href='code.html#slide-5'>▻</a>
+<h3 id="best-practices">5 Best Practices</h3>
+<ul>
+<li><a href="https://github.com/railsbp/rails_best_practices">rails_best_pracices</a></li>
+</ul>
+</div>
+<div class='slide'>
+<a class='slide_break' href='code.html#slide-6'>▻</a>
+<h3 id="security">6 Security</h3>
+<ul>
+<li><a href="https://github.com/presidentbeef/brakeman">brakeman</a></li>
+</ul>
+</div>
+    </div>
+    <!-- End slides. -->
+    <!-- Begin extension snippets. Add or remove as needed. -->
+    <!-- deck.navigation snippet -->
+    <div aria-role="navigation">
+        <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+        <a href="#" class="deck-next-link" title="Next">&#8594;</a>
+    </div>
+    <!-- deck.status snippet -->
+    <p class="deck-status" aria-role="status">
+        <span class="deck-status-current"></span>
+        /
+        <span class="deck-status-total"></span>
+    </p>
+    <!-- deck.goto snippet -->
+    <form action="." method="get" class="goto-form">
+        <label for="goto-slide">Go to slide:</label>
+        <input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+        <datalist id="goto-datalist"></datalist>
+        <input type="submit" value="Go">
+    </form>
+    <!-- End extension snippets. -->
+    </div>
+    <!-- Required JS files. -->
+    <script src="javascripts/jquery.min.js"></script>
+    <script src="javascripts/deck.core.js"></script>
+    <!-- Extension JS files. Add or remove as needed. -->
+    <script src="javascripts/deck.menu.js"></script>
+    <script src="javascripts/deck.goto.js"></script>
+    <script src="javascripts/deck.status.js"></script>
+    <script src="javascripts/deck.navigation.js"></script>
+    <script src="javascripts/deck.escape.js"></script>
+    <!--  Syntax highlighter -->
+    <script src="javascripts/syntaxhighlighter/shCore.js"></script>
+    <script src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
+    <script src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
+    <script src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
+    <script src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>    
+    <!-- Initialize the deck. You can put this in an external file if desired. -->
+    <script>
+    SyntaxHighlighter.all()      
+    $(function() {
+      $.deck('.slide');
+    });
+
+    var $d = $(document);    
+
+    $d.bind('deck.change', function(event, from, to) {
+      // console.log('Moving from slide ' + from + ' to ' + to);
+    });   
+    $d.bind('deck.beforeInit', function() {
+      // console.log('Deck.beforeInit. hash is ' + document.location.hash);
+    });     
+    $d.bind('deck.init', function() {
+      // console.log('Deck.init is done. hash was ' + document.location.hash);
+    }); 
+    </script>
+</body>
+
+</html>

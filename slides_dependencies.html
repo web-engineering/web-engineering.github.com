@@ -1,116 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=1024, user-scalable=no">
+    <title>Slides for
+        Managing Dependencies in the Backend Development Textbook
+    </title>
+    <!-- Required stylesheet -->
+    <link rel="stylesheet" media="screen" href="stylesheets/deck.core.css">
+    <!-- Extension CSS files go here. Remove or add as needed. -->
+    <link rel="stylesheet" media="screen" href="stylesheets/deck.goto.css">
+    <link rel="stylesheet" media="screen" href="stylesheets/deck.menu.css">
+    <link rel="stylesheet" media="screen" href="stylesheets/deck.navigation.css">
+    <link rel="stylesheet" media="screen" href="stylesheets/deck.status.css">
+    <!-- Style theme. More available in /themes/style/ or create your own. -->
+    <link rel="stylesheet" media="screen" href="stylesheets/web-2.0.css">
+    <!-- Transition theme. More available in /themes/transition/ or create your own. -->
+    <link rel="stylesheet" media="screen" href="stylesheets/horizontal-slide.css">
+    <!-- syntax highlighter -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shThemeRailsGuides.css" />    
 
-  <title>Managing Dependencies in the Backend Development Textbook</title>
-  <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
-  <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
-  <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shThemeRailsGuides.css" />
-
-  <link rel="stylesheet" type="text/css" href="stylesheets/fixes.css" />
-  <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" />
-
-  <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <!-- Basic black and white print styles -->
+    <link rel="stylesheet" media="print" href="stylesheets/print.css">
+    <!-- Required Modernizr file -->
+    <script src="javascripts/modernizr.custom.js"></script>
 </head>
-<body class="guide">
-  <div>
-    <a href="http://github.com/web-engineering/web-engineering-textbook/"><img style="position: fixed; top: 0; right: 0; border: 0; z-index: 10;" src="images/forkme.png" alt="Fork me on GitHub"></a>
-  </div>
-  <div id="topNav">
-    <div class="wrapper">
-      <strong class="more-info-label">Learn more at the sources: </strong>
-      <ul class="more-info-links s-hidden">
-        <li class="more-info"><a href="https://git-scm.com/documentation">Git Documentation</a></li>
-        <li class="more-info"><a href="https://try.github.io/">Try Git</a></li>
-        <li class="more-info"><a href="http://refactoring.com/catalog/">Refactoring Catalog</a></li>
-      </ul>
-    </div>
-  </div>
-  <div id="header">
-    <div class="wrapper clearfix">
-      <h1><a href="index.html" title="Return to home page">Web<span>Engineering</span></a></h1>
-      <ul class="nav">
-        <li><a class="nav-item" href="index.html">Home</a></li>
-        <li class="guides-index guides-index-large">
-          <a href="index.html" onclick="guideMenu(); return false;" id="guidesMenu" class="guides-index-item nav-item">Index  &#x25BC;</a>
-          <div id="guides" class="clearfix" style="display: none;">
-            <hr />
-              <dl class="L">
-                <dt>Basics</dt>
-                <dd><a href="vi.html">vi</a></dd>
-                <dd><a href="public_key.html">Using Public Key Cryptography</a></dd>
-                <dd><a href="git_basics.html">Git Basics</a></dd>
-                <dt>Workflows</dt>
-                <dd><a href="git_branching.html">Git Branching and Merging</a></dd>
-                <dd><a href="pair_programming.html">Pair Programming</a></dd>
-                <dd><a href="code.html">Clean Code</a></dd>
-                <dd><a href="testing.html">Testing</a></dd>
-                <dd><a href="refactoring.html">Refactoring</a></dd>
-                <dd><a href="dependencies.html">Managing Dependencies</a></dd>
-              </dl>
-              <dl class="R">
-                <dt>Web Operations</dt>
-                <dd><a href="deploy-spa.html">Deploy a SPA</a></dd>
-                <dd><a href="webserver.html">Webserver</a></dd>
-              </dl>
-          </div>
-          </li>
-        <li><a class="nav-item" href="https://github.com/web-engineering/web-engineering-textbook/">Contribute</a></li>
-      </ul>
-      </div>
-    </div>
-  </div>
-  <hr class="hide" />
 
-  <div id="feature">
-    <div class="wrapper">
-                <div id="subCol">
-            <h3 class="chapter"><img src="images/chapters_icon.gif" alt="" />Chapters</h3>
-            <ol class="chapters">
-<li>
-<a href="#dependencies">Dependencies</a>
-
-<ul>
-<li><a href="#libraries-io">libraries.io</a></li>
-<li><a href="#dynamiclly-linked-libraries">dynamiclly linked libraries</a></li>
-<li><a href="#package-names-and-a-central-database">package names and a central database</a></li>
-<li><a href="#how-to-install">How to install</a></li>
-<li><a href="#where-is-the-code-installed-questionmark">Where is the code installed?</a></li>
-<li><a href="#security-considerations">Security considerations</a></li>
-</ul>
-</li>
-<li>
-<a href="#dependency-hell">Dependency Hell</a>
-
-<ul>
-<li><a href="#escape-from-depencency-hell">Escape from Depencency Hell</a></li>
-<li><a href="#defining-versions">Defining Versions</a></li>
-<li><a href="#keeping-up-to-date">Keeping Up To Date</a></li>
-</ul>
-</li>
-<li><a href="#dependencies-always-imply-risk">Dependencies always imply Risk</a></li>
-<li>
-<a href="#quick-start-guides">Quick Start Guides</a>
-
-<ul>
-<li><a href="#apt-for-linux">apt for Linux</a></li>
-<li><a href="#brew-for-mac-os">brew for mac os</a></li>
-<li><a href="#choco-for-windows">choco for windows</a></li>
-<li><a href="#gem-and-bundler-for-ruby">gem and bundler for ruby</a></li>
-<li><a href="#npm-for-javascript-and-node-js">npm for javascript and node.js</a></li>
-<li><a href="#composer-and-packagist-for-php">composer and packagist for php</a></li>
-</ul>
-</li>
-<li><a href="#references">References</a></li>
-</ol>
-
-          </div>
-
-      <h2>Managing Dependencies</h2><p>The program you write will depend on  code
+<body>
+    <div class="deck-container">
+        <div class='slide'><h2>Managing Dependencies</h2><p>The program you write will depend on  code
 that other people have written.  This guide will teach you 
 how to install, use and upgrade dependencies for your web application. 
 It covers ruby, javascript and php.</p><p>After working through this guide you will be able to:</p>
@@ -123,13 +45,10 @@ It covers ruby, javascript and php.</p><p>After working through this guide you w
 <li>know how to keep your dependencies current</li>
 </ul>
 
-    </div>
-  </div>
-
-  <div id="container">
-    <div class="wrapper">
-      <div id="mainCol">
-        <h3 id="dependencies">1 Dependencies</h3>
+</div>
+<div class='slide'>
+<a class='slide_break' href='dependencies.html#slide-1'>▻</a>
+<h3 id="dependencies">1 Dependencies</h3>
 <p>The program you write will depend on  code
 that other people have written. Some of this code
 has been packaged into operating systems or applications:
@@ -163,10 +82,16 @@ programming languages.</p>
 </ul>
 </li>
 </ul>
+</div>
+<div class='slide'>
+<a class='slide_break' href='dependencies.html#slide-2'>▻</a>
 <h4 id="libraries-io">1.1 libraries.io</h4>
 <p>The site <a href="https://libraries.io/">libraries.io</a> collects information
 for many package management systems, it's a central place to look
 for software to use.</p>
+</div>
+<div class='slide'>
+<a class='slide_break' href='dependencies.html#slide-3'>▻</a>
 <h4 id="dynamiclly-linked-libraries">1.2 dynamiclly linked libraries</h4>
 <p>Why do we need to look at <code>apt</code>, <code>brew</code> or <code>choco</code>?  Isn't the
 package manager for my main programing language enough?</p>
@@ -199,6 +124,9 @@ In file included from binder.cpp:20:
 
 </pre>
 </div>
+</div>
+<div class='slide'>
+<a class='slide_break' href='dependencies.html#slide-4'>▻</a>
 <h4 id="package-names-and-a-central-database">1.3 package names and a central database</h4>
 <p>To enable easy installation of a dependency with just one command we need
 a central database that contains the information on all available packages.
@@ -218,6 +146,9 @@ These databases typically also offer a web page with search functionality:</p>
 <a href="https://packagist.org/">packagist.org</a> for php and composer
 Package names need to be unique.  Version numbers are often given out according to <a href="http://semver.org/">semantic versioning</a>.</li>
 </ul>
+</div>
+<div class='slide'>
+<a class='slide_break' href='dependencies.html#slide-5'>▻</a>
 <h4 id="how-to-install">1.4 How to install</h4>
 <ul>
 <li><code>apt-get install imagemagick</code></li>
@@ -228,10 +159,16 @@ Package names need to be unique.  Version numbers are often given out according 
 <li>
 <code>composer install imagemagick</code>  - does not work, needs PECL </li>
 </ul>
+</div>
+<div class='slide'>
+<a class='slide_break' href='dependencies.html#slide-6'>▻</a>
 <h4 id="where-is-the-code-installed-questionmark">1.5 Where is the code installed?</h4>
 <p>All the package managers distinguish between installing <strong>globally</strong> - for all users and projects on a computer and installing <strong>locally</strong>.  This might mean installing in a way that only one user can use, or it might mean installing into a projects directory.</p>
 <p>When you deploy your project to a production server you again face this question: should
 the dependencies be installed globally or locally?</p>
+</div>
+<div class='slide'>
+<a class='slide_break' href='dependencies.html#slide-7'>▻</a>
 <h4 id="security-considerations">1.6 Security considerations</h4>
 <p>Downloading and using software is always dangerous. With a package
 management system a lot of downloads happen automatically.  So we want
@@ -243,6 +180,9 @@ to make sure the software we download is really what it is supposed to be.</p>
 that only the original author of the package can release new versions.<br>
 </li>
 </ul>
+</div>
+<div class='slide'>
+<a class='slide_break' href='dependencies.html#slide-8'>▻</a>
 <h3 id="dependency-hell">2 Dependency Hell</h3>
 <p>For a big web project you will be using a lot of dependencies. This will lead
 to two problems (here shown in a ruby projects with gems):</p>
@@ -252,6 +192,9 @@ to two problems (here shown in a ruby projects with gems):</p>
 </ol>
 <p>If this all goes horribly wrong you are in "dependency hell": you can't find the right versions
 of gems to make your code work again on a new machine or after an update.</p>
+</div>
+<div class='slide'>
+<a class='slide_break' href='dependencies.html#slide-9'>▻</a>
 <h4 id="escape-from-depencency-hell">2.1 Escape from Depencency Hell</h4>
 <p><img src="images/bundler-small.png" alt="bundler"></p>
 <p>Bundler is the name of the ruby tool that solves this problem for ruby.
@@ -278,6 +221,9 @@ you run <code>bundle install</code> and the exact same versions are now installe
 <li>one file that is written by hand that contains your <strong>wishes</strong> </li>
 <li>another file that is created by the package manager, that contains the exact version numbers</li>
 </ul>
+</div>
+<div class='slide'>
+<a class='slide_break' href='dependencies.html#slide-10'>▻</a>
 <h4 id="defining-versions">2.2 Defining Versions</h4>
 <p>When definig your wishes for dependencies you can specify which versions should be used.
 But don't overdo it!  The package manager does a good job picking versions.
@@ -315,6 +261,9 @@ for your version number:  MAJOR dot MINOR dot PATCH.  For example 3.1.0.</p>
 <li>a new '''patch''' version means backwards-compatible bug fixes.</li>
 </ul>
 <p>But not all projects adher to this standard yet.</p>
+</div>
+<div class='slide'>
+<a class='slide_break' href='dependencies.html#slide-11'>▻</a>
 <h4 id="keeping-up-to-date">2.3 Keeping Up To Date</h4>
 <p>Let's assume you list 12 dependencies in your project. This might result in 36 dependencies 
 being installed in all.  Now assume each dependency releases a new version once a year. You
@@ -322,6 +271,9 @@ have to be prepared for updating several dependencies each month!</p>
 <p>To update the versions you need to override the lock-file and allow a change in version numbers.</p>
 <p>For each dependency system we discussed there are services out there that will tell
 you about new version or -- even more important -- new security updates for your dependencies.</p>
+</div>
+<div class='slide'>
+<a class='slide_break' href='dependencies.html#slide-12'>▻</a>
 <h3 id="dependencies-always-imply-risk">3 Dependencies always imply Risk</h3>
 <p>Using a third party library will make you more
 productive today. But it could well harm you in the long run:</p>
@@ -337,7 +289,13 @@ productive today. But it could well harm you in the long run:</p>
 <ul>
 <li>Use <a href="https://bundlephobia.com/">bundlephobia</a> to measure the size of javascript dependencies</li>
 </ul>
+</div>
+<div class='slide'>
+<a class='slide_break' href='dependencies.html#slide-13'>▻</a>
 <h3 id="quick-start-guides">4 Quick Start Guides</h3>
+</div>
+<div class='slide'>
+<a class='slide_break' href='dependencies.html#slide-14'>▻</a>
 <h4 id="apt-for-linux">4.1 apt for Linux</h4>
 <p>The Advanced Package Tool, or APT, handles the installation and removal 
 of software on the Debian, Ubuntu and other Linux distributions. 
@@ -406,6 +364,9 @@ $ dpkg -L libmagickcore
 <li>c libraries: include the header-file in your own c program, like <code>#include &lt;PCSC/winscard.h&gt;</code> and then link the library </li>
 <li>other libraries: depends on the programming language</li>
 </ul>
+</div>
+<div class='slide'>
+<a class='slide_break' href='dependencies.html#slide-15'>▻</a>
 <h4 id="brew-for-mac-os">4.2 brew for mac os</h4>
 <p>Homebrew is a package manager for Mac OS.  It builds
 software from source, applying patches to make the software
@@ -468,7 +429,13 @@ lrwxr-xr-x  user  createdb -&gt; ../Cellar/postgresql/9.5.4_1/bin/createdb
 <li>c libraries: include the header-file in your own c program, like <code>#include &lt;yaml.h&gt;</code> and then link the library </li>
 <li>other libraries: depends on the programming language</li>
 </ul>
+</div>
+<div class='slide'>
+<a class='slide_break' href='dependencies.html#slide-16'>▻</a>
 <h4 id="choco-for-windows">4.3 choco for windows</h4>
+</div>
+<div class='slide'>
+<a class='slide_break' href='dependencies.html#slide-17'>▻</a>
 <h4 id="gem-and-bundler-for-ruby">4.4 gem and bundler for ruby</h4>
 <p>Libraries for ruby are called <strong>gems</strong>  and can be installed using the command lin tool <code>gem</code>:</p>
 <div class="code_container">
@@ -543,6 +510,9 @@ repository.   </p>
 <li>
 <a href="https://github.com/presidentbeef/brakeman">brakeman</a> check for security risks, incl</li>
 </ul>
+</div>
+<div class='slide'>
+<a class='slide_break' href='dependencies.html#slide-18'>▻</a>
 <h4 id="npm-for-javascript-and-node-js">4.5 npm for javascript and node.js</h4>
 <p>Libraries for javascript are called <strong>packages</strong>  and can be installed using the command line tool <code>npm</code>:</p>
 <div class="code_container">
@@ -619,6 +589,9 @@ import { http } from 'http';
 <p>To fix the exact versions of all dependencies, use
 <code>npm shrinkwrap</code>. This command creates a file <code>npm-shrinkwrap.json</code>.</p>
 <p>When using git with a node.js project you add <code>packages.json</code> and  <code>npm-shrinkwrap.json</code> to the repository, and <code>node_modules</code> to <code>.gitignore</code>.   </p>
+</div>
+<div class='slide'>
+<a class='slide_break' href='dependencies.html#slide-19'>▻</a>
 <h4 id="composer-and-packagist-for-php">4.6 composer and packagist for php</h4>
 <p>One package manager for php is <code>composer</code>.  It can be used to
 install packages with <code>composer require</code>:</p>
@@ -670,6 +643,9 @@ $log = new Monolog\Logger('name');
 <li>PEAR <a href="https://pear.php.net/">https://pear.php.net/</a> was the former package manager for php packages, see also <a href="http://fabien.potencier.org/the-rise-of-composer-and-the-fall-of-pear.html">Fabien Potencier article: The rise of Composer and the fall of PEAR</a>
 </li>
 </ul>
+</div>
+<div class='slide'>
+<a class='slide_break' href='dependencies.html#slide-20'>▻</a>
 <h3 id="references">5 References</h3>
 <ul>
 <li>Package management for the operating system:
@@ -701,32 +677,64 @@ $log = new Monolog\Logger('name');
 </ul>
 </li>
 </ul>
-
-      </div>
+</div>
     </div>
-  </div>
-
-  <hr class="hide" />
-  <div id="footer">
-    <div class="wrapper">
-      <p class="copyright">published under <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/at/deed.de">creative commons by-nc-sa</a> in 2012-2019 by <a href="http://brigitte-jellinek.at">Brigitte Jellinek</a>.
-      </p><p>If you want to contribute: <a href="https://github.com/web-engineering/web-engineering-textbook/fork">fork the source on github</a>
-        and edit <a href="https://github.com/web-engineering/web-engineering-textbook/blob/master/source/dependencies.md">dependencies.md</a>
-      </p>
+    <!-- End slides. -->
+    <!-- Begin extension snippets. Add or remove as needed. -->
+    <!-- deck.navigation snippet -->
+    <div aria-role="navigation">
+        <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+        <a href="#" class="deck-next-link" title="Next">&#8594;</a>
     </div>
-  </div>
+    <!-- deck.status snippet -->
+    <p class="deck-status" aria-role="status">
+        <span class="deck-status-current"></span>
+        /
+        <span class="deck-status-total"></span>
+    </p>
+    <!-- deck.goto snippet -->
+    <form action="." method="get" class="goto-form">
+        <label for="goto-slide">Go to slide:</label>
+        <input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+        <datalist id="goto-datalist"></datalist>
+        <input type="submit" value="Go">
+    </form>
+    <!-- End extension snippets. -->
+    </div>
+    <!-- Required JS files. -->
+    <script src="javascripts/jquery.min.js"></script>
+    <script src="javascripts/deck.core.js"></script>
+    <!-- Extension JS files. Add or remove as needed. -->
+    <script src="javascripts/deck.menu.js"></script>
+    <script src="javascripts/deck.goto.js"></script>
+    <script src="javascripts/deck.status.js"></script>
+    <script src="javascripts/deck.navigation.js"></script>
+    <script src="javascripts/deck.escape.js"></script>
+    <!--  Syntax highlighter -->
+    <script src="javascripts/syntaxhighlighter/shCore.js"></script>
+    <script src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
+    <script src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
+    <script src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
+    <script src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>    
+    <!-- Initialize the deck. You can put this in an external file if desired. -->
+    <script>
+    SyntaxHighlighter.all()      
+    $(function() {
+      $.deck('.slide');
+    });
 
-  <script type="text/javascript" src="javascripts/jquery.min.js"></script>
-  <script type="text/javascript" src="javascripts/responsive-tables.js"></script>
-  <script type="text/javascript" src="javascripts/guides.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
-  <script type="text/javascript">
-    SyntaxHighlighter.all()
-    $(guidesIndex.bind);
-  </script>
-  </body>
+    var $d = $(document);    
+
+    $d.bind('deck.change', function(event, from, to) {
+      // console.log('Moving from slide ' + from + ' to ' + to);
+    });   
+    $d.bind('deck.beforeInit', function() {
+      // console.log('Deck.beforeInit. hash is ' + document.location.hash);
+    });     
+    $d.bind('deck.init', function() {
+      // console.log('Deck.init is done. hash was ' + document.location.hash);
+    }); 
+    </script>
+</body>
+
 </html>
