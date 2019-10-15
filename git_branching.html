@@ -98,6 +98,7 @@
 <a href="#merge-requests-pull-requests">Merge Requests / Pull Requests</a>
 
 <ul>
+<li><a href="#when-a-merge-request-can-t-be-merged">When a merge request can't be merged</a></li>
 <li><a href="#resources">Resources</a></li>
 </ul>
 </li>
@@ -306,7 +307,18 @@ simplified graphics from github:</p>
 </ol>
 <p>git flow is githubs explanation of this workflow:</p>
 <p><a href="https://guides.github.com/introduction/flow/">github flow</a></p>
-<h4 id="resources">4.1 Resources</h4>
+<h4 id="when-a-merge-request-can-t-be-merged">4.1 When a merge request can't be merged</h4>
+<p>You might run into trouble when the master has moved on from the position where you
+created your branch.</p>
+<p>Then you need to</p>
+<ol>
+<li>get the current version of master by switching to master <code>git checkout master</code> and pulling in the newest commits <code>git pull origin master</code>
+</li>
+<li>merge these newest commits into your branch by switching to your branch <code>git checkout YOUR_BRANCH</code>  and <code>git merge master</code> and solving any conflicts</li>
+<li>pushing this new version up to the server with <code>git push origin YOUR_BRANCH</code>
+</li>
+</ol>
+<h4 id="resources">4.2 Resources</h4>
 <ul>
 <li><a href="http://git-scm.com/book/en/Git-Branching-Basic-Branching-and-Merging">Git Book: Chapter 3.2</a></li>
 <li><a href="http://rypress.com/tutorials/git/branches-1.html">Ry's git tutorial: Branches 1</a></li>
