@@ -34,10 +34,11 @@
     <div class="deck-container">
         <div class='slide'><h2>Tools to keep your Code Clean</h2><p>With this guide will get to know some tools
 that will help you produce good code, and keep
-the quality up.</p>
+the quality up.</p><p>You will get to know tools for Ruby for</p>
 <ul>
-<li>this</li>
-<li>that</li>
+<li>linting</li>
+<li>best practices</li>
+<li>security</li>
 </ul>
 
 </div>
@@ -50,8 +51,8 @@ of coding conventions. This is called "linting". </p>
 </div>
 <div class='slide'>
 <a class='slide_break' href='code.html#slide-2'>▻</a>
-<h3 id="style-guide">2 Style Guide</h3>
-<p>A Style Guide or Coding Convention tells places
+<h3 id="coding-convention">2 Coding Convention</h3>
+<p>A Style Guide or Coding Convention places
 restrictions on the way you write your code: it tells
 you how deep indentation should be, whether to put
 spaces inside brackts, and so on.</p>
@@ -78,6 +79,7 @@ Linting tools are available for all languages:</p>
 </ul>
 <p>You can incorporate linting into your editor, this
 way you will never stray far from the style guide.</p>
+<p><img src="/images/rubocop-in-vscode.png" srcset='/images/rubocop-in-vscode.png 1x, /images/rubocop-in-vscode@2x.png 2x' alt="rubocop in vscode"></p>
 </div>
 <div class='slide'>
 <a class='slide_break' href='code.html#slide-4'>▻</a>
@@ -85,7 +87,7 @@ way you will never stray far from the style guide.</p>
 <p>When you run <code>rubocop</code> it will examine all the files
 in the current directory, and in subdirectories.</p>
 <p>The rules that rubocop follows are called "cops". The default
-rules are <a href="https://github.com/bbatsov/rubocop/blob/master/config/enabled.yml">documented here</a>.</p>
+rules are <a href="https://github.com/rubocop-hq/rubocop/blob/master/config/default.yml">documented here</a>.</p>
 <p>You can configure rubocop by writing a file <code>.rubocop.yml</code> in your
 projects root folder.</p>
 <p>Run  <code>rubocop -d</code> to find out which rules the code is breaking.
@@ -102,16 +104,54 @@ completely, or you can deactivate a rule just for a few lines of code:</p>
 </div>
 <div class='slide'>
 <a class='slide_break' href='code.html#slide-5'>▻</a>
-<h3 id="best-practices">5 Best Practices</h3>
+<h3 id="example-linter-for-javascript-eslint">5 Example Linter for JavaScript: ESLint</h3>
+<p>When you run <code>eslint</code> it will examine all the files
+in the current directory, and in subdirectories.</p>
+<p>The rules that eslint follows are configured
+in an <code>.eslintrc.*</code> file or an <code>eslintConfig</code> field in a <code>package.json</code> file.</p>
+<p>Especially important are parser options because eslint can be used
+on different version of JavaScript and TypeScript. See <a href="https://eslint.org/docs/user-guide/configuring#specifying-parser-options">the documentation</a>.</p>
+<p>You can also configure rule just for a few lines of code
+by writing comments in your source code. The following example
+was taken from <a href="https://hackernoon.com/eslint-configuration-comments-e6f274a16f96">Jeff Lowreys article</a></p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+const getFinalContext = (context) =&gt; {
+        /* eslint-disable-next-line no-unused-vars */
+        const { calls, ...finalContext } = context;
+        return finalContext;
+    }
+
+</pre>
+</div>
+<p>The above code does a destructuring assignment from a passed-in context parameter. The function is only interested in the rest assignment to finalContext, and “discards” the first assignment, calls. Jeff Lowrey  disables the rule that
+would complain about having an unused variable <code>call</code> by using the comment <code>/* eslint-disable-next-line no-unused-vars */</code>. This only applies to the next code line, though, and the rule will remain in effect for the rest of the file.</p>
+</div>
+<div class='slide'>
+<a class='slide_break' href='code.html#slide-6'>▻</a>
+<h3 id="best-practices">6 Best Practices</h3>
+<p>For the framework Rails there exists a collection of "best pracices" - 
+hints how to use the framworks.  They are doumented on <a href="https://rails-bestpractices.com/">rails-bestpractices.com</a></p>
+<p>There is a command line tool that checks your Rails projects against
+these best pracices and can also fix some of the problems:</p>
 <ul>
 <li><a href="https://github.com/railsbp/rails_best_practices">rails_best_pracices</a></li>
 </ul>
 </div>
 <div class='slide'>
-<a class='slide_break' href='code.html#slide-6'>▻</a>
-<h3 id="security">6 Security</h3>
+<a class='slide_break' href='code.html#slide-7'>▻</a>
+<h3 id="security">7 Security</h3>
+<p>Brakeman is a static analysis tool that specializes in security
+problems for Ruby on Rails.  Use it on your rails project to find and fix security problems:</p>
 <ul>
 <li><a href="https://github.com/presidentbeef/brakeman">brakeman</a></li>
+</ul>
+<p>For JavaScript there are some ESLint rules you can install for
+checking for security problems:</p>
+<ul>
+<li><a href="https://github.com/mozfreddyb/eslint-config-scanjs">eslint-config-scanjs</a></li>
+<li>
+<a href="https://github.com/nodesecurity/eslint-plugin-security">eslint-plugin-security</a> for node.js</li>
 </ul>
 </div>
     </div>
