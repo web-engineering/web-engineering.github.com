@@ -125,16 +125,20 @@ end
 </pre>
 </div>
 <p>And after the refactoring:</p>
-<p>``
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
 def print_owing(amount)
   print_banner
   print_details amount
-end</p>
-<p>def print_details(amount)
+end
+
+def print_details(amount)
   puts "name: #{@name}"
   puts "amount: #{amount}"
 end
-```</p>
+
+</pre>
+</div>
 </div>
 <div class='slide'>
 <a class='slide_break' href='refactoring.html#slide-7'>▻</a>

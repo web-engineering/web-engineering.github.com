@@ -169,16 +169,20 @@ end
 </pre>
 </div>
 <p>And after the refactoring:</p>
-<p>``
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
 def print_owing(amount)
   print_banner
   print_details amount
-end</p>
-<p>def print_details(amount)
+end
+
+def print_details(amount)
   puts "name: #{@name}"
   puts "amount: #{amount}"
 end
-```</p>
+
+</pre>
+</div>
 <h4 id="code-smells-and-refactorings">1.6 Code Smells and Refactorings</h4>
 <p>Let's See how code smells and refactoring work together.</p>
 <p>An intresting code smell is "comments".  This is not meant to imply that
