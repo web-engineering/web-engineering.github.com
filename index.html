@@ -16,10 +16,16 @@
   <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" />
 
   <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  <style>
+
+    .slide img[src$=svg] {
+      width: 100%;
+    }
+  </style>
 </head>
 <body class="guide">
   <div>
-    <a href="http://github.com/web-engineering/web-engineering-textbook/"><img style="position: fixed; top: 0; right: 0; border: 0; z-index: 10;" src="images/forkme.png" alt="Fork me on GitHub"></a>
+    <a href="https://github.com/web-engineering/web-engineering-textbook/"><img style="position: fixed; top: 0; right: 0; border: 0; z-index: 10;" src="images/forkme.png" alt="Fork me on GitHub"></a>
   </div>
   <div id="topNav">
     <div class="wrapper">
@@ -33,8 +39,7 @@
   </div>
   <div id="header">
     <div class="wrapper clearfix">
-      <h1><a href="index.html" title="Return to home page">Web<span>Engineering</span></a></h1>
-      <ul class="nav">
+      <h1><a href="index.html" title="Return to home page">Web<span>Engineering</span></a></h1>      <ul class="nav">
         <li><a class="nav-item" href="index.html">Home</a></li>
         <li class="guides-index guides-index-large">
           <a href="index.html" onclick="guideMenu(); return false;" id="guidesMenu" class="guides-index-item nav-item">Index  &#x25BC;</a>
@@ -42,41 +47,40 @@
             <hr />
               <dl class="L">
                 <dt>Basics</dt>
-                <dd><a href="vi.html">vi</a></dd>
-                <dd><a href="public_key.html">Using Public Key Cryptography</a></dd>
-                <dd><a href="git_basics.html">Git Basics</a></dd>
+                <dd><a class="nav-item" href="vi.html">vi</a></dd>
+                <dd><a class="nav-item" href="public_key.html">Using Public Key Cryptography</a></dd>
+                <dd><a class="nav-item" href="git_basics.html">Git Basics</a></dd>
                 <dt>Workflows</dt>
-                <dd><a href="git_branching.html">Git Branching and Merging</a></dd>
-                <dd><a href="pair_programming.html">Pair Programming</a></dd>
-                <dd><a href="code.html">Clean Code</a></dd>
-                <dd><a href="testing.html">Testing</a></dd>
-                <dd><a href="refactoring.html">Refactoring</a></dd>
-                <dd><a href="dependencies.html">Managing Dependencies</a></dd>
+                <dd><a class="nav-item" href="git_branching.html">Git Branching and Merging</a></dd>
+                <dd><a class="nav-item" href="pair_programming.html">Pair Programming</a></dd>
+                <dd><a class="nav-item" href="code.html">Clean Code</a></dd>
+                <dd><a class="nav-item" href="testing.html">Testing</a></dd>
+                <dd><a class="nav-item" href="refactoring.html">Refactoring</a></dd>
+                <dd><a class="nav-item" href="dependencies.html">Managing Dependencies</a></dd>
               </dl>
               <dl class="R">
                 <dt>Web Operations</dt>
-                <dd><a href="deploy-spa.html">Deploy a SPA</a></dd>
-                <dd><a href="webserver.html">Webserver</a></dd>
+                <dd><a class="nav-item" href="deploy-spa.html">Deploy a SPA</a></dd>
+                <dd><a class="nav-item" href="webserver.html">Webserver</a></dd>
               </dl>
           </div>
           </li>
         <li><a class="nav-item" href="https://github.com/web-engineering/web-engineering-textbook/">Contribute</a></li>
       </ul>
-      </div>
     </div>
   </div>
+
   <hr class="hide" />
 
   <div id="feature">
     <div class="wrapper">
-      
-        <h2>About this Book</h2>
+      <div class="header_section">
+          <h2>About this Book</h2>
   <p>This is a textbook for the second year of a computer
   science or "media informatics" degree program.  It builds
   on <a href="https://web-development.github.io">Web Development</a> 
   (in german) and runs parallel to
-  <a href="https://backend-development.github.io">Backend Development</a>  and
-  <a href="https://frontend-development.github.io">Frontend Development</a>.</p>
+  <a href="https://backend-development.github.io">Backend Development</a>.</p>
 
   <p>This book is not a self-contained work: There are great
   resources for learning about the tools and technologies of web engineering
@@ -88,14 +92,21 @@
   in educational institutions as well as to self-directed learners on the internet.
   </p>
 
+      </div>
+      
     </div>
   </div>
+
 
   <div id="container">
     <div class="wrapper">
       <div id="mainCol">
-        
+        <div class='slide'><a id='slide-1'></a>
 
+
+</div>
+<div class='slide'>
+<a class='slide_break' id='slide-1' href='slides_#slide-1'>▻</a>
 <h3>What is Web Engineering</h3>
 
 <p>Under this title we collect all the stuff that
@@ -134,7 +145,7 @@ workflows, tools, operations.
 </dd>      <dt><a href="webserver.html">Webserver</a></dt><dd>
         <p>Webserver</p>
 </dd>  </dl>
-
+</div>        
       </div>
     </div>
   </div>
@@ -148,17 +159,22 @@ workflows, tools, operations.
     </div>
   </div>
 
-  <script type="text/javascript" src="javascripts/jquery.min.js"></script>
-  <script type="text/javascript" src="javascripts/responsive-tables.js"></script>
-  <script type="text/javascript" src="javascripts/guides.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
-  <script type="text/javascript">
+  <script src="javascripts/jquery.min.js"></script>
+  <script src="javascripts/responsive-tables.js"></script>
+  <script src="javascripts/guides.js"></script>
+  <script src="javascripts/syntaxhighlighter/shCore.js"></script>
+  <script src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
+  <script src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
+  <script src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
+  <script src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
+  <script>
     SyntaxHighlighter.all()
     $(guidesIndex.bind);
+    $(document).ready(function(){
+      let hash = document.location.hash;
+      if(! hash) return;
+      document.getElementById(hash.substr(1)).scrollIntoView(true);
+    })
   </script>
   </body>
 </html>

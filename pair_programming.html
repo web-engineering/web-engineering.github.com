@@ -15,10 +15,16 @@
   <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" />
 
   <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  <style>
+
+    .slide img[src$=svg] {
+      width: 100%;
+    }
+  </style>
 </head>
 <body class="guide">
   <div>
-    <a href="http://github.com/web-engineering/web-engineering-textbook/"><img style="position: fixed; top: 0; right: 0; border: 0; z-index: 10;" src="images/forkme.png" alt="Fork me on GitHub"></a>
+    <a href="https://github.com/web-engineering/web-engineering-textbook/"><img style="position: fixed; top: 0; right: 0; border: 0; z-index: 10;" src="images/forkme.png" alt="Fork me on GitHub"></a>
   </div>
   <div id="topNav">
     <div class="wrapper">
@@ -32,8 +38,7 @@
   </div>
   <div id="header">
     <div class="wrapper clearfix">
-      <h1><a href="index.html" title="Return to home page">Web<span>Engineering</span></a></h1>
-      <ul class="nav">
+      <h1><a href="index.html" title="Return to home page">Web<span>Engineering</span></a></h1>      <ul class="nav">
         <li><a class="nav-item" href="index.html">Home</a></li>
         <li class="guides-index guides-index-large">
           <a href="index.html" onclick="guideMenu(); return false;" id="guidesMenu" class="guides-index-item nav-item">Index  &#x25BC;</a>
@@ -41,33 +46,42 @@
             <hr />
               <dl class="L">
                 <dt>Basics</dt>
-                <dd><a href="vi.html">vi</a></dd>
-                <dd><a href="public_key.html">Using Public Key Cryptography</a></dd>
-                <dd><a href="git_basics.html">Git Basics</a></dd>
+                <dd><a class="nav-item" href="vi.html">vi</a></dd>
+                <dd><a class="nav-item" href="public_key.html">Using Public Key Cryptography</a></dd>
+                <dd><a class="nav-item" href="git_basics.html">Git Basics</a></dd>
                 <dt>Workflows</dt>
-                <dd><a href="git_branching.html">Git Branching and Merging</a></dd>
-                <dd><a href="pair_programming.html">Pair Programming</a></dd>
-                <dd><a href="code.html">Clean Code</a></dd>
-                <dd><a href="testing.html">Testing</a></dd>
-                <dd><a href="refactoring.html">Refactoring</a></dd>
-                <dd><a href="dependencies.html">Managing Dependencies</a></dd>
+                <dd><a class="nav-item" href="git_branching.html">Git Branching and Merging</a></dd>
+                <dd><a class="nav-item" href="pair_programming.html">Pair Programming</a></dd>
+                <dd><a class="nav-item" href="code.html">Clean Code</a></dd>
+                <dd><a class="nav-item" href="testing.html">Testing</a></dd>
+                <dd><a class="nav-item" href="refactoring.html">Refactoring</a></dd>
+                <dd><a class="nav-item" href="dependencies.html">Managing Dependencies</a></dd>
               </dl>
               <dl class="R">
                 <dt>Web Operations</dt>
-                <dd><a href="deploy-spa.html">Deploy a SPA</a></dd>
-                <dd><a href="webserver.html">Webserver</a></dd>
+                <dd><a class="nav-item" href="deploy-spa.html">Deploy a SPA</a></dd>
+                <dd><a class="nav-item" href="webserver.html">Webserver</a></dd>
               </dl>
           </div>
           </li>
         <li><a class="nav-item" href="https://github.com/web-engineering/web-engineering-textbook/">Contribute</a></li>
       </ul>
-      </div>
     </div>
   </div>
+
   <hr class="hide" />
 
   <div id="feature">
     <div class="wrapper">
+      <div class="header_section">
+        <h2>Pair Programming</h2><p>In this guide you will learn about a special form of teamwork
+in programming: pair programming.</p><p>After reading this guide, you will:</p>
+<ul>
+<li>Know why you should try pair programming</li>
+<li>have a good starting point for your first try at pairing</li>
+</ul>
+
+      </div>
                 <div id="subCol">
             <h3 class="chapter"><img src="images/chapters_icon.gif" alt="" />Chapters</h3>
             <ol class="chapters">
@@ -89,25 +103,26 @@
 
           </div>
 
-      <h2>Pair Programming</h2><p>In this guide you will learn about a special form of teamwork
-in programming: pair programming.</p><p>After reading this guide, you will:</p>
-<ul>
-<li>Know why you should try pair programming</li>
-<li>have a good starting point for your first try at pairing</li>
-</ul>
-
     </div>
   </div>
+
 
   <div id="container">
     <div class="wrapper">
       <div id="mainCol">
-        <h3 id="pair-programming">1 Pair Programming</h3>
+        <div class='slide'><a id='slide-1'></a>
+</div>
+<div class='slide'>
+<a class='slide_break' id='slide-1' href='slides_pair_programming.html#slide-1'>▻</a>
+<h3 id="pair-programming">1 Pair Programming</h3>
 <p>In pair programming two programmers work together at one workstation. 
 One, the driver, writes code while the other, the observer or navigator,
 considers the "strategic" direction of the work, coming up with 
 ideas for improvements and likely future problems to address.
 The two programmers switch roles frequently.</p>
+</div>
+<div class='slide'>
+<a class='slide_break' id='slide-2' href='slides_pair_programming.html#slide-2'>▻</a>
 <h4 id="why-pair-questionmark">1.1 why pair?</h4>
 <p>At first glance two people programming together seems
 like a waste of resources: they could be typing in twice
@@ -119,6 +134,9 @@ the amount of code if they each had a keyboard!</p>
 <li>learn from each other</li>
 <li>part of agile methodologies, used today in industry</li>
 </ul>
+</div>
+<div class='slide'>
+<a class='slide_break' id='slide-3' href='slides_pair_programming.html#slide-3'>▻</a>
 <h3 id="pair-programming-und-git">2 Pair Programming und git</h3>
 <p>We want the log to show who worked as a pair</p>
 <div class="code_container">
@@ -138,6 +156,9 @@ e-mail address of the navigator
 
 </pre>
 </div>
+</div>
+<div class='slide'>
+<a class='slide_break' id='slide-4' href='slides_pair_programming.html#slide-4'>▻</a>
 <h4 id="git-config">2.1 git config</h4>
 <p>The configuration of git is saved on three levels:
 For the repository you can find the configuration in the file <code>.git/config</code>.</p>
@@ -165,7 +186,7 @@ will be saved to <code>/etc/gitconfig</code></p>
 
 </pre>
 </div>
-
+</div>        
       </div>
     </div>
   </div>
@@ -175,22 +196,27 @@ will be saved to <code>/etc/gitconfig</code></p>
     <div class="wrapper">
       <p class="copyright">published under <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/at/deed.de">creative commons by-nc-sa</a> in 2012-2019 by <a href="http://brigitte-jellinek.at">Brigitte Jellinek</a>.
       </p><p>If you want to contribute: <a href="https://github.com/web-engineering/web-engineering-textbook/fork">fork the source on github</a>
-        and edit <a href="https://github.com/web-engineering/web-engineering-textbook/blob/master/source/pair_programming.md">pair_programming.md</a>
+        and edit <a href="https://github.com/web-engineering/web-engineering-textbook//blob/master/source/pair_programming.md">pair_programming.md</a>
       </p>
     </div>
   </div>
 
-  <script type="text/javascript" src="javascripts/jquery.min.js"></script>
-  <script type="text/javascript" src="javascripts/responsive-tables.js"></script>
-  <script type="text/javascript" src="javascripts/guides.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
-  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
-  <script type="text/javascript">
+  <script src="javascripts/jquery.min.js"></script>
+  <script src="javascripts/responsive-tables.js"></script>
+  <script src="javascripts/guides.js"></script>
+  <script src="javascripts/syntaxhighlighter/shCore.js"></script>
+  <script src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
+  <script src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
+  <script src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
+  <script src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
+  <script>
     SyntaxHighlighter.all()
     $(guidesIndex.bind);
+    $(document).ready(function(){
+      let hash = document.location.hash;
+      if(! hash) return;
+      document.getElementById(hash.substr(1)).scrollIntoView(true);
+    })
   </script>
   </body>
 </html>
