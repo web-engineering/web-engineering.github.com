@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Managing Dependencies in the Backend Development Textbook</title>
+  <title>Web Engineering Textbook</title>
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
   <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
@@ -74,19 +74,7 @@
   <div id="feature">
     <div class="wrapper">
       <div class="header_section">
-        <h2>Managing Dependencies</h2><p>The program you write will depend on  code
-that other people have written.  This guide will teach you 
-how to install, use and upgrade dependencies for your web application. 
-It covers ruby, javascript and php.</p><p>After working through this guide you will be able to:</p>
-<ul>
-<li>understand what a package manager does for you</li>
-<li>install packages for javascript and node with <code>npm</code></li>
-<li>install gems für ruby with <code>gem</code> and <code>bundler</code></li>
-<li>install libraries for php with <code>composer</code></li>
-<li>install programs and libraries for your operating system with <code>brew</code>, <code>apt</code> or <code>choco</code></li>
-<li>know how to keep your dependencies current</li>
-</ul>
-
+         
       </div>
                 <div id="subCol">
             <h3 class="chapter"><img src="images/chapters_icon.gif" alt="" />Chapters</h3>
@@ -141,8 +129,34 @@ It covers ruby, javascript and php.</p><p>After working through this guide you w
 </div>
 <div class='slide'>
 <a class='slide_break' id='slide-1' href='slides_dependencies.html#slide-1'>▻</a>
+<h2>Dependencies</h2>
+<p>The program you write will depend on code
+that other people have written. This guide will teach you
+how to install, use and upgrade dependencies for your web application.
+It covers ruby, javascript and php.</p>
+<p>After working through this guide you will be able to:</p>
+<ul>
+<li>understand what a package manager does for you</li>
+<li>install packages for javascript and node with <code>npm</code>
+</li>
+<li>install gems für ruby with <code>gem</code> and <code>bundler</code>
+</li>
+<li>install libraries for php with <code>composer</code>
+</li>
+<li>install programs and libraries for your operating system with <code>brew</code>, <code>apt</code> or <code>choco</code>
+</li>
+<li>know how to keep your dependencies current</li>
+</ul>
+
+</div>
+<div class='slide'>
+<a class='slide_break' id='slide-2' href='slides_dependencies.html#slide-2'>▻</a>
+<hr>
+</div>
+<div class='slide'>
+<a class='slide_break' id='slide-3' href='slides_dependencies.html#slide-3'>▻</a>
 <h3 id="dependencies">1 Dependencies</h3>
-<p>The program you write will depend on  code
+<p>The program you write will depend on code
 that other people have written. Some of this code
 has been packaged into operating systems or applications:
 Linux, Postgres, Apache, nginx, and so on.</p>
@@ -177,25 +191,25 @@ programming languages.</p>
 </ul>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-2' href='slides_dependencies.html#slide-2'>▻</a>
+<a class='slide_break' id='slide-4' href='slides_dependencies.html#slide-4'>▻</a>
 <h4 id="libraries-io">1.1 libraries.io</h4>
 <p>The site <a href="https://libraries.io/">libraries.io</a> collects information
 for many package management systems, it's a central place to look
 for software to use.</p>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-3' href='slides_dependencies.html#slide-3'>▻</a>
+<a class='slide_break' id='slide-5' href='slides_dependencies.html#slide-5'>▻</a>
 <h4 id="dynamiclly-linked-libraries">1.2 dynamiclly linked libraries</h4>
-<p>Why do we need to look at <code>apt</code>, <code>brew</code> or <code>choco</code>?  Isn't the
+<p>Why do we need to look at <code>apt</code>, <code>brew</code> or <code>choco</code>? Isn't the
 package manager for my main programing language enough?</p>
 <p>In many cases using php-only or ruby-only libraries will be enough.
 But sometimes the libraries we use in our dynamic languages use
 other code originally written in c or c++.</p>
-<p>The image processing library <code>imagemagick</code> is a good example.  If you want to use the ruby gem <a href="https://rubygems.org/gems/rmagick/versions/2.15.4">rmagick</a> or the npm package <a href="https://www.npmjs.com/package/easyimage">easyimage</a> to edit images  you will that they deplend on the library "ImageMagick"
+<p>The image processing library <code>imagemagick</code> is a good example. If you want to use the ruby gem <a href="https://rubygems.org/gems/rmagick/versions/2.15.4">rmagick</a> or the npm package <a href="https://www.npmjs.com/package/easyimage">easyimage</a> to edit images you will that they deplend on the library "ImageMagick"
 which is writen in <a href="https://github.com/ImageMagick/ImageMagick/tree/master/MagickCore">C</a>.</p>
 <p>You do this using apt or brew or
 <a href="http://www.imagemagick.org/script/binary-releases.php#windows">the windows installer with dynamic link libraries</a>.</p>
-<p>The result of installing imagemagick with brew is the file <code>libMagickCore-6.Q16.2.dylib</code> and two other libraries.  These are libraries that can be used by multiple programs on your computer when they are dynamically linked to those programs.</p>
+<p>The result of installing imagemagick with brew is the file <code>libMagickCore-6.Q16.2.dylib</code> and two other libraries. These are libraries that can be used by multiple programs on your computer when they are dynamically linked to those programs.</p>
 <p>When installing the ruby gem with <code>gem install rmagick</code> you get the following output:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
@@ -206,7 +220,7 @@ Building native extensions.  This could take a while...
 <p>Sometimes you need to set include paths when installing gem, e.g.:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
-&gt; gem install eventmachine 
+&gt; gem install eventmachine
 ... error messages ...
 In file included from binder.cpp:20:
 ./project.h:116:10: fatal error: 'openssl/ssl.h' file not found
@@ -219,7 +233,7 @@ In file included from binder.cpp:20:
 </div>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-4' href='slides_dependencies.html#slide-4'>▻</a>
+<a class='slide_break' id='slide-6' href='slides_dependencies.html#slide-6'>▻</a>
 <h4 id="package-names-and-a-central-database">1.3 package names and a central database</h4>
 <p>To enable easy installation of a dependency with just one command we need
 a central database that contains the information on all available packages.
@@ -237,11 +251,11 @@ These databases typically also offer a web page with search functionality:</p>
 <a href="https://www.npmjs.com/">npmjs.com</a> for javascript</li>
 <li>
 <a href="https://packagist.org/">packagist.org</a> for php and composer
-Package names need to be unique.  Version numbers are often given out according to <a href="http://semver.org/">semantic versioning</a>.</li>
+Package names need to be unique. Version numbers are often given out according to <a href="http://semver.org/">semantic versioning</a>.</li>
 </ul>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-5' href='slides_dependencies.html#slide-5'>▻</a>
+<a class='slide_break' id='slide-7' href='slides_dependencies.html#slide-7'>▻</a>
 <h4 id="how-to-install">1.4 How to install</h4>
 <ul>
 <li><code>apt-get install imagemagick</code></li>
@@ -250,44 +264,43 @@ Package names need to be unique.  Version numbers are often given out according 
 <li><code>gem install rmagick</code></li>
 <li><code>npm install imagemagick</code></li>
 <li>
-<code>composer install imagemagick</code>  - does not work, needs PECL </li>
-</ul>
-</div>
-<div class='slide'>
-<a class='slide_break' id='slide-6' href='slides_dependencies.html#slide-6'>▻</a>
-<h4 id="where-is-the-code-installed-questionmark">1.5 Where is the code installed?</h4>
-<p>All the package managers distinguish between installing <strong>globally</strong> - for all users and projects on a computer and installing <strong>locally</strong>.  This might mean installing in a way that only one user can use, or it might mean installing into a projects directory.</p>
-<p>When you deploy your project to a production server you again face this question: should
-the dependencies be installed globally or locally?</p>
-</div>
-<div class='slide'>
-<a class='slide_break' id='slide-7' href='slides_dependencies.html#slide-7'>▻</a>
-<h4 id="security-considerations">1.6 Security considerations</h4>
-<p>Downloading and using software is always dangerous. With a package
-management system a lot of downloads happen automatically.  So we want
-to make sure the software we download is really what it is supposed to be.</p>
-<p>A package management system can offer different methods of making it more secure:</p>
-<ul>
-<li>comparing <strong>checksums</strong> of the code to  make sure the downloaded package contains the same code as the original package </li>
-<li>cryptographically <strong>signing</strong> the code in the package and checking this signature before installing. This ensures
-that only the original author of the package can release new versions.<br>
-</li>
+<code>composer install imagemagick</code> - does not work, needs PECL</li>
 </ul>
 </div>
 <div class='slide'>
 <a class='slide_break' id='slide-8' href='slides_dependencies.html#slide-8'>▻</a>
+<h4 id="where-is-the-code-installed-questionmark">1.5 Where is the code installed?</h4>
+<p>All the package managers distinguish between installing <strong>globally</strong> - for all users and projects on a computer and installing <strong>locally</strong>. This might mean installing in a way that only one user can use, or it might mean installing into a projects directory.</p>
+<p>When you deploy your project to a production server you again face this question: should
+the dependencies be installed globally or locally?</p>
+</div>
+<div class='slide'>
+<a class='slide_break' id='slide-9' href='slides_dependencies.html#slide-9'>▻</a>
+<h4 id="security-considerations">1.6 Security considerations</h4>
+<p>Downloading and using software is always dangerous. With a package
+management system a lot of downloads happen automatically. So we want
+to make sure the software we download is really what it is supposed to be.</p>
+<p>A package management system can offer different methods of making it more secure:</p>
+<ul>
+<li>comparing <strong>checksums</strong> of the code to make sure the downloaded package contains the same code as the original package</li>
+<li>cryptographically <strong>signing</strong> the code in the package and checking this signature before installing. This ensures
+that only the original author of the package can release new versions.</li>
+</ul>
+</div>
+<div class='slide'>
+<a class='slide_break' id='slide-10' href='slides_dependencies.html#slide-10'>▻</a>
 <h3 id="dependency-hell">2 Dependency Hell</h3>
 <p>For a big web project you will be using a lot of dependencies. This will lead
 to two problems (here shown in a ruby projects with gems):</p>
 <ol>
-<li>dependency resolution: gem A depends on version 1.1 of gem C, while gem B wants at least version 1.5.  You need to find the right version for every gem in your project so that they actually all fit together</li>
+<li>dependency resolution: gem A depends on version 1.1 of gem C, while gem B wants at least version 1.5. You need to find the right version for every gem in your project so that they actually all fit together</li>
 <li>different installation: when deploying to a production server, or even just when sharing code with other developers you need to make sure that the same constellation of gems and versions is used on every machine</li>
 </ol>
 <p>If this all goes horribly wrong you are in "dependency hell": you can't find the right versions
 of gems to make your code work again on a new machine or after an update.</p>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-9' href='slides_dependencies.html#slide-9'>▻</a>
+<a class='slide_break' id='slide-11' href='slides_dependencies.html#slide-11'>▻</a>
 <h4 id="escape-from-depencency-hell">2.1 Escape from Depencency Hell</h4>
 <p><img src="images/bundler-small.png" alt="bundler"></p>
 <p>Bundler is the name of the ruby tool that solves this problem for ruby.
@@ -297,29 +310,32 @@ Beware: the command you will be using called <code>bundle</code>, not bundler.</
 a <code>Gemfile</code> in which you define which gems and (to a certain degree) which versions you want.
 When you run <code>bundle install</code> bundler will:</p>
 <ul>
-<li>read the Gemfile, </li>
-<li>pick out compatible versions of all the gems and their dependencies (if possible), </li>
+<li>read the Gemfile,</li>
+<li>pick out compatible versions of all the gems and their dependencies (if possible),</li>
 <li>install all these gems</li>
 <li>write <code>Gemfile.lock</code>
 </li>
 </ul>
 <p>The lock-file contains a complete list of all the gems necessary for
-your project, and their version numbers.  This also includes dependencies of you
+your project, and their version numbers. This also includes dependencies of you
 dependencies, that you don't even knew you were using!
 The version numbers are now locked down, and will not change.</p>
-<p>When deploying to a new development machine or the production server, 
+<p>When deploying to a new development machine or the production server,
 you run <code>bundle install</code> and the exact same versions are now installed.</p>
 <p>All modern package managment systems offer a form of this solution, with</p>
 <ul>
-<li>one file that is written by hand that contains your <strong>wishes</strong> </li>
+<li>one file that is written by hand that contains your <strong>wishes</strong>
+</li>
 <li>another file that is created by the package manager, that contains the exact version numbers</li>
 </ul>
+<p>You can add packages by editing the Gemfile, or on the commandline with <code>bundle add</code> and
+the name of the gem.</p>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-10' href='slides_dependencies.html#slide-10'>▻</a>
+<a class='slide_break' id='slide-12' href='slides_dependencies.html#slide-12'>▻</a>
 <h4 id="defining-versions">2.2 Defining Versions</h4>
 <p>When definig your wishes for dependencies you can specify which versions should be used.
-But don't overdo it!  The package manager does a good job picking versions.
+But don't overdo it! The package manager does a good job picking versions.
 If you specify every version number by hand you are doing too much work. And you
 are potentially locking yourself in to old versions.</p>
 <p>Some examples of the different ways of specifying version number and source in a ruby <code>Gemfile</code>:</p>
@@ -338,16 +354,16 @@ gem 'coffee-rails', '~&gt; 4.1.0'
 </pre>
 </div>
 <p>Giving an exact version number fixes that version, so only
-version 4.2.5 of rails will be allowed here.  Using the "greater-or-equal-than" sign
-you can require any version greater or equal to 1.3.0.  So 1.2.7 is forbidden,
+version 4.2.5 of rails will be allowed here. Using the "greater-or-equal-than" sign
+you can require any version greater or equal to 1.3.0. So 1.2.7 is forbidden,
 but 1.3.2 or 1.4.0 or 2.2.0 is allowed.</p>
-<p>The arrow <code>~&gt;</code> will only allow an increase in the 
+<p>The arrow <code>~&gt;</code> will only allow an increase in the
 last (right most) number, so <code>~&gt; 4.1.0</code> does allow <code>4.1.17</code> but not <code>4.2</code>.
-This is called a pessimistic version constraint, read more about 
+This is called a pessimistic version constraint, read more about
 it in <a href="http://guides.rubygems.org/patterns/#pessimistic-version-constraint">the rubygem documentation</a>.</p>
 <p>There now is a common standard on how to use version numbers called
-<a href="http://semver.org/">semantic versioning</a>.  In short: Use three numbers
-for your version number:  MAJOR dot MINOR dot PATCH.  For example 3.1.0.</p>
+<a href="http://semver.org/">semantic versioning</a>. In short: Use three numbers
+for your version number: MAJOR dot MINOR dot PATCH. For example 3.1.0.</p>
 <ul>
 <li>a new '''major''' version number means incompatible API changes,</li>
 <li>a new '''minor''' version number means added functionality in a backwards-compatible manner, and</li>
@@ -356,17 +372,17 @@ for your version number:  MAJOR dot MINOR dot PATCH.  For example 3.1.0.</p>
 <p>But not all projects adher to this standard yet.</p>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-11' href='slides_dependencies.html#slide-11'>▻</a>
+<a class='slide_break' id='slide-13' href='slides_dependencies.html#slide-13'>▻</a>
 <h4 id="keeping-up-to-date">2.3 Keeping Up To Date</h4>
-<p>Let's assume you list 12 dependencies in your project. This might result in 36 dependencies 
-being installed in all.  Now assume each dependency releases a new version once a year. You
+<p>Let's assume you list 12 dependencies in your project. This might result in 36 dependencies
+being installed in all. Now assume each dependency releases a new version once a year. You
 have to be prepared for updating several dependencies each month!</p>
 <p>To update the versions you need to override the lock-file and allow a change in version numbers.</p>
 <p>For each dependency system we discussed there are services out there that will tell
 you about new version or -- even more important -- new security updates for your dependencies.</p>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-12' href='slides_dependencies.html#slide-12'>▻</a>
+<a class='slide_break' id='slide-14' href='slides_dependencies.html#slide-14'>▻</a>
 <h3 id="dependencies-always-imply-risk">3 Dependencies always imply Risk</h3>
 <p>Using a third party library will make you more
 productive today. But it could well harm you in the long run:</p>
@@ -384,19 +400,19 @@ productive today. But it could well harm you in the long run:</p>
 </ul>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-13' href='slides_dependencies.html#slide-13'>▻</a>
+<a class='slide_break' id='slide-15' href='slides_dependencies.html#slide-15'>▻</a>
 <h3 id="quick-start-guides">4 Quick Start Guides</h3>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-14' href='slides_dependencies.html#slide-14'>▻</a>
+<a class='slide_break' id='slide-16' href='slides_dependencies.html#slide-16'>▻</a>
 <h4 id="apt-for-linux">4.1 apt for Linux</h4>
-<p>The Advanced Package Tool, or APT, handles the installation and removal 
-of software on the Debian, Ubuntu and other Linux distributions. 
+<p>The Advanced Package Tool, or APT, handles the installation and removal
+of software on the Debian, Ubuntu and other Linux distributions.
 It installs both complete programs (like apache in the example below)
 and libraries (like libssl in the example below) that can be used to build programs.</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
-apt install apache2  
+apt install apache2
 apt install libssl-dev
 
 </pre>
@@ -454,21 +470,21 @@ $ dpkg -L libmagickcore
 </li>
 <li>daemons: you start and stop them with the service command, like <code>service apache2 start</code>
 </li>
-<li>c libraries: include the header-file in your own c program, like <code>#include &lt;PCSC/winscard.h&gt;</code> and then link the library </li>
+<li>c libraries: include the header-file in your own c program, like <code>#include &lt;PCSC/winscard.h&gt;</code> and then link the library</li>
 <li>other libraries: depends on the programming language</li>
 </ul>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-15' href='slides_dependencies.html#slide-15'>▻</a>
+<a class='slide_break' id='slide-17' href='slides_dependencies.html#slide-17'>▻</a>
 <h4 id="brew-for-mac-os">4.2 brew for mac os</h4>
-<p>Homebrew is a package manager for Mac OS.  It builds
+<p>Homebrew is a package manager for Mac OS. It builds
 software from source, applying patches to make the software
 mac compatible.</p>
 <p>It installs both complete programs (like postgresql in the example below)
 and libraries (like libyaml in the example below) that can be used to build programs.</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
-brew install postgresql  
+brew install postgresql
 brew install libyaml
 
 </pre>
@@ -478,15 +494,15 @@ brew install libyaml
 <pre class="brush: plain; gutter: false; toolbar: false">
 $ brew search xml
 [...]
-homebrew/php/php54-wbxml               libxml++3 
-homebrew/php/php54-xmldiff             libxml2 ✔ 
+homebrew/php/php54-wbxml               libxml++3
+homebrew/php/php54-xmldiff             libxml2 ✔
 homebrew/php/php55-wbxml               libxmlsec1
 [...]
 
 </pre>
 </div>
-<p>Homebrew is a git repository in <code>/usr/local/Homebew</code>.  It installs
-software into <code>/usr/local/Cellar</code> and then creates links from 
+<p>Homebrew is a git repository in <code>/usr/local/Homebew</code>. It installs
+software into <code>/usr/local/Cellar</code> and then creates links from
 <code>/usr/local/bin</code> or <code>/usr/local/lib</code> as appropriate.</p>
 <p>You can find out what exactly got installed by running the <code>brew list</code> command:</p>
 <div class="code_container">
@@ -505,7 +521,7 @@ $ brew list postgresql
 </pre>
 </div>
 <p>The executable programs in the last example can
-be found as links in <code>/usr/local/bin/</code>  </p>
+be found as links in <code>/usr/local/bin/</code></p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 lrwxr-xr-x  user  clusterdb -&gt; ../Cellar/postgresql/9.5.4_1/bin/clusterdb
@@ -519,18 +535,18 @@ lrwxr-xr-x  user  createdb -&gt; ../Cellar/postgresql/9.5.4_1/bin/createdb
 </li>
 <li>daemons: you start and stop them with the service command, like <code>brew services start postgresql</code>
 </li>
-<li>c libraries: include the header-file in your own c program, like <code>#include &lt;yaml.h&gt;</code> and then link the library </li>
+<li>c libraries: include the header-file in your own c program, like <code>#include &lt;yaml.h&gt;</code> and then link the library</li>
 <li>other libraries: depends on the programming language</li>
 </ul>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-16' href='slides_dependencies.html#slide-16'>▻</a>
+<a class='slide_break' id='slide-18' href='slides_dependencies.html#slide-18'>▻</a>
 <h4 id="choco-for-windows">4.3 choco for windows</h4>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-17' href='slides_dependencies.html#slide-17'>▻</a>
+<a class='slide_break' id='slide-19' href='slides_dependencies.html#slide-19'>▻</a>
 <h4 id="gem-and-bundler-for-ruby">4.4 gem and bundler for ruby</h4>
-<p>Libraries for ruby are called <strong>gems</strong>  and can be installed using the command lin tool <code>gem</code>:</p>
+<p>Libraries for ruby are called <strong>gems</strong> and can be installed using the command lin tool <code>gem</code>:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 gem install pg
@@ -559,7 +575,7 @@ can be used by several users for several projects.</p>
 </ul>
 <p>You can find out where a gem is installed by using <code>gem which</code>.</p>
 <p>On many machines <code>rvm</code> - the ruby version manager - is used to switch
-between different versions of the programming language.  Then each version
+between different versions of the programming language. Then each version
 of the language has it's own set of gems, and the paths include the
 word <code>rvm</code>:</p>
 <ul>
@@ -593,7 +609,7 @@ require 'active_record'
 </div>
 <p>In a rails project this is not necessary, the gems are loaded by rails.</p>
 <p>When using git with ruby you add <code>Gemfile</code> and <code>Gemfile.lock</code> to the
-repository.   </p>
+repository.</p>
 <p>Keeping up to date:</p>
 <ul>
 <li>
@@ -605,12 +621,12 @@ repository.   </p>
 </ul>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-18' href='slides_dependencies.html#slide-18'>▻</a>
+<a class='slide_break' id='slide-20' href='slides_dependencies.html#slide-20'>▻</a>
 <h4 id="npm-for-javascript-and-node-js">4.5 npm for javascript and node.js</h4>
-<p>Libraries for javascript are called <strong>packages</strong>  and can be installed using the command line tool <code>npm</code>:</p>
+<p>Libraries for javascript are called <strong>packages</strong> and can be installed using the command line tool <code>npm</code>:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
-npm install should 
+npm install should
 
 </pre>
 </div>
@@ -636,8 +652,8 @@ npm install -g grunt
 
 </pre>
 </div>
-<p>To use packages in your javascript project you will write a <code>package.json</code> file where you list the packages (and maybe the versions) that you need.  To create
-the first version of this file use <code>npm init</code>.  Then you can use the <code>--save</code> 
+<p>To use packages in your javascript project you will write a <code>package.json</code> file where you list the packages (and maybe the versions) that you need. To create
+the first version of this file use <code>npm init</code>. Then you can use the <code>--save</code>
 option to install packages and at the same time add them to the file:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
@@ -675,18 +691,21 @@ const http = require('http');
 
 </pre>
 </div>
-<p>In ECMAScript2015:
-<code>
+<p>In ECMAScript2015:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
 import { http } from 'http';
-</code></p>
+
+</pre>
+</div>
 <p>To fix the exact versions of all dependencies, use
 <code>npm shrinkwrap</code>. This command creates a file <code>npm-shrinkwrap.json</code>.</p>
-<p>When using git with a node.js project you add <code>packages.json</code> and  <code>npm-shrinkwrap.json</code> to the repository, and <code>node_modules</code> to <code>.gitignore</code>.   </p>
+<p>When using git with a node.js project you add <code>packages.json</code> and <code>npm-shrinkwrap.json</code> to the repository, and <code>node_modules</code> to <code>.gitignore</code>.</p>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-19' href='slides_dependencies.html#slide-19'>▻</a>
+<a class='slide_break' id='slide-21' href='slides_dependencies.html#slide-21'>▻</a>
 <h4 id="composer-and-packagist-for-php">4.6 composer and packagist for php</h4>
-<p>One package manager for php is <code>composer</code>.  It can be used to
+<p>One package manager for php is <code>composer</code>. It can be used to
 install packages with <code>composer require</code>:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
@@ -729,16 +748,16 @@ $log = new Monolog\Logger('name');
 
 </pre>
 </div>
-<p>When using git with a  php project you add <code>composer.json</code> and  <code>composer.lock</code> to the repository, and <code>vendor</code> to <code>.gitignore</code>.   </p>
+<p>When using git with a php project you add <code>composer.json</code> and <code>composer.lock</code> to the repository, and <code>vendor</code> to <code>.gitignore</code>.</p>
 <p>A word of warning: there are two older levels of dependencies:</p>
 <ul>
-<li>PECL <a href="https://pecl.php.net/">https://pecl.php.net/</a> is a library of PHP extentions, that need to be compiled and linked to the php interpreter. </li>
+<li>PECL <a href="https://pecl.php.net/">https://pecl.php.net/</a> is a library of PHP extentions, that need to be compiled and linked to the php interpreter.</li>
 <li>PEAR <a href="https://pear.php.net/">https://pear.php.net/</a> was the former package manager for php packages, see also <a href="http://fabien.potencier.org/the-rise-of-composer-and-the-fall-of-pear.html">Fabien Potencier article: The rise of Composer and the fall of PEAR</a>
 </li>
 </ul>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-20' href='slides_dependencies.html#slide-20'>▻</a>
+<a class='slide_break' id='slide-22' href='slides_dependencies.html#slide-22'>▻</a>
 <h3 id="references">5 References</h3>
 <ul>
 <li>Package management for the operating system:
