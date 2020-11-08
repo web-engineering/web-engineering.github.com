@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Deploy a Single Page App in the Web Engineering Textbook</title>
+  <title>Using Linux on Windows for Web Development in the Web Engineering Textbook</title>
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
   <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
@@ -75,21 +75,24 @@
   <div id="feature">
     <div class="wrapper">
       <div class="header_section">
-        <h2>Deploy a Single Page App</h2><p>A Single Page App makes one html file appear
-to contain many pages.  To host such an app
-you need a very specific configuration of a webserver </p><p>After reading it you should be familiar with:</p>
+        <h2>Using Linux on Windows for Web Development</h2><p>This Guide will help you set up
+your windows computer as a development machine
+using Linux.</p><p>After reading this guide, you will have the
+following tools installed on your machine:</p>
 <ul>
-<li>How to host a SPA on Heroku</li>
-<li>How to configure Apache for a SPA</li>
+<li>The &quot;Windows Subsystem for Linux&quot; (WSL2) with Ubuntu</li>
+<li>Terminal</li>
+<li>git </li>
+<li>VS Code with the ability to use WSL</li>
 </ul>
  
       </div>
                 <div id="subCol">
             <h3 class="chapter"><img src="images/chapters_icon.gif" alt="" />Chapters</h3>
             <ol class="chapters">
-<li><a href="#urls-and-routing-in-a-spa">URLS and Routing in a SPA</a></li>
-<li><a href="#deploying-to-heroku">Deploying to Heroku</a></li>
-<li><a href="#see-also">See Also</a></li>
+<li><a href="#why-use-linux-on-windows-questionmark">Why use Linux on Windows?</a></li>
+<li><a href="#windows-subsystem-for-linux">Windows Subsystem for Linux</a></li>
+<li><a href="#git">Git</a></li>
 </ol>
 
           </div>
@@ -104,123 +107,22 @@ you need a very specific configuration of a webserver </p><p>After reading it yo
         <div class='slide'><a id='slide-1'></a>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-1' href='slides_deploy-spa.html#slide-1'>▻</a>
-<h3 id="urls-and-routing-in-a-spa">1 URLS and Routing in a SPA</h3>
-<p>A Single Page App makes one html file appear
-to contain many pages.  When a users clicks on a link
-the URL changes and new content appears, just like
-in a classical static web site.  But the new
-content and the URL change are both done by JavaScript.</p>
-<p>See <a href="https://blog.pshrmn.com/entry/how-single-page-applications-work/">How Single-Page Applications Work</a> for a good introduction.</p>
-<p>For example let's consider the single page app on <code>https://mini-spa-demo.herokuapps.com/</code>. There might be only one <code>index.html</code>, but inside this page the URL might be changed to</p>
-<ul>
-<li><code>https://mini-spa-demo.herokuapps.com/about</code></li>
-<li><code>https://mini-spa-demo.herokuapps.com/product/1</code></li>
-<li><code>https://mini-spa-demo.herokuapps.com/product/2</code></li>
-</ul>
-<p>and so on.</p>
-<p>Each of these URLs also need to work when you call them
-directly, without entering through index.html.  This is
-what we need to configure our webserver for.</p>
+<a class='slide_break' id='slide-1' href='slides_linux_on_windows.html#slide-1'>▻</a>
+<h3 id="why-use-linux-on-windows-questionmark">1 Why use Linux on Windows?</h3>
+<p>In the last three decades  web development tools
+were mostly developed for UNIX systems: either for linux
+or for mac os.</p>
+<p>With  "Windows Subsystem for Linux" you can use all these tools
+and still keep using your gaming pc.</p>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-2' href='slides_deploy-spa.html#slide-2'>▻</a>
-<h3 id="deploying-to-heroku">2 Deploying to Heroku</h3>
-<p>You need a heroku account and the heroku toolbelt (= command line program) installed. Remember: heroku expects your app to be in the <strong>root folder of the repository</strong>!!</p>
-<p>Heroku offers a plugin to the heroku toolbelt, install it with</p>
-<div class="code_container">
-<pre class="brush: plain; gutter: false; toolbar: false">
-$ heroku plugins:install heroku-cli-static
-
-</pre>
-</div>
-<p>Got to your SPAs root folder and run</p>
-<div class="code_container">
-<pre class="brush: plain; gutter: false; toolbar: false">
-$ heroku create
-
-</pre>
-</div>
-<p>to create a new heroku app.  you will be told the URL of your app.</p>
-<p>Now you can start the setup process: First define the buildpacks</p>
-<div class="code_container">
-<pre class="brush: plain; gutter: false; toolbar: false">
-$ heroku buildpacks:add heroku/nodejs
-$ heroku buildpacks:add https://github.com/hone/heroku-buildpack-static
-
-</pre>
-</div>
-<p>We need two buildpacks: nodejs to run the build, and static to do
-the actuall serving of the pages.  </p>
-<p>The node buildpack will run <code>npm install</code> automatically.
-this is considered to be the build step. But we need another
-build step to build our app. So we add <code>heroku-postbuild</code> 
-to <code>package.json</code> and run our build there:</p>
-<div class="code_container">
-<pre class="brush: plain; gutter: false; toolbar: false">
-    "heroku-postbuild": "webpack --mode production",
-
-</pre>
-</div>
-<p>To configure the static buildpack we create a file <code>static.json</code>:</p>
-<div class="code_container">
-<pre class="brush: plain; gutter: false; toolbar: false">
-$ heroku static:init
-? Enter the directory of your app: dist/
-? Drop `.html` extensions from urls? Yes
-? Path to custom error page from root directory: 404
-{
-  "root": "dist/",
-  "clean_urls": true,
-  "error_page": "404"
-}
-
-</pre>
-</div>
-<p>This creates the file <code>static.json</code>. You could have created this file
-by hand. Now we need to add information about the routing in our page.
-For example: the build process creates a structure.</p>
-<div class="code_container">
-<pre class="brush: plain; gutter: false; toolbar: false">
---+ dist
-  |-+ fonts
-    + Roboto-Regular.woff
-    + Roboto-Regular.woff2
-  |-+ images
-    + logo.svg
-  + index.html
-  + style.b15a70a9c7e59c773405.css
-  + main.ff30a167f508273f99d6.js
-
-</pre>
-</div>
-<p>the fonts, images, css and js files should be served by the webserver directly.  All other URLs should be handled by index.html. This can be configured in <code>static.json</code> like this:</p>
-<div class="code_container">
-<pre class="brush: plain; gutter: false; toolbar: false">
-{
-  "root": "dist/",
-  "clean_urls": true,
-  "error_page": "404.html",
-  "routes": {
-    "/fonts/*":  "/fonts/",
-    "/images/*": "/images/",
-    "/*.js":     "/",
-    "/*.css":    "/",
-    "/**":       "index.html"
-  }  
-}
-
-</pre>
-</div>
+<a class='slide_break' id='slide-2' href='slides_linux_on_windows.html#slide-2'>▻</a>
+<h3 id="windows-subsystem-for-linux">2 Windows Subsystem for Linux</h3>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-3' href='slides_deploy-spa.html#slide-3'>▻</a>
-<h3 id="see-also">3 See Also</h3>
-<ul>
-<li><a href="https://www.npmjs.com/package/heroku-cli-static">heroku-cli-static</a></li>
-<li><a href="https://github.com/heroku/heroku-buildpack-static">static buildpack for heroku</a></li>
-</ul>
-</div>        
+<a class='slide_break' id='slide-3' href='slides_linux_on_windows.html#slide-3'>▻</a>
+<h3 id="git">3 Git</h3>
+<p><code>git config --global credential.helper 'cache --timeout=21600'</code></p></div>        
       </div>
     </div>
   </div>
@@ -230,7 +132,7 @@ For example: the build process creates a structure.</p>
     <div class="wrapper">
       <p class="copyright">published under <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/at/deed.de">creative commons by-nc-sa</a> in 2012-2019 by <a href="http://brigitte-jellinek.at">Brigitte Jellinek</a>.
       </p><p>If you want to contribute: <a href="https://github.com/web-engineering/web-engineering-textbook/fork">fork the source on github</a>
-        and edit <a href="https://github.com/web-engineering/web-engineering-textbook//blob/master/source/deploy-spa.md">deploy-spa.md</a>
+        and edit <a href="https://github.com/web-engineering/web-engineering-textbook//blob/master/source/linux_on_windows.md">linux_on_windows.md</a>
       </p>
     </div>
   </div>
