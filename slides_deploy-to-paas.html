@@ -63,7 +63,7 @@ running databases and other services and providing the interpreter or runtime fo
 the programming language. You rent space for your app plus the database(es) you need.</p>
 <p>With <em>Software as a Service</em> there is no app to deploy, the whole stack is in
 the hands of the service provider.</p>
-<p><img src="iaas-paas-saas.png" alt="comparison of on premise, iaas, paas, saas"></p>
+<p><img src="images/iaas-paas-saas.png" srcset='images/iaas-paas-saas.png 1x, images/iaas-paas-saas@2x.png 2x' alt="comparison of on premise, iaas, paas, saas"></p>
 <p>For a company, moving from on premise to *aas means employing
 fewer sysadmins and buying less hardware. It also means
 paying a lot of money to the service provider.</p>
@@ -181,7 +181,6 @@ REDIS_URL:                redis://dokku-redis-joe19-redis:6379
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
 $ heroku config
-$ heroku config
 === obscure-springs-61542 Config Vars
 DATABASE_URL:             postgres://erout:1baa7f8@ec2-34-200-106-49.compute-1.amazonaws.com:5432/d3jjlc4
 LANG:                     en_US.UTF-8
@@ -202,6 +201,14 @@ SECRET_KEY_BASE:          39a9fdb1549bfc2042b1d227682d3a2a5eebd26377461a479c727f
 you can see the variable <code>DATABASE_URL</code>. This contains
 all the information needed to connect to the database -
 type of database, username, password, host, port, name of the database.</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+DATABASE_URL:             postgres://erout:1baa7f8@ec2-34-200-106-49.compute-1.amazonaws.com:5432/d3jjlc4
+
+</pre>
+</div>
+<p>Here you can also see that Heroku uses Amazon AWS to run the database server.
+To Heroku buys iaas from aws and sells paas to us.</p>
 </div>
 <div class='slide'>
 <a class='slide_break' href='deploy-to-paas.html#slide-11'>▻</a>
@@ -284,13 +291,13 @@ $ heroku logs
 running the <code>run</code> command:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
-heroku run db:migrate
+heroku run rails db:migrate
 
 </pre>
 </div>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
-dokku run db:migrate
+dokku run rails db:migrate
 
 </pre>
 </div>
