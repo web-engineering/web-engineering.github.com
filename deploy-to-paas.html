@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Web Engineering Textbook</title>
+  <title>Deploy to PAAS in the Web Engineering Textbook</title>
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
   <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
@@ -74,7 +74,15 @@
   <div id="feature">
     <div class="wrapper">
       <div class="header_section">
-         
+        <h2>Deploy to PAAS</h2><p>Platform as a Service - PAAS - is one
+way to deploy web apps.</p><p>After reading it you should</p>
+<ul>
+<li>know different cloud service models</li>
+<li>know some of the 12 factors of the 12factor App</li>
+<li>be able to deploy to heroku</li>
+<li>be able to deploy to dokku</li>
+</ul>
+ 
       </div>
                 <div id="subCol">
             <h3 class="chapter"><img src="images/chapters_icon.gif" alt="" />Chapters</h3>
@@ -119,24 +127,6 @@
 </div>
 <div class='slide'>
 <a class='slide_break' id='slide-1' href='slides_deploy-to-paas.html#slide-1'>▻</a>
-<h2>Deploy to PAAS</h2>
-<p>Platform as a Service - PAAS - is one
-way to deploy web apps.</p>
-<p>After reading it you should</p>
-<ul>
-<li>know different cloud service models</li>
-<li>know some of the 12 factors of the 12factor App</li>
-<li>be able to deploy to heroku</li>
-<li>be able to deploy to dokku</li>
-</ul>
-
-</div>
-<div class='slide'>
-<a class='slide_break' id='slide-2' href='slides_deploy-to-paas.html#slide-2'>▻</a>
-<hr>
-</div>
-<div class='slide'>
-<a class='slide_break' id='slide-3' href='slides_deploy-to-paas.html#slide-3'>▻</a>
 <h3 id="what-is-cloud-computing-questionmark">1 What is Cloud Computing?</h3>
 <p>When you want to publish your web application you can use your own
 computer, connect it to the internet permanently, and do all the work
@@ -164,7 +154,7 @@ paying a lot of money to the service provider.</p>
 specific project depends on many factors.</p>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-4' href='slides_deploy-to-paas.html#slide-4'>▻</a>
+<a class='slide_break' id='slide-2' href='slides_deploy-to-paas.html#slide-2'>▻</a>
 <h3 id="why-use-cloud-computing-questionmark">2 Why use Cloud Computing?</h3>
 <p>The <a href="https://csrc.nist.gov/publications/detail/sp/800-145/final">NIST Definition of Cloud Computing</a>
 lists five essential characteristics of cloud computing. The short version is:</p>
@@ -182,7 +172,7 @@ lists five essential characteristics of cloud computing. The short version is:</
 </ul>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-5' href='slides_deploy-to-paas.html#slide-5'>▻</a>
+<a class='slide_break' id='slide-3' href='slides_deploy-to-paas.html#slide-3'>▻</a>
 <h3 id="public-vs-private-cloud">3 Public vs. Private Cloud</h3>
 <p>Any cloud infrastructure that is open for use by the general public is called a public cloud.
 Public does not mean free, just that any paying customer can use it.
@@ -194,7 +184,7 @@ still exhibit the five characteristics above.</p>
 und one example of a private paas (dokku).</p>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-6' href='slides_deploy-to-paas.html#slide-6'>▻</a>
+<a class='slide_break' id='slide-4' href='slides_deploy-to-paas.html#slide-4'>▻</a>
 <h3 id="using-heroku">4 Using Heroku</h3>
 <p>you need to</p>
 <ul>
@@ -207,7 +197,7 @@ und one example of a private paas (dokku).</p>
 </ul>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-7' href='slides_deploy-to-paas.html#slide-7'>▻</a>
+<a class='slide_break' id='slide-5' href='slides_deploy-to-paas.html#slide-5'>▻</a>
 <h3 id="using-dokku">5 Using Dokku</h3>
 <p>if you are reading this as part of your course at Fachhochschule Salzburg
 you already have an account on our local dokku install.</p>
@@ -219,7 +209,7 @@ you already have an account on our local dokku install.</p>
 </ul>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-8' href='slides_deploy-to-paas.html#slide-8'>▻</a>
+<a class='slide_break' id='slide-6' href='slides_deploy-to-paas.html#slide-6'>▻</a>
 <h3 id="the-12factor-app">6 The 12factor App</h3>
 <p>In 2011 the document "the 12factor app" was published by developers from
 the company heroku. It describes how to prepare a web app
@@ -230,7 +220,7 @@ at each one in turn. A link to the original document is
 always provided in the first sentence, please read the original first!</p>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-9' href='slides_deploy-to-paas.html#slide-9'>▻</a>
+<a class='slide_break' id='slide-7' href='slides_deploy-to-paas.html#slide-7'>▻</a>
 <h4 id="i-codebase">6.1 I. Codebase</h4>
 <p><a href="https://12factor.net/codebase">One codebase tracked in revision control, many deploys</a></p>
 <p>Discussion:</p>
@@ -243,14 +233,14 @@ different apps and libraries, most famously Google. (If you have as much code
 as google git will not suffice for a monorepo)</p>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-10' href='slides_deploy-to-paas.html#slide-10'>▻</a>
+<a class='slide_break' id='slide-8' href='slides_deploy-to-paas.html#slide-8'>▻</a>
 <h4 id="ii-dependencies">6.2 II. Dependencies</h4>
 <p><a href="https://12factor.net/dependencies">Explicitly declare and isolate dependencies</a></p>
 <p>Dependency declaration through a file like <code>Gemfile</code>, <code>package.json</code>, <code>composer.json</code>
 is available in all modern languages for the web.</p>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-11' href='slides_deploy-to-paas.html#slide-11'>▻</a>
+<a class='slide_break' id='slide-9' href='slides_deploy-to-paas.html#slide-9'>▻</a>
 <h4 id="iii-config">6.3 III. Config</h4>
 <p><a href="https://12factor.net/config">Store config in the environment</a></p>
 <p>You can see the environment variables in both dokku and heroku by
@@ -288,7 +278,7 @@ SECRET_KEY_BASE:          39a9fdb1549bfc2042b1d227682d3a2a5eebd26377461a479c727f
 </div>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-12' href='slides_deploy-to-paas.html#slide-12'>▻</a>
+<a class='slide_break' id='slide-10' href='slides_deploy-to-paas.html#slide-10'>▻</a>
 <h4 id="iv-backing-services">6.4 IV. Backing services</h4>
 <p><a href="https://12factor.net/backing-services">Treat backing services as attached resources</a></p>
 <p>If you look back at the environment variables above
@@ -297,7 +287,7 @@ all the information needed to connect to the database -
 type of database, username, password, host, port, name of the database.</p>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-13' href='slides_deploy-to-paas.html#slide-13'>▻</a>
+<a class='slide_break' id='slide-11' href='slides_deploy-to-paas.html#slide-11'>▻</a>
 <h4 id="v-build-release-run">6.5 V. Build, release, run</h4>
 <p><a href="https://12factor.net/build-release-run">Strictly separate build and run stages</a></p>
 <p>Here we first meet a limitation of the 12 factor app when
@@ -307,33 +297,33 @@ It is impossible to make changes to the code at runtime.</p>
 and wait for a minute for it to deploy.</p>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-14' href='slides_deploy-to-paas.html#slide-14'>▻</a>
+<a class='slide_break' id='slide-12' href='slides_deploy-to-paas.html#slide-12'>▻</a>
 <h4 id="vi-processes">6.6 VI. Processes</h4>
 <p><a href="https://12factor.net/processes">Execute the app as one or more stateless processes</a></p>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-15' href='slides_deploy-to-paas.html#slide-15'>▻</a>
+<a class='slide_break' id='slide-13' href='slides_deploy-to-paas.html#slide-13'>▻</a>
 <h4 id="vii-port-binding">6.7 VII. Port binding</h4>
 <p><a href="https://12factor.net/port-binding">Export services via port binding</a></p>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-16' href='slides_deploy-to-paas.html#slide-16'>▻</a>
+<a class='slide_break' id='slide-14' href='slides_deploy-to-paas.html#slide-14'>▻</a>
 <h4 id="viii-concurrency">6.8 VIII. Concurrency</h4>
 <p><a href="https://12factor.net/concurrency">Scale out via the process model</a></p>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-17' href='slides_deploy-to-paas.html#slide-17'>▻</a>
+<a class='slide_break' id='slide-15' href='slides_deploy-to-paas.html#slide-15'>▻</a>
 <h4 id="ix-disposability">6.9 IX. Disposability</h4>
 <p><a href="https://12factor.net/disposability">Maximize robustness with fast startup and graceful shutdown</a></p>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-18' href='slides_deploy-to-paas.html#slide-18'>▻</a>
+<a class='slide_break' id='slide-16' href='slides_deploy-to-paas.html#slide-16'>▻</a>
 <h4 id="x-dev-prod-parity">6.10 X. Dev/prod parity</h4>
 <p><a href="https://12factor.net/dev-prod-parity">Keep development, staging, and production as similar as possible</a></p>
 <p>Yes.</p>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-19' href='slides_deploy-to-paas.html#slide-19'>▻</a>
+<a class='slide_break' id='slide-17' href='slides_deploy-to-paas.html#slide-17'>▻</a>
 <h4 id="xi-logs">6.11 XI. Logs</h4>
 <p><a href="https://12factor.net/logs">Treat logs as event streams</a></p>
 <p>You can see the log in both dokku and heroku by
@@ -370,7 +360,7 @@ $ heroku logs
 </div>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-20' href='slides_deploy-to-paas.html#slide-20'>▻</a>
+<a class='slide_break' id='slide-18' href='slides_deploy-to-paas.html#slide-18'>▻</a>
 <h4 id="xii-admin-processes">6.12 XII. Admin processes</h4>
 <p><a href="https://12factor.net/admin-processes">Run admin/management tasks as one-off processes</a></p>
 <p>You can run other processes in both dokku and heroku by
@@ -389,7 +379,7 @@ dokku run db:migrate
 </div>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-21' href='slides_deploy-to-paas.html#slide-21'>▻</a>
+<a class='slide_break' id='slide-19' href='slides_deploy-to-paas.html#slide-19'>▻</a>
 <h3 id="first-steps">7 First steps</h3>
 <ol>
 <li>create an app</li>
@@ -399,7 +389,7 @@ dokku run db:migrate
 </ol>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-22' href='slides_deploy-to-paas.html#slide-22'>▻</a>
+<a class='slide_break' id='slide-20' href='slides_deploy-to-paas.html#slide-20'>▻</a>
 <h3 id="see-also">8 See Also</h3>
 <ul>
 <li><a href="https://csrc.nist.gov/publications/detail/sp/800-145/final">NIST Definition of Cloud Computing</a></li>
