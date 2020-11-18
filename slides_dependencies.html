@@ -85,14 +85,25 @@ programming languages.</p>
 </div>
 <div class='slide'>
 <a class='slide_break' href='dependencies.html#slide-2'>▻</a>
-<h4 id="libraries-io">1.1 libraries.io</h4>
+<h4 id="the-other-side">1.1 The other side</h4>
+<p>While this chapter is about using dependencies, you might also consider
+what goes into creating a good dependency: how do I write code that can
+be reused? How do I split up a larger problem into smaller pieces that can
+be reused?</p>
+<p>Therese are questions of software design and software architecture. They go
+back a long time (e.g. D.L. Parnas. (1972). On the criteria to be used in decomposing systems into modules. Communications of the ACM, 15(12), 1053–1058. doi: 10.1007/978-3-642-48354-7_20, discussed in
+<a href="https://blog.acolyer.org/2016/09/05/on-the-criteria-to-be-used-in-decomposing-systems-into-modules/">morning papers</a>).</p>
+</div>
+<div class='slide'>
+<a class='slide_break' href='dependencies.html#slide-3'>▻</a>
+<h4 id="libraries-io">1.2 libraries.io</h4>
 <p>The site <a href="https://libraries.io/">libraries.io</a> collects information
 for many package management systems, it's a central place to look
 for software to use.</p>
 </div>
 <div class='slide'>
-<a class='slide_break' href='dependencies.html#slide-3'>▻</a>
-<h4 id="dynamiclly-linked-libraries">1.2 dynamiclly linked libraries</h4>
+<a class='slide_break' href='dependencies.html#slide-4'>▻</a>
+<h4 id="dynamiclly-linked-libraries">1.3 dynamiclly linked libraries</h4>
 <p>Why do we need to look at <code>apt</code>, <code>brew</code> or <code>choco</code>? Isn't the
 package manager for my main programing language enough?</p>
 <p>In many cases using php-only or ruby-only libraries will be enough.
@@ -126,8 +137,8 @@ In file included from binder.cpp:20:
 </div>
 </div>
 <div class='slide'>
-<a class='slide_break' href='dependencies.html#slide-4'>▻</a>
-<h4 id="package-names-and-a-central-database">1.3 package names and a central database</h4>
+<a class='slide_break' href='dependencies.html#slide-5'>▻</a>
+<h4 id="package-names-and-a-central-database">1.4 package names and a central database</h4>
 <p>To enable easy installation of a dependency with just one command we need
 a central database that contains the information on all available packages.
 These databases typically also offer a web page with search functionality:</p>
@@ -148,8 +159,8 @@ Package names need to be unique. Version numbers are often given out according t
 </ul>
 </div>
 <div class='slide'>
-<a class='slide_break' href='dependencies.html#slide-5'>▻</a>
-<h4 id="how-to-install">1.4 How to install</h4>
+<a class='slide_break' href='dependencies.html#slide-6'>▻</a>
+<h4 id="how-to-install">1.5 How to install</h4>
 <ul>
 <li><code>apt-get install imagemagick</code></li>
 <li><code>brew install imagemagick</code></li>
@@ -161,15 +172,15 @@ Package names need to be unique. Version numbers are often given out according t
 </ul>
 </div>
 <div class='slide'>
-<a class='slide_break' href='dependencies.html#slide-6'>▻</a>
-<h4 id="where-is-the-code-installed-questionmark">1.5 Where is the code installed?</h4>
+<a class='slide_break' href='dependencies.html#slide-7'>▻</a>
+<h4 id="where-is-the-code-installed-questionmark">1.6 Where is the code installed?</h4>
 <p>All the package managers distinguish between installing <strong>globally</strong> - for all users and projects on a computer and installing <strong>locally</strong>. This might mean installing in a way that only one user can use, or it might mean installing into a projects directory.</p>
 <p>When you deploy your project to a production server you again face this question: should
 the dependencies be installed globally or locally?</p>
 </div>
 <div class='slide'>
-<a class='slide_break' href='dependencies.html#slide-7'>▻</a>
-<h4 id="security-considerations">1.6 Security considerations</h4>
+<a class='slide_break' href='dependencies.html#slide-8'>▻</a>
+<h4 id="security-considerations">1.7 Security considerations</h4>
 <p>Downloading and using software is always dangerous. With a package
 management system a lot of downloads happen automatically. So we want
 to make sure the software we download is really what it is supposed to be.</p>
@@ -181,7 +192,7 @@ that only the original author of the package can release new versions.</li>
 </ul>
 </div>
 <div class='slide'>
-<a class='slide_break' href='dependencies.html#slide-8'>▻</a>
+<a class='slide_break' href='dependencies.html#slide-9'>▻</a>
 <h3 id="dependency-hell">2 Dependency Hell</h3>
 <p>For a big web project you will be using a lot of dependencies. This will lead
 to two problems (here shown in a ruby projects with gems):</p>
@@ -193,7 +204,7 @@ to two problems (here shown in a ruby projects with gems):</p>
 of gems to make your code work again on a new machine or after an update.</p>
 </div>
 <div class='slide'>
-<a class='slide_break' href='dependencies.html#slide-9'>▻</a>
+<a class='slide_break' href='dependencies.html#slide-10'>▻</a>
 <h4 id="escape-from-depencency-hell">2.1 Escape from Depencency Hell</h4>
 <p><img src="images/bundler-small.png" alt="bundler"></p>
 <p>Bundler is the name of the ruby tool that solves this problem for ruby.
@@ -225,7 +236,7 @@ you run <code>bundle install</code> and the exact same versions are now installe
 the name of the gem.</p>
 </div>
 <div class='slide'>
-<a class='slide_break' href='dependencies.html#slide-10'>▻</a>
+<a class='slide_break' href='dependencies.html#slide-11'>▻</a>
 <h4 id="defining-versions">2.2 Defining Versions</h4>
 <p>When definig your wishes for dependencies you can specify which versions should be used.
 But don't overdo it! The package manager does a good job picking versions.
@@ -265,7 +276,7 @@ for your version number: MAJOR dot MINOR dot PATCH. For example 3.1.0.</p>
 <p>But not all projects adher to this standard yet.</p>
 </div>
 <div class='slide'>
-<a class='slide_break' href='dependencies.html#slide-11'>▻</a>
+<a class='slide_break' href='dependencies.html#slide-12'>▻</a>
 <h4 id="keeping-up-to-date">2.3 Keeping Up To Date</h4>
 <p>Let's assume you list 12 dependencies in your project. This might result in 36 dependencies
 being installed in all. Now assume each dependency releases a new version once a year. You
@@ -275,7 +286,7 @@ have to be prepared for updating several dependencies each month!</p>
 you about new version or -- even more important -- new security updates for your dependencies.</p>
 </div>
 <div class='slide'>
-<a class='slide_break' href='dependencies.html#slide-12'>▻</a>
+<a class='slide_break' href='dependencies.html#slide-13'>▻</a>
 <h3 id="dependencies-always-imply-risk">3 Dependencies always imply Risk</h3>
 <p>Using a third party library will make you more
 productive today. But it could well harm you in the long run:</p>
@@ -293,11 +304,11 @@ productive today. But it could well harm you in the long run:</p>
 </ul>
 </div>
 <div class='slide'>
-<a class='slide_break' href='dependencies.html#slide-13'>▻</a>
+<a class='slide_break' href='dependencies.html#slide-14'>▻</a>
 <h3 id="quick-start-guides">4 Quick Start Guides</h3>
 </div>
 <div class='slide'>
-<a class='slide_break' href='dependencies.html#slide-14'>▻</a>
+<a class='slide_break' href='dependencies.html#slide-15'>▻</a>
 <h4 id="apt-for-linux">4.1 apt for Linux</h4>
 <p>The Advanced Package Tool, or APT, handles the installation and removal
 of software on the Debian, Ubuntu and other Linux distributions.
@@ -368,7 +379,7 @@ $ dpkg -L libmagickcore
 </ul>
 </div>
 <div class='slide'>
-<a class='slide_break' href='dependencies.html#slide-15'>▻</a>
+<a class='slide_break' href='dependencies.html#slide-16'>▻</a>
 <h4 id="brew-for-mac-os">4.2 brew for mac os</h4>
 <p>Homebrew is a package manager for Mac OS. It builds
 software from source, applying patches to make the software
@@ -433,11 +444,11 @@ lrwxr-xr-x  user  createdb -&gt; ../Cellar/postgresql/9.5.4_1/bin/createdb
 </ul>
 </div>
 <div class='slide'>
-<a class='slide_break' href='dependencies.html#slide-16'>▻</a>
+<a class='slide_break' href='dependencies.html#slide-17'>▻</a>
 <h4 id="choco-for-windows">4.3 choco for windows</h4>
 </div>
 <div class='slide'>
-<a class='slide_break' href='dependencies.html#slide-17'>▻</a>
+<a class='slide_break' href='dependencies.html#slide-18'>▻</a>
 <h4 id="gem-and-bundler-for-ruby">4.4 gem and bundler for ruby</h4>
 <p>Libraries for ruby are called <strong>gems</strong> and can be installed using the command lin tool <code>gem</code>:</p>
 <div class="code_container">
@@ -514,7 +525,7 @@ repository.</p>
 </ul>
 </div>
 <div class='slide'>
-<a class='slide_break' href='dependencies.html#slide-18'>▻</a>
+<a class='slide_break' href='dependencies.html#slide-19'>▻</a>
 <h4 id="npm-for-javascript-and-node-js">4.5 npm for javascript and node.js</h4>
 <p>Libraries for javascript are called <strong>packages</strong> and can be installed using the command line tool <code>npm</code>:</p>
 <div class="code_container">
@@ -596,7 +607,7 @@ import { http } from 'http';
 <p>When using git with a node.js project you add <code>packages.json</code> and <code>npm-shrinkwrap.json</code> to the repository, and <code>node_modules</code> to <code>.gitignore</code>.</p>
 </div>
 <div class='slide'>
-<a class='slide_break' href='dependencies.html#slide-19'>▻</a>
+<a class='slide_break' href='dependencies.html#slide-20'>▻</a>
 <h4 id="composer-and-packagist-for-php">4.6 composer and packagist for php</h4>
 <p>One package manager for php is <code>composer</code>. It can be used to
 install packages with <code>composer require</code>:</p>
@@ -650,7 +661,7 @@ $log = new Monolog\Logger('name');
 </ul>
 </div>
 <div class='slide'>
-<a class='slide_break' href='dependencies.html#slide-20'>▻</a>
+<a class='slide_break' href='dependencies.html#slide-21'>▻</a>
 <h3 id="references">5 References</h3>
 <ul>
 <li>Package management for the operating system:
