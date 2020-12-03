@@ -113,6 +113,13 @@ other code originally written in c or c++.</p>
 which is writen in <a href="https://github.com/ImageMagick/ImageMagick/tree/master/MagickCore">C</a>.</p>
 <p>You do this using apt or brew or
 <a href="http://www.imagemagick.org/script/binary-releases.php#windows">the windows installer with dynamic link libraries</a>.</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+sudo apt-get install imagemagick libmagickwand-dev  # ubuntu, wls
+brew install imagemagick                            # macos
+
+</pre>
+</div>
 <p>The result of installing imagemagick with brew is the file <code>libMagickCore-6.Q16.2.dylib</code> and two other libraries. These are libraries that can be used by multiple programs on your computer when they are dynamically linked to those programs.</p>
 <p>When installing the ruby gem with <code>gem install rmagick</code> you get the following output:</p>
 <div class="code_container">
