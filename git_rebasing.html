@@ -4,8 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Web Engineering - a textbook
-</title>
+  <title>Git Rebasing in the Web Engineering Textbook</title>
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
   <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
@@ -76,25 +75,27 @@
   <div id="feature">
     <div class="wrapper">
       <div class="header_section">
-          <h2>About this Book</h2>
-  <p>This is a textbook for the second year of a computer
-  science or "media informatics" degree program.  It builds
-  on <a href="https://web-development.github.io">Web Development</a> 
-  (in german) and runs parallel to
-  <a href="https://backend-development.github.io">Backend Development</a>.</p>
-
-  <p>This book is not a self-contained work: There are great
-  resources for learning about the tools and technologies of web engineering
-  - this book tries to use
-  these resources, and bind them together into a coherent study plan.</p>
-
-  <p>It was written and published by Brigitte Jellinek 
-  in the hope that it will be useful to lecturers and students
-  in educational institutions as well as to self-directed learners on the internet.
-  </p>
+        <h2>Git Rebasing</h2><p>This Guide will elaborate on teamwork in git 
+and using branches.</p><p>After reading this guide, you will know:</p>
+<ul>
+<li>Hot to rebase</li>
+</ul>
  
       </div>
-      
+                <div id="subCol">
+            <h3 class="chapter"><img src="images/chapters_icon.gif" alt="" />Chapters</h3>
+            <ol class="chapters">
+<li>
+<a href="#what-is-a-commit-what-is-a-branch">What is a commit, what is a branch.</a>
+
+<ul>
+<li><a href="#resources">Resources</a></li>
+</ul>
+</li>
+</ol>
+
+          </div>
+
     </div>
   </div>
 
@@ -103,61 +104,41 @@
     <div class="wrapper">
       <div id="mainCol">
         <div class='slide'><a id='slide-1'></a>
-
-
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-1' href='slides_#slide-1'>▻</a>
-<h3>What is Web Engineering</h3>
+<a class='slide_break' id='slide-1' href='slides_git_rebasing.html#slide-1'>▻</a>
+<h3 id="what-is-a-commit-what-is-a-branch">1 What is a commit, what is a branch.</h3>
+<p>Every commit is just a small change that
+points to the commit before.</p>
+<p>A branch is just a pointer to a certain commit.</p>
+<p>If you create a branch called <code>a3</code> and add
+a few commits W, X, Y, and Z to it, it might look like this:</p>
+<p><img src="images/git_branch.svg" alt=""></p>
+<p>If you merge back into master now everything will be fine.</p>
+<p>But what if the master moves on?<br>
+Let's say three other commits are added to the master: B, C and D:</p>
+<p><img src="images/git_branches.svg" alt=""></p>
+<p>If you merge this, the merge might get complicated.
+A new Commit is created that contains all the necessary changes:</p>
+<p><img src="images/git_merge.svg" alt=""></p>
+<p>But there's a better approach: First you rebase your branch onto the master:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+git checkout a4
+git rebase master
 
-<p>Under this title we collect all the stuff that
-does not fit neatly into "backend" or "frontend" development:
-workflows, tools, operations.
-</p>
-
-  <h3>Basics</h3>
-  <dl>
-      <dt><a href="vi.html">vi</a></dt><dd>
-        <p>the editor vi, and how to get out of it</p>
-</dd>      <dt><a href="public_key.html">Using Public Key Cryptography</a></dt><dd>
-        <p></p>
-</dd>      <dt><a href="git_basics.html">Git Basics</a></dt><dd>
-        <p>First Steps in git</p>
-</dd>      <dt><a href="linux_on_windows.html">Using Linux on Windows for Web Development</a></dt><dd>
-        <p>When using windows as your development machine you will need to install some extra tools</p>
-</dd>  </dl>
-  <h3>Workflows</h3>
-  <dl>
-      <dt><a href="git_branching.html">Git Branching and Merging</a></dt><dd>
-        <p>With branches you can work on two separate versions of your code in parallel. For example you can work on a new feature, but go back and fix an error in production in the middle of it. Git will help you keep your code sorted.</p>
-</dd>      <dt><a href="git_rebasing.html">Git Rebasing</a></dt><dd>
-        <p>An important concept to avoid complex merges</p>
-</dd>      <dt><a href="dependencies.html">Managing Dependencies</a></dt><dd>
-        <p></p>
-</dd>      <dt><a href="testing.html">Testing</a></dt><dd>
-        <p>Automatic tests for your programs</p>
-</dd>      <dt><a href="refactoring.html">Refactoring</a></dt><dd>
-        <p>Improve your code through simple refactoring steps</p>
-</dd>  </dl>
-  <h3>Web Operations</h3>
-  <dl>
-      <dt><a href="deploy-to-paas.html">Deploy to Paas</a></dt><dd>
-        <p>How to deploy your app to a PAAS - platform as a service.</p>
-</dd>      <dt><a href="deploy-spa.html">Deploy a SPA</a></dt><dd>
-        <p>How to deploy your Single Page App</p>
-</dd>      <dt><a href="webserver.html">Webserver</a></dt><dd>
-        <p>Webserver</p>
-</dd>  </dl>
-
+</pre>
+</div>
+<p>This will try to apply the new commits in a4 on top
+of the current state of master, leading to this situation:</p>
+<p><img src="images/git_rebase.svg" alt=""></p>
+<p>After the rebase a merge into master will be simple.</p>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-2' href='slides_#slide-2'>▻</a>
-<h3>What is Web Engineering</h3>
-
-<p>Futher reading, stuff we want to cover later</p>
-
+<a class='slide_break' id='slide-2' href='slides_git_rebasing.html#slide-2'>▻</a>
+<h4 id="resources">1.1 Resources</h4>
 <ul>
-<li>Docker: <a href="https://docker-curriculum.com/">docker-curriculum.com</a></li>
+<li><a href="https://git-scm.com/book/en/v2/Git-Branching-Rebasing">Git Book: Chapter 3.6</a></li>
 </ul>
 </div>        
       </div>
@@ -169,6 +150,7 @@ workflows, tools, operations.
     <div class="wrapper">
       <p class="copyright">published under <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/at/deed.de">creative commons by-nc-sa</a> in 2012-2019 by <a href="http://brigitte-jellinek.at">Brigitte Jellinek</a>.
       </p><p>If you want to contribute: <a href="https://github.com/web-engineering/web-engineering-textbook/fork">fork the source on github</a>
+        and edit <a href="https://github.com/web-engineering/web-engineering-textbook//blob/master/source/git_rebasing.md">git_rebasing.md</a>
       </p>
     </div>
   </div>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=1024, user-scalable=no">
+    <title>Slides for
+        Git Rebasing in the Web Engineering Textbook
+    </title>
+    <!-- Required stylesheet -->
+    <link rel="stylesheet" media="screen" href="stylesheets/deck.core.css">
+    <!-- Extension CSS files go here. Remove or add as needed. -->
+    <link rel="stylesheet" media="screen" href="stylesheets/deck.goto.css">
+    <link rel="stylesheet" media="screen" href="stylesheets/deck.menu.css">
+    <link rel="stylesheet" media="screen" href="stylesheets/deck.navigation.css">
+    <link rel="stylesheet" media="screen" href="stylesheets/deck.status.css">
+    <!-- Style theme. More available in /themes/style/ or create your own. -->
+    <link rel="stylesheet" media="screen" href="stylesheets/web-2.0.css">
+    <!-- Transition theme. More available in /themes/transition/ or create your own. -->
+    <link rel="stylesheet" media="screen" href="stylesheets/horizontal-slide.css">
+    <!-- syntax highlighter -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shThemeRailsGuides.css" />    
+
+
+    <!-- Basic black and white print styles -->
+    <link rel="stylesheet" media="print" href="stylesheets/print.css">
+    <!-- Required Modernizr file -->
+    <script src="javascripts/modernizr.custom.js"></script>
+</head>
+
+<body>
+    <div class="deck-container">
+        <div class='slide'><h2>Git Rebasing</h2><p>This Guide will elaborate on teamwork in git 
+and using branches.</p><p>After reading this guide, you will know:</p>
+<ul>
+<li>Hot to rebase</li>
+</ul>
+
+</div>
+<div class='slide'>
+<a class='slide_break' href='git_rebasing.html#slide-1'>▻</a>
+<h3 id="what-is-a-commit-what-is-a-branch">1 What is a commit, what is a branch.</h3>
+<p>Every commit is just a small change that
+points to the commit before.</p>
+<p>A branch is just a pointer to a certain commit.</p>
+<p>If you create a branch called <code>a3</code> and add
+a few commits W, X, Y, and Z to it, it might look like this:</p>
+<p><img src="images/git_branch.svg" alt=""></p>
+<p>If you merge back into master now everything will be fine.</p>
+<p>But what if the master moves on?<br>
+Let's say three other commits are added to the master: B, C and D:</p>
+<p><img src="images/git_branches.svg" alt=""></p>
+<p>If you merge this, the merge might get complicated.
+A new Commit is created that contains all the necessary changes:</p>
+<p><img src="images/git_merge.svg" alt=""></p>
+<p>But there's a better approach: First you rebase your branch onto the master:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+git checkout a4
+git rebase master
+
+</pre>
+</div>
+<p>This will try to apply the new commits in a4 on top
+of the current state of master, leading to this situation:</p>
+<p><img src="images/git_rebase.svg" alt=""></p>
+<p>After the rebase a merge into master will be simple.</p>
+</div>
+<div class='slide'>
+<a class='slide_break' href='git_rebasing.html#slide-2'>▻</a>
+<h4 id="resources">1.1 Resources</h4>
+<ul>
+<li><a href="https://git-scm.com/book/en/v2/Git-Branching-Rebasing">Git Book: Chapter 3.6</a></li>
+</ul>
+</div>
+    </div>
+    <!-- End slides. -->
+    <!-- Begin extension snippets. Add or remove as needed. -->
+    <!-- deck.navigation snippet -->
+    <div aria-role="navigation">
+        <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+        <a href="#" class="deck-next-link" title="Next">&#8594;</a>
+    </div>
+    <!-- deck.status snippet -->
+    <p class="deck-status" aria-role="status">
+        <span class="deck-status-current"></span>
+        /
+        <span class="deck-status-total"></span>
+    </p>
+    <!-- deck.goto snippet -->
+    <form action="." method="get" class="goto-form">
+        <label for="goto-slide">Go to slide:</label>
+        <input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+        <datalist id="goto-datalist"></datalist>
+        <input type="submit" value="Go">
+    </form>
+    <!-- End extension snippets. -->
+    </div>
+    <!-- Required JS files. -->
+    <script src="javascripts/jquery.min.js"></script>
+    <script src="javascripts/deck.core.js"></script>
+    <!-- Extension JS files. Add or remove as needed. -->
+    <script src="javascripts/deck.menu.js"></script>
+    <script src="javascripts/deck.goto.js"></script>
+    <script src="javascripts/deck.status.js"></script>
+    <script src="javascripts/deck.navigation.js"></script>
+    <script src="javascripts/deck.escape.js"></script>
+    <!--  Syntax highlighter -->
+    <script src="javascripts/syntaxhighlighter/shCore.js"></script>
+    <script src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
+    <script src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
+    <script src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
+    <script src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>    
+    <!-- Initialize the deck. You can put this in an external file if desired. -->
+    <script>
+    SyntaxHighlighter.all()      
+    $(function() {
+      $.deck('.slide');
+    });
+
+    var $d = $(document);    
+
+    $d.bind('deck.change', function(event, from, to) {
+      // console.log('Moving from slide ' + from + ' to ' + to);
+    });   
+    $d.bind('deck.beforeInit', function() {
+      // console.log('Deck.beforeInit. hash is ' + document.location.hash);
+    });     
+    $d.bind('deck.init', function() {
+      // console.log('Deck.init is done. hash was ' + document.location.hash);
+    }); 
+    </script>
+</body>
+
+</html>
