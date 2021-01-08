@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Tools to keep your Code Clean in the Web Engineering Textbook</title>
+  <title>Tools to help you create better code in the Web Engineering Textbook</title>
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
   <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
@@ -56,6 +56,7 @@
                 <dd><a class="nav-item" href="dependencies.html">Managing Dependencies</a></dd>
                 <dd><a class="nav-item" href="testing.html">Testing</a></dd>
                 <dd><a class="nav-item" href="refactoring.html">Refactoring</a></dd>
+                <dd><a class="nav-item" href="code.html">Tools for better code</a></dd>
               </dl>
               <dl class="R">
                 <dt>Web Operations</dt>
@@ -75,7 +76,7 @@
   <div id="feature">
     <div class="wrapper">
       <div class="header_section">
-        <h2>Tools to keep your Code Clean</h2><p>With this guide will get to know some tools
+        <h2>Tools to help you create better code</h2><p>With this guide will get to know some tools
 that will help you produce good code, and keep
 the quality up.</p><p>You will get to know tools for Ruby for</p>
 <ul>
@@ -91,10 +92,22 @@ the quality up.</p><p>You will get to know tools for Ruby for</p>
 <li><a href="#static-code-analysis">Static Code Analysis</a></li>
 <li><a href="#coding-convention">Coding Convention</a></li>
 <li><a href="#linting">Linting</a></li>
-<li><a href="#example-linter-for-ruby-rubocop">Example Linter for Ruby: Rubocop</a></li>
+<li><a href="#metrics">Metrics</a></li>
+<li>
+<a href="#example-linter-for-ruby-rubocop">Example Linter for Ruby: Rubocop</a>
+
+<ul>
+<li><a href="#running-rubocop">Running rubocop</a></li>
+<li><a href="#learning-more-about-cops">Learning more about cops</a></li>
+<li><a href="#automatically-fixing-code">Automatically fixing code</a></li>
+<li><a href="#configure-rubocop">Configure Rubocop</a></li>
+</ul>
+</li>
 <li><a href="#example-linter-for-javascript-eslint">Example Linter for JavaScript: ESLint</a></li>
 <li><a href="#best-practices">Best Practices</a></li>
+<li><a href="#overview-of-several-tools">Overview of several tools</a></li>
 <li><a href="#security">Security</a></li>
+<li><a href="#see-also">See Also</a></li>
 </ol>
 
           </div>
@@ -121,16 +134,17 @@ of coding conventions. This is called "linting". </p>
 <p>A Style Guide or Coding Convention places
 restrictions on the way you write your code: it tells
 you how deep indentation should be, whether to put
-spaces inside brackts, and so on.</p>
+spaces inside brackets, and so on.</p>
 <p>You can invest a lot of emotional energy in this, and fight
 with your co-workers over the details of formatting.  Or
 you can just decide on a style guide to follow, and be done
 with the discussions.</p>
 <ul>
 <li><a href="https://github.com/bbatsov/ruby-style-guide">ruby style guide</a></li>
-<li><a href="https://github.com/airbnb/javascript">airbnb style guide</a></li>
+<li><a href="https://github.com/airbnb/javascript">airbnb javascript style guide</a></li>
 <li><a href="https://standardjs.com/">javascript standard stlye</a></li>
-<li><a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md">PHP Standards Recommendations: PSR-2</a></li>
+<li>[PHP Standards Recommendations: <a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md">PSR-1</a> and <a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-12-extended-coding-style-guide.md">PSR-12</a>
+</li>
 </ul>
 </div>
 <div class='slide'>
@@ -139,38 +153,181 @@ with the discussions.</p>
 <p>To lint is to check if code follows a style guide.
 Linting tools are available for all languages:</p>
 <ul>
-<li><a href="https://github.com/bbatsov/rubocop">rubocop</a></li>
-<li><a href="http://eslint.org/">ES Lint</a></li>
-<li><a href="https://github.com/squizlabs/PHP_CodeSniffer">PHP Code Sniffer</a></li>
+<li>
+<a href="https://docs.rubocop.org/rubocop/1.8/usage/basic_usage.html">rubocop</a> </li>
+<li>
+<a href="http://eslint.org/">ES Lint</a> + <a href="https://github.com/typescript-eslint/typescript-eslint#readme">typescript-eslint</a>
+</li>
+<li><a href="https://github.com/squizlabs/PHP_CodeSniffer#readme">PHP Code Sniffer</a></li>
 </ul>
 <p>You can incorporate linting into your editor, this
 way you will never stray far from the style guide.</p>
-<p><img src="/images/rubocop-in-vscode.png" srcset='/images/rubocop-in-vscode.png 1x, /images/rubocop-in-vscode@2x.png 2x' alt="rubocop in vscode"></p>
+<p><img src="images/rubocop-in-vscode.png" srcset='images/rubocop-in-vscode.png 1x, images/rubocop-in-vscode@2x.png 2x' alt="rubocop in vscode"></p>
 </div>
 <div class='slide'>
 <a class='slide_break' id='slide-4' href='slides_code.html#slide-4'>▻</a>
-<h3 id="example-linter-for-ruby-rubocop">4 Example Linter for Ruby: Rubocop</h3>
-<p>When you run <code>rubocop</code> it will examine all the files
-in the current directory, and in subdirectories.</p>
-<p>The rules that rubocop follows are called "cops". The default
-rules are <a href="https://github.com/rubocop-hq/rubocop/blob/master/config/default.yml">documented here</a>.</p>
-<p>You can configure rubocop by writing a file <code>.rubocop.yml</code> in your
-projects root folder.</p>
-<p>Run  <code>rubocop -d</code> to find out which rules the code is breaking.
-You can disable rules for all files, you can exempt some files from
-completely, or you can deactivate a rule just for a few lines of code:</p>
+<h3 id="metrics">4 Metrics</h3>
+<p>Software metrics try to <strong>measure</strong> aspects of code. The
+result is a number. </p>
+<ul>
+<li>
+<a href="https://en.wikipedia.org/wiki/Source_lines_of_code">LOC</a> - lines of code - just counts the lines, ignoring comments</li>
+<li>
+<a href="https://en.wikipedia.org/wiki/ABC_Software_Metric">ABC</a> - counts the number of assignments (A), branches (B) and conditionals (C) </li>
+<li>
+<a href="https://en.wikipedia.org/wiki/Cyclomatic_complexity">Cyclomatic complexity</a> - counts the number of "paths" through the code</li>
+</ul>
+<p>Running <code>rails stats</code>  will give you a first overview of the "size" of a rails app:</p>
 <div class="code_container">
 <pre class="brush: plain; gutter: false; toolbar: false">
-# rubocop:disable Metrics/LineLength, Style/StringLiterals
-# [... ugly code ...]
-# rubocop:enable Metrics/LineLength, Style/StringLiterals
+$ rails stats
++----------------------+--------+--------+---------+---------+-----+-------+
+| Name                 |  Lines |    LOC | Classes | Methods | M/C | LOC/M |
++----------------------+--------+--------+---------+---------+-----+-------+
+| Controllers          |   1137 |    799 |      18 |     136 |   7 |     3 |
+| Helpers              |     26 |     21 |       0 |       2 |   0 |     8 |
+| Jobs                 |      4 |      2 |       1 |       0 |   0 |     0 |
+| Models               |    402 |    185 |      13 |      13 |   1 |    12 |
+| Mailers              |     22 |     15 |       2 |       1 |   0 |    13 |
+| Channels             |     12 |      8 |       2 |       0 |   0 |     0 |
+| JavaScripts          |     46 |      8 |       0 |       3 |   0 |     0 |
+| Libraries            |     54 |     40 |       2 |       2 |   1 |    18 |
+| Controller tests     |    520 |     55 |       8 |       5 |   0 |     9 |
+| Helper tests         |      0 |      0 |       0 |       0 |   0 |     0 |
+| Model tests          |    234 |     47 |      10 |       3 |   0 |    13 |
+| Mailer tests         |     14 |      5 |       2 |       0 |   0 |     0 |
+| Integration tests    |      0 |      0 |       0 |       0 |   0 |     0 |
+| System tests         |     16 |     12 |       1 |       1 |   1 |    10 |
++----------------------+--------+--------+---------+---------+-----+-------+
+| Total                |   2487 |   1197 |      59 |     166 |   2 |     5 |
++----------------------+--------+--------+---------+---------+-----+-------+
+  Code LOC: 1078     Test LOC: 119     Code to Test Ratio: 1:0.1
+
 
 </pre>
 </div>
 </div>
 <div class='slide'>
 <a class='slide_break' id='slide-5' href='slides_code.html#slide-5'>▻</a>
-<h3 id="example-linter-for-javascript-eslint">5 Example Linter for JavaScript: ESLint</h3>
+<h3 id="example-linter-for-ruby-rubocop">5 Example Linter for Ruby: Rubocop</h3>
+<p>When you run <code>rubocop</code> it will examine all the files
+in the current directory, and in subdirectories.</p>
+</div>
+<div class='slide'>
+<a class='slide_break' id='slide-6' href='slides_code.html#slide-6'>▻</a>
+<h4 id="running-rubocop">5.1 Running rubocop</h4>
+<pre class="terminal">
+$ rubocop
+
+Inspecting 93 files
+<span style="color:green;">.</span><span style="color:green;">.</span><span style="color:green;">.</span><span style="color:green;">.</span><span style="color:green;">.</span><span style="color:green;">.</span><span style="color:green;">.</span><span style="color:green;">.</span><span style="color:green;">.C</span><span style="color:green;">.</span><span style="color:green;">.</span><span style="color:green;">.</span><span style="color:green;">.</span><span style="color:green;">CC.</span><span style="color:green;">.</span><span style="color:green;">.</span><span style="color:green;">.</span><span style="color:green;">.</span><span style="color:green;">.</span><span style="color:green;">.</span>
+
+Offenses:
+
+<span style="color:teal;">app/models/concrete_item.rb</span>:35:5: <span style="color:olive;">C</span>: Layout/EmptyLineAfterGuardClause: Add empty line after guard clause.
+    return false if t.nil?
+    ^^^^^^^^^^^^^^^^^^^^^^
+<span style="color:teal;">config/routes.rb</span>:28:20: <span style="color:olive;">C</span>: Layout/LeadingCommentSpace: Missing space after <span style="color:olive;">#</span>.
+  resources :items #, except: %i[index]
+                   ^^^^^^^^^^^^^^^^^^^^
+<span style="color:teal;">config/routes.rb</span>:29:2: <span style="color:olive;">C</span>: Layout/CommentIndentation: Incorrect indentation detected (column 1 instead of 2).
+ # get 'items' =&gt; 'items#index'
+ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+93 files inspected, <span style="color:red;">3 offenses</span> detected
+</pre>
+<p>In this example rubocop found 3 "offenses" to complain about.  It gives you all
+the necessary info to find and understand the problem:</p>
+<ul>
+<li>file  <code>config/routes.rb</code>, line 29, column 2</li>
+<li>the rule that was broken is called <code>Layout/CommentIndentation</code>
+</li>
+<li>there is a short explanation of the problem: "Incorrect indentation detected (column 1 instead of 2)"</li>
+<li>the affected line is shown, with the problem underlined:</li>
+</ul>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+ # get 'items' =&amp;gt; 'items#index'
+ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+</pre>
+</div>
+</div>
+<div class='slide'>
+<a class='slide_break' id='slide-7' href='slides_code.html#slide-7'>▻</a>
+<h4 id="learning-more-about-cops">5.2 Learning more about cops</h4>
+<p>The rules that rubocop follows are called "cops". The default
+rules are <a href="https://github.com/rubocop-hq/rubocop/blob/master/config/default.yml">listed here</a>.</p>
+<p>There is good documentation for each cop, you can find it on docs.rubocop.org, or by
+googling the name:</p>
+<ul>
+<li><a href="https://docs.rubocop.org/rubocop/cops_layout.html#layoutemptylineafterguardclause">Layout/EmptyLineAfterGuardClause</a></li>
+</ul>
+<p>Layout cops are simple and can be corrected automatically.</p>
+</div>
+<div class='slide'>
+<a class='slide_break' id='slide-8' href='slides_code.html#slide-8'>▻</a>
+<h4 id="automatically-fixing-code">5.3 Automatically fixing code</h4>
+<p>With the option <code>-a</code> rubocop will try to fix the code:</p>
+<pre class="terminal">
+$ rubocop -A
+
+Inspecting 93 files
+<span style="color:green;">.</span><span style="color:green;">.</span><span style="color:green;">.</span><span style="color:green;">.</span><span style="color:green;">.</span><span style="color:green;">.</span><span style="color:green;">.</span><span style="color:green;">.</span><span style="color:green;">.C</span><span style="color:green;">.</span><span style="color:green;">.</span><span style="color:green;">.</span><span style="color:green;">.</span><span style="color:green;">CC.</span><span style="color:green;">.</span><span style="color:green;">.</span><span style="color:green;">.</span><span style="color:green;">.</span><span style="color:green;">.</span><span style="color:green;">.</span>
+
+Offenses:
+
+<span style="color:teal;">app/models/concrete_item.rb</span>:35:5: <span style="color:olive;">C</span>: <span style="color:green;">[Corrected] </span>Layout/EmptyLineAfterGuardClause: Add empty line after guard clause.
+    return false if t.nil?
+    ^^^^^^^^^^^^^^^^^^^^^^
+<span style="color:teal;">config/routes.rb</span>:28:20: <span style="color:olive;">C</span>: <span style="color:green;">[Corrected] </span>Layout/LeadingCommentSpace: Missing space after <span style="color:olive;">#</span>.
+  resources :items #, except: %i[index]
+                   ^^^^^^^^^^^^^^^^^^^^
+<span style="color:teal;">config/routes.rb</span>:29:2: <span style="color:olive;">C</span>: <span style="color:green;">[Corrected] </span>Layout/CommentIndentation: Incorrect indentation detected (column 1 instead of 2).
+ # get 'items' =&gt; 'items#index'
+ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+93 files inspected, <span style="color:red;">3 offenses</span> detected, <span style="color:green;">3 offenses</span> corrected
+</pre>
+</div>
+<div class='slide'>
+<a class='slide_break' id='slide-9' href='slides_code.html#slide-9'>▻</a>
+<h4 id="configure-rubocop">5.4 Configure Rubocop</h4>
+<p>You can configure rubocop by writing a file <code>.rubocop.yml</code> in your
+projects root folder.  Create it with <code>rubocop --init</code>.</p>
+<p>You can use the configuration to exclude some files and directories:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+AllCops:
+  TargetRubyVersion: 2.3.4
+  Exclude:
+    - "db/migrations/2020*"
+    - "lib/minitest/extra_tests_plugin.rb"
+    - "db/migrate/20210103183933_add_year_to_schedule.rb"
+
+</pre>
+</div>
+<p>In this example migrations from the year 2020 are excluded from rubocop - these
+files will never be used again und there's no need to change them now.
+Two other files are also excluded.</p>
+<p>Instead of excluding a whole file you can disable rubocop for
+some lines in a file like this:</p>
+<div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+# rubocop:disable Rails/SkipsModelValidations
+count_persons = enroll_data_lecturer.update_all(set_fields)
+# rubocop:enable Rails/SkipsModelValidations
+
+</pre>
+</div>
+<p>Here the method <code>update_all</code> is used. The cop  <a href="https://docs.rubocop.org/rubocop-rails/cops_rails.html#railsskipsmodelvalidations">SkipsModelValidations</a> warns against using it 
+method because it skips validations.  The programmer is aware of this fact
+an still choses to use the method.  Do keep rubocop from complaining
+or automatically replacing the code this cop is disabled for one line of code.</p>
+</div>
+<div class='slide'>
+<a class='slide_break' id='slide-10' href='slides_code.html#slide-10'>▻</a>
+<h3 id="example-linter-for-javascript-eslint">6 Example Linter for JavaScript: ESLint</h3>
 <p>When you run <code>eslint</code> it will examine all the files
 in the current directory, and in subdirectories.</p>
 <p>The rules that eslint follows are configured
@@ -194,8 +351,8 @@ const getFinalContext = (context) =&gt; {
 would complain about having an unused variable <code>call</code> by using the comment <code>/* eslint-disable-next-line no-unused-vars */</code>. This only applies to the next code line, though, and the rule will remain in effect for the rest of the file.</p>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-6' href='slides_code.html#slide-6'>▻</a>
-<h3 id="best-practices">6 Best Practices</h3>
+<a class='slide_break' id='slide-11' href='slides_code.html#slide-11'>▻</a>
+<h3 id="best-practices">7 Best Practices</h3>
 <p>For the framework Rails there exists a collection of "best pracices" - 
 hints how to use the framworks.  They are doumented on <a href="https://rails-bestpractices.com/">rails-bestpractices.com</a></p>
 <p>There is a command line tool that checks your Rails projects against
@@ -205,8 +362,15 @@ these best pracices and can also fix some of the problems:</p>
 </ul>
 </div>
 <div class='slide'>
-<a class='slide_break' id='slide-7' href='slides_code.html#slide-7'>▻</a>
-<h3 id="security">7 Security</h3>
+<a class='slide_break' id='slide-12' href='slides_code.html#slide-12'>▻</a>
+<h3 id="overview-of-several-tools">8 Overview of several tools</h3>
+<p><code>rubycritic</code> combines several tools and generates an report as several html pages:</p>
+<p><img src="images/rubycritic.png" alt=""></p>
+<p><img src="images/rubycritic-code.png" srcset='images/rubycritic-code.png 1x, images/rubycritic-code@2x.png 2x' alt=""></p>
+</div>
+<div class='slide'>
+<a class='slide_break' id='slide-13' href='slides_code.html#slide-13'>▻</a>
+<h3 id="security">9 Security</h3>
 <p>Brakeman is a static analysis tool that specializes in security
 problems for Ruby on Rails.  Use it on your rails project to find and fix security problems:</p>
 <ul>
@@ -218,6 +382,14 @@ checking for security problems:</p>
 <li><a href="https://github.com/mozfreddyb/eslint-config-scanjs">eslint-config-scanjs</a></li>
 <li>
 <a href="https://github.com/nodesecurity/eslint-plugin-security">eslint-plugin-security</a> for node.js</li>
+</ul>
+</div>
+<div class='slide'>
+<a class='slide_break' id='slide-14' href='slides_code.html#slide-14'>▻</a>
+<h3 id="see-also">10 See Also</h3>
+<ul>
+<li>
+<a href="https://www.ruby-toolbox.com/categories/code_metrics">Code Metrics</a> in the ruby toolbox</li>
 </ul>
 </div>        
       </div>
