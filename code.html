@@ -127,6 +127,7 @@ the quality up.</p><p>You will get to know tools for Ruby for</p>
 <p>Any automatic analysis done on the <strong>source code</strong> of a program
 is called <strong>static</strong> analysis.  The simplest form is a check
 of coding conventions. This is called "linting". </p>
+<p>This is in contrast do <strong>dynamic</strong> analysis of a running program.</p>
 </div>
 <div class='slide'>
 <a class='slide_break' id='slide-2' href='slides_code.html#slide-2'>▻</a>
@@ -258,7 +259,7 @@ the necessary info to find and understand the problem:</p>
 <h4 id="learning-more-about-cops">5.2 Learning more about cops</h4>
 <p>The rules that rubocop follows are called "cops". The default
 rules are <a href="https://github.com/rubocop-hq/rubocop/blob/master/config/default.yml">listed here</a>.</p>
-<p>There is good documentation for each cop, you can find it on docs.rubocop.org, or by
+<p>There is good documentation for each cop, you can find it on <a href="https://docs.rubocop.org/rubocop/">docs.rubocop.org</a>, or by
 googling the name:</p>
 <ul>
 <li><a href="https://docs.rubocop.org/rubocop/cops_layout.html#layoutemptylineafterguardclause">Layout/EmptyLineAfterGuardClause</a></li>
@@ -322,8 +323,8 @@ count_persons = enroll_data_lecturer.update_all(set_fields)
 </div>
 <p>Here the method <code>update_all</code> is used. The cop  <a href="https://docs.rubocop.org/rubocop-rails/cops_rails.html#railsskipsmodelvalidations">SkipsModelValidations</a> warns against using it 
 method because it skips validations.  The programmer is aware of this fact
-an still choses to use the method.  Do keep rubocop from complaining
-or automatically replacing the code this cop is disabled for one line of code.</p>
+an still choses to use the method.  To keep rubocop from complaining
+or automatically replacing the code,this cop is disabled for one line.</p>
 </div>
 <div class='slide'>
 <a class='slide_break' id='slide-10' href='slides_code.html#slide-10'>▻</a>
@@ -365,7 +366,7 @@ these best pracices and can also fix some of the problems:</p>
 <a class='slide_break' id='slide-12' href='slides_code.html#slide-12'>▻</a>
 <h3 id="overview-of-several-tools">8 Overview of several tools</h3>
 <p><code>rubycritic</code> combines several tools and generates an report as several html pages:</p>
-<p><img src="images/rubycritic.png" alt=""></p>
+<p><img src="images/rubycritic-dashboard.png" srcset='images/rubycritic-dashboard.png 1x, images/rubycritic-dashboard@2x.png 2x' alt=""></p>
 <p><img src="images/rubycritic-code.png" srcset='images/rubycritic-code.png 1x, images/rubycritic-code@2x.png 2x' alt=""></p>
 </div>
 <div class='slide'>
@@ -383,6 +384,8 @@ checking for security problems:</p>
 <li>
 <a href="https://github.com/nodesecurity/eslint-plugin-security">eslint-plugin-security</a> for node.js</li>
 </ul>
+<p>For all programming langauges you also have to think about
+<a href="dependencies.html#keeping-up-to-date">security and dependencies</a>.</p>
 </div>
 <div class='slide'>
 <a class='slide_break' id='slide-14' href='slides_code.html#slide-14'>▻</a>
