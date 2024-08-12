@@ -4,8 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Web Engineering - a textbook
-</title>
+  <title>Web Engineering - was a textbook, is now gone </title>
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
   <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
@@ -17,58 +16,15 @@
 
   <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
   <style>
-
     .slide img[src$=svg] {
       width: 100%;
     }
   </style>
 </head>
 <body class="guide">
-  <div>
-    <a href="https://github.com/web-engineering/web-engineering-textbook/"><img style="position: fixed; top: 0; right: 0; border: 0; z-index: 10;" src="images/forkme.png" alt="Fork me on GitHub"></a>
-  </div>
-  <div id="topNav">
-    <div class="wrapper">
-      <strong class="more-info-label">Learn more at the sources: </strong>
-      <ul class="more-info-links s-hidden">
-        <li class="more-info"><a href="https://git-scm.com/documentation">Git Documentation</a></li>
-        <li class="more-info"><a href="https://try.github.io/">Try Git</a></li>
-        <li class="more-info"><a href="http://refactoring.com/catalog/">Refactoring Catalog</a></li>
-      </ul>
-    </div>
-  </div>
   <div id="header">
     <div class="wrapper clearfix">
-      <h1><a href="index.html" title="Return to home page">Web<span>Engineering</span></a></h1>      <ul class="nav">
-        <li><a class="nav-item" href="index.html">Home</a></li>
-        <li class="guides-index guides-index-large">
-          <a href="index.html" onclick="guideMenu(); return false;" id="guidesMenu" class="guides-index-item nav-item">Index  &#x25BC;</a>
-          <div id="guides" class="clearfix" style="display: none;">
-            <hr />
-              <dl class="L">
-                <dt>Basics</dt>
-                <dd><a class="nav-item" href="vi.html">vi</a></dd>
-                <dd><a class="nav-item" href="public_key.html">Using Public Key Cryptography</a></dd>
-                <dd><a class="nav-item" href="git_basics.html">Git Basics</a></dd>
-                <dd><a class="nav-item" href="linux_on_windows.html">Using Linux on Windows for Web Development</a></dd>
-                <dt>Workflows</dt>
-                <dd><a class="nav-item" href="git_branching.html">Git Branching and Merging</a></dd>
-                <dd><a class="nav-item" href="git_rebasing.html">Git Rebasing</a></dd>
-                <dd><a class="nav-item" href="dependencies.html">Managing Dependencies</a></dd>
-                <dd><a class="nav-item" href="testing.html">Testing</a></dd>
-                <dd><a class="nav-item" href="refactoring.html">Refactoring</a></dd>
-                <dd><a class="nav-item" href="code.html">Tools for better code</a></dd>
-              </dl>
-              <dl class="R">
-                <dt>Web Operations</dt>
-                <dd><a class="nav-item" href="deploy-to-paas.html">Deploy to Paas</a></dd>
-                <dd><a class="nav-item" href="deploy-spa.html">Deploy a SPA</a></dd>
-                <dd><a class="nav-item" href="webserver.html">Webserver</a></dd>
-              </dl>
-          </div>
-          </li>
-        <li><a class="nav-item" href="https://github.com/web-engineering/web-engineering-textbook/">Contribute</a></li>
-      </ul>
+      <h1><a href="index.html" title="Return to home page">Web<span>Engineering</span></a></h1>      
     </div>
   </div>
 
@@ -77,102 +33,10 @@
   <div id="feature">
     <div class="wrapper">
       <div class="header_section">
-          <h2>About this Book</h2>
-  <p>This is a textbook for the second year of a computer
-  science or "media informatics" degree program.  It builds
-  on <a href="https://web-development.github.io">Web Development</a> 
-  (in german) and runs parallel to
-  <a href="https://backend-development.github.io">Backend Development</a>.</p>
-
-  <p>This book is not a self-contained work: There are great
-  resources for learning about the tools and technologies of web engineering
-  - this book tries to use
-  these resources, and bind them together into a coherent study plan.</p>
-
-  <p>It was written and published by Brigitte Jellinek 
-  in the hope that it will be useful to lecturers and students
-  in educational institutions as well as to self-directed learners on the internet.
-  </p>
- 
-      </div>
-      
-    </div>
-  </div>
-
-
-  <div id="container">
-    <div class="wrapper">
-      <div id="mainCol">
-        <div class='slide'><a id='slide-1'></a>
-
-
-</div>
-<div class='slide'>
-<a class='slide_break' id='slide-1' href='slides_#slide-1'>▻</a>
-<h3>What is Web Engineering</h3>
-
-<p>Under this title we collect all the stuff that
-does not fit neatly into "backend" or "frontend" development:
-workflows, tools, operations.
-</p>
-
-  <h3>Basics</h3>
-  <dl>
-      <dt><a href="vi.html">vi</a></dt><dd>
-        <p>the editor vi, and how to get out of it</p>
-</dd>      <dt><a href="public_key.html">Using Public Key Cryptography</a></dt><dd>
-        <p></p>
-</dd>      <dt><a href="git_basics.html">Git Basics</a></dt><dd>
-        <p>First Steps in git</p>
-</dd>      <dt><a href="linux_on_windows.html">Using Linux on Windows for Web Development</a></dt><dd>
-        <p>When using windows as your development machine you will need to install some extra tools</p>
-</dd>  </dl>
-  <h3>Workflows</h3>
-  <dl>
-      <dt><a href="git_branching.html">Git Branching and Merging</a></dt><dd>
-        <p>With branches you can work on two separate versions of your code in parallel. For example you can work on a new feature, but go back and fix an error in production in the middle of it. Git will help you keep your code sorted.</p>
-</dd>      <dt><a href="git_rebasing.html">Git Rebasing</a></dt><dd>
-        <p>An important concept to avoid complex merges</p>
-</dd>      <dt><a href="dependencies.html">Managing Dependencies</a></dt><dd>
-        <p></p>
-</dd>      <dt><a href="testing.html">Testing</a></dt><dd>
-        <p>Automatic tests for your programs</p>
-</dd>      <dt><a href="refactoring.html">Refactoring</a></dt><dd>
-        <p>Improve your code through simple refactoring steps</p>
-</dd>      <dt><a href="code.html">Tools for better code</a></dt><dd>
-        <p>Let these tools find problems in your code for you</p>
-</dd>  </dl>
-  <h3>Web Operations</h3>
-  <dl>
-      <dt><a href="deploy-to-paas.html">Deploy to Paas</a></dt><dd>
-        <p>How to deploy your app to a PAAS - platform as a service.</p>
-</dd>      <dt><a href="deploy-spa.html">Deploy a SPA</a></dt><dd>
-        <p>How to deploy your Single Page App</p>
-</dd>      <dt><a href="webserver.html">Webserver</a></dt><dd>
-        <p>Webserver</p>
-</dd>  </dl>
-
-</div>
-<div class='slide'>
-<a class='slide_break' id='slide-2' href='slides_#slide-2'>▻</a>
-<h3>What is Web Engineering</h3>
-
-<p>Futher reading, stuff we want to cover later</p>
-
-<ul>
-<li>Docker: <a href="https://docker-curriculum.com/">docker-curriculum.com</a></li>
-</ul>
-</div>        
-      </div>
-    </div>
-  </div>
-
-  <hr class="hide" />
-  <div id="footer">
-    <div class="wrapper">
-      <p class="copyright">published under <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/at/deed.de">creative commons by-nc-sa</a> in 2012-2019 by <a href="http://brigitte-jellinek.at">Brigitte Jellinek</a>.
-      </p><p>If you want to contribute: <a href="https://github.com/web-engineering/web-engineering-textbook/fork">fork the source on github</a>
-      </p>
+          <h2>About this Website</h2>
+  <p>This used to be a textbook, but it was deleted in 2024.
+  See <a href="https://web-development.github.io">Web Development</a> (in german) and 
+  <a href="https://backend-development.github.io">Backend Development</a>, they still exist.</p>
     </div>
   </div>
 
